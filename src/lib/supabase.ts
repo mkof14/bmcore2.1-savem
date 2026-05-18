@@ -1,17 +1,26 @@
 import { createClient } from '@supabase/supabase-js';
 
-const isMock = import.meta.env.VITE_MOCK_MODE === '1';
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || (isMock ? 'https://mock.supabase.co' : '');
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || (isMock ? 'mock-anon-key' : '');
-
-if (!isMock && (!supabaseUrl || !supabaseAnonKey)) {
-  throw new Error('Missing Supabase environment variables (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY)');
+function isValidHttpUrl(value: string | undefined): value is string {
+  if (!value) return false;
+  try {
+    const u = new URL(value);
+    return u.protocol === 'http:' || u.protocol === 'https:';
+  } catch {
+    return false;
+  }
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true
-  }
-});
+const rawUrl = import.meta.env.VITE_SUPABASE_URL;
+const rawKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const supabaseUrl = isValidHttpUrl(rawUrl) ? rawUrl : 'https://mock.supabase.co';
+const supabaseAnonKey = rawKey && rawKey.trim() ? rawKey : 'mock-anon-key';
+
+if (!isValidHttpUrl(rawUrl)) {
+  console.warn('[supabase] Invalid/missing VITE_SUPABASE_URL, using mock fallback.');
+}
+if (!rawKey || !rawKey.trim()) {
+  console.warn('[supabase] Missing VITE_SUPABASE_ANON_KEY, using mock fallback.');
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

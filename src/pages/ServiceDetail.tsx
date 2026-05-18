@@ -4,7 +4,7 @@ import { serviceCategories } from '../data/services';
 import { supabase } from '../lib/supabase';
 import { notifyUserInfo } from '../lib/adminNotify';
 import SEO from '../components/SEO';
-import { addKnowledgeSignals, buildAggregatedSecondOpinion, estimateLocalSignalCounts, getKnowledgeSignalScore, shouldUseMultiModel } from '../lib/secondOpinionEngine';
+import { addKnowledgeSignals, buildAggregatedSecondOpinion, estimateLocalSignalCounts, getKnowledgeSignalScore, loadKnowledgeSnapshot, shouldUseMultiModel } from '../lib/secondOpinionEngine';
 import type { UserKnowledgeSnapshot } from '../lib/secondOpinionEngine';
 import ReportBrandHeader from '../components/report/ReportBrandHeader';
 import ModelRadarComparison, { buildModelScores } from '../components/report/ModelRadarComparison';

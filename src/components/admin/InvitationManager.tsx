@@ -6,6 +6,7 @@ import { sendEmail, htmlToPlainText } from '../../lib/emailProvider';
 import { notifyError, notifySuccess } from '../../lib/adminNotify';
 import StateCard from '../ui/StateCard';
 import SuccessBanner from '../ui/SuccessBanner';
+import ModalShell from '../ui/ModalShell';
 
 interface Invitation {
   id: string;

@@ -48,6 +48,18 @@ export default function Reports({ onNavigate }: ReportsProps) {
     }
   }, []);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem('bmcore.report.favorites', JSON.stringify(favorites));
+    } catch {
+      // ignore
+    }
+  }, [favorites]);
+
+  const toggleFavorite = (id: string) => {
+    setFavorites((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [id, ...prev]));
+  };
+
   async function loadReports() {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -1446,14 +1458,3 @@ function ReportView({ report, onBack, onNavigate }: ReportViewProps) {
     </div>
   );
 }
-  useEffect(() => {
-    try {
-      localStorage.setItem('bmcore.report.favorites', JSON.stringify(favorites));
-    } catch {
-      // ignore
-    }
-  }, [favorites]);
-
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [id, ...prev]));
-  };
