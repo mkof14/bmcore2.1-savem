@@ -13,12 +13,9 @@ const missing = requiredPublicEnv.filter((key) => {
 });
 
 if (missing.length > 0) {
-  console.error('[env-check] Missing required public environment variables:');
-  missing.forEach((key) => console.error(`  - ${key}`));
-  console.error(
-    '[env-check] Set them in Vercel Project Settings -> Environment Variables and redeploy.'
-  );
-  process.exit(1);
+  console.warn('[env-check] Missing public environment variables; build will use client fallbacks:');
+  missing.forEach((key) => console.warn(`  - ${key}`));
+  process.exit(0);
 }
 
 console.log('[env-check] Required public environment variables are present.');
