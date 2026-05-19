@@ -1,8 +1,16 @@
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
 const base = SUPABASE_URL || "http://localhost:54321";
+const MOCK_MODE = process.env.VITE_MOCK_MODE === "1";
+
+if (!SUPABASE_URL && MOCK_MODE) {
+  console.log("VITE_MOCK_MODE=1 and no Supabase URL provided; skipping live API smoke tests.");
+  process.exit(0);
+}
 
 if (!SUPABASE_URL) {
-  console.error("Error: VITE_SUPABASE_URL or SUPABASE_URL environment variable is required");
+  console.error(
+    "Error: VITE_SUPABASE_URL or SUPABASE_URL environment variable is required. Set VITE_MOCK_MODE=1 to skip live API smoke tests."
+  );
   process.exit(1);
 }
 

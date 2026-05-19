@@ -30,8 +30,8 @@ BioMath Core is a comprehensive health analytics platform that combines cutting-
 
 - Node.js v20.11.1 or higher (see `.nvmrc`)
 - npm or pnpm
-- Supabase account
-- Stripe account (for payments)
+- Supabase account (only required when testing real auth/data)
+- Stripe account (only required when testing payments)
 
 ### Installation
 
@@ -53,9 +53,9 @@ BioMath Core is a comprehensive health analytics platform that combines cutting-
    cp .env.example .env
    ```
 
-   Fill in your environment variables in `.env`. See `.env.example` for all available options.
+   For UI/dev work without real backend services, set `VITE_MOCK_MODE=1` and leave service credentials empty. Fill in real environment variables only when testing live Supabase, payments, or provider integrations. See `.env.example` for all available options.
 
-4. **Run database migrations**
+4. **Run database migrations** (live backend only)
    ```bash
    # Migrations are automatically applied when you start the dev server
    # Or manually run migrations in Supabase Studio
@@ -111,7 +111,11 @@ biomathcore-platform/
 
 All environment variables must be prefixed with `VITE_` to be accessible in the browser. See `.env.example` for a complete list.
 
-**Required variables:**
+**Development/staging without live services:**
+- `VITE_MOCK_MODE=1` - Uses local client fallbacks for Supabase auth, queries, storage, functions, and realtime channels.
+- Vercel preview/development builds are configured to use mock mode by default through `npm run vercel-build`.
+
+**Required for live Supabase mode:**
 - `VITE_SUPABASE_URL` - Supabase project URL
 - `VITE_SUPABASE_ANON_KEY` - Supabase anon key
 

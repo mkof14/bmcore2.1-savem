@@ -54,11 +54,22 @@ git push -u origin main
 
 ## Step 4: Deploy to Vercel
 
+### 4.0 Development/Preview Mode Without Live Services
+
+The repository is configured so Vercel development and preview deployments can run without real Supabase, storage, or realtime connections.
+
+- `npm run vercel-build` sets `VITE_MOCK_MODE=1`.
+- `vercel.json` also sets `VITE_MOCK_MODE=1` for Vercel builds.
+- In mock mode, the frontend uses local fallbacks for Supabase auth, queries, rpc, storage, functions, and realtime channels.
+- Live DB/API smoke tests are intentionally skipped when no Supabase URL is present and `VITE_MOCK_MODE=1`.
+
+Use this mode for UI, routing, design, copy, and frontend flow development. Add real environment variables only when you are ready to test live auth/data/payments.
+
 ### 4.0 Vercel Environment Checklist (Quick)
 
 Set these in **Vercel → Project → Settings → Environment Variables**.
 
-Required for all environments (`Production`, `Preview`, `Development`):
+Required only for live Supabase environments:
 
 ```bash
 VITE_SUPABASE_URL=https://YOUR_PROJECT.supabase.co

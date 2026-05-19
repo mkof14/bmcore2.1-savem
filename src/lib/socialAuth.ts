@@ -150,10 +150,11 @@ class SocialAuthService {
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         break;
 
-      case 'twitter':
+      case 'twitter': {
         const text = `${title}${description ? ' - ' + description : ''}`;
         shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
         break;
+      }
 
       case 'linkedin':
         shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;

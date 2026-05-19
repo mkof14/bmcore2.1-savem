@@ -53,7 +53,7 @@ export function measurePerformance() {
 
 export function measureCLS() {
   let clsValue = 0;
-  let clsEntries: PerformanceEntry[] = [];
+  const clsEntries: PerformanceEntry[] = [];
 
   const observer = new PerformanceObserver((entryList) => {
     for (const entry of entryList.getEntries()) {

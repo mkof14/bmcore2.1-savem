@@ -50,7 +50,7 @@ class Analytics {
 
     (window as any).dataLayer = (window as any).dataLayer || [];
     function gtag(...args: any[]) {
-      (window as any).dataLayer.push(arguments);
+      (window as any).dataLayer.push(args);
     }
     (window as any).gtag = gtag;
     gtag('js', new Date());
@@ -61,10 +61,10 @@ class Analytics {
   }
 
   private initFBPixel(pixelId: string) {
-    (window as any).fbq = function() {
+    (window as any).fbq = function(...args: any[]) {
       (window as any).fbq.callMethod
-        ? (window as any).fbq.callMethod.apply((window as any).fbq, arguments)
-        : (window as any).fbq.queue.push(arguments);
+        ? (window as any).fbq.callMethod(...args)
+        : (window as any).fbq.queue.push(args);
     };
     (window as any)._fbq = (window as any).fbq;
     (window as any).fbq.push = (window as any).fbq;

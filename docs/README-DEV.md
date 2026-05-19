@@ -7,8 +7,8 @@ Welcome to BioMath Core! This guide will get you up and running in less than 15 
 - Node.js v20.11.1 (use `nvm use` to auto-switch)
 - npm or pnpm
 - Git
-- Supabase account
-- Stripe account (test mode)
+- Supabase account (only for live auth/data work)
+- Stripe account (only for payment work)
 
 ## Quick Start (10 Steps)
 
@@ -38,6 +38,9 @@ cp .env.example .env
 Edit `.env` and fill in:
 
 ```bash
+# Mock mode for UI/frontend development without live services
+VITE_MOCK_MODE=1
+
 # Supabase
 VITE_SUPABASE_URL=https://xxx.supabase.co
 VITE_SUPABASE_ANON_KEY=eyJxxx...
@@ -49,6 +52,8 @@ VITE_STRIPE_PUBLISHABLE_KEY=pk_test_xxx
 BMC_KMS_KEY=<generate using command below>
 ```
 
+For the current development phase, `VITE_MOCK_MODE=1` is enough to run the app without real Supabase credentials. Leave live keys empty until you intentionally test backend integrations.
+
 Generate KMS key:
 
 ```bash
@@ -57,9 +62,9 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 
 **Time: ~3 minutes**
 
-### 4. Set Up Database
+### 4. Set Up Database (Live Backend Only)
 
-Migrations are in `supabase/migrations/`. Apply them:
+Skip this step when `VITE_MOCK_MODE=1`. Migrations are in `supabase/migrations/`. Apply them when testing a real Supabase project:
 
 1. Go to [Supabase Dashboard](https://app.supabase.com)
 2. Select your project

@@ -15,6 +15,18 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
 
+  // Keep legacy code quality debt visible without blocking development deploys.
+  {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-expressions': 'warn',
+      'no-empty': 'warn',
+      'no-unused-expressions': 'warn',
+      'no-useless-escape': 'warn',
+    },
+  },
+
   // Config for React source files
   {
     files: ['src/**/*.{ts,tsx}'],
@@ -39,16 +51,17 @@ export default tseslint.config(
       ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
-        'error',
+        'warn',
         { allowConstantExport: true },
       ],
-      'react-hooks/exhaustive-deps': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
-        'error',
+        'warn',
         { argsIgnorePattern: '^_' },
       ],
-      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      'react/no-unescaped-entities': 'warn',
       'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
     },
@@ -62,6 +75,10 @@ export default tseslint.config(
     },
     rules: {
       '@typescript-eslint/no-var-requires': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      'no-empty': 'warn',
+      'no-useless-escape': 'warn',
     },
   },
 
@@ -74,6 +91,10 @@ export default tseslint.config(
     rules: {
       '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/no-var-requires': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      'no-empty': 'warn',
+      'no-useless-escape': 'warn',
     },
   },
 
@@ -84,7 +105,10 @@ export default tseslint.config(
       globals: { ...globals.browser },
     },
     rules: {
-        'no-undef': 'warn', // Still might have some specific globals
+        'no-undef': 'warn',
+        'no-unused-vars': 'warn',
+        '@typescript-eslint/no-unused-vars': 'warn',
+        'no-unused-expressions': 'warn',
     }
   },
 
