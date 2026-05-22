@@ -152,3 +152,14 @@ npm run dev:saven
 Primary local URL:
 
 http://127.0.0.1:5173/app/saven/settings
+
+## Backend-ready contract layer
+
+SAVEN now has a contract-first backend boundary:
+
+- `src/features/saven/contracts/savenBackendContract.ts`
+- `src/features/saven/services/savenLocalBackendGateway.ts`
+- `src/features/saven/services/__tests__/savenLocalBackendGateway.test.ts`
+- `docs/SAVEN_BACKEND_CONTRACT.md`
+
+This is intentionally local-only. It prepares the architecture for backend, doctors, nurses, emergency routing, family routing, robot/device services, and continuity workflows without real db/env/external connections.
