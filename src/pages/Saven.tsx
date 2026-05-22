@@ -39,6 +39,7 @@ import {
   MapPinned,
   Satellite,
   Wifi,
+  FileCheck2,
 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import BackButton from '../components/BackButton';
@@ -2960,244 +2961,127 @@ function RecoveryMode() {
 }
 
 function VerificationCenter() {
+  const [selectedProofId, setSelectedProofId] = useState('mobility-walk');
+
+  const openVerifications = [
+    {
+      id: 'mobility-walk',
+      task: 'Assisted walking session',
+      owner: 'Maya Carter',
+      proof: 'Caregiver confirmation + wearable motion trend',
+      due: '10:30',
+      status: 'Waiting',
+      impact: '+2 continuity when verified',
+      next: 'Ask Maya to confirm support was completed.',
+      tone: 'gold',
+    },
+    {
+      id: 'medication-support',
+      task: 'Medication support confirmation',
+      owner: 'Maya Carter + Daniel Roberts fallback',
+      proof: 'Caregiver confirmation required; family fallback if missed',
+      due: '09:00',
+      status: 'Review',
+      impact: 'Care route prepared if unresolved',
+      next: 'Prepare nurse review if no confirmation arrives.',
+      tone: 'red',
+    },
+    {
+      id: 'hydration-check',
+      task: 'Hydration check',
+      owner: 'SAVEN + sensor',
+      proof: 'Hydration sensor signal supports user confirmation',
+      due: '08:30',
+      status: 'Verified',
+      impact: 'Continuity already updated',
+      next: 'Keep normal reminders calm.',
+      tone: 'green',
+    },
+  ];
+
+  const proofPolicies = [
+    { label: 'Low risk routine', proof: 'User or caregiver confirmation', examples: ['Breathing exercise', 'Drink water', 'Daily note'], icon: ClipboardCheck, tone: 'blue' },
+    { label: 'Recovery support', proof: 'Caregiver confirmation required', examples: ['Walking support', 'Medication support', 'Transfer assistance'], icon: HeartPulse, tone: 'gold' },
+    { label: 'Device-assisted', proof: 'Human confirmation plus telemetry', examples: ['Wearable activity', 'Bed sensor', 'Hydration signal'], icon: Gauge, tone: 'green' },
+    { label: 'Robot-related', proof: 'Human approval before action, telemetry after action', examples: ['Robot readiness', 'Mobility endpoint', 'Room assist'], icon: Bot, tone: 'blue' },
+  ];
+
+  const selectedProof = openVerifications.find((item) => item.id === selectedProofId) ?? openVerifications[0];
+
   return (
     <div className="space-y-6">
-      <PageIntro eyebrow="Verification Center" title="Reality confirmed, not assumed." text="SAVEN shows what was verified, by whom, how, when, confidence, and what still needs review." />
-      <EmergencyEscalationCenter />
-      <div className="grid gap-5 xl:grid-cols-[1fr_360px]">
-        <section className="space-y-4">
-          {verifiedActions.map((event) => (
-            <VerifiedActionCard key={`${event.time}-${event.action}`} event={event} />
-          ))}
-        </section>
-        <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl transition-all hover:border-amber-200 dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-amber-300/30">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Unresolved actions</p>
-          <h3 className="mt-3 text-3xl font-semibold text-slate-950 dark:text-white">1 needs review</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Medication support confirmation is waiting for caregiver confirmation.</p>
-          <div className="mt-6 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-950/70">
-            <div className="h-full w-4/5 rounded-full bg-gradient-to-r from-blue-400 to-emerald-500" />
+      <PageIntro eyebrow="Verification Engine" title="SAVEN updates continuity only after proof." text="Verification turns real-world support into accountable continuity. The system shows what is waiting, who confirms it, what proof is required, and what happens next." />
+
+      <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
+        <div className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(16,185,129,0.15),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(240,253,244,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.23),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(6,34,24,0.62))] dark:ring-1 dark:ring-white/10">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Open verifications</p>
+              <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">What is waiting for confirmation?</h3>
+            </div>
+            <StatusPill tone="gold" label="2 open" />
           </div>
-          <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">Confirmation confidence: strong once caregiver responds.</p>
-        </section>
-      </div>
-    </div>
-  );
-}
-
-
-
-
-
-function CirclePermissionsMatrix() {
-  const permissions = [
-    { actor: 'Anna Roberts', role: 'Supported person', can: ['Ask for support', 'Confirm low-risk routines'], cannot: ['Approve robot physical action'], tone: 'blue' },
-    { actor: 'Maya Carter', role: 'Caregiver', can: ['Perform recovery tasks', 'Verify mobility support', 'Pause robot handoff'], cannot: ['Change privacy rules alone'], tone: 'green' },
-    { actor: 'Daniel Roberts', role: 'Family', can: ['Receive digest', 'Confirm family tasks', 'Escalate unresolved item'], cannot: ['View restricted biometrics'], tone: 'gold' },
-    { actor: 'SAVEN Assist R1', role: 'Robot endpoint', can: ['Report readiness', 'Send telemetry', 'Wait for command'], cannot: ['Choose care action independently'], tone: 'blue' },
-  ];
-
-  return (
-    <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Support Circle permissions</p>
-          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Who can do what around Anna?</h3>
-        </div>
-        <StatusPill tone="green" label="Permissions visible" />
-      </div>
-      <div className="mt-6 grid gap-4 xl:grid-cols-4">
-        {permissions.map((permission) => {
-          const tone = permission.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : permission.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
-          return (
-            <article key={permission.actor} className={'rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
-              <h4 className="text-xl font-semibold">{permission.actor}</h4>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">{permission.role}</p>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Can</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {permission.can.map((item) => <span key={item} className="rounded-full bg-white/82 px-3 py-1 text-xs font-semibold shadow-sm dark:bg-slate-950/70">{item}</span>)}
-              </div>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Cannot</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {permission.cannot.map((item) => <span key={item} className="rounded-full bg-slate-950 px-3 py-1 text-xs font-semibold text-white shadow-sm dark:bg-white dark:text-slate-950">{item}</span>)}
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-
-function SavenCommandCenter() {
-  const commandChannels = [
-    { label: 'Voice', command: 'Hey SAVEN, show today support status.', response: 'SAVEN opens the active day, highlights one open verification, and keeps the voice layer calm.', tone: 'blue', icon: Mic },
-    { label: 'Text', command: 'Assign walking support to Maya and request confirmation.', response: 'The task is routed to Maya Carter with caregiver confirmation required before continuity updates.', tone: 'green', icon: MessageSquareText },
-    { label: 'Robot-safe', command: 'Can R1 help with mobility support?', response: 'R1 readiness is checked, but physical action stays locked until human approval.', tone: 'gold', icon: Bot },
-    { label: 'Family', command: 'Send Daniel the evening recovery summary.', response: 'A calm family digest is prepared with only support status and no sensitive biometric details.', tone: 'blue', icon: UsersRound },
-  ];
-
-  const serviceCards = [
-    { title: 'Global command layer', text: 'Every SAVEN page gets a voice and text path, but the page workflow remains primary.', items: ['Voice', 'Text fallback', 'Page-aware command', 'Command log'] },
-    { title: 'Permission aware', text: 'Commands cannot skip profile rules, caregiver override, robot gates, or verification policy.', items: ['Role scope', 'Human approval', 'Safe actions', 'Privacy'] },
-    { title: 'Operational response', text: 'SAVEN answers as an operating system: what changed, who owns it, and what waits for confirmation.', items: ['Owner', 'Status', 'Next step', 'Verification'] },
-  ];
-
-  return (
-    <div className="space-y-6">
-      <PageIntro eyebrow="SAVEN Command Center" title="One command layer across every support service." text="Voice and text commands control daily support, caregiver handoff, device checks, robot readiness, verification, and continuity without turning SAVEN into a generic chat assistant." />
-      <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_380px]">
-        <div className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_15%_20%,rgba(59,130,246,0.22),transparent_28%),radial-gradient(circle_at_84%_18%,rgba(249,115,22,0.18),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.92),rgba(239,246,255,0.78))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_15%_20%,rgba(59,130,246,0.28),transparent_28%),radial-gradient(circle_at_84%_18%,rgba(249,115,22,0.16),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9))] dark:ring-1 dark:ring-white/10">
-          <div className="grid gap-4 md:grid-cols-2">
-            {commandChannels.map((channel) => {
-              const Icon = channel.icon;
-              const tone = channel.tone === 'green' ? 'border-emerald-200 bg-emerald-50/86 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : channel.tone === 'gold' ? 'border-amber-200 bg-amber-50/86 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50/86 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+          <div className="mt-6 grid gap-3">
+            {openVerifications.map((item) => {
+              const isSelected = selectedProof.id === item.id;
+              const tone =
+                item.tone === 'green'
+                  ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
+                  : item.tone === 'red'
+                    ? 'border-red-200 bg-red-50 text-red-900 dark:border-red-300/20 dark:bg-red-500/10 dark:text-red-100'
+                    : 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100';
               return (
-                <article key={channel.label} className={'group rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
-                  <div className="flex items-center gap-3">
-                    <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-white/70 transition-transform group-hover:scale-105 dark:bg-slate-950/70 dark:ring-white/10">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <h3 className="text-xl font-semibold">{channel.label} command</h3>
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setSelectedProofId(item.id)}
+                  className={(isSelected ? 'scale-[1.01] shadow-xl ring-2 ring-current/20 ' : 'shadow-sm hover:-translate-y-0.5 hover:shadow-lg ') + tone + ' rounded-3xl border p-4 text-left transition-all'}
+                >
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-65">{item.status}</p>
+                      <h4 className="mt-2 text-xl font-semibold">{item.task}</h4>
+                      <p className="mt-2 text-sm leading-6 opacity-80">{item.proof}</p>
+                    </div>
+                    <span className="w-fit rounded-full bg-white/82 px-3 py-1 text-xs font-semibold shadow-sm dark:bg-slate-950/70">{item.due}</span>
                   </div>
-                  <div className="mt-5 rounded-2xl bg-slate-950 p-4 text-sm font-semibold leading-6 text-white shadow-inner ring-1 ring-white/10">{channel.command}</div>
-                  <p className="mt-4 text-sm leading-6 opacity-85">{channel.response}</p>
-                </article>
+                </button>
               );
             })}
           </div>
         </div>
-        <div className="rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
+
+        <aside className="rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
           <div className="flex items-center gap-3">
-            <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-2xl bg-slate-900 ring-1 ring-blue-300/30">
-              <img src="/saven-mark.png" alt="" className="h-full w-full object-cover" />
+            <span className="grid h-13 w-13 place-items-center rounded-2xl bg-emerald-500/15 text-emerald-100 ring-1 ring-emerald-300/20">
+              <FileCheck2 className="h-6 w-6" />
             </span>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">Live command state</p>
-              <h3 className="mt-1 text-2xl font-semibold">Ready for Anna</h3>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100">Selected proof</p>
+              <h3 className="mt-1 text-2xl font-semibold">{selectedProof.task}</h3>
             </div>
           </div>
-          <div className="mt-6 space-y-3">
-            <SummaryLine label="Voice" value="Available in Settings" />
-            <SummaryLine label="Text" value="Always available" />
-            <SummaryLine label="Robot commands" value="Approval gated" />
-            <SummaryLine label="Verification" value="Required before update" />
+          <div className="mt-6 grid gap-3">
+            <SummaryLine label="Owner" value={selectedProof.owner} />
+            <SummaryLine label="Proof required" value={selectedProof.proof} />
+            <SummaryLine label="Continuity impact" value={selectedProof.impact} />
+            <SummaryLine label="Next action" value={selectedProof.next} />
           </div>
           <div className="mt-6 rounded-3xl bg-white/7 p-4 text-sm leading-6 text-slate-300 ring-1 ring-white/10">
-            Practical next backend step: persist commands as events, not chat messages. Each command should create or update a task, policy, assignment, or verification record.
+            Backend event shape: taskId, proofType, verifierId, evidenceSource, status, continuityImpact, nextAction.
           </div>
-        </div>
+        </aside>
       </section>
-      <section className="grid gap-5 lg:grid-cols-3">
-        {serviceCards.map((card) => <LayeredPanel key={card.title} title={card.title} text={card.text} items={card.items} />)}
-      </section>
-    </div>
-  );
-}
 
-function TaskLifecycleService() {
-  const lifecycle = [
-    { step: '01', title: 'Need Detected', owner: 'BioMath Core or SAVEN profile', state: 'Signal received', tone: 'blue', detail: 'Hydration, mobility, recovery, reminder, safety, environment, or caregiver coverage need.' },
-    { step: '02', title: 'Support Task Created', owner: 'SAVEN task service', state: 'Structured', tone: 'green', detail: 'Need becomes a task with due time, category, priority, permission, and verification requirement.' },
-    { step: '03', title: 'Assigned', owner: 'Circle permission service', state: 'Maya Carter', tone: 'gold', detail: 'SAVEN chooses person, device, robot, or family fallback based on policy and availability.' },
-    { step: '04', title: 'Action Performed', owner: 'Human or endpoint', state: 'In reality', tone: 'blue', detail: 'The support action happens outside the website: walking, hydration, handoff, recovery routine.' },
-    { step: '05', title: 'Verified', owner: 'Verification policy', state: 'Confirmed', tone: 'green', detail: 'Confirmation arrives through caregiver, family, user, device telemetry, robot telemetry, or environment signal.' },
-    { step: '06', title: 'Continuity Updated', owner: 'Timeline engine', state: 'Stable', tone: 'gold', detail: 'The event updates timeline, daily summary, support confidence, and next recommended action.' },
-  ];
-
-  return (
-    <div className="space-y-6">
-      <PageIntro eyebrow="Task Lifecycle Service" title="Every support need moves through one visible lifecycle." text="This is the practical service SAVEN needs most: one canonical path from need to verified continuity, shared across Today, Circle, Robots, Verification, Timeline, and Settings." />
-      <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-        <div className="grid gap-4 xl:grid-cols-6">
-          {lifecycle.map((item, index) => {
-            const color = item.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : item.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
-            return (
-              <article key={item.title} className={'relative min-h-[260px] rounded-3xl border p-4 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + color}>
-                {index < lifecycle.length - 1 && <span className="pointer-events-none absolute -right-3 top-1/2 hidden h-1 w-6 rounded-full bg-gradient-to-r from-blue-400 to-orange-400 xl:block" />}
-                <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/82 text-sm font-semibold shadow-sm dark:bg-slate-950/70">{item.step}</span>
-                <h3 className="mt-4 text-xl font-semibold">{item.title}</h3>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">{item.owner}</p>
-                <p className="mt-4 text-sm leading-6 opacity-85">{item.detail}</p>
-                <span className="mt-4 inline-flex rounded-full bg-white/82 px-3 py-1 text-xs font-semibold shadow-sm dark:bg-slate-950/70">{item.state}</span>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-      <section className="grid gap-5 lg:grid-cols-3">
-        <LayeredPanel title="Service contract" text="Every page should read and write the same lifecycle event, not independent demo states." items={['taskId', 'ownerId', 'status', 'verificationPolicy', 'timelineEvent']} />
-        <LayeredPanel title="What this prevents" text="No disconnected widgets, no repeated status logic, no unclear responsibility." items={['One status model', 'One owner', 'One proof path', 'One continuity update']} />
-        <LayeredPanel title="Ready for backend" text="This can become the first SAVEN data model without real external integrations." items={['Local seed data', 'Mock API', 'Event store', 'UI state']} />
-      </section>
-    </div>
-  );
-}
-
-function DailySupportPlanBuilder() {
-  const planRows = [
-    { time: '08:30', action: 'Hydration check', owner: 'Maya Carter', command: 'Hey SAVEN, start hydration check.', verify: 'Caregiver + sensor' },
-    { time: '10:30', action: 'Assisted walking session', owner: 'Maya Carter', command: 'Assign walking support and request confirmation.', verify: 'Caregiver confirmation' },
-    { time: '13:30', action: 'Robot readiness review', owner: 'SAVEN Assist R1', command: 'Check robot readiness only.', verify: 'Robot telemetry' },
-    { time: '19:00', action: 'Family recovery summary', owner: 'Daniel Roberts', command: 'Send calm family digest.', verify: 'Family acknowledgement' },
-  ];
-
-  return (
-    <div className="space-y-6">
-      <PageIntro eyebrow="Daily Support Plan" title="A simple daily plan that becomes real support work." text="SAVEN should not only show tasks. It should let operators build a day: time windows, owners, commands, verification, fallback, and continuity effect." />
-      <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_380px]">
-        <div className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-          <div className="space-y-3">
-            {planRows.map((row) => (
-              <div key={row.time} className="grid gap-3 rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md dark:border-white/10 dark:bg-slate-900 md:grid-cols-[86px_minmax(0,1fr)_180px] md:items-center">
-                <span className="rounded-full bg-white px-3 py-1 text-center text-sm font-semibold text-slate-700 shadow-sm dark:bg-slate-950 dark:text-slate-200 dark:ring-1 dark:ring-white/10">{row.time}</span>
-                <div>
-                  <p className="font-semibold text-slate-950 dark:text-white">{row.action}</p>
-                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{row.command}</p>
-                </div>
-                <div className="text-sm">
-                  <p className="font-semibold text-slate-800 dark:text-slate-100">{row.owner}</p>
-                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{row.verify}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="rounded-[2rem] border border-white/70 bg-[linear-gradient(135deg,#0f172a,#1e3a8a_56%,#7c2d12)] p-6 text-white shadow-xl shadow-blue-950/20 dark:border-white/10">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Plan quality</p>
-          <h3 className="mt-3 text-3xl font-semibold tracking-tight">Keep the day useful, not overloaded.</h3>
-          <div className="mt-6 grid gap-3">
-            <SummaryLine label="Open tasks" value="1" />
-            <SummaryLine label="Human-owned" value="3" />
-            <SummaryLine label="Robot physical action" value="Locked" />
-            <SummaryLine label="Continuity confidence" value="Strong" />
-          </div>
-        </div>
-      </section>
-      <SupportTemplateLibrary />
-      <section className="grid gap-5 lg:grid-cols-3">
-        <LayeredPanel title="Builder controls" text="The next UI should add and reorder plan blocks without turning Settings into a dashboard." items={['Add task', 'Time window', 'Owner', 'Fallback', 'Verification']} />
-        <LayeredPanel title="Command support" text="Every plan row should be runnable by voice or text command." items={['Start', 'Pause', 'Assign', 'Confirm', 'Escalate']} />
-        <LayeredPanel title="Guardrails" text="Limit the number of active actions so support feels calm." items={['No clutter', 'One next action', 'Quiet hours', 'Family digest']} />
-      </section>
-    </div>
-  );
-}
-
-function VerificationPolicyBuilder() {
-  const policies = [
-    { label: 'Low risk routine', proof: 'User or caregiver confirmation', examples: ['Breathing exercise', 'Drink water', 'Daily note'], tone: 'blue' },
-    { label: 'Recovery support', proof: 'Caregiver confirmation required', examples: ['Walking support', 'Medication support', 'Transfer assistance'], tone: 'gold' },
-    { label: 'Device-assisted', proof: 'Human confirmation plus telemetry', examples: ['Wearable activity', 'Bed sensor', 'Hydration signal'], tone: 'green' },
-    { label: 'Robot-related', proof: 'Human approval before action, telemetry after action', examples: ['Robot readiness', 'Mobility endpoint', 'Room assist'], tone: 'blue' },
-  ];
-
-  return (
-    <div className="space-y-6">
-      <PageIntro eyebrow="Verification Policy Builder" title="SAVEN needs clear proof rules before continuity changes." text="The verification page should become a policy builder: what kind of action is allowed, who confirms it, which device signal counts, and when escalation starts." />
       <section className="grid gap-4 lg:grid-cols-2">
-        {policies.map((policy) => {
-          const tone = policy.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : policy.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+        {proofPolicies.map((policy) => {
+          const Icon = policy.icon;
+          const tone =
+            policy.tone === 'green'
+              ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
+              : policy.tone === 'gold'
+                ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
+                : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
           return (
             <article key={policy.label} className={'rounded-[2rem] border p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
               <div className="flex items-start justify-between gap-4">
@@ -3205,7 +3089,7 @@ function VerificationPolicyBuilder() {
                   <h3 className="text-2xl font-semibold">{policy.label}</h3>
                   <p className="mt-3 text-sm leading-6 opacity-85">{policy.proof}</p>
                 </div>
-                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm dark:bg-slate-950/70"><ShieldCheck className="h-5 w-5" /></span>
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70"><Icon className="h-5 w-5" /></span>
               </div>
               <div className="mt-5 flex flex-wrap gap-2">
                 {policy.examples.map((item) => <span key={item} className="rounded-full bg-white/82 px-3 py-1 text-xs font-semibold shadow-sm dark:bg-slate-950/70">{item}</span>)}
@@ -3214,26 +3098,130 @@ function VerificationPolicyBuilder() {
           );
         })}
       </section>
-      <section className="grid gap-5 lg:grid-cols-3">
-        <LayeredPanel title="Required fields" text="Each policy should be structured enough for backend persistence later." items={['riskLevel', 'requiredProof', 'allowedVerifier', 'timeout', 'fallback']} />
-        <LayeredPanel title="Human trust" text="The UI should explain why proof is required in plain language." items={['No assumptions', 'Clear responsibility', 'Calm escalation', 'Review path']} />
-        <LayeredPanel title="Robot safety" text="Robots never verify themselves for high-impact physical support." items={['Approval first', 'Telemetry second', 'Human override', 'Stop command']} />
+    </div>
+  );
+}
+
+function SavenCommandCenter() {
+  const commands = [
+    { label: 'Voice', command: 'Hey SAVEN, show today support status.', result: 'Highlights open verification and next action.', tone: 'blue' },
+    { label: 'Text', command: 'Assign walking support to Maya.', result: 'Routes support task with verification required.', tone: 'green' },
+    { label: 'Robot-safe', command: 'Can R1 help with mobility?', result: 'Checks readiness; physical action stays approval-gated.', tone: 'gold' },
+    { label: 'Family', command: 'Prepare Daniel evening summary.', result: 'Creates family-safe digest without hidden medical detail.', tone: 'blue' },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <PageIntro eyebrow="SAVEN Command Center" title="One command layer across every support service." text="Voice and text commands control daily support, caregiver handoff, device checks, robot readiness, verification, and continuity." />
+      <section className="grid gap-4 md:grid-cols-2">
+        {commands.map((item) => {
+          const tone = item.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : item.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+          return (
+            <article key={item.label} className={'rounded-[2rem] border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] opacity-65">{item.label}</p>
+              <div className="mt-4 rounded-2xl bg-slate-950 p-4 text-sm font-semibold leading-6 text-white shadow-inner">{item.command}</div>
+              <p className="mt-4 text-sm leading-6 opacity-85">{item.result}</p>
+            </article>
+          );
+        })}
+      </section>
+    </div>
+  );
+}
+
+function TaskLifecycleService() {
+  const lifecycle = [
+    ['Need Detected', 'Signal received'],
+    ['Support Task Created', 'Structured'],
+    ['Assigned', 'Owner selected'],
+    ['Action Performed', 'In reality'],
+    ['Verified', 'Proof received'],
+    ['Continuity Updated', 'Stable'],
+  ];
+
+  return (
+    <div className="space-y-6">
+      <PageIntro eyebrow="Task Lifecycle Service" title="Every support need moves through one visible lifecycle." text="SAVEN keeps one path from detected need to verified continuity." />
+      <section className="grid gap-4 xl:grid-cols-6">
+        {lifecycle.map(([title, state], index) => (
+          <article key={title} className="relative min-h-[210px] rounded-3xl border border-blue-200 bg-blue-50 p-4 text-blue-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100">
+            {index < lifecycle.length - 1 && <span className="pointer-events-none absolute -right-3 top-1/2 hidden h-1 w-6 rounded-full bg-gradient-to-r from-blue-400 to-orange-400 xl:block" />}
+            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/82 text-sm font-semibold shadow-sm dark:bg-slate-950/70">{String(index + 1).padStart(2, '0')}</span>
+            <h3 className="mt-4 text-xl font-semibold">{title}</h3>
+            <p className="mt-4 text-sm leading-6 opacity-85">{state}</p>
+          </article>
+        ))}
+      </section>
+    </div>
+  );
+}
+
+function DailySupportPlanBuilder() {
+  const rows = [
+    ['08:30', 'Hydration check', 'SAVEN + sensor', 'Sensor + user'],
+    ['10:30', 'Assisted walking session', 'Maya Carter', 'Caregiver confirmation'],
+    ['13:30', 'Robot readiness review', 'SAVEN Assist R1', 'Telemetry only'],
+    ['19:00', 'Family recovery summary', 'Daniel Roberts', 'Family acknowledgement'],
+  ];
+
+  return (
+    <div className="space-y-6">
+      <PageIntro eyebrow="Daily Support Plan" title="A simple daily plan that becomes real support work." text="SAVEN organizes time windows, owners, commands, verification, fallback, and continuity effect." />
+      <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
+        <div className="space-y-3">
+          {rows.map(([time, action, owner, proof]) => (
+            <div key={time} className="grid gap-3 rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 dark:border-white/10 dark:bg-slate-900 md:grid-cols-[86px_minmax(0,1fr)_190px] md:items-center">
+              <span className="rounded-full bg-white px-3 py-1 text-center text-sm font-semibold text-slate-700 shadow-sm dark:bg-slate-950 dark:text-slate-200">{time}</span>
+              <div>
+                <p className="font-semibold text-slate-950 dark:text-white">{action}</p>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{proof}</p>
+              </div>
+              <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">{owner}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function VerificationPolicyBuilder() {
+  const policies = [
+    ['Low risk routine', 'User or caregiver confirmation', 'blue'],
+    ['Recovery support', 'Caregiver confirmation required', 'gold'],
+    ['Device-assisted', 'Human confirmation plus telemetry', 'green'],
+    ['Robot-related', 'Human approval before action, telemetry after action', 'blue'],
+  ];
+
+  return (
+    <div className="space-y-6">
+      <PageIntro eyebrow="Verification Policy Builder" title="Proof rules before continuity changes." text="Each support category defines who confirms it and which signals can support proof." />
+      <section className="grid gap-4 lg:grid-cols-2">
+        {policies.map(([label, proof, tone]) => {
+          const color = tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+          return (
+            <article key={label} className={'rounded-[2rem] border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + color}>
+              <h3 className="text-2xl font-semibold">{label}</h3>
+              <p className="mt-3 text-sm leading-6 opacity-85">{proof}</p>
+            </article>
+          );
+        })}
       </section>
     </div>
   );
 }
 
 function ContinuityOperations() {
-  const continuityRows = [
+  const rows = [
     { label: 'Today support continuity', value: 'Strong', detail: '4 verified actions, 1 waiting for review', tone: 'green' },
     { label: 'Caregiver coverage', value: 'Active', detail: 'Maya owns recovery actions until 15:00', tone: 'blue' },
     { label: 'Robot readiness', value: 'Standby', detail: 'R1 available for readiness only', tone: 'gold' },
-    { label: 'Family awareness', value: 'Digest ready', detail: 'Daniel gets evening summary', tone: 'green' },
+    { label: 'Open verification', value: '1 waiting', detail: 'Assisted walking session needs confirmation', tone: 'red' },
   ];
 
   return (
     <div className="space-y-6">
-      <PageIntro eyebrow="Continuity Operations" title="Continuity is the final SAVEN product outcome." text="The user should not feel they are managing pages. SAVEN should show whether real support continuity is stable, interrupted, waiting, or escalating." />
+      <PageIntro eyebrow="Continuity Operations" title="Continuity is the final SAVEN product outcome." text="SAVEN shows whether real support continuity is stable, interrupted, waiting, or escalating." />
       <section className="grid gap-5 xl:grid-cols-[420px_minmax(0,1fr)]">
         <div className="rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Continuity score</p>
@@ -3244,13 +3232,13 @@ function ContinuityOperations() {
           <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-900">
             <div className="h-full w-[86%] rounded-full bg-gradient-to-r from-blue-500 via-emerald-400 to-amber-300" />
           </div>
-          <p className="mt-5 text-sm leading-6 text-slate-300">This is an operational confidence view, not a medical score. It summarizes task completion, unresolved items, coverage, and verification strength.</p>
+          <p className="mt-5 text-sm leading-6 text-slate-300">Operational confidence, not a medical score.</p>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          {continuityRows.map((row) => {
-            const tone = row.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : row.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+          {rows.map((row) => {
+            const tone = row.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : row.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : row.tone === 'red' ? 'border-red-200 bg-red-50 text-red-900 dark:border-red-300/20 dark:bg-red-500/10 dark:text-red-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
             return (
-              <article key={row.label} className={'rounded-[2rem] border p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
+              <article key={row.label} className={'rounded-[2rem] border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
                 <p className="text-sm font-semibold opacity-75">{row.label}</p>
                 <h3 className="mt-3 text-3xl font-semibold">{row.value}</h3>
                 <p className="mt-3 text-sm leading-6 opacity-85">{row.detail}</p>
@@ -3259,16 +3247,39 @@ function ContinuityOperations() {
           })}
         </div>
       </section>
-      <section className="grid gap-5 lg:grid-cols-3">
-        <LayeredPanel title="Continuity should answer" text="Can the person continue the day safely and calmly?" items={['What is done', 'What is open', 'Who owns it', 'What happens next']} />
-        <LayeredPanel title="Keep it light" text="Do not show every raw signal. Show the few signals that change action." items={['Open verification', 'Coverage gap', 'Escalation', 'Blocked robot action']} />
-        <LayeredPanel title="Best next build" text="Make all pages feed this final state." items={['Today', 'Tasks', 'Circle', 'Robots', 'Verification']} />
-      </section>
     </div>
   );
 }
 
+function CirclePermissionsMatrix() {
+  const rows = [
+    ['Family', 'Receive summary', 'Escalate unresolved items'],
+    ['Caregiver', 'Perform support', 'Verify action'],
+    ['Doctor', 'Review clinical summary', 'Approve plan change'],
+    ['Robot', 'Report readiness', 'Wait for approval'],
+  ];
 
+  return (
+    <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Circle permissions</p>
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Who can do what?</h3>
+        </div>
+        <StatusPill tone="blue" label="Permission matrix" />
+      </div>
+      <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        {rows.map(([role, action, limit]) => (
+          <article key={role} className="rounded-3xl border border-blue-200 bg-blue-50 p-4 text-blue-900 shadow-sm dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100">
+            <p className="text-xl font-semibold">{role}</p>
+            <p className="mt-3 text-sm leading-6 opacity-85">{action}</p>
+            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] opacity-60">{limit}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 function SupportTemplateLibrary() {
   const templates = [
