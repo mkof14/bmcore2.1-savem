@@ -24,3 +24,7 @@ The local version must never silently dispatch real emergency, medical, robot, d
 ## Next Backend Step
 
 When real backend work begins, implement `SavenBackendGateway` with a real adapter while keeping the UI and reducer code pointed at the same interface.
+
+## Interface Gateway Panel
+
+The developer readiness area now includes a Backend Gateway Map panel. It visualizes caregiver, family, nurse, doctor, and emergency routes, plus the safety gate that keeps the local version from dispatching real medical, robot, or emergency actions.

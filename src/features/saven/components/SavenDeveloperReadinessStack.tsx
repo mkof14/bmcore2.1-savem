@@ -1,6 +1,7 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BellRing, HeartPulse, PhoneCall, ShieldCheck, Stethoscope, Users } from 'lucide-react';
 import { savenMockState } from '../mock/savenMockState';
 import { savenControlApiMock } from '../services/savenControlApiMock';
+import { savenCareContacts } from '../services/savenLocalBackendGateway';
 
 type Tone = 'blue' | 'gold' | 'green';
 
@@ -153,6 +154,109 @@ function SavenControlApiMockPanel() {
   );
 }
 
+
+function SavenBackendGatewayPanel() {
+  const routeStyles = {
+    caregiver: {
+      icon: HeartPulse,
+      label: 'Caregiver',
+      className: 'border-emerald-200 bg-emerald-50 text-emerald-950 dark:border-emerald-300/25 dark:bg-emerald-500/10 dark:text-emerald-100',
+    },
+    family: {
+      icon: Users,
+      label: 'Family',
+      className: 'border-blue-200 bg-blue-50 text-blue-950 dark:border-blue-300/25 dark:bg-blue-500/10 dark:text-blue-100',
+    },
+    nurse: {
+      icon: BellRing,
+      label: 'Nurse',
+      className: 'border-cyan-200 bg-cyan-50 text-cyan-950 dark:border-cyan-300/25 dark:bg-cyan-500/10 dark:text-cyan-100',
+    },
+    doctor: {
+      icon: Stethoscope,
+      label: 'Doctor',
+      className: 'border-violet-200 bg-violet-50 text-violet-950 dark:border-violet-300/25 dark:bg-violet-500/10 dark:text-violet-100',
+    },
+    emergency: {
+      icon: PhoneCall,
+      label: 'Emergency',
+      className: 'border-red-200 bg-red-50 text-red-950 dark:border-red-300/25 dark:bg-red-500/10 dark:text-red-100',
+    },
+  } as const;
+
+  const gatewaySteps = [
+    { label: 'UI command', detail: 'Voice, text, button, schedule, robot readiness, or care route.', tone: 'blue' },
+    { label: 'Local gateway', detail: 'Transforms the action into one backend-ready contract call.', tone: 'green' },
+    { label: 'Safety gate', detail: 'Blocks real dispatch, robot action, medical route, or emergency route without human confirmation.', tone: 'gold' },
+    { label: 'Future adapter', detail: 'A real backend can replace the local gateway without rewriting the page.', tone: 'violet' },
+  ];
+
+  return (
+    <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_12%_16%,rgba(0,180,255,0.16),transparent_30%),radial-gradient(circle_at_86%_12%,rgba(255,178,54,0.18),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.95),rgba(240,249,255,0.8),rgba(255,247,237,0.76))] p-5 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_12%_16%,rgba(0,180,255,0.22),transparent_30%),radial-gradient(circle_at_86%_12%,rgba(255,178,54,0.14),transparent_28%),linear-gradient(135deg,rgba(3,7,18,0.98),rgba(7,20,39,0.9),rgba(35,19,7,0.68))] dark:ring-1 dark:ring-white/10">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Backend gateway map</p>
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">SAVEN has one safe bridge for care routes and future backend services.</h3>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">This view shows the future service boundary: doctors, nurses, emergency help, family, caregivers, devices, robots, and continuity all pass through one local contract first.</p>
+        </div>
+        <StatusPill tone="green" label="Contract visible" />
+      </div>
+
+      <div className="mt-5 grid gap-3 lg:grid-cols-5">
+        {savenCareContacts.map((contact) => {
+          const style = routeStyles[contact.role];
+          const Icon = style.icon;
+
+          return (
+            <article key={contact.id} className={'group rounded-3xl border p-4 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + style.className}>
+              <div className="flex items-start justify-between gap-3">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 transition-transform group-hover:scale-105 dark:bg-slate-950/70">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <span className="rounded-full bg-white/75 px-3 py-1 text-xs font-semibold shadow-sm ring-1 ring-current/10 dark:bg-slate-950/65">{style.label}</span>
+              </div>
+              <h4 className="mt-4 text-lg font-semibold">{contact.name}</h4>
+              <p className="mt-2 text-sm leading-6 opacity-80">{contact.route}</p>
+              <div className="mt-4 rounded-2xl bg-white/68 p-3 text-sm shadow-inner ring-1 ring-current/10 dark:bg-slate-950/48">
+                <p className="font-semibold">{contact.availability}</p>
+                <p className="mt-1 opacity-75">{contact.responseTarget}</p>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        {gatewaySteps.map((step) => {
+          const tone =
+            step.tone === 'green'
+              ? 'border-emerald-200 bg-emerald-50 text-emerald-950 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
+              : step.tone === 'gold'
+                ? 'border-amber-200 bg-amber-50 text-amber-950 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
+                : step.tone === 'violet'
+                  ? 'border-violet-200 bg-violet-50 text-violet-950 dark:border-violet-300/20 dark:bg-violet-500/10 dark:text-violet-100'
+                  : 'border-blue-200 bg-blue-50 text-blue-950 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+
+          return (
+            <div key={step.label} className={'rounded-3xl border p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg ' + tone}>
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4" />
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-65">{step.label}</p>
+              </div>
+              <p className="mt-3 text-sm leading-6 opacity-85">{step.detail}</p>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="mt-5 rounded-3xl border border-red-200 bg-red-50 p-4 text-red-950 shadow-sm dark:border-red-300/25 dark:bg-red-500/10 dark:text-red-100">
+        <p className="text-sm font-semibold">Emergency route is visible, but locked.</p>
+        <p className="mt-2 text-sm leading-6 opacity-80">The local development version can prepare an emergency path for the interface, but it cannot dispatch real emergency services. The real backend must keep this as a human-confirmed action.</p>
+      </div>
+    </section>
+  );
+}
+
 function OperationalReadinessReport() {
   const reportRows = [
     { label: 'Lifecycle service', value: 'Ready', detail: 'Tasks share one support path', tone: 'green' },
@@ -190,6 +294,7 @@ export function SavenDeveloperReadinessStack() {
   const panels = [
     { title: 'Local mock state', summary: 'People, tasks, endpoints, commands, escalation, and continuity.', component: <SavenLocalMockStatePanel /> },
     { title: 'Control API mock', summary: 'Future backend operations represented locally.', component: <SavenControlApiMockPanel /> },
+    { title: 'Backend gateway map', summary: 'Care contacts, safety gates, and future backend routes.', component: <SavenBackendGatewayPanel /> },
     { title: 'Operational report', summary: 'Lifecycle, command layer, robot gates, and verification readiness.', component: <OperationalReadinessReport /> },
     { title: 'Final readiness audit', summary: 'Version, mock-only boundaries, and cleanup status.', component: <SavenFinalAuditPanel /> },
   ];
@@ -201,7 +306,7 @@ export function SavenDeveloperReadinessStack() {
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Developer readiness</p>
           <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Technical layers are available without crowding the daily workflow.</h3>
         </div>
-        <StatusPill tone="blue" label="4 panels" />
+        <StatusPill tone="blue" label="5 panels" />
       </div>
       <div className="mt-5 space-y-3">
         {panels.map((panel, index) => (
