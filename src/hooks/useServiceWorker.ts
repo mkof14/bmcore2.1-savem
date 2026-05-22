@@ -16,6 +16,23 @@ export function useServiceWorker() {
   });
 
   useEffect(() => {
+    if (!state.isSupported) return;
+
+    const isLocalDevelopment =
+      import.meta.env.DEV ||
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1';
+
+    if (isLocalDevelopment) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        registrations.forEach((registration) => registration.unregister());
+      });
+      caches?.keys?.().then((keys) => {
+        keys.forEach((key) => caches.delete(key));
+      });
+      return;
+    }
+
     // Service Worker disabled per Phase 1 requirements
     // Uncomment to enable: registerServiceWorker();
     return;

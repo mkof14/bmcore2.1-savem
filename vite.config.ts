@@ -14,10 +14,12 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   server: {
-    host: '0.0.0.0',
+    host: '127.0.0.1',
     port: 5173,
-    strictPort: false,
+    strictPort: true,
     hmr: {
+      host: '127.0.0.1',
+      port: 5173,
       overlay: true
     },
     headers: {
@@ -26,6 +28,11 @@ export default defineConfig({
       'Referrer-Policy': 'strict-origin-when-cross-origin',
       'Permissions-Policy': 'camera=(), microphone=(), geolocation=()'
     }
+  },
+  preview: {
+    host: '127.0.0.1',
+    port: 5173,
+    strictPort: true
   },
   build: {
     sourcemap: false,

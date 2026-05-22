@@ -199,6 +199,11 @@ export default function Footer({ onNavigate }: FooterProps) {
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Partnership</h3>
             <ul className="space-y-2">
               <li>
+                <button onClick={() => onNavigate('saven')} className="text-sm font-semibold text-orange-500 hover:text-orange-400 transition-colors">
+                  SAVEN
+                </button>
+              </li>
+              <li>
                 <button onClick={() => onNavigate('partnership')} className="text-sm text-gray-400 hover:text-orange-500 transition-colors">
                   Partnership Opportunities
                 </button>

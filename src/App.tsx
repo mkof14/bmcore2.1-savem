@@ -8,7 +8,6 @@ import CookieBanner from './components/CookieBanner';
 import PWAInstallPrompt from './components/PWAInstallPrompt';
 import PWAUpdatePrompt from './components/PWAUpdatePrompt';
 import CommandPalette from './components/CommandPalette';
-import { LoadingPage } from './components/LoadingSpinner';
 import { analytics, identifyUser } from './lib/analytics';
 import { useServiceWorker } from './hooks/useServiceWorker';
 import AdminGate from './components/AdminGate';
@@ -54,12 +53,21 @@ const HowItWorks = lazy(() => import('./pages/HowItWorks'));
 const WhyTwoModels = lazy(() => import('./pages/WhyTwoModels'));
 const PrivacyTrust = lazy(() => import('./pages/PrivacyTrust'));
 const ConfigSystem = lazy(() => import('./pages/admin/ConfigSystem'));
+const Saven = lazy(() => import('./pages/Saven'));
 
-type Page = 'home' | 'about' | 'services' | 'pricing' | 'investors' | 'science' | 'api' | 'contact' | 'signin' | 'signup' | 'member' | 'member-zone' | 'services-catalog' | 'service-detail' | 'devices' | 'reports' | 'faq' | 'referral' | 'ambassador' | 'learning' | 'learning-center' | 'biomath-core-summary' | 'summary-text' | 'blog' | 'news' | 'careers' | 'command-center' | 'admin-panel' | 'config-system' | 'privacy-policy' | 'terms-of-service' | 'disclaimer' | 'hipaa-notice' | 'security' | 'gdpr' | 'data-privacy' | 'trust-safety' | 'partnership' | 'how-it-works' | 'why-two-models' | 'privacy-trust' | 'redeem-invitation';
+type Page = 'home' | 'about' | 'services' | 'pricing' | 'investors' | 'science' | 'api' | 'contact' | 'signin' | 'signup' | 'member' | 'member-zone' | 'services-catalog' | 'service-detail' | 'devices' | 'reports' | 'faq' | 'referral' | 'ambassador' | 'learning' | 'learning-center' | 'biomath-core-summary' | 'summary-text' | 'blog' | 'news' | 'careers' | 'command-center' | 'admin-panel' | 'config-system' | 'privacy-policy' | 'terms-of-service' | 'disclaimer' | 'hipaa-notice' | 'security' | 'gdpr' | 'data-privacy' | 'trust-safety' | 'partnership' | 'how-it-works' | 'why-two-models' | 'privacy-trust' | 'redeem-invitation' | 'saven';
+
+const getInitialPage = (): Page => {
+  if (typeof window !== 'undefined' && (window.location.pathname.startsWith('/saven') || window.location.pathname.startsWith('/app/saven'))) {
+    return 'saven';
+  }
+
+  return 'home';
+};
 
 function App() {
   // VERSION: 2025-10-20-01:48 - Force HMR refresh
-  const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [currentPage, setCurrentPage] = useState<Page>(getInitialPage);
   const [serviceDetailId, setServiceDetailId] = useState<string>('');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -265,6 +273,8 @@ function App() {
         return <WhyTwoModels />;
       case 'privacy-trust':
         return <PrivacyTrust onNavigate={handleNavigate} />;
+      case 'saven':
+        return <Saven onNavigate={handleNavigate} />;
       default:
         return <Home onNavigate={handleNavigate} />;
     }
@@ -277,7 +287,7 @@ function App() {
       <AdminToast />
       {showHeaderFooter && <Header onNavigate={handleNavigate} currentPage={currentPage} />}
       <main>
-        <Suspense fallback={<LoadingPage text="Loading..." />}>
+        <Suspense fallback={null}>
           {renderPage()}
         </Suspense>
       </main>
