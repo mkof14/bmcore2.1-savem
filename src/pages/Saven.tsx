@@ -27,6 +27,18 @@ import {
   Stethoscope,
   Siren,
   Users,
+  Cable,
+  CircuitBoard,
+  Gauge,
+  Network,
+  ScanLine,
+  Workflow,
+  Bed,
+  Droplets,
+  EyeOff,
+  MapPinned,
+  Satellite,
+  Wifi,
 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import BackButton from '../components/BackButton';
@@ -2500,25 +2512,40 @@ function SupportCircle() {
 }
 
 function DeviceReadiness() {
-  const gatewaySignals = [
-    { signal: 'Hydration confirmation', source: 'Smart hydration sensor', task: 'Morning hydration check', confidence: 'Strong', tone: 'green' },
-    { signal: 'Mobility trend', source: 'Wearable recovery tracker', task: 'Assisted walking session', confidence: 'Supportive', tone: 'blue' },
-    { signal: 'Rest window presence', source: 'Bed presence sensor', task: 'Rest period check', confidence: 'Standby', tone: 'gold' },
-    { signal: 'Stability telemetry', source: 'Mobility support device', task: 'Walking support fallback', confidence: 'Needs maintenance', tone: 'gold' },
+  const signalRoutes = [
+    { signal: 'Hydration signal', source: 'Smart hydration sensor', task: 'Morning hydration check', proof: 'Supportive', icon: Droplets, tone: 'green' },
+    { signal: 'Mobility trend', source: 'Wearable recovery tracker', task: 'Assisted walking session', proof: 'Supportive', icon: Activity, tone: 'blue' },
+    { signal: 'Rest window', source: 'Bed presence sensor', task: 'Recovery pacing', proof: 'Context only', icon: Bed, tone: 'gold' },
+    { signal: 'Room state', source: 'Home sensor mesh', task: 'Environment permission', proof: 'Rule input', icon: Satellite, tone: 'blue' },
+  ];
+
+  const consentRules = [
+    { label: 'Consent visible', detail: 'Device use is shown as part of support, not hidden monitoring.', icon: EyeOff, tone: 'blue' },
+    { label: 'Signal scoped', detail: 'Only support-relevant signals appear in SAVEN routes.', icon: ScanLine, tone: 'green' },
+    { label: 'Human decision', detail: 'Telemetry supports proof but does not replace human confirmation.', icon: ShieldCheck, tone: 'gold' },
+    { label: 'Backend ready', detail: 'Each signal can become an event behind the SAVEN gateway.', icon: Cable, tone: 'blue' },
   ];
 
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Device Readiness" title="Devices are the verification gateway for real-world support." text="Devices do not make care decisions. They confirm signals, support continuity, and give SAVEN enough reality context to keep people, robots, and environments aligned." />
-      <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_380px]">
+
+      <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
         <div className="grid gap-5 lg:grid-cols-2">
           {devices.map((device) => (
             <ReadinessCard key={device.name} title={device.name} subtitle={device.type} status={device.status} lines={[device.environment, device.telemetry]} items={device.capabilities} />
           ))}
         </div>
         <div className="rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Device Gateway</p>
-          <h3 className="mt-3 text-3xl font-semibold tracking-tight">Signals become proof, not noise.</h3>
+          <div className="flex items-center gap-3">
+            <span className="grid h-13 w-13 place-items-center rounded-2xl bg-blue-500/15 text-blue-100 ring-1 ring-blue-300/20">
+              <Wifi className="h-6 w-6" />
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">Device Gateway</p>
+              <h3 className="mt-1 text-2xl font-semibold">Signals become proof, not noise.</h3>
+            </div>
+          </div>
           <div className="mt-6 space-y-3">
             <SummaryLine label="Device role" value="Verification support" />
             <SummaryLine label="Decision authority" value="Human + policy" />
@@ -2527,7 +2554,8 @@ function DeviceReadiness() {
           </div>
         </div>
       </section>
-      <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
+
+      <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(16,185,129,0.15),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(240,253,244,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.23),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(6,34,24,0.62))] dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Live signal routing</p>
@@ -2536,87 +2564,170 @@ function DeviceReadiness() {
           <StatusPill tone="green" label="Gateway active" />
         </div>
         <div className="mt-6 grid gap-3">
-          {gatewaySignals.map((signal) => {
-            const tone = signal.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : signal.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+          {signalRoutes.map((signal) => {
+            const Icon = signal.icon;
+            const tone =
+              signal.tone === 'green'
+                ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
+                : signal.tone === 'gold'
+                  ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
+                  : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
             return (
-              <div key={signal.signal} className={'grid gap-3 rounded-3xl border p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[1fr_1fr_1fr_150px] md:items-center ' + tone}>
+              <div key={signal.signal} className={'grid gap-3 rounded-3xl border p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[48px_1fr_1fr_1fr_150px] md:items-center ' + tone}>
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70"><Icon className="h-5 w-5" /></span>
                 <p className="font-semibold">{signal.signal}</p>
                 <p className="text-sm opacity-80">{signal.source}</p>
                 <p className="text-sm font-semibold">{signal.task}</p>
-                <span className="rounded-full bg-white/82 px-3 py-1 text-center text-xs font-semibold shadow-sm dark:bg-slate-950/70">{signal.confidence}</span>
+                <span className="rounded-full bg-white/82 px-3 py-1 text-center text-xs font-semibold shadow-sm dark:bg-slate-950/70">{signal.proof}</span>
               </div>
             );
           })}
         </div>
+      </section>
+
+      <section className="grid gap-4 xl:grid-cols-4">
+        {consentRules.map((rule) => {
+          const Icon = rule.icon;
+          const tone =
+            rule.tone === 'green'
+              ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
+              : rule.tone === 'gold'
+                ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
+                : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+          return (
+            <article key={rule.label} className={'rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
+              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70"><Icon className="h-5 w-5" /></span>
+              <h3 className="mt-4 text-xl font-semibold">{rule.label}</h3>
+              <p className="mt-3 text-sm leading-6 opacity-85">{rule.detail}</p>
+            </article>
+          );
+        })}
       </section>
     </div>
   );
 }
 
 function RobotReadiness() {
-  const robotServices = [
-    { label: 'Mobility transfer', detail: 'Assistive robot plus caregiver approval', tone: 'blue', icon: Bot },
-    { label: 'Telemetry bridge', detail: 'Robot data, wearable state, room sensor context', tone: 'green', icon: Radar },
-    { label: 'Environment rules', detail: 'Doors, lights, bed, lift, charging zone', tone: 'gold', icon: Home },
-    { label: 'Verification loop', detail: 'Human confirmation plus robot/device telemetry', tone: 'blue', icon: ShieldCheck },
+  const robots = [
+    {
+      name: 'SAVEN Assist R1',
+      model: 'Humanoid support endpoint',
+      readiness: 'Standby',
+      capability: 'Conversation, object fetch readiness, mobility support preparation, room status reporting.',
+      assignment: 'Recovery support only after caregiver approval',
+      limits: ['No autonomous lift', 'No medication decision', 'No emergency dispatch'],
+    },
+    {
+      name: 'Mobility Base M2',
+      model: 'Physical mobility platform',
+      readiness: 'Approval gated',
+      capability: 'Transfer positioning, path readiness, room obstacle reporting, low-speed assisted movement.',
+      assignment: 'Assistive movement only with human present',
+      limits: ['Human present', 'Room rules required', 'Stop command always active'],
+    },
+    {
+      name: 'Home Sensor Mesh',
+      model: 'Environment robotics layer',
+      readiness: 'Live telemetry',
+      capability: 'Room presence, bed state, door state, light state, fall-risk signal, quiet-hours awareness.',
+      assignment: 'Telemetry support for verification',
+      limits: ['Signal only', 'No care decision alone', 'Privacy scoped'],
+    },
+    {
+      name: 'Wearable Bridge',
+      model: 'Body telemetry endpoint',
+      readiness: 'Connected',
+      capability: 'Motion trend, recovery activity, reminder response, hydration support, verification assist.',
+      assignment: 'Supports but does not replace human confirmation',
+      limits: ['No diagnosis', 'No hidden monitoring', 'Consent required'],
+    },
   ];
 
-  const connectionLayers = [
-    { from: 'SAVEN', to: 'Humanoid Robot', mode: 'Task command', state: 'Human approved', color: 'blue' },
-    { from: 'Humanoid Robot', to: 'Wearable', mode: 'Telemetry sync', state: 'Live', color: 'green' },
-    { from: 'Mobility Base', to: 'Smart Bed', mode: 'Physical support', state: 'Ready', color: 'gold' },
-    { from: 'Room Sensors', to: 'Verification', mode: 'Reality check', state: 'Strong', color: 'blue' },
-    { from: 'Caregiver', to: 'Robot R1', mode: 'Override and pause', state: 'Required', color: 'green' },
+  const serviceMatrix = [
+    { service: 'Task command', saven: 'Creates action', robot: 'Receives scoped instruction', device: 'Adds state', human: 'Approves', status: 'Ready', tone: 'blue' },
+    { service: 'Physical support', saven: 'Checks policy', robot: 'Prepares movement', device: 'Confirms room', human: 'Must be present', status: 'Locked', tone: 'gold' },
+    { service: 'Telemetry sync', saven: 'Reads signals', robot: 'Reports readiness', device: 'Streams mock state', human: 'Reviews exceptions', status: 'Live mock', tone: 'green' },
+    { service: 'Verification', saven: 'Waits for proof', robot: 'Provides telemetry', device: 'Supports proof', human: 'Confirms reality', status: 'Required', tone: 'blue' },
+    { service: 'Emergency safety', saven: 'Prepares context', robot: 'Stops action', device: 'Adds location state', human: 'Confirms route', status: 'Human only', tone: 'red' },
+  ];
+
+  const physicalCommandStates = [
+    { label: 'Readiness check', state: 'Allowed', detail: 'SAVEN may ask robots and devices for readiness state.', icon: Activity, tone: 'green' },
+    { label: 'Move / lift / transfer', state: 'Locked', detail: 'Physical movement requires caregiver approval and environment rules.', icon: Bot, tone: 'gold' },
+    { label: 'Device telemetry', state: 'Allowed', detail: 'Wearables and room sensors can support verification in mock mode.', icon: Gauge, tone: 'blue' },
+    { label: 'Emergency route', state: 'Human only', detail: 'Robots stop and SAVEN prepares context; dispatch is not automatic.', icon: ShieldCheck, tone: 'red' },
+  ];
+
+  const networkNodes = [
+    { label: 'SAVEN', x: 50, y: 18, color: '#60a5fa' },
+    { label: 'R1', x: 20, y: 45, color: '#f97316' },
+    { label: 'Mobility', x: 38, y: 76, color: '#f59e0b' },
+    { label: 'Wearable', x: 66, y: 74, color: '#34d399' },
+    { label: 'Room', x: 82, y: 44, color: '#22d3ee' },
+    { label: 'Human', x: 50, y: 52, color: '#a78bfa' },
+  ];
+
+  const networkPaths = [
+    'M50 18 C38 24 27 32 20 45',
+    'M50 18 C62 24 75 32 82 44',
+    'M20 45 C28 58 32 68 38 76',
+    'M82 44 C76 58 72 68 66 74',
+    'M38 76 C48 84 56 84 66 74',
+    'M50 18 C50 30 50 42 50 52',
+    'M50 52 C42 58 40 66 38 76',
+    'M50 52 C58 58 64 66 66 74',
   ];
 
   return (
     <div className="space-y-6">
-      <section className="relative overflow-hidden rounded-[2.25rem] border border-white/70 bg-[radial-gradient(circle_at_18%_22%,rgba(59,130,246,0.35),transparent_28%),radial-gradient(circle_at_72%_18%,rgba(249,115,22,0.26),transparent_30%),radial-gradient(circle_at_82%_88%,rgba(16,185,129,0.22),transparent_30%),linear-gradient(135deg,#f8fbff,#eaf3ff_42%,#fff4e8)] p-6 shadow-xl shadow-blue-950/8 dark:border-white/10 dark:bg-[radial-gradient(circle_at_18%_22%,rgba(59,130,246,0.36),transparent_30%),radial-gradient(circle_at_72%_18%,rgba(249,115,22,0.22),transparent_32%),radial-gradient(circle_at_82%_88%,rgba(16,185,129,0.18),transparent_30%),linear-gradient(135deg,#020817,#08182d_52%,#201205)]">
+      <section className="relative overflow-hidden rounded-[2.25rem] border border-white/70 bg-[radial-gradient(circle_at_18%_18%,rgba(0,180,255,0.24),transparent_30%),radial-gradient(circle_at_78%_16%,rgba(255,178,54,0.24),transparent_30%),radial-gradient(circle_at_84%_86%,rgba(16,185,129,0.2),transparent_30%),linear-gradient(135deg,#f8fbff,#eaf3ff_42%,#fff4e8)] p-6 shadow-xl shadow-blue-950/8 dark:border-white/10 dark:bg-[radial-gradient(circle_at_18%_18%,rgba(0,180,255,0.26),transparent_30%),radial-gradient(circle_at_78%_16%,rgba(255,178,54,0.2),transparent_30%),radial-gradient(circle_at_84%_86%,rgba(16,185,129,0.16),transparent_30%),linear-gradient(135deg,#020817,#08182d_52%,#201205)]">
         <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(59,130,246,0.16)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.14)_1px,transparent_1px)] [background-size:38px_38px] dark:opacity-35" />
-        <div className="relative grid gap-7 xl:grid-cols-[minmax(0,1.08fr)_minmax(420px,0.92fr)] xl:items-center">
+        <div className="relative grid gap-7 xl:grid-cols-[minmax(0,1.02fr)_minmax(460px,0.98fr)] xl:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 dark:text-blue-200">Robotic Execution Layer</p>
-            <h2 className="mt-4 max-w-4xl text-5xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-6xl">Robots become safe physical endpoints for SAVEN.</h2>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">Humanoid robots, mobility systems, room devices, wearables, and verification services are connected by one support command layer. SAVEN keeps every physical action permissioned, visible, and verified.</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 dark:text-blue-200">Robot / Device Service Matrix</p>
+            <h2 className="mt-4 max-w-4xl text-5xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-6xl">Physical support becomes visible, permissioned, and verified.</h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">SAVEN connects humanoid robots, mobility systems, room sensors, wearables, environment rules, and human approval through one operational layer. Robots can participate, but they cannot decide care alone.</p>
             <div className="mt-7 grid gap-3 sm:grid-cols-3">
-              {['Human approval', 'Device sync', 'Verified action'].map((item, index) => (
-                <div key={item} className="rounded-3xl border border-white/70 bg-white/76 p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/60 dark:ring-1 dark:ring-white/10">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Layer {index + 1}</p>
-                  <p className="mt-2 text-sm font-semibold text-slate-950 dark:text-white">{item}</p>
+              {[
+                ['Command', 'One SAVEN task source'],
+                ['Approval', 'Human-gated action'],
+                ['Proof', 'Telemetry plus confirmation'],
+              ].map(([label, value]) => (
+                <div key={label} className="rounded-3xl border border-white/70 bg-white/76 p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/60 dark:ring-1 dark:ring-white/10">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{label}</p>
+                  <p className="mt-2 text-sm font-semibold text-slate-950 dark:text-white">{value}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 p-5 text-white shadow-2xl shadow-slate-950/30">
+          <div className="relative min-h-[450px] overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950 p-5 text-white shadow-2xl shadow-slate-950/30">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_42%_18%,rgba(59,130,246,0.34),transparent_30%),radial-gradient(circle_at_72%_68%,rgba(249,115,22,0.32),transparent_32%),linear-gradient(135deg,#020617,#0f172a_55%,#111827)]" />
             <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(96,165,250,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.18)_1px,transparent_1px)] [background-size:28px_28px]" />
             <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              {['M50 14 C30 24 22 45 30 66', 'M50 14 C70 24 78 45 70 66', 'M30 66 C42 78 58 78 70 66', 'M50 28 C50 46 50 64 50 82'].map((path, index) => (
+              {networkPaths.map((path, index) => (
                 <g key={path}>
-                  <path d={path} fill="none" stroke={index % 2 ? 'rgba(249,115,22,0.54)' : 'rgba(96,165,250,0.58)'} strokeWidth="0.42" strokeDasharray="1.4 1.2" />
+                  <path d={path} fill="none" stroke={index % 2 ? 'rgba(249,115,22,0.52)' : 'rgba(96,165,250,0.58)'} strokeWidth="0.46" strokeDasharray="1.6 1.2" />
                   <circle r="0.8" fill={index % 2 ? '#fb923c' : '#60a5fa'}>
-                    <animateMotion dur={(3.8 + index * 0.35) + 's'} repeatCount="indefinite" path={path} />
+                    <animateMotion dur={(3.8 + index * 0.3) + 's'} repeatCount="indefinite" path={path} />
                   </circle>
                 </g>
               ))}
+              {networkNodes.map((node) => (
+                <g key={node.label}>
+                  <circle cx={node.x} cy={node.y} r="5.4" fill="rgba(15,23,42,0.92)" stroke={node.color} strokeWidth="0.7" />
+                  <circle cx={node.x} cy={node.y} r="2.1" fill={node.color} opacity="0.95" />
+                </g>
+              ))}
             </svg>
-            <div className="relative mx-auto mt-4 flex h-[360px] max-w-[360px] items-center justify-center">
-              <div className="absolute h-72 w-72 animate-pulse rounded-full border border-blue-300/20" />
-              <div className="absolute h-52 w-52 rounded-full border border-orange-300/20" />
-              <div className="relative grid h-52 w-40 place-items-center rounded-[3rem] border border-blue-300/30 bg-gradient-to-br from-slate-800 via-slate-950 to-blue-950 shadow-2xl shadow-blue-950/40">
-                <div className="absolute -top-12 h-24 w-24 rounded-[2rem] border border-blue-300/30 bg-gradient-to-br from-slate-700 to-slate-950 shadow-xl">
-                  <div className="mx-auto mt-8 h-2 w-12 rounded-full bg-blue-300 shadow-[0_0_18px_rgba(96,165,250,0.9)]" />
-                </div>
-                <div className="absolute -left-14 top-16 h-32 w-8 rotate-12 rounded-full bg-gradient-to-b from-blue-400 to-slate-900 shadow-lg shadow-blue-950/40" />
-                <div className="absolute -right-14 top-16 h-32 w-8 -rotate-12 rounded-full bg-gradient-to-b from-orange-400 to-slate-900 shadow-lg shadow-orange-950/40" />
-                <div className="grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-blue-500 via-slate-950 to-orange-500 ring-1 ring-white/10">
-                  <img src="/saven-mark.png" alt="" className="h-20 w-20 rounded-full object-cover" />
-                </div>
-                <div className="absolute -bottom-14 flex gap-5">
-                  <span className="h-20 w-9 rounded-full bg-gradient-to-b from-slate-700 to-blue-950" />
-                  <span className="h-20 w-9 rounded-full bg-gradient-to-b from-slate-700 to-orange-950" />
-                </div>
+            <div className="relative grid min-h-[410px] place-items-center">
+              <div className="grid h-28 w-28 place-items-center overflow-hidden rounded-[2rem] bg-slate-950 shadow-2xl ring-1 ring-blue-300/30">
+                <img src="/saven-mark.png" alt="" className="h-full w-full object-cover" />
+              </div>
+              <div className="absolute inset-x-4 bottom-4 grid gap-2 sm:grid-cols-3">
+                {['Robot ready', 'Devices live', 'Human approval'].map((label) => (
+                  <div key={label} className="rounded-2xl bg-white/8 px-3 py-2 text-center text-xs font-semibold text-slate-100 ring-1 ring-white/10">{label}</div>
+                ))}
               </div>
             </div>
           </div>
@@ -2624,98 +2735,150 @@ function RobotReadiness() {
       </section>
 
       <section className="grid gap-4 xl:grid-cols-4">
-        {robotServices.map((service) => {
-          const Icon = service.icon;
-          const tone = service.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : service.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+        {physicalCommandStates.map((item) => {
+          const Icon = item.icon;
+          const tone =
+            item.tone === 'green'
+              ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
+              : item.tone === 'gold'
+                ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
+                : item.tone === 'red'
+                  ? 'border-red-200 bg-red-50 text-red-900 dark:border-red-300/20 dark:bg-red-500/10 dark:text-red-100'
+                  : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
           return (
-            <article key={service.label} className={'rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
-              <div className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/78 shadow-sm dark:bg-slate-950/70">
-                  <Icon className="h-4 w-4" />
+            <article key={item.label} className={'group rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
+              <div className="flex items-start justify-between gap-3">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/78 shadow-sm ring-1 ring-current/10 transition-transform group-hover:scale-105 dark:bg-slate-950/70">
+                  <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="text-lg font-semibold">{service.label}</h3>
+                <span className="rounded-full bg-white/82 px-3 py-1 text-xs font-semibold shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70">{item.state}</span>
               </div>
-              <p className="mt-4 text-sm leading-6 opacity-80">{service.detail}</p>
+              <h3 className="mt-4 text-xl font-semibold">{item.label}</h3>
+              <p className="mt-3 text-sm leading-6 opacity-85">{item.detail}</p>
             </article>
           );
         })}
       </section>
 
+      <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Service matrix</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Who does what before a robot can help?</h3>
+          </div>
+          <StatusPill tone="blue" label="Operational layer" />
+        </div>
+        <div className="mt-5 overflow-hidden rounded-3xl border border-slate-100 bg-[#f7f5f1] dark:border-white/10 dark:bg-slate-900/70">
+          <div className="hidden grid-cols-[1.1fr_1fr_1fr_1fr_1fr_110px] gap-0 border-b border-slate-200/70 bg-white/70 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-400 xl:grid">
+            <span>Service</span>
+            <span>SAVEN</span>
+            <span>Robot</span>
+            <span>Device</span>
+            <span>Human</span>
+            <span>Status</span>
+          </div>
+          {serviceMatrix.map((row) => {
+            const tone =
+              row.tone === 'green'
+                ? 'text-emerald-700 dark:text-emerald-200'
+                : row.tone === 'gold'
+                  ? 'text-amber-700 dark:text-amber-200'
+                  : row.tone === 'red'
+                    ? 'text-red-700 dark:text-red-200'
+                    : 'text-blue-700 dark:text-blue-200';
+            return (
+              <div key={row.service} className="grid gap-3 border-b border-slate-200/70 px-4 py-4 text-sm last:border-b-0 dark:border-white/10 xl:grid-cols-[1.1fr_1fr_1fr_1fr_1fr_110px] xl:items-center">
+                <p className={'font-semibold ' + tone}>{row.service}</p>
+                <p className="text-slate-700 dark:text-slate-300">{row.saven}</p>
+                <p className="text-slate-700 dark:text-slate-300">{row.robot}</p>
+                <p className="text-slate-700 dark:text-slate-300">{row.device}</p>
+                <p className="text-slate-700 dark:text-slate-300">{row.human}</p>
+                <span className="w-fit rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-100 dark:bg-slate-950 dark:text-slate-200 dark:ring-white/10">{row.status}</span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
-        <div className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Robot connection services</p>
-          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Every robot is connected to devices, people, environment, and verification.</h3>
-          <div className="mt-6 space-y-3">
-            {connectionLayers.map((layer) => {
-              const dot = layer.color === 'green' ? 'bg-emerald-500' : layer.color === 'gold' ? 'bg-amber-500' : 'bg-blue-500';
-              return (
-                <div key={layer.from + layer.to} className="grid gap-3 rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md dark:border-white/10 dark:bg-slate-900 md:grid-cols-[1fr_auto_1fr_120px] md:items-center">
-                  <p className="font-semibold text-slate-950 dark:text-white">{layer.from}</p>
-                  <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400"><span className={'h-2 w-2 rounded-full ' + dot} />{layer.mode}</span>
-                  <p className="font-semibold text-slate-950 dark:text-white">{layer.to}</p>
-                  <span className="rounded-full bg-white px-3 py-1 text-center text-xs font-semibold text-slate-700 ring-1 ring-slate-100 dark:bg-slate-950 dark:text-slate-200 dark:ring-white/10">{layer.state}</span>
+        <div className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_12%_16%,rgba(59,130,246,0.16),transparent_30%),radial-gradient(circle_at_88%_16%,rgba(16,185,129,0.14),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(240,253,244,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_12%_16%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_88%_16%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(6,34,24,0.62))] dark:ring-1 dark:ring-white/10">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Connected endpoints</p>
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Robots, devices, and environments are one network.</h3>
+          <div className="mt-6 grid gap-4 lg:grid-cols-2">
+            {robots.map((robot) => (
+              <article key={robot.name} className="group rounded-3xl border border-white/70 bg-white/78 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-xl dark:border-white/10 dark:bg-slate-950/60">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{robot.model}</p>
+                    <h4 className="mt-2 text-xl font-semibold text-slate-950 dark:text-white">{robot.name}</h4>
+                  </div>
+                  <RobotBadge status={robot.readiness} />
                 </div>
-              );
-            })}
+                <p className="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-300">{robot.capability}</p>
+                <div className="mt-4 rounded-2xl bg-[#f7f5f1] p-3 text-sm dark:bg-slate-900/70">
+                  <SummaryLine label="Assignment" value={robot.assignment} />
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {robot.limits.map((limit) => (
+                    <span key={limit} className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-slate-950/70 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25">{limit}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
 
         <div className="rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Physical orchestration</p>
-          <h3 className="mt-3 text-3xl font-semibold tracking-tight">SAVEN never lets robots become independent care decision makers.</h3>
+          <div className="flex items-center gap-3">
+            <span className="grid h-13 w-13 place-items-center rounded-2xl bg-blue-500/15 text-blue-100 ring-1 ring-blue-300/20">
+              <Workflow className="h-6 w-6" />
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">Physical orchestration</p>
+              <h3 className="mt-1 text-2xl font-semibold">Rules before action</h3>
+            </div>
+          </div>
           <div className="mt-6 grid gap-3">
             <SummaryLine label="Command source" value="SAVEN task layer" />
             <SummaryLine label="Physical action" value="Human approval required" />
             <SummaryLine label="Telemetry" value="Robot + device + room" />
             <SummaryLine label="Continuity" value="Verified before update" />
+            <SummaryLine label="Emergency" value="Stop and prepare context only" />
+          </div>
+          <div className="mt-6 rounded-3xl bg-white/7 p-4 text-sm leading-6 text-slate-300 ring-1 ring-white/10">
+            Backend note: robot services should become adapters behind the same SAVEN gateway contract, never page-specific direct integrations.
           </div>
         </div>
       </section>
-
-      <div className="grid gap-5 lg:grid-cols-2">
-        {robots.map((robot) => (
-          <article key={robot.name} className="group rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{robot.model}</p>
-                <h3 className="mt-2 text-3xl font-semibold text-slate-950 dark:text-white">{robot.name}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{robot.capability}</p>
-              </div>
-              <RobotBadge status={robot.readiness} />
-            </div>
-            <div className="mt-5 rounded-3xl bg-[#f7f5f1] p-4 text-sm text-slate-600 dark:bg-slate-950/50 dark:text-slate-300">
-              <SummaryLine label="Current assignment" value={robot.assignment} />
-              <SummaryLine label="Safe execution" value="Human approval required" />
-            </div>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {robot.limits.map((limit) => (
-                <span key={limit} className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-slate-950/70 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25">{limit}</span>
-              ))}
-            </div>
-          </article>
-        ))}
-      </div>
     </div>
   );
 }
 
 function EnvironmentSystem() {
   const environmentRules = [
-    { zone: 'Bedroom', allowed: 'Rest checks, bed sensor, quiet voice', restricted: 'Robot physical action at night', tone: 'blue' },
-    { zone: 'Hallway', allowed: 'Walking support, wearable confirmation', restricted: 'No robot assist without caregiver', tone: 'green' },
-    { zone: 'Kitchen', allowed: 'Hydration prompt, family check', restricted: 'No medication assumption', tone: 'gold' },
-    { zone: 'Clinic handoff', allowed: 'Provider note, recovery plan sync', restricted: 'No family digest without privacy rule', tone: 'blue' },
+    { zone: 'Bedroom', allowed: 'Rest checks, bed sensor, quiet voice', restricted: 'Robot physical action at night', tone: 'blue', icon: Bed },
+    { zone: 'Hallway', allowed: 'Walking support, wearable confirmation', restricted: 'No robot assist without caregiver', tone: 'green', icon: MapPinned },
+    { zone: 'Kitchen', allowed: 'Hydration prompt, family check', restricted: 'No medication assumption', tone: 'gold', icon: Droplets },
+    { zone: 'Clinic handoff', allowed: 'Provider note, recovery plan sync', restricted: 'No family digest without privacy rule', tone: 'blue', icon: Stethoscope },
+  ];
+
+  const environmentFlow = [
+    { label: 'Room context', value: 'Home Recovery', detail: 'Environment decides where a support action can happen.' },
+    { label: 'Active helpers', value: 'Maya + Daniel', detail: 'People are matched with room and risk rules.' },
+    { label: 'Physical endpoints', value: 'Robot + sensors', detail: 'Devices and robots inherit environment restrictions.' },
+    { label: 'Escalation', value: 'Nurse / doctor', detail: 'Unresolved or clinical routes leave the home workflow safely.' },
   ];
 
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Care Environment" title="Home Recovery has one support logic." text="People, devices, robots, rules, and escalation chain are managed together without becoming a hospital dashboard." />
-      <CareContactNetwork />
+
       <section className="grid gap-5 lg:grid-cols-3">
         <LayeredPanel title="Connected people" text="Family and caregiver coverage is active." items={['Anna Roberts', 'Daniel Roberts', 'Maya Carter']} />
         <LayeredPanel title="Connected systems" text="Devices and robots are scoped to Home Recovery." items={['Smart hydration sensor', 'Wearable tracker', 'SAVEN Assist R1']} />
-        <LayeredPanel title="Escalation chain" text="Unresolved items move through calm responsibility levels." items={['Assigned helper', 'Family', 'Support provider', 'Environment admin']} />
+        <LayeredPanel title="Escalation chain" text="Unresolved items move through calm responsibility levels." items={['Assigned helper', 'Family', 'Nurse', 'Doctor']} />
       </section>
+
       <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_15%_18%,rgba(59,130,246,0.2),transparent_28%),radial-gradient(circle_at_82%_22%,rgba(16,185,129,0.16),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.92),rgba(239,246,255,0.78),rgba(255,247,237,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_15%_18%,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_82%_22%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(33,22,10,0.7))] dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -2726,10 +2889,19 @@ function EnvironmentSystem() {
         </div>
         <div className="mt-6 grid gap-4 xl:grid-cols-4">
           {environmentRules.map((rule) => {
-            const tone = rule.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : rule.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+            const Icon = rule.icon;
+            const tone =
+              rule.tone === 'green'
+                ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
+                : rule.tone === 'gold'
+                  ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
+                  : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
             return (
               <article key={rule.zone} className={'rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
-                <h4 className="text-xl font-semibold">{rule.zone}</h4>
+                <div className="flex items-center gap-3">
+                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70"><Icon className="h-5 w-5" /></span>
+                  <h4 className="text-xl font-semibold">{rule.zone}</h4>
+                </div>
                 <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Allowed</p>
                 <p className="mt-2 text-sm leading-6 opacity-85">{rule.allowed}</p>
                 <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Restricted</p>
@@ -2737,6 +2909,26 @@ function EnvironmentSystem() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Environment flow</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight">The home becomes a controlled support surface.</h3>
+          </div>
+          <StatusPill tone="green" label="Rules active" />
+        </div>
+        <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {environmentFlow.map((item, index) => (
+            <div key={item.label} className="rounded-3xl border border-white/10 bg-white/6 p-4 transition-all hover:-translate-y-0.5 hover:bg-white/9">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-blue-500 text-sm font-semibold text-white">{index + 1}</span>
+              <p className="mt-4 text-sm font-semibold uppercase tracking-[0.16em] text-blue-100">{item.label}</p>
+              <p className="mt-2 text-xl font-semibold">{item.value}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-300">{item.detail}</p>
+            </div>
+          ))}
         </div>
       </section>
     </div>
