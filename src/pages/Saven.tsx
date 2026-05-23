@@ -1,4 +1,27 @@
-import { Activity, ArrowLeft, ArrowRight, Bot, AlertCircle, BookOpen, CalendarCheck, ClipboardCheck, Clock3, Cpu, HeartPulse, Home, LockKeyhole, MessageSquareText, Mic, Radar, ShieldCheck, UserRound, UsersRound, Waypoints, PhoneCall, Bed, useState } from 'react';
+import {
+  Activity,
+  AlertCircle,
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Bot,
+  CalendarCheck,
+  ClipboardCheck,
+  Clock3,
+  Cpu,
+  HeartPulse,
+  Home,
+  LockKeyhole,
+  MessageSquareText,
+  Mic,
+  PhoneCall,
+  Radar,
+  ShieldCheck,
+  UserRound,
+  UsersRound,
+  Waypoints,
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
 import BackButton from '../components/BackButton';
 import SEO from '../components/SEO';
 import { SavenCareRoutes } from '../features/saven/pages/SavenCareRoutesPage';
@@ -8,7 +31,7 @@ import { SavenLearningCenter } from '../features/saven/pages/SavenLearningCenter
 import { ContinuityOperations, DailySupportPlanBuilder, SavenCommandCenter, TaskLifecycleService, VerificationPolicyBuilder } from '../features/saven/pages/SavenOperationalPages';
 import { HumanSupportTimeline, RecoveryMode, SupportCircle } from '../features/saven/pages/SavenHumanCircleRecoveryPages';
 import { TodaySupport } from '../features/saven/pages/SavenTodayPage';
-import { DualModeArchitecture, SupportFlowPage } from '../features/saven/pages/SavenModesFlowPages';
+import { DualModeArchitecture, SupportFlowGraphic, SupportFlowPage } from '../features/saven/pages/SavenModesFlowPages';
 import { LifeSetup, SupportProfile } from '../features/saven/pages/SavenLifeSetupPage';
 import { VerificationCenter } from '../features/saven/pages/SavenVerificationPage';
 import { EnvironmentSystem } from '../features/saven/pages/SavenEnvironmentsPage';
@@ -1305,253 +1328,6 @@ function SystemEntryCard({ title, text, onClick }: { title: string; text: string
   );
 }
 
-(active ? 'border-red-200 bg-red-50/75 dark:border-red-300/30 dark:bg-red-950/20' : 'border-slate-100 bg-[#f7f5f1] dark:border-white/10 dark:bg-slate-900') + ' rounded-2xl border px-3 py-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg dark:ring-1 dark:ring-white/10'}>
-      <div className="grid gap-3 sm:grid-cols-[92px_minmax(0,1fr)_72px] sm:items-center">
-        <button onClick={onToggle} className={(active ? 'bg-red-600 text-white shadow-md shadow-red-950/25 ring-red-300/35' : 'bg-slate-950 text-slate-100 ring-white/10 hover:bg-slate-800') + ' inline-flex h-9 items-center justify-center rounded-full px-3 text-xs font-semibold ring-1 transition-all hover:-translate-y-0.5'}>
-          <span className={(active ? 'bg-white animate-pulse' : 'bg-slate-500') + ' mr-2 inline-block h-2 w-2 rounded-full'} />
-          {active ? 'On' : 'Mic'}
-        </button>
 
-        <div className="min-w-0">
-          <div className="relative overflow-hidden rounded-xl bg-slate-950 p-1.5 shadow-inner ring-1 ring-slate-900/10 dark:ring-white/10">
-            <div className="flex h-5 items-center gap-1">
-              {bars.map((_, index) => {
-                const lit = index < activeBars;
-                const color = meterColor(index, bars.length);
-                return (
-                  <span
-                    key={index}
-                    className="h-full min-w-0 flex-1 rounded-[3px] transition-all duration-75"
-                    style={{
-                      backgroundColor: lit ? color : 'rgba(51,65,85,0.72)',
-                      opacity: lit ? 1 : 0.42,
-                      transform: lit ? 'scaleY(1)' : 'scaleY(0.5)',
-                      boxShadow: lit ? '0 0 8px ' + color + '55' : 'none',
-                    }}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </div>
 
-        <div className="flex items-center justify-between gap-2 sm:block sm:text-right">
-          <span className={(active ? 'text-red-600 dark:text-red-300' : 'text-slate-500 dark:text-slate-400') + ' text-[11px] font-semibold uppercase tracking-[0.14em]'}>
-            {active ? 'Live' : 'Muted'}
-          </span>
-          <span className={(clip ? 'bg-red-600 text-white' : 'bg-white text-slate-700 dark:bg-slate-950 dark:text-slate-200') + ' mt-0 inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-slate-200 dark:ring-white/10 sm:mt-1'}>
-            {clip ? 'High' : level + '%'}
-          </span>
-        </div>
-      </div>
-      {error && <p className="mt-2 truncate text-[11px] font-semibold text-red-500">{error}</p>}
-    </div>
-  );
-}
-
-function SettingSlider({ label, low, high, value, tone, onChange }: { label: string; low: string; high: string; value: number; tone: 'blue' | 'gold' | 'green'; onChange: (value: number) => void }) {
-  const color = tone === 'green' ? 'accent-emerald-500 dark:accent-emerald-300' : tone === 'gold' ? 'accent-amber-500 dark:accent-amber-300' : 'accent-blue-500 dark:accent-blue-300';
-  const barColor = tone === 'green' ? 'bg-emerald-500' : tone === 'gold' ? 'bg-amber-500' : 'bg-blue-500';
-  return (
-    <div className="rounded-3xl border border-slate-100 bg-[#f7f5f1] p-5 dark:border-white/10 dark:bg-slate-900">
-      <div className="flex items-center justify-between gap-4">
-        <div>
-          <p className="text-sm font-semibold text-slate-950 dark:text-white">{label}</p>
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{low} to {high}</p>
-        </div>
-        <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-slate-700 shadow-sm dark:bg-slate-950 dark:text-slate-100 dark:ring-1 dark:ring-white/10">{value}%</span>
-      </div>
-      <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-950">
-        <div className={'h-full rounded-full transition-all duration-500 ' + barColor} style={{ width: value + '%' }} />
-      </div>
-      <input aria-label={label} type="range" min="0" max="100" value={value} onChange={(event) => onChange(Number(event.target.value))} className={'mt-4 w-full cursor-pointer ' + color} />
-    </div>
-  );
-}
-
-function SettingToggle({ label, text, icon: Icon, enabled, onToggle }: { label: string; text: string; icon: typeof Activity; enabled: boolean; onToggle: () => void }) {
-  return (
-    <button onClick={onToggle} className={
-      'group flex min-h-[128px] gap-4 rounded-3xl border p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 ' +
-      (enabled
-        ? 'border-emerald-200 bg-emerald-50 text-emerald-900 hover:border-emerald-300 dark:border-emerald-300/25 dark:bg-slate-900 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/15'
-        : 'border-slate-200 bg-white text-slate-600 hover:border-blue-200 dark:border-white/10 dark:bg-slate-950 dark:text-slate-300 dark:ring-1 dark:ring-white/10')
-    }>
-      <span className={
-        'grid h-11 w-11 shrink-0 place-items-center rounded-2xl ring-1 transition-transform group-hover:scale-105 ' +
-        (enabled
-          ? 'bg-emerald-600 text-white ring-emerald-500/20 dark:bg-emerald-500 dark:text-white dark:ring-emerald-300/30'
-          : 'bg-slate-100 text-slate-500 ring-slate-200 dark:bg-slate-900 dark:text-slate-300 dark:ring-white/10')
-      }>
-        <Icon className="h-5 w-5" />
-      </span>
-      <span className="min-w-0 flex-1">
-        <span className="flex items-center justify-between gap-3">
-          <span className="text-base font-semibold text-slate-950 dark:text-white">{label}</span>
-          <span className={
-            'relative h-6 w-11 shrink-0 rounded-full transition-colors ' +
-            (enabled ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-700')
-          }>
-            <span className={
-              'absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform ' +
-              (enabled ? 'translate-x-6' : 'translate-x-1')
-            } />
-          </span>
-        </span>
-        <span className="mt-2 block text-sm leading-6 opacity-80">{text}</span>
-      </span>
-    </button>
-  );
-}
-
-: { eyebrow: string; title: string; text: string }) {
-  return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-7 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <div className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full bg-blue-200/20 blur-3xl dark:bg-slate-950/70 dark:ring-1 dark:ring-blue-300/15" />
-      <div className="relative">
-      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
-      <h2 className="mt-3 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
-      <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
-      </div>
-    </section>
-  );
-}
-
-: { title: string; text: string; items: string[] }) {
-  return (
-    <article className="group rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
-      <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{text}</p>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {items.map((item) => (
-          <span key={item} className="rounded-full bg-[#f7f5f1] px-3 py-1.5 text-xs font-semibold text-slate-600 dark:bg-slate-950/65 dark:text-slate-200 dark:ring-1 dark:ring-white/10">{item}</span>
-        ))}
-      </div>
-    </article>
-  );
-}
-
-: { title: string; subtitle: string; status: string; lines: string[]; items: string[] }) {
-  return (
-    <article className="group rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{subtitle}</p>
-          <h3 className="mt-2 text-2xl font-semibold text-slate-950 dark:text-white">{title}</h3>
-        </div>
-        <RobotBadge status={status} />
-      </div>
-      <div className="mt-5 space-y-2 text-sm text-slate-600 dark:text-slate-300">
-        {lines.map((line) => <p key={line}>{line}</p>)}
-      </div>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {items.map((item) => <span key={item} className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-slate-950/70 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25">{item}</span>)}
-      </div>
-    </article>
-  );
-}
-
-: { label: string; value: string; onChange: (value: string) => void }) {
-  return (
-    <label className="block">
-      <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">{label}</span>
-      <input
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="mt-2 w-full rounded-2xl border border-slate-200 bg-white/92 px-4 py-3 text-sm text-slate-900 outline-none transition-colors focus:border-blue-300 dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-blue-300/50"
-      />
-    </label>
-  );
-}
-
-: { label: string; value: string; options: string[]; onChange: (value: string) => void }) {
-  return (
-    <label className="block">
-      <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">{label}</span>
-      <select
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        className="mt-2 w-full rounded-2xl border border-slate-200 bg-white/92 px-4 py-3 text-sm text-slate-900 outline-none transition-colors focus:border-blue-300 dark:border-white/10 dark:bg-slate-900 dark:text-white dark:focus:border-blue-300/50"
-      >
-        {options.map((option) => <option key={option}>{option}</option>)}
-      </select>
-    </label>
-  );
-}
-
-: { label: string; value?: string }) {
-  return (
-    <div className="flex items-center justify-between gap-4 border-b border-slate-100 py-2 last:border-b-0 dark:border-white/10">
-      <span className="text-slate-500 dark:text-slate-400">{label}</span>
-      <span className="text-right font-semibold text-slate-800 dark:text-white">{value || 'Not set'}</span>
-    </div>
-  );
-}
-
-: { label: string; value: string }) {
-  return (
-    <div className="rounded-3xl bg-white/80 p-4 shadow-sm dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{label}</p>
-      <p className="mt-2 text-sm font-semibold text-slate-800 dark:text-white">{value}</p>
-    </div>
-  );
-}
-
-: { label: string; value: number; tone: string }) {
-  const color =
-    tone === 'green'
-      ? 'border-emerald-100 bg-gradient-to-br from-emerald-50 to-white text-emerald-700 dark:border-emerald-300/25 dark:from-slate-950/90 dark:to-emerald-950/45 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/15'
-      : tone === 'amber'
-        ? 'border-amber-100 bg-gradient-to-br from-amber-50 to-white text-amber-700 dark:border-amber-300/25 dark:from-slate-950/90 dark:to-amber-950/45 dark:text-amber-100 dark:ring-1 dark:ring-amber-300/15'
-        : 'border-blue-100 bg-gradient-to-br from-blue-50 to-white text-blue-700 dark:border-blue-300/25 dark:from-slate-950/90 dark:to-blue-950/45 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/15';
-  return (
-    <div className={`rounded-[2rem] border p-5 shadow-sm ${color}`}>
-      <p className="text-sm font-semibold opacity-80">{label}</p>
-      <p className="mt-3 text-5xl font-semibold tracking-tight">{value}</p>
-    </div>
-  );
-}
-
-function StatusPill({ label, tone }: { label: string; tone: 'blue' | 'gold' | 'green' }) {
-  const color =
-    tone === 'green'
-      ? 'border border-emerald-200 bg-emerald-100 text-emerald-900 dark:border-emerald-300/30 dark:bg-slate-950/75 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/25'
-      : tone === 'gold'
-        ? 'border border-amber-200 bg-amber-100 text-amber-900 dark:border-amber-300/30 dark:bg-slate-950/75 dark:text-amber-100 dark:ring-1 dark:ring-amber-300/25'
-        : 'border border-blue-200 bg-blue-100 text-blue-900 dark:border-blue-300/30 dark:bg-slate-950/75 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25';
-  return <span className={`rounded-full px-4 py-2 font-semibold shadow-sm ${color}`}>{label}</span>;
-}
-
-: { status: SupportTask['status'] }) {
-  const color =
-    status === 'completed'
-      ? 'bg-emerald-50 text-emerald-700 dark:bg-slate-950/70 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/25'
-      : status === 'pending_confirmation' || status === 'needs_attention' || status === 'delayed'
-        ? 'bg-amber-50 text-amber-700 dark:bg-slate-950/70 dark:text-amber-100 dark:ring-1 dark:ring-amber-300/25'
-        : status === 'active'
-          ? 'bg-blue-50 text-blue-700 dark:bg-slate-950/70 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25'
-          : 'bg-slate-100 text-slate-600 dark:bg-slate-950/65 dark:text-slate-200 dark:ring-1 dark:ring-white/10';
-  return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-black/0 dark:ring-white/10 ${color}`}>{status.replace(/_/g, ' ')}</span>;
-}
-
-: { priority: SupportTask['priority'] }) {
-  const color =
-    priority === 'high'
-      ? 'bg-amber-50 text-amber-700 dark:bg-slate-950/70 dark:text-amber-100 dark:ring-1 dark:ring-amber-300/25'
-      : priority === 'low'
-        ? 'bg-slate-100 text-slate-600 dark:bg-slate-950/65 dark:text-slate-200 dark:ring-1 dark:ring-white/10'
-        : 'bg-blue-50 text-blue-700 dark:bg-slate-950/70 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25';
-  return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-black/0 dark:ring-white/10 ${color}`}>{priority}</span>;
-}
-
-function RobotBadge({ status }: { status: string }) {
-  const color =
-    status === 'ready' || status === 'online'
-      ? 'bg-emerald-50 text-emerald-700 dark:bg-slate-950/70 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/25'
-      : status === 'limited' || status === 'maintenance'
-        ? 'bg-amber-50 text-amber-700 dark:bg-slate-950/70 dark:text-amber-100 dark:ring-1 dark:ring-amber-300/25'
-        : status === 'standby'
-          ? 'bg-blue-50 text-blue-700 dark:bg-slate-950/70 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25'
-          : 'bg-slate-100 text-slate-600 dark:bg-slate-950/65 dark:text-slate-200 dark:ring-1 dark:ring-white/10';
-  return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-black/0 dark:ring-white/10 ${color}`}>{status}</span>;
-}
+function StatusPill({ label, tone }

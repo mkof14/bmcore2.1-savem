@@ -300,7 +300,7 @@ export function SupportFlowPage() {
   );
 }
 
-function SupportFlowGraphic({ current }: { current: string }) {
+export function SupportFlowGraphic({ current }: { current: string }) {
   const steps = ['Need Detected', 'Support Task Created', 'Assigned to Person / Device / Robot', 'Action Performed', 'Verification Received', 'Continuity Updated'];
   const currentIndex = steps.indexOf(current);
 
