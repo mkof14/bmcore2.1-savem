@@ -1,49 +1,4 @@
-import {
-  Activity,
-  ArrowLeft,
-  ArrowRight,
-  Bot,
-  AlertCircle,
-  BookOpen,
-  Building2,
-  CalendarCheck,
-  Check,
-  ClipboardCheck,
-  Clock3,
-  Cpu,
-  HeartPulse,
-  Home,
-  LockKeyhole,
-  MessageSquareText,
-  Mic,
-  Radar,
-  ShieldCheck,
-  UserRound,
-  UsersRound,
-  Watch,
-  Waypoints,
-  BellRing,
-  PhoneCall,
-  Stethoscope,
-  Siren,
-  Users,
-  Cable,
-  CircuitBoard,
-  Gauge,
-  Network,
-  ScanLine,
-  Workflow,
-  Bed,
-  Droplets,
-  EyeOff,
-  MapPinned,
-  Satellite,
-  Wifi,
-  FileCheck2,
-  ListChecks,
-  TimerReset,
-} from 'lucide-react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Activity, ArrowLeft, ArrowRight, Bot, AlertCircle, BookOpen, CalendarCheck, ClipboardCheck, Clock3, Cpu, HeartPulse, Home, LockKeyhole, MessageSquareText, Mic, Radar, ShieldCheck, UserRound, UsersRound, Waypoints, PhoneCall, Bed, useState } from 'react';
 import BackButton from '../components/BackButton';
 import SEO from '../components/SEO';
 import { SavenCareRoutes } from '../features/saven/pages/SavenCareRoutesPage';
@@ -59,7 +14,6 @@ import { VerificationCenter } from '../features/saven/pages/SavenVerificationPag
 import { EnvironmentSystem } from '../features/saven/pages/SavenEnvironmentsPage';
 import { RobotReadiness } from '../features/saven/pages/SavenRobotsPage';
 import { DeviceReadiness } from '../features/saven/pages/SavenDevicesPage';
-import { savenCareContacts } from '../features/saven/services/savenLocalBackendGateway';
 
 interface SavenProps {
   onNavigate: (page: string) => void;
