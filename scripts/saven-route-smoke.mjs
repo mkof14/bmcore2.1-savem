@@ -70,7 +70,14 @@ async function main() {
 
   const savenPage = readProjectFile('src/pages/Saven.tsx');
   const readinessReport = readProjectFile('docs/SAVEN_FINAL_READINESS_REPORT.md');
-  const combined = savenPage + '\n' + readinessReport;
+  const splitPageDir = new URL('../src/features/saven/pages/', import.meta.url);
+  const splitPages = fs.existsSync(splitPageDir)
+    ? fs.readdirSync(splitPageDir)
+        .filter((file) => file.endsWith('.tsx'))
+        .map((file) => fs.readFileSync(new URL(file, splitPageDir), 'utf8'))
+        .join('\n')
+    : '';
+  const combined = savenPage + '\n' + readinessReport + '\n' + splitPages;
 
   for (const [label, expectedOptions] of sourceExpectations) {
     const matched = expectedOptions.some((expected) => combined.includes(expected));
