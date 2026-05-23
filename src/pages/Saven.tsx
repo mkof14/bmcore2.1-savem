@@ -1329,5 +1329,13 @@ function SystemEntryCard({ title, text, onClick }: { title: string; text: string
 }
 
 
+function StatusPill({ label, tone }: { label: string; tone: 'blue' | 'gold' | 'green' }) {
+  const color =
+    tone === 'green'
+      ? 'border border-emerald-200 bg-emerald-100 text-emerald-900 dark:border-emerald-300/30 dark:bg-slate-950/75 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/25'
+      : tone === 'gold'
+        ? 'border border-amber-200 bg-amber-100 text-amber-900 dark:border-amber-300/30 dark:bg-slate-950/75 dark:text-amber-100 dark:ring-1 dark:ring-amber-300/25'
+        : 'border border-blue-200 bg-blue-100 text-blue-900 dark:border-blue-300/30 dark:bg-slate-950/75 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25';
 
-function StatusPill({ label, tone }
+  return <span className={`rounded-full px-4 py-2 font-semibold shadow-sm ${color}`}>{label}</span>;
+}
