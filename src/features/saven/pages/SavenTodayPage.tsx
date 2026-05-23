@@ -288,7 +288,7 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
     detail: string;
     command: string;
     result: string;
-    page: string;
+    page: 'app-support' | 'app-plan' | 'app-circle' | 'app-command' | 'app-environments' | 'app-verification' | 'app-continuity';
     tone: 'blue' | 'green' | 'gold' | 'red';
   }> = [
     {
