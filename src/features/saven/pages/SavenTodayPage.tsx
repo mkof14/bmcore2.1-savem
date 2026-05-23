@@ -281,7 +281,7 @@ export function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeS
 }
 
 
-function SavenEndToEndScenario({ openPage }: { openPage: (pageId: string) => void }) {
+function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' | 'app-plan' | 'app-circle' | 'app-command' | 'app-environments' | 'app-verification' | 'app-continuity') => void }) {
   const scenarioSteps: Array<{
     label: string;
     title: string;
