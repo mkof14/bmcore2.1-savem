@@ -54,6 +54,7 @@ import { ContinuityOperations, DailySupportPlanBuilder, SavenCommandCenter, Task
 import { HumanSupportTimeline, RecoveryMode, SupportCircle } from '../features/saven/pages/SavenHumanCircleRecoveryPages';
 import { TodaySupport } from '../features/saven/pages/SavenTodayPage';
 import { DualModeArchitecture, SupportFlowPage } from '../features/saven/pages/SavenModesFlowPages';
+import { LifeSetup, SupportProfile } from '../features/saven/pages/SavenLifeSetupPage';
 import { VerificationCenter } from '../features/saven/pages/SavenVerificationPage';
 import { EnvironmentSystem } from '../features/saven/pages/SavenEnvironmentsPage';
 import { RobotReadiness } from '../features/saven/pages/SavenRobotsPage';
@@ -1350,553 +1351,7 @@ function SystemEntryCard({ title, text, onClick }: { title: string; text: string
   );
 }
 
-function LifeSetup({
-  setup,
-  setSetup,
-  onCreate,
-}: {
-  setup: LifeSetupState;
-  setSetup: (value: LifeSetupState) => void;
-  onCreate: () => void;
-}) {
-  const toggleSupportCircle = (option: string) => {
-    const exists = setup.supportCircle.includes(option);
-    setSetup({
-      ...setup,
-      supportCircle: exists ? setup.supportCircle.filter((item) => item !== option) : [...setup.supportCircle, option],
-    });
-  };
-
-  const toggleGoal = (option: string) => {
-    const exists = setup.goals.includes(option);
-    setSetup({
-      ...setup,
-      goals: exists ? setup.goals.filter((item) => item !== option) : [...setup.goals, option],
-    });
-  };
-
-  return (
-    <div className="space-y-6">
-      <div className="space-y-8">
-        <section className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-[linear-gradient(135deg,rgba(255,255,255,0.95),rgba(236,246,255,0.82),rgba(255,248,232,0.74))] p-7 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(10,21,35,0.96),rgba(22,38,58,0.86),rgba(45,35,21,0.66))]">
-          <div className="absolute -right-8 top-0 hidden h-52 w-52 rounded-full bg-blue-200/30 blur-3xl dark:bg-blue-400/12 md:block" />
-          <div className="absolute bottom-0 left-10 hidden h-28 w-72 rounded-full bg-amber-200/24 blur-3xl dark:bg-amber-300/10 md:block" />
-          <div className="relative">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Life Setup</p>
-            <h2 className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 dark:text-white">
-              Build a real-life support profile in a few clear steps.
-            </h2>
-            <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-              This is not a medical form. SAVEN learns the person's life situation, support circle, rhythm, comfort, and goals so daily support can start calmly.
-            </p>
-            <div className="mt-7 grid gap-3 md:grid-cols-4">
-              {['Person', 'Life context', 'Support circle', 'Daily plan'].map((item, index) => (
-                <div key={item} className="group rounded-3xl border border-white/70 bg-white/72 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-white/90 hover:shadow-md dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:bg-slate-900/80">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">Part {index + 1}</p>
-                  <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-white">{item}</p>
-                  <div className="mt-3 h-1 rounded-full bg-gradient-to-r from-blue-300 via-amber-300 to-emerald-300 opacity-60 transition-opacity group-hover:opacity-100" />
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 grid gap-3 lg:grid-cols-3">
-              <InfoNote tone="blue" title="Easy first pass" text="Start with the closest answers. SAVEN can adapt later." />
-              <InfoNote tone="gold" title="No diagnosis" text="This setup describes life context, rhythm, comfort, and support needs." />
-              <InfoNote tone="green" title="Ready for action" text="The profile creates a daily plan with visible responsibility and confirmation." />
-            </div>
-          </div>
-        </section>
-
-        <LifeSetupSection
-          step="01"
-          tone="blue"
-          title="Person foundation"
-          subtitle="Start with who this support system is for. Keep it simple and human."
-        >
-          <OptionGroup
-            title="Who is this for?"
-            description="This sets the relationship and the language SAVEN uses."
-            options={['Myself', 'Family member', 'Person under care', 'Client / resident']}
-            selected={setup.relationship}
-            onSelect={(value) => setSetup({ ...setup, relationship: value })}
-          />
-          <InfoNote tone="blue" title="Basic information" text="These fields help SAVEN address the person naturally and place support in the right environment." className="mt-6" />
-          <div className="mt-4 grid gap-4 rounded-[1.5rem] border border-slate-200/70 bg-white/60 p-4 dark:border-white/10 dark:bg-slate-950/55 md:grid-cols-2">
-            <Field label="First name" value={setup.firstName} onChange={(value) => setSetup({ ...setup, firstName: value })} />
-            <Field label="Preferred name" value={setup.preferredName} onChange={(value) => setSetup({ ...setup, preferredName: value })} />
-            <SelectLike label="Age group" value={setup.ageGroup} options={['Child', 'Teen', 'Adult', 'Senior', 'Advanced senior']} onChange={(value) => setSetup({ ...setup, ageGroup: value })} />
-            <SelectLike label="Sex" value={setup.sex} options={['Female', 'Male', 'Prefer not to say']} onChange={(value) => setSetup({ ...setup, sex: value })} />
-            <Field label="Primary language" value={setup.language} onChange={(value) => setSetup({ ...setup, language: value })} />
-            <SelectLike label="Living situation" value={setup.livingSituation} options={['Independent home', 'With family', 'Assisted living', 'Rehabilitation center', 'Senior care', 'Hospital recovery', 'Home Recovery']} onChange={(value) => setSetup({ ...setup, livingSituation: value })} />
-          </div>
-        </LifeSetupSection>
-
-        <LifeSetupSection
-          step="02"
-          tone="gold"
-          title="Life context"
-          subtitle="Choose the current support situation and daily rhythm. This helps SAVEN create the first support day."
-        >
-          <OptionGroup
-            title="Current support situation"
-            description="Pick the closest current mode. This can change later."
-            options={['Independent living', 'Home recovery', 'Post-surgery recovery', 'Rehabilitation', 'Senior support', 'Child support', 'Wellness monitoring']}
-            selected={setup.supportMode}
-            onSelect={(value) => setSetup({ ...setup, supportMode: value })}
-          />
-          <div className="mt-6 grid gap-6">
-            <OptionGroup
-              title="Mobility level"
-              description="This changes how many actions appear at once and who should verify them."
-              options={['Fully independent', 'Light assistance', 'Walking support', 'Limited mobility', 'Wheelchair support', 'Bed recovery']}
-              selected={setup.mobility}
-              onSelect={(value) => setSetup({ ...setup, mobility: value })}
-            />
-            <OptionGroup
-              title="Daily rhythm"
-              description="SAVEN uses rhythm to place support windows without overwhelming the day."
-              options={['Early morning', 'Balanced day', 'Low activity', 'Evening active', 'Structured recovery']}
-              selected={setup.rhythm}
-              onSelect={(value) => setSetup({ ...setup, rhythm: value })}
-            />
-          </div>
-        </LifeSetupSection>
-
-        <LifeSetupSection
-          step="03"
-          tone="green"
-          title="Support circle"
-          subtitle="Show who is available around the person. SAVEN will use this to make responsibility visible."
-        >
-          <MultiOptionGroup
-            title="Who is available?"
-            description="Select everyone who may participate in support."
-            options={['Family available', 'Caregiver available', 'Clinic connected', 'Rehabilitation provider', 'No support connected yet']}
-            selected={setup.supportCircle}
-            onToggle={toggleSupportCircle}
-          />
-        </LifeSetupSection>
-
-        <LifeSetupSection
-          step="04"
-          tone="blue"
-          title="Comfort and communication"
-          subtitle="Set how support should feel. This controls reminders, devices, and robot readiness language."
-        >
-          <div className="grid gap-6">
-            <OptionGroup
-              title="Comfort with technology and robotics"
-              description="SAVEN can stay human-first or prepare for device and robot support."
-              options={['Prefers human support', 'Comfortable with devices', 'Cautious about robots', 'Open to robotic support', 'High automation acceptance']}
-              selected={setup.technologyComfort}
-              onSelect={(value) => setSetup({ ...setup, technologyComfort: value })}
-            />
-            <OptionGroup
-              title="Communication preference"
-              description="Choose how reminders should arrive in daily life."
-              options={['Gentle notifications', 'Voice prompts', 'Text reminders', 'Visual prompts', 'Caregiver first', 'Minimal notifications']}
-              selected={setup.communication}
-              onSelect={(value) => setSetup({ ...setup, communication: value })}
-            />
-          </div>
-        </LifeSetupSection>
-
-        <LifeSetupSection
-          step="05"
-          tone="gold"
-          title="Main support goals"
-          subtitle="Select the goals that make SAVEN useful from day one."
-        >
-          <MultiOptionGroup
-            title="Starting goals"
-            description="These goals shape the first support plan after setup."
-            options={['Maintain independence', 'Recover after surgery', 'Improve daily routine', 'Support mobility', 'Reduce missed actions', 'Coordinate family and caregivers', 'Prepare for device or robot support']}
-            selected={setup.goals}
-            onToggle={toggleGoal}
-          />
-        </LifeSetupSection>
-      </div>
-
-      <aside className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_280px] xl:items-start">
-        <SupportProfileSummary setup={setup} />
-        <button onClick={onCreate} className="group flex w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#0f172a,#1d4ed8)] px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-blue-950/10 transition-all hover:-translate-y-0.5 hover:shadow-xl dark:from-blue-500/90 dark:to-slate-800">
-          Create Support Profile
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-        </button>
-      </aside>
-    </div>
-  );
-}
-
-function SupportProfileSummary({ setup }: { setup: LifeSetupState }) {
-  return (
-    <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/88 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#0b1726]/86">
-      <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-blue-200/20 blur-3xl dark:bg-slate-950/70 dark:ring-1 dark:ring-blue-300/15" />
-      <p className="relative text-xs font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Live Review</p>
-      <h3 className="mt-3 text-2xl font-semibold text-slate-950 dark:text-white">{setup.preferredName || setup.firstName} Support Profile</h3>
-      <div className="mt-5 rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-        <div className="flex items-center gap-3">
-          <div className="grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 text-white shadow-sm ring-1 ring-slate-900/10 dark:bg-slate-950/75 dark:text-blue-100 dark:ring-blue-300/20">
-            <UserRound className="h-5 w-5" />
-          </div>
-          <div>
-            <p className="font-semibold text-slate-950 dark:text-white">{setup.preferredName || setup.firstName}</p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">{setup.supportMode}</p>
-          </div>
-        </div>
-      </div>
-      <div className="mt-5 rounded-3xl border border-slate-100 bg-white/60 px-4 py-2 text-sm text-slate-600 dark:border-white/10 dark:bg-slate-950/65 dark:text-slate-300 dark:ring-1 dark:ring-white/10">
-        <SummaryLine label="For" value={setup.relationship} />
-        <SummaryLine label="Situation" value={setup.supportMode} />
-        <SummaryLine label="Mobility" value={setup.mobility} />
-        <SummaryLine label="Environment" value={setup.livingSituation} />
-        <SummaryLine label="Daily rhythm" value={setup.rhythm} />
-        <SummaryLine label="Communication" value={setup.communication} />
-      </div>
-      <InfoNote tone="green" title="After creation" text="SAVEN will generate the first daily support plan after profile creation." className="mt-5" />
-    </section>
-  );
-}
-
-function InfoNote({ tone, title, text, className = '' }: { tone: 'blue' | 'gold' | 'green' | 'amber'; title: string; text: string; className?: string }) {
-  const toneClass =
-    tone === 'green'
-      ? 'border-emerald-200 bg-emerald-50/82 text-emerald-900 dark:border-emerald-300/25 dark:bg-slate-950/75 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/20'
-      : tone === 'gold'
-        ? 'border-amber-200 bg-amber-50/82 text-amber-900 dark:border-amber-300/25 dark:bg-slate-950/75 dark:text-amber-100 dark:ring-1 dark:ring-amber-300/20'
-        : tone === 'amber'
-          ? 'border-orange-200 bg-orange-50/82 text-orange-900 dark:border-orange-300/25 dark:bg-slate-950/75 dark:text-orange-100 dark:ring-1 dark:ring-orange-300/20'
-          : 'border-blue-200 bg-blue-50/82 text-blue-900 dark:border-blue-300/25 dark:bg-slate-950/75 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/20';
-
-  return (
-    <div className={`rounded-3xl border p-4 shadow-sm ${toneClass} ${className}`}>
-      <p className="text-sm font-semibold">{title}</p>
-      <p className="mt-1 text-sm leading-6 opacity-80">{text}</p>
-    </div>
-  );
-}
-
-function LifeSetupSection({
-  step,
-  tone,
-  title,
-  subtitle,
-  children,
-}: {
-  step: string;
-  tone: 'blue' | 'gold' | 'green';
-  title: string;
-  subtitle: string;
-  children: React.ReactNode;
-}) {
-  const toneClass =
-    tone === 'green'
-      ? 'from-emerald-50/95 via-white/86 to-white/70 dark:from-emerald-950/30 dark:via-slate-900/80 dark:to-slate-950/60'
-      : tone === 'gold'
-        ? 'from-amber-50/95 via-white/86 to-white/70 dark:from-amber-950/25 dark:via-slate-900/80 dark:to-slate-950/60'
-        : 'from-blue-50/95 via-white/86 to-white/70 dark:from-blue-950/30 dark:via-slate-900/80 dark:to-slate-950/60';
-
-  const dotClass =
-    tone === 'green'
-      ? 'bg-emerald-500 shadow-emerald-500/25'
-      : tone === 'gold'
-        ? 'bg-amber-500 shadow-amber-500/25'
-        : 'bg-blue-500 shadow-blue-500/25';
-
-  return (
-    <section className={`overflow-hidden rounded-[2rem] border border-white/75 bg-gradient-to-br ${toneClass} p-5 shadow-sm backdrop-blur-xl dark:border-white/10 sm:p-6`}>
-      <div className="rounded-[1.65rem] border border-white/70 bg-white/42 p-5 shadow-sm dark:border-white/10 dark:bg-slate-950/55">
-        <div className="flex flex-col gap-4 border-b border-slate-200/70 pb-5 dark:border-white/10 lg:flex-row lg:items-start lg:justify-between">
-          <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start">
-            <div className={`grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-sm font-semibold text-white shadow-lg ${dotClass}`}>{step}</div>
-            <div className="min-w-0">
-              <h3 className="text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h3>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">{subtitle}</p>
-            </div>
-          </div>
-          <div className="hidden h-12 min-w-28 rounded-full border border-white/70 bg-white/70 shadow-inner dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 lg:block" />
-        </div>
-        <div className="mt-5">{children}</div>
-      </div>
-    </section>
-  );
-}
-
-function OptionGroup({
-  title,
-  description,
-  options,
-  selected,
-  onSelect,
-}: {
-  title: string;
-  description: string;
-  options: string[];
-  selected: string;
-  onSelect: (value: string) => void;
-}) {
-  return (
-    <div className="overflow-hidden rounded-[1.5rem] border border-slate-200/80 bg-white/78 shadow-sm dark:border-white/10 dark:bg-[#0b1726]/72">
-      <div className="border-b border-slate-200/70 bg-[linear-gradient(135deg,rgba(239,246,255,0.92),rgba(255,255,255,0.74))] px-5 py-4 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(37,99,235,0.14),rgba(15,23,42,0.62))]">
-        <div className="grid gap-3 sm:grid-cols-[92px_minmax(0,1fr)] sm:items-start">
-          <span className="inline-flex w-fit items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-slate-950/70 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25">Single</span>
-          <div>
-            <h4 className="text-lg font-semibold leading-6 text-slate-950 dark:text-white">{title}</h4>
-            <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">{description}</p>
-          </div>
-        </div>
-      </div>
-      <div className="grid gap-px bg-slate-200/70 p-px dark:bg-slate-950/70">
-        {options.map((option) => (
-          <LifeSetupOptionCard key={option} label={option} selected={selected === option} onClick={() => onSelect(option)} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function MultiOptionGroup({
-  title,
-  description,
-  options,
-  selected,
-  onToggle,
-}: {
-  title: string;
-  description: string;
-  options: string[];
-  selected: string[];
-  onToggle: (value: string) => void;
-}) {
-  return (
-    <div className="overflow-hidden rounded-[1.5rem] border border-slate-200/80 bg-white/78 shadow-sm dark:border-white/10 dark:bg-[#0b1726]/72">
-      <div className="border-b border-slate-200/70 bg-[linear-gradient(135deg,rgba(236,253,245,0.92),rgba(255,255,255,0.74))] px-5 py-4 dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(16,185,129,0.14),rgba(15,23,42,0.62))]">
-        <div className="grid gap-3 sm:grid-cols-[92px_minmax(0,1fr)] sm:items-start">
-          <span className="inline-flex w-fit items-center justify-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800 dark:bg-slate-950/70 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/25">{selected.length} selected</span>
-          <div>
-            <h4 className="text-lg font-semibold leading-6 text-slate-950 dark:text-white">{title}</h4>
-            <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">{description}</p>
-          </div>
-        </div>
-      </div>
-      <div className="grid gap-px bg-slate-200/70 p-px dark:bg-slate-950/70">
-        {options.map((option) => (
-          <LifeSetupOptionCard key={option} label={option} selected={selected.includes(option)} onClick={() => onToggle(option)} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function LifeSetupOptionCard({ label, selected, onClick }: { label: string; selected: boolean; onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`group relative min-h-[56px] w-full overflow-hidden border-0 px-4 py-3 text-left transition-all focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-300/70 ${
-        selected
-          ? 'bg-[linear-gradient(135deg,#172554,#1d4ed8)] text-white dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.96),rgba(30,64,175,0.72))] dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25'
-          : 'bg-white text-slate-700 hover:bg-blue-50/90 dark:bg-slate-950/70 dark:text-slate-200 dark:hover:bg-blue-400/10'
-      }`}
-    >
-      <span className={`absolute inset-y-0 left-0 w-1.5 transition-colors ${selected ? 'bg-emerald-300' : 'bg-slate-200 group-hover:bg-blue-300 dark:bg-slate-800 dark:group-hover:bg-blue-300/60'}`} />
-      <div className="grid grid-cols-[minmax(0,1fr)_22px] items-center gap-4 pl-3">
-        <span className="min-w-0 whitespace-normal break-words text-sm font-semibold leading-5">{label}</span>
-        <span className={`grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full border transition-all ${selected ? 'border-white/20 bg-emerald-600 text-white dark:bg-emerald-300 dark:text-slate-950' : 'border-slate-300 bg-white/80 text-transparent dark:border-white/20 dark:bg-slate-950/70'}`}>
-          <Check className="h-2.5 w-2.5" />
-        </span>
-      </div>
-    </button>
-  );
-}
-
-function SupportProfile({ setup, openPage }: { setup: LifeSetupState; openPage: (pageId: SavenPageId) => void }) {
-  return (
-    <div className="space-y-6">
-      <PageIntro eyebrow="Human Support Profile" title={`${setup.preferredName || setup.firstName} Roberts`} text="A life-support profile that describes the daily support context without becoming a medical chart." />
-      <div className="grid gap-5 lg:grid-cols-3">
-        <LayeredPanel title="Support mode" text={setup.supportMode} items={['Daily rhythm: ' + setup.rhythm, 'Mobility support: ' + setup.mobility, 'Environment: ' + setup.livingSituation]} />
-        <LayeredPanel title="Family connection" text="Support circle is connected and ready." items={['Daniel Roberts', 'Maya Carter', 'Home Recovery']} />
-        <LayeredPanel title="Technology comfort" text={setup.technologyComfort} items={['Device comfort visible', 'Robot comfort cautious', 'Preferred reminders: ' + setup.communication]} />
-      </div>
-      <button onClick={() => openPage('app-today')} className="rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white">
-        Open Today's Support
-      </button>
-    </div>
-  );
-}
-
-function SupportTemplateLibrary() {
-  const templates = [
-    {
-      name: 'Home recovery morning',
-      purpose: 'Start the day calmly after surgery or rehabilitation.',
-      steps: ['Hydration check', 'Medication support confirmation', 'Mobility readiness', 'Family digest'],
-      owner: 'Caregiver first',
-      verify: 'Caregiver + device',
-      tone: 'blue',
-    },
-    {
-      name: 'Mobility support',
-      purpose: 'Coordinate walking or transfer support without unsafe automation.',
-      steps: ['Check environment', 'Assign helper', 'Lock robot physical action', 'Verify completion'],
-      owner: 'Maya Carter',
-      verify: 'Human confirmation',
-      tone: 'green',
-    },
-    {
-      name: 'Quiet night mode',
-      purpose: 'Reduce interruptions while keeping urgent escalation visible.',
-      steps: ['Emergency only voice', 'Bed sensor standby', 'Family fallback', 'Morning summary'],
-      owner: 'SAVEN rules',
-      verify: 'Environment signal',
-      tone: 'gold',
-    },
-    {
-      name: 'Care concern review',
-      purpose: 'Route a concern to nurse or doctor without creating panic.',
-      steps: ['Collect support note', 'Attach verification', 'Request nurse review', 'Escalate doctor if needed'],
-      owner: 'Nurse path',
-      verify: 'Professional review',
-      tone: 'red',
-    },
-  ];
-
-  return (
-    <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_16%_20%,rgba(59,130,246,0.2),transparent_28%),radial-gradient(circle_at_84%_18%,rgba(249,115,22,0.14),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.76),rgba(255,247,237,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_16%_20%,rgba(59,130,246,0.26),transparent_28%),radial-gradient(circle_at_84%_18%,rgba(249,115,22,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(33,22,10,0.66))] dark:ring-1 dark:ring-white/10">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Support templates</p>
-          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Ready scenarios without loading the user with setup.</h3>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Templates should create a daily plan, required permissions, command examples, verification policy, and escalation path in one move.</p>
-        </div>
-        <StatusPill tone="blue" label="Template library" />
-      </div>
-      <div className="mt-6 grid gap-4 xl:grid-cols-4">
-        {templates.map((template) => {
-          const tone = template.tone === 'red'
-            ? 'border-red-200 bg-red-50 text-red-900 dark:border-red-300/25 dark:bg-red-500/10 dark:text-red-100'
-            : template.tone === 'green'
-              ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
-              : template.tone === 'gold'
-                ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
-                : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
-          return (
-            <article key={template.name} className={'group rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
-              <h4 className="text-xl font-semibold">{template.name}</h4>
-              <p className="mt-3 text-sm leading-6 opacity-85">{template.purpose}</p>
-              <div className="mt-4 space-y-2">
-                {template.steps.map((step, index) => (
-                  <div key={step} className="grid grid-cols-[28px_minmax(0,1fr)] items-center gap-2 rounded-2xl bg-white/72 px-3 py-2 text-sm font-semibold shadow-sm dark:bg-slate-950/70">
-                    <span className="grid h-6 w-6 place-items-center rounded-full bg-slate-950 text-[11px] text-white dark:bg-white dark:text-slate-950">{index + 1}</span>
-                    <span>{step}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 rounded-2xl bg-white/72 p-3 text-xs font-semibold leading-5 shadow-sm dark:bg-slate-950/70">
-                Owner: {template.owner}<br />Verification: {template.verify}
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-function EmergencyEscalationCenter({ compact = false }: { compact?: boolean }) {
-  const escalationRows = [
-    { level: 'Normal support', route: 'Family or caregiver', trigger: 'Missed low-risk task, routine reminder, family digest', response: 'Create follow-up and wait calmly', tone: 'blue' },
-    { level: 'Care concern', route: 'Nurse path', trigger: 'Repeated missed confirmation, recovery discomfort, wound care question', response: 'Request nurse review with timeline context', tone: 'green' },
-    { level: 'Clinical review', route: 'Doctor path', trigger: 'Medication concern, recovery plan change, high-risk unresolved event', response: 'Send concise clinical summary for review', tone: 'gold' },
-    { level: 'Emergency', route: 'Emergency path', trigger: 'Fall risk, acute distress, immediate safety concern', response: 'Show emergency escalation state only in dev mock', tone: 'red' },
-  ];
-
-  return (
-    <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.2),transparent_28%),radial-gradient(circle_at_84%_22%,rgba(239,68,68,0.16),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.76),rgba(255,241,242,0.7))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_84%_22%,rgba(239,68,68,0.14),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(45,16,16,0.58))] dark:ring-1 dark:ring-white/10">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Escalation center</p>
-          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">SAVEN separates normal support from urgent escalation.</h3>
-          {!compact && <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">The goal is to reduce panic: clear levels, clear route, clear next action. Real emergency calling is intentionally not connected in this development version.</p>}
-        </div>
-        <StatusPill tone="gold" label="Escalation rules" />
-      </div>
-      <div className={'mt-6 grid gap-4 ' + (compact ? 'lg:grid-cols-2 xl:grid-cols-4' : 'xl:grid-cols-4')}>
-        {escalationRows.map((row, index) => {
-          const tone = row.tone === 'red'
-            ? 'border-red-200 bg-red-50 text-red-900 dark:border-red-300/25 dark:bg-red-500/10 dark:text-red-100'
-            : row.tone === 'green'
-              ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
-              : row.tone === 'gold'
-                ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
-                : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
-          return (
-            <article key={row.level} className={'rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
-              <div className="flex items-center justify-between gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/82 text-sm font-semibold shadow-sm dark:bg-slate-950/70">{index + 1}</span>
-                {row.tone === 'red' && <span className="h-3 w-3 animate-pulse rounded-full bg-red-500 shadow-[0_0_14px_rgba(239,68,68,0.8)]" />}
-              </div>
-              <h4 className="mt-4 text-xl font-semibold">{row.level}</h4>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">{row.route}</p>
-              {!compact && <p className="mt-4 text-sm leading-6 opacity-85">{row.trigger}</p>}
-              <p className="mt-4 rounded-2xl bg-white/72 p-3 text-sm font-semibold leading-6 shadow-sm dark:bg-slate-950/70">{row.response}</p>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-
-
-
-type SpeechRecognitionResultLike = {
-  isFinal: boolean;
-  0: { transcript: string };
-};
-
-type SpeechRecognitionEventLike = {
-  resultIndex?: number;
-  results: ArrayLike<SpeechRecognitionResultLike>;
-};
-
-type SpeechRecognitionLike = {
-  continuous: boolean;
-  interimResults: boolean;
-  lang: string;
-  onresult: ((event: SpeechRecognitionEventLike) => void) | null;
-  onerror: ((event: { error?: string }) => void) | null;
-  onend: (() => void) | null;
-  start: () => void;
-  stop: () => void;
-};
-
-type SpeechRecognitionConstructorLike = new () => SpeechRecognitionLike;
-
-type VoiceCommandLog = {
-  time: string;
-  source: string;
-  command: string;
-  status: string;
-  response: string;
-};
-
-
-
-function meterColor(index: number, total = 28) {
-  const ratio = index / Math.max(1, total - 1);
-  if (ratio < 0.6) return '#22c55e';
-  if (ratio < 0.82) return '#f59e0b';
-  return '#ef4444';
-}
-
-function MicLevelBar({ level, active, error, onToggle }: { level: number; active: boolean; error: string; onToggle: () => void }) {
-  const bars = Array.from({ length: 28 });
-  const activeBars = Math.max(active ? 2 : 0, Math.round((level / 100) * bars.length));
-  const clip = level > 84;
-
-  return (
-    <div className={(active ? 'border-red-200 bg-red-50/75 dark:border-red-300/30 dark:bg-red-950/20' : 'border-slate-100 bg-[#f7f5f1] dark:border-white/10 dark:bg-slate-900') + ' rounded-2xl border px-3 py-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg dark:ring-1 dark:ring-white/10'}>
+(active ? 'border-red-200 bg-red-50/75 dark:border-red-300/30 dark:bg-red-950/20' : 'border-slate-100 bg-[#f7f5f1] dark:border-white/10 dark:bg-slate-900') + ' rounded-2xl border px-3 py-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg dark:ring-1 dark:ring-white/10'}>
       <div className="grid gap-3 sm:grid-cols-[92px_minmax(0,1fr)_72px] sm:items-center">
         <button onClick={onToggle} className={(active ? 'bg-red-600 text-white shadow-md shadow-red-950/25 ring-red-300/35' : 'bg-slate-950 text-slate-100 ring-white/10 hover:bg-slate-800') + ' inline-flex h-9 items-center justify-center rounded-full px-3 text-xs font-semibold ring-1 transition-all hover:-translate-y-0.5'}>
           <span className={(active ? 'bg-white animate-pulse' : 'bg-slate-500') + ' mr-2 inline-block h-2 w-2 rounded-full'} />
@@ -1995,7 +1450,7 @@ function SettingToggle({ label, text, icon: Icon, enabled, onToggle }: { label: 
   );
 }
 
-function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
+: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-7 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <div className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full bg-blue-200/20 blur-3xl dark:bg-slate-950/70 dark:ring-1 dark:ring-blue-300/15" />
@@ -2008,7 +1463,7 @@ function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; t
   );
 }
 
-function LayeredPanel({ title, text, items }: { title: string; text: string; items: string[] }) {
+: { title: string; text: string; items: string[] }) {
   return (
     <article className="group rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
       <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">{title}</h3>
@@ -2022,7 +1477,7 @@ function LayeredPanel({ title, text, items }: { title: string; text: string; ite
   );
 }
 
-function ReadinessCard({ title, subtitle, status, lines, items }: { title: string; subtitle: string; status: string; lines: string[]; items: string[] }) {
+: { title: string; subtitle: string; status: string; lines: string[]; items: string[] }) {
   return (
     <article className="group rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
       <div className="flex items-start justify-between gap-4">
@@ -2042,7 +1497,7 @@ function ReadinessCard({ title, subtitle, status, lines, items }: { title: strin
   );
 }
 
-function Field({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
+: { label: string; value: string; onChange: (value: string) => void }) {
   return (
     <label className="block">
       <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">{label}</span>
@@ -2055,7 +1510,7 @@ function Field({ label, value, onChange }: { label: string; value: string; onCha
   );
 }
 
-function SelectLike({ label, value, options, onChange }: { label: string; value: string; options: string[]; onChange: (value: string) => void }) {
+: { label: string; value: string; options: string[]; onChange: (value: string) => void }) {
   return (
     <label className="block">
       <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">{label}</span>
@@ -2070,7 +1525,7 @@ function SelectLike({ label, value, options, onChange }: { label: string; value:
   );
 }
 
-function SummaryLine({ label, value }: { label: string; value?: string }) {
+: { label: string; value?: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-b border-slate-100 py-2 last:border-b-0 dark:border-white/10">
       <span className="text-slate-500 dark:text-slate-400">{label}</span>
@@ -2079,7 +1534,7 @@ function SummaryLine({ label, value }: { label: string; value?: string }) {
   );
 }
 
-function InfoTile({ label, value }: { label: string; value: string }) {
+: { label: string; value: string }) {
   return (
     <div className="rounded-3xl bg-white/80 p-4 shadow-sm dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{label}</p>
@@ -2088,7 +1543,7 @@ function InfoTile({ label, value }: { label: string; value: string }) {
   );
 }
 
-function MetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
+: { label: string; value: number; tone: string }) {
   const color =
     tone === 'green'
       ? 'border-emerald-100 bg-gradient-to-br from-emerald-50 to-white text-emerald-700 dark:border-emerald-300/25 dark:from-slate-950/90 dark:to-emerald-950/45 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/15'
@@ -2113,7 +1568,7 @@ function StatusPill({ label, tone }: { label: string; tone: 'blue' | 'gold' | 'g
   return <span className={`rounded-full px-4 py-2 font-semibold shadow-sm ${color}`}>{label}</span>;
 }
 
-function StatusBadge({ status }: { status: SupportTask['status'] }) {
+: { status: SupportTask['status'] }) {
   const color =
     status === 'completed'
       ? 'bg-emerald-50 text-emerald-700 dark:bg-slate-950/70 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/25'
@@ -2125,7 +1580,7 @@ function StatusBadge({ status }: { status: SupportTask['status'] }) {
   return <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-black/0 dark:ring-white/10 ${color}`}>{status.replace(/_/g, ' ')}</span>;
 }
 
-function PriorityBadge({ priority }: { priority: SupportTask['priority'] }) {
+: { priority: SupportTask['priority'] }) {
   const color =
     priority === 'high'
       ? 'bg-amber-50 text-amber-700 dark:bg-slate-950/70 dark:text-amber-100 dark:ring-1 dark:ring-amber-300/25'
