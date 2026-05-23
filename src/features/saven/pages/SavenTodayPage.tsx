@@ -102,7 +102,7 @@ function StatusBadge({ status }: { status: SupportTask['status'] }) {
     pending_confirmation: 'bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-100 dark:ring-1 dark:ring-amber-300/20',
     planned: 'bg-slate-100 text-slate-600 dark:bg-slate-950/70 dark:text-slate-200 dark:ring-1 dark:ring-white/10',
   };
-  return <span className={'rounded-full px-3 py-1 text-xs font-semibold ' + map[status]}>{status.replaceAll('_', ' ')}</span>;
+  return <span className={'rounded-full px-3 py-1 text-xs font-semibold ' + map[status]}>{status.replace(/_/g, ' ')}</span>;
 }
 
 function PriorityBadge({ priority }: { priority: SupportTask['priority'] }) {
@@ -229,7 +229,7 @@ const continuityFactors = [
   { label: 'Robot readiness', value: 'Ready', tone: 'blue' },
 ];
 
-export function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeSetupState; openPage: (pageId: string) => void; profileCreated: boolean }) {
+export function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeSetupState; openPage: (pageId: 'app-support' | 'app-plan' | 'app-circle' | 'app-command' | 'app-environments' | 'app-verification' | 'app-continuity') => void; profileCreated: boolean }) {
   const stats = useMemo(
     () => [
       { label: 'Active', value: supportTasks.filter((task) => task.status === 'active' || task.status === 'planned').length, tone: 'blue' },

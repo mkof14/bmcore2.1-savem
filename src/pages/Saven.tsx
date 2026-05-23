@@ -835,8 +835,8 @@ export default function Saven({ onNavigate }: SavenProps) {
               }}
             />
           )}
-          {activePage === 'app-today' && <TodaySupport setup={setup} openPage={openPage} profileCreated={profileCreated} />}
-          {activePage === 'app-profile' && <SupportProfile setup={setup} openPage={openPage} />}
+          {activePage === 'app-today' && <TodaySupport setup={setup} openPage={(pageId) => openPage(pageId)} profileCreated={profileCreated} />}
+          {activePage === 'app-profile' && <SupportProfile setup={setup} openPage={(pageId) => openPage(pageId)} />}
           {activePage === 'app-modes' && <DualModeArchitecture />}
           {activePage === 'app-command' && <SavenCommandCenter />}
           {activePage === 'app-support' && <SupportFlowPage />}
