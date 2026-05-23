@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { ComponentType, useEffect, useMemo, useRef, useState } from 'react';
 import {
   BellRing,
   Bot,
@@ -17,6 +17,10 @@ import {
   StopCircle,
   Volume2,
   Watch,
+  Activity,
+  Clock3,
+  UsersRound,
+  Waypoints,
 } from 'lucide-react';
 
 type Tone = 'blue' | 'gold' | 'green';
@@ -87,6 +91,102 @@ type VoiceCommandLog = {
   response: string;
 };
 
+
+
+function SummaryLine({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between gap-4 border-b border-white/10 py-2 last:border-b-0">
+      <span className="text-sm text-slate-300">{label}</span>
+      <span className="text-right text-sm font-semibold text-white">{value}</span>
+    </div>
+  );
+}
+
+function SelectLike({ label, value, options, onChange }: { label: string; value: string; options: string[]; onChange: (value: string) => void }) {
+  return (
+    <label className="block">
+      <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">{label}</span>
+      <span className="relative mt-2 block">
+        <select
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          className="w-full appearance-none rounded-2xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm font-semibold text-slate-900 shadow-sm outline-none transition-all hover:border-blue-200 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 dark:border-white/10 dark:bg-slate-950 dark:text-white dark:focus:border-blue-300 dark:focus:ring-blue-300/10"
+        >
+          {options.map((option) => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+        <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+      </span>
+    </label>
+  );
+}
+
+function SettingSlider({ label, low, high, value, tone, onChange }: { label: string; low: string; high: string; value: number | string | boolean; tone: Tone; onChange: (value: number) => void }) {
+  const numericValue = typeof value === 'number' ? value : Number(value) || 0;
+  const bar =
+    tone === 'green'
+      ? 'accent-emerald-500'
+      : tone === 'gold'
+        ? 'accent-amber-500'
+        : 'accent-blue-500';
+
+  return (
+    <div className="rounded-3xl border border-white/70 bg-white/78 p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/58">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-semibold text-slate-950 dark:text-white">{label}</p>
+          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{low} to {high}</p>
+        </div>
+        <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-slate-700 shadow-sm dark:bg-slate-950 dark:text-slate-100 dark:ring-1 dark:ring-white/10">{numericValue}%</span>
+      </div>
+      <input className={'mt-4 w-full ' + bar} type="range" min="0" max="100" value={numericValue} onChange={(event) => onChange(Number(event.target.value))} />
+    </div>
+  );
+}
+
+function SettingToggle({ label, text, icon: Icon, enabled, onToggle }: { label: string; text: string; icon: ComponentType<{ className?: string }>; enabled: unknown; onToggle: () => void }) {
+  const isEnabled = Boolean(enabled);
+
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className={(isEnabled ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/25 dark:bg-emerald-500/10 dark:text-emerald-100' : 'border-slate-200 bg-white text-slate-700 dark:border-white/10 dark:bg-slate-950/58 dark:text-slate-200') + ' group rounded-3xl border p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl'}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 transition-transform group-hover:scale-105 dark:bg-slate-950/70">
+          <Icon className="h-4 w-4" />
+        </span>
+        <span className="rounded-full bg-white/82 px-3 py-1 text-xs font-semibold shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70">{isEnabled ? 'On' : 'Off'}</span>
+      </div>
+      <p className="mt-4 text-sm font-semibold">{label}</p>
+      <p className="mt-2 text-sm leading-6 opacity-80">{text}</p>
+    </button>
+  );
+}
+
+function MicLevelBar({ level, active, error, onToggle }: { level: number; active: boolean; error: string; onToggle: () => void }) {
+  const bars = Array.from({ length: 28 }, (_, index) => {
+    const threshold = ((index + 1) / 28) * 100;
+    const lit = active && level >= threshold;
+    const color = index > 22 ? 'bg-red-500' : index > 16 ? 'bg-amber-400' : 'bg-emerald-400';
+    return <span key={index} className={(lit ? color : 'bg-slate-800 dark:bg-slate-900') + ' h-5 flex-1 rounded-sm transition-all'} />;
+  });
+
+  return (
+    <div className="rounded-3xl border border-slate-200 bg-white/82 p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/65">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center">
+        <button type="button" onClick={onToggle} className={(active ? 'bg-red-600 text-white shadow-lg shadow-red-950/25' : 'bg-slate-950 text-white dark:bg-white dark:text-slate-950') + ' rounded-full px-5 py-3 text-sm font-semibold transition-all hover:-translate-y-0.5'}>
+          {active ? 'Mic on' : 'Mic'}
+        </button>
+        <div className="flex min-h-7 flex-1 items-end gap-1 rounded-2xl bg-slate-950 p-2 ring-1 ring-white/10">{bars}</div>
+        <span className="w-16 rounded-full bg-slate-950 px-3 py-1 text-center text-sm font-semibold text-white">{level}%</span>
+      </div>
+      {error && <p className="mt-3 text-sm font-semibold text-red-500">{error}</p>}
+    </div>
+  );
+}
 
 export function SavenSettings() {
   const [settings, setSettings] = useState({
