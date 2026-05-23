@@ -40,6 +40,8 @@ import {
   Satellite,
   Wifi,
   FileCheck2,
+  ListChecks,
+  TimerReset,
 } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import BackButton from '../components/BackButton';
@@ -1713,6 +1715,7 @@ function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeSetupSta
       <HumanSupportHeader setup={setup} />
       <CareContactNetwork compact />
       <SavenEndToEndScenario openPage={openPage} />
+      <TodayOperationalClarity />
       <SavenDeveloperReadinessStack />
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {stats.map((stat) => (
@@ -1893,6 +1896,122 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: SavenPageId) =
   );
 }
 
+
+function TodayOperationalClarity() {
+  const todayRows = [
+    {
+      label: 'Open verification',
+      value: 'Assisted walking session',
+      owner: 'Maya Carter',
+      proof: 'Caregiver confirmation + wearable motion trend',
+      impact: '+2 continuity when verified',
+      next: 'Ask Maya to confirm completion.',
+      tone: 'gold',
+      icon: FileCheck2,
+    },
+    {
+      label: 'Care route ready',
+      value: 'Nurse review path',
+      owner: 'Nurse Olivia Grant',
+      proof: 'Used if medication confirmation remains unresolved',
+      impact: 'Prevents continuity from becoming unclear',
+      next: 'Prepare care concern route if no proof arrives.',
+      tone: 'blue',
+      icon: HeartPulse,
+    },
+    {
+      label: 'Physical action gate',
+      value: 'Robot movement locked',
+      owner: 'Caregiver approval',
+      proof: 'Robot readiness can be checked; movement stays gated',
+      impact: 'Safety preserved',
+      next: 'Keep R1 in readiness-only mode.',
+      tone: 'green',
+      icon: ShieldCheck,
+    },
+  ];
+
+  return (
+    <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_84%_18%,rgba(249,115,22,0.14),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(255,247,237,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.23),transparent_30%),radial-gradient(circle_at_84%_18%,rgba(249,115,22,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(33,22,10,0.66))] dark:ring-1 dark:ring-white/10">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Today operational clarity</p>
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">What needs attention right now?</h3>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Today should show the operating truth: owner, proof, continuity impact, and next action.</p>
+        </div>
+        <StatusPill tone="gold" label="1 open proof" />
+      </div>
+      <div className="mt-6 grid gap-4 xl:grid-cols-3">
+        {todayRows.map((row) => {
+          const Icon = row.icon;
+          const tone =
+            row.tone === 'green'
+              ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
+              : row.tone === 'gold'
+                ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
+                : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+          return (
+            <article key={row.label} className={'rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
+              <div className="flex items-start justify-between gap-3">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70"><Icon className="h-5 w-5" /></span>
+                <span className="rounded-full bg-white/82 px-3 py-1 text-xs font-semibold shadow-sm dark:bg-slate-950/70">{row.label}</span>
+              </div>
+              <h4 className="mt-4 text-xl font-semibold">{row.value}</h4>
+              <div className="mt-4 space-y-2 text-sm leading-6 opacity-85">
+                <p><span className="font-semibold">Owner:</span> {row.owner}</p>
+                <p><span className="font-semibold">Proof:</span> {row.proof}</p>
+                <p><span className="font-semibold">Impact:</span> {row.impact}</p>
+                <p><span className="font-semibold">Next:</span> {row.next}</p>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function TimelineOperationalClarity() {
+  const timelineRows = [
+    { time: '08:30', event: 'Hydration check verified', proof: 'Sensor signal + user confirmation', continuity: '+1 stable', state: 'Done', tone: 'green' },
+    { time: '10:30', event: 'Assisted walking support', proof: 'Waiting for Maya confirmation', continuity: '+2 pending', state: 'Open', tone: 'gold' },
+    { time: '11:00', event: 'Robot readiness checked', proof: 'R1 telemetry only', continuity: 'No physical action', state: 'Safe', tone: 'blue' },
+    { time: 'If missed', event: 'Nurse route prepared', proof: 'Care concern context', continuity: 'Prevents gap', state: 'Fallback', tone: 'red' },
+  ];
+
+  return (
+    <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Timeline clarity</p>
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Each event should explain proof and continuity.</h3>
+        </div>
+        <StatusPill tone="green" label="Explainable timeline" />
+      </div>
+      <div className="mt-6 grid gap-3">
+        {timelineRows.map((row) => {
+          const tone =
+            row.tone === 'green'
+              ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100'
+              : row.tone === 'gold'
+                ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
+                : row.tone === 'red'
+                  ? 'border-red-200 bg-red-50 text-red-900 dark:border-red-300/20 dark:bg-red-500/10 dark:text-red-100'
+                  : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+          return (
+            <div key={row.time + row.event} className={'grid gap-3 rounded-3xl border p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[92px_minmax(0,1fr)_minmax(0,1fr)_150px_110px] md:items-center ' + tone}>
+              <span className="rounded-full bg-white/82 px-3 py-1 text-center text-xs font-semibold shadow-sm dark:bg-slate-950/70">{row.time}</span>
+              <p className="font-semibold">{row.event}</p>
+              <p className="text-sm opacity-80">{row.proof}</p>
+              <p className="text-sm font-semibold">{row.continuity}</p>
+              <span className="rounded-full bg-white/82 px-3 py-1 text-center text-xs font-semibold shadow-sm dark:bg-slate-950/70">{row.state}</span>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
 
 function HumanSupportHeader({ setup }: { setup: LifeSetupState }) {
   return (
@@ -2398,6 +2517,7 @@ function HumanSupportTimeline() {
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Support Timeline" title="Real history of support and care continuity." text="This timeline is not an audit log. It shows verified actions in plain human language." />
+      <TimelineOperationalClarity />
       <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
         <div className="space-y-4">
           {verifiedActions.map((event) => (
