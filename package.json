@@ -27,7 +27,9 @@
     "validate": "npm run check && npm run test",
     "db:types": "npx supabase gen types typescript --project-id <YOUR_PROJECT_ID> > src/types/database.ts",
     "prebuild": "node scripts/validate-build-env.mjs && node scripts/gen-version.mjs",
-    "dev:saven": "vite --host 127.0.0.1 --port 5173 --strictPort --open /app/saven/settings"
+    "dev:saven": "vite --host 127.0.0.1 --port 5173 --strictPort --open /app/saven/settings",
+    "smoke:saven": "node scripts/saven-route-smoke.mjs",
+    "smoke:saven:auto": "node scripts/saven-route-smoke-with-server.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
