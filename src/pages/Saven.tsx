@@ -1106,30 +1106,30 @@ function SavenAppShell({
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#f7f5f1] text-slate-950 dark:bg-[#07111f] dark:text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(91,143,201,0.24),transparent_30%),radial-gradient(circle_at_90%_0%,rgba(198,155,72,0.2),transparent_26%),radial-gradient(circle_at_70%_95%,rgba(4,120,87,0.13),transparent_30%),linear-gradient(180deg,#fbfaf7,#f2efe8)] dark:bg-[radial-gradient(circle_at_12%_8%,rgba(91,143,201,0.25),transparent_32%),radial-gradient(circle_at_88%_4%,rgba(198,155,72,0.16),transparent_28%),radial-gradient(circle_at_70%_92%,rgba(16,185,129,0.1),transparent_30%),linear-gradient(180deg,#07111f,#0f172a_48%,#111827)]" />
-      <div className="relative grid min-h-screen lg:grid-cols-[292px_1fr]">
-        <aside className="hidden border-r border-white/70 bg-white/78 px-4 py-5 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#081422]/84 lg:block">
+      <div className="relative grid min-h-screen lg:grid-cols-[258px_1fr]">
+        <aside className="hidden border-r border-white/60 bg-white/72 px-3 py-4 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#081422]/80 lg:block">
           <BackButton onNavigate={onNavigate} label="Back to BioMath Core" />
-          <button onClick={() => openPage('app-start')} className="group mt-5 flex w-full items-center gap-3 rounded-3xl px-2 py-2 text-left transition-all hover:bg-white/70 dark:hover:bg-white/[0.07]">
-            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-2xl bg-slate-950 shadow-sm ring-1 ring-white/50 transition-transform group-hover:scale-105 dark:ring-white/10">
+          <button onClick={() => openPage('app-start')} className="group mt-4 flex w-full items-center gap-3 rounded-2xl px-2 py-2 text-left transition-all hover:bg-white/70 dark:hover:bg-white/[0.07]">
+            <span className="grid h-10 w-10 place-items-center overflow-hidden rounded-xl bg-slate-950 shadow-sm ring-1 ring-white/50 transition-transform group-hover:scale-105 dark:ring-white/10">
               <img src="/saven-mark.png" alt="SAVEN" className="h-full w-full object-cover" />
             </span>
             <span>
-              <span className="block text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">SAVEN</span>
+              <span className="block text-xl font-semibold tracking-tight text-slate-950 dark:text-white">SAVEN</span>
               <span className="block text-xs text-slate-500 dark:text-slate-400">Real support system</span>
             </span>
           </button>
-          <div className="mt-6 overflow-hidden rounded-3xl border border-blue-200/70 bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_88%_20%,rgba(249,115,22,0.16),transparent_28%),linear-gradient(135deg,#ffffff,#eff6ff_46%,#fff7ed)] p-4 shadow-lg shadow-blue-950/5 dark:border-blue-300/20 dark:bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.24),transparent_30%),radial-gradient(circle_at_92%_12%,rgba(249,115,22,0.18),transparent_30%),linear-gradient(135deg,#06101f,#0b1728_58%,#21170b)] dark:ring-1 dark:ring-blue-300/15">
+          <div className="mt-4 overflow-hidden rounded-2xl border border-blue-200/60 bg-[linear-gradient(135deg,#ffffff,#eff6ff_52%,#fff7ed)] p-3 shadow-sm shadow-blue-950/5 dark:border-blue-300/15 dark:bg-[linear-gradient(135deg,#06101f,#0b1728_58%,#21170b)] dark:ring-1 dark:ring-blue-300/10">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-700 dark:text-blue-100">Support active</p>
-              <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.9)]" />
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-700 dark:text-blue-100">Support active</p>
+              <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.85)]" />
             </div>
-            <p className="mt-3 text-lg font-semibold tracking-tight text-slate-950 dark:text-white">Anna Roberts</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <span className="rounded-full bg-blue-500/12 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-400/15 dark:text-blue-100">Home Recovery</span>
-              <span className="rounded-full bg-orange-500/12 px-3 py-1 text-xs font-semibold text-orange-800 dark:bg-orange-400/15 dark:text-orange-100">Live circle</span>
+            <p className="mt-2 text-base font-semibold tracking-tight text-slate-950 dark:text-white">Anna Roberts</p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              <span className="rounded-full bg-blue-500/12 px-2.5 py-1 text-[11px] font-semibold text-blue-800 dark:bg-blue-400/15 dark:text-blue-100">Home Recovery</span>
+              <span className="rounded-full bg-orange-500/12 px-2.5 py-1 text-[11px] font-semibold text-orange-800 dark:bg-orange-400/15 dark:text-orange-100">Live circle</span>
             </div>
           </div>
-          <nav className="mt-6 space-y-1">
+          <nav className="mt-4 space-y-0.5">
             {appNavItems.map((item, index) => {
               const Icon = item.icon;
               const isActive = activePage === item.id;
@@ -1152,11 +1152,12 @@ function SavenAppShell({
                 <button
                   key={item.id}
                   onClick={() => openPage(item.id)}
-                  className={`group flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left text-sm font-semibold transition-all ${
-                    isActive ? 'bg-slate-950 text-white shadow-sm shadow-slate-950/10 dark:bg-slate-900 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25' : 'text-slate-600 hover:bg-white hover:text-slate-950 hover:shadow-sm dark:text-slate-300 dark:hover:bg-slate-900/80 dark:hover:text-white'
+                  className={`group relative flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-left text-sm font-semibold transition-all ${
+                    isActive ? 'bg-white text-slate-950 shadow-sm shadow-slate-950/8 ring-1 ring-blue-200/70 dark:bg-slate-900 dark:text-blue-100 dark:ring-blue-300/25' : 'text-slate-600 hover:bg-white/80 hover:text-slate-950 hover:shadow-sm dark:text-slate-300 dark:hover:bg-slate-900/80 dark:hover:text-white'
                   }`}
                 >
-                  <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-xl ring-1 transition-all group-hover:scale-105 ${isActive ? 'bg-gradient-to-br ' + navTone + ' text-white shadow-lg shadow-blue-950/20 ring-white/20' : 'bg-slate-100 text-slate-500 ring-slate-200/70 group-hover:bg-white group-hover:text-blue-600 group-hover:shadow-sm dark:bg-slate-950/65 dark:text-slate-300 dark:ring-white/10 dark:group-hover:bg-slate-900'}`}>
+                  {isActive && <span className={`absolute left-0 top-2 bottom-2 w-1 rounded-full bg-gradient-to-b ${navTone}`} />}
+                  <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-lg ring-1 transition-all group-hover:scale-105 ${isActive ? 'bg-gradient-to-br ' + navTone + ' text-white shadow-md shadow-blue-950/15 ring-white/20' : 'bg-slate-100 text-slate-500 ring-slate-200/70 group-hover:bg-white group-hover:text-blue-600 group-hover:shadow-sm dark:bg-slate-950/65 dark:text-slate-300 dark:ring-white/10 dark:group-hover:bg-slate-900'}`}>
                     <Icon className="h-3.5 w-3.5" />
                   </span>
                   {item.label}
@@ -1166,7 +1167,7 @@ function SavenAppShell({
           </nav>
           <button
             onClick={() => openPage('home')}
-            className="mt-6 flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-white/70 px-4 py-3 text-left text-sm font-semibold text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:text-white"
+            className="mt-4 flex w-full items-center justify-between rounded-xl border border-slate-200 bg-white/60 px-3 py-2.5 text-left text-sm font-semibold text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:text-white"
           >
             Public website
             <ArrowRight className="h-4 w-4" />
