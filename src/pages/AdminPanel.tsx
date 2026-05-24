@@ -17,7 +17,7 @@ import ConfigSystem from './admin/ConfigSystem';
 import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
-import { savenLocalBackendGateway } from '../features/saven/services/savenLocalBackendGateway';
+import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
 import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
 
 interface AdminPanelProps {
@@ -127,7 +127,7 @@ function SavenOpsAdminSection() {
 
   useEffect(() => {
     let mounted = true;
-    savenLocalBackendGateway.getMonitoringSnapshot()
+    savenBackendGateway.getMonitoringSnapshot()
       .then((nextSnapshot) => {
         if (mounted) setSnapshot(nextSnapshot);
       })
@@ -157,7 +157,7 @@ function SavenOpsAdminSection() {
   ];
 
   const runAdminOverride = async (action: SavenAdminOverrideAction, targetId: string, reason: string) => {
-    const result = await savenLocalBackendGateway.applyAdminOverride({
+    const result = await savenBackendGateway.applyAdminOverride({
       action,
       actorId: 'biomath-admin',
       targetId,

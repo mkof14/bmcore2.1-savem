@@ -127,3 +127,14 @@ Current route contract:
 - `POST /admin-overrides`
 
 The adapter is not activated by default. The current UI remains on the local gateway until a real backend service is deployed and intentionally wired.
+
+## Backend Gateway Selector
+
+SAVEN now has a safe gateway selector:
+
+- `createSavenBackendGatewayFromEnv(options)`
+- `savenBackendGateway`
+- default mode: local gateway
+- HTTP mode: requires `VITE_SAVEN_BACKEND_MODE=http` and `VITE_SAVEN_BACKEND_URL`
+
+BioMath Core Admin now reads from `savenBackendGateway`, so it can stay local-safe today and switch to the HTTP backend adapter later without rewriting the Admin UI.
