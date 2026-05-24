@@ -1588,10 +1588,87 @@ function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: Sav
         </div>
       </section>
 
+      <SavenOperatorShortcuts openPage={openPage} />
+
       <SavenStartPath openPage={openPage} />
 
       <SupportFlowGraphic current="Support Task Created" />
     </div>
+  );
+}
+
+
+function SavenOperatorShortcuts({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
+  const shortcuts: Array<{
+    label: string;
+    title: string;
+    command: string;
+    result: string;
+    page: SavenPageId;
+    tone: string;
+  }> = [
+    {
+      label: 'Start',
+      title: 'Set up the person',
+      command: 'Create Anna\'s support profile.',
+      result: 'Profile, rhythm, circle, and support mode become visible.',
+      page: 'app-life-setup',
+      tone: 'from-blue-500 to-cyan-300',
+    },
+    {
+      label: 'Now',
+      title: 'Open today\'s shift',
+      command: 'What needs attention right now?',
+      result: 'SAVEN shows owner, proof, next action, and window.',
+      page: 'app-today',
+      tone: 'from-emerald-500 to-teal-300',
+    },
+    {
+      label: 'Voice',
+      title: 'Send a support command',
+      command: 'Request nurse follow-up and send recovery context.',
+      result: 'The command becomes a route with a human gate.',
+      page: 'app-commands',
+      tone: 'from-indigo-500 to-blue-400',
+    },
+    {
+      label: 'Proof',
+      title: 'Verify reality',
+      command: 'Confirm assisted walking with Maya and wearable trend.',
+      result: 'Continuity updates only after proof returns.',
+      page: 'app-verification',
+      tone: 'from-amber-400 to-orange-400',
+    },
+  ];
+
+  return (
+    <section className="overflow-hidden rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10" data-saven-start-shortcuts="true">
+      <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">Operator shortcuts</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Start with the action, not the menu.</h3>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-200">These are the four entry points a caregiver or family member can actually use.</p>
+        </div>
+        <button onClick={() => openPage('app-commands')} className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
+          Open commands
+        </button>
+      </div>
+      <div className="mt-5 grid gap-3 md:grid-cols-2 2xl:grid-cols-4">
+        {shortcuts.map((item) => (
+          <button
+            key={item.label}
+            onClick={() => openPage(item.page)}
+            className="group min-h-[176px] rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4 text-left shadow-sm ring-1 ring-white/5 transition-all hover:-translate-y-0.5 hover:border-blue-300/35 hover:bg-white/[0.1] hover:shadow-xl hover:shadow-blue-950/20"
+          >
+            <span className={'block h-1.5 w-16 rounded-full bg-gradient-to-r ' + item.tone} />
+            <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{item.label}</p>
+            <h4 className="mt-2 text-xl font-semibold leading-6 text-white">{item.title}</h4>
+            <p className="mt-3 rounded-2xl bg-black/25 px-3 py-2 text-sm font-semibold leading-5 text-slate-100 ring-1 ring-white/10">Hey SAVEN, {item.command}</p>
+            <p className="mt-3 line-clamp-2 text-sm leading-5 text-slate-300">{item.result}</p>
+          </button>
+        ))}
+      </div>
+    </section>
   );
 }
 
