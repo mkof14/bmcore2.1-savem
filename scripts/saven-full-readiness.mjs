@@ -14,6 +14,7 @@ const steps = [
   { label: 'Worker handoff', command: 'npm', args: ['run', 'workers:saven'] },
   { label: 'Admin worker shift', command: 'npm', args: ['run', 'admin-workers:saven'] },
   { label: 'Ops evidence pack', command: 'npm', args: ['run', 'evidence:saven'] },
+  { label: 'Admin evidence pack', command: 'npm', args: ['run', 'admin-evidence:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },
   { label: 'Production QA audit', command: 'npm', args: ['run', 'qa:saven'] },
   { label: 'Theme contrast', command: 'npm', args: ['run', 'contrast:saven'] },

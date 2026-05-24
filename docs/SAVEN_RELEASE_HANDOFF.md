@@ -201,6 +201,16 @@ For final shipping review:
 npm run ship:saven
 ```
 
+## Admin Ops Evidence Panel
+
+Run:
+
+```zsh
+npm run admin-evidence:saven
+```
+
+Admin Ops should show the SAVEN evidence pack as release posture, gate status, evidence counts, and operator narrative.
+
 ## Ops Evidence Pack
 
 Run:

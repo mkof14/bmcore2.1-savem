@@ -76,6 +76,7 @@ const sourceExpectations = [
   ['Visual Acceptance', ['Visual Acceptance', 'visual:saven', 'SAVEN_VISUAL_ACCEPTANCE', 'dark-operational']],
   ['Security Privacy Guardrails', ['SAVEN Security And Privacy Guardrails', 'privacy:saven', 'savenPrivacyPolicyMatrix', 'emergency_route']],
   ['Ops Evidence Pack', ['SAVEN Ops Evidence Pack', 'createSavenOpsEvidencePack', 'evidence:saven', 'saven-ops-evidence-pack']],
+  ['Admin Ops Evidence Panel', ['data-saven-admin-evidence-pack="true"', 'SAVEN ops evidence', 'admin-evidence:saven']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

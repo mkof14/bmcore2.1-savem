@@ -459,3 +459,14 @@ SAVEN now has one operational evidence object:
 - `npm run evidence:saven`
 
 The pack summarizes command fixtures, worker handoff, privacy guardrails, monitoring SLO, alert routes, and Admin Ops visibility. It reports `review_ready`, `needs_operator_review`, or `blocked` as an operator release posture.
+
+
+## Admin Ops Evidence Panel
+
+BioMath Core Admin now shows the SAVEN Ops Evidence Pack:
+
+- `data-saven-admin-evidence-pack="true"`
+- `createSavenOpsEvidencePack`
+- `npm run admin-evidence:saven`
+
+The panel shows release posture, evidence counts, gate status, and operator narrative in the SAVEN Ops screen. It turns release evidence into something visible before handoff, not only a hidden test result.

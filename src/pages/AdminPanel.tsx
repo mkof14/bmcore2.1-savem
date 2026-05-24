@@ -18,6 +18,7 @@ import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
+import { createSavenOpsEvidencePack } from '../features/saven/services/savenOpsEvidenceService';
 import { createSavenWorkerShiftBoard } from '../features/saven/services/savenWorkerHandoffService';
 import { createSavenMonitoringSloReport, type SavenMonitoringSloReport } from '../features/saven/services/savenMonitoringSloService';
 import { createSavenOpsAlerts, type SavenOpsAlert } from '../features/saven/services/savenAlertingService';
@@ -185,6 +186,7 @@ function SavenOpsAdminSection() {
   const persistenceTables = persistenceStatus?.tables.slice(0, 6) ?? [];
   const sloReport: SavenMonitoringSloReport | null = snapshot ? createSavenMonitoringSloReport(snapshot) : null;
   const activeAlerts: SavenOpsAlert[] = sloReport ? createSavenOpsAlerts(sloReport) : [];
+  const opsEvidencePack = createSavenOpsEvidencePack();
   const workerShiftBoard = createSavenWorkerShiftBoard([
     { source: 'voice' as const, text: 'Hey SAVEN, request nurse follow-up and send recovery context.', targetTaskId: 'task-medication-0900' },
     { source: 'voice' as const, text: 'Hey SAVEN, assign caregiver Maya to this support task.', targetTaskId: 'task-mobility-1030' },
@@ -289,6 +291,54 @@ function SavenOpsAdminSection() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-violet-300/15 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-evidence-pack="true">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-violet-100/70">SAVEN ops evidence</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">Release posture is visible before handoff.</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">This pack connects command fixtures, worker handoff, privacy, monitoring, alerts, and Admin Ops into one operator-facing review signal.</p>
+          </div>
+          <span className="w-fit rounded-full border border-violet-300/25 bg-violet-500/10 px-4 py-2 text-sm font-semibold capitalize text-violet-100">
+            {opsEvidencePack.releasePosture.replace(/_/g, ' ')}
+          </span>
+        </div>
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+          {Object.entries(opsEvidencePack.evidence).map(([label, value]) => (
+            <article key={label} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 ring-1 ring-white/5">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">{label.replace(/([A-Z])/g, ' $1')}</p>
+              <p className="mt-3 text-3xl font-semibold text-white">{value}</p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-5 grid gap-3 xl:grid-cols-5">
+          {opsEvidencePack.gates.map((gate) => {
+            const gateTone =
+              gate.status === 'blocked'
+                ? 'border-red-300/25 bg-red-500/10'
+                : gate.status === 'watch'
+                  ? 'border-amber-300/25 bg-amber-500/10'
+                  : 'border-emerald-300/25 bg-emerald-500/10';
+            return (
+              <article key={gate.id} className={'rounded-2xl border p-4 ring-1 ring-white/5 ' + gateTone}>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-semibold text-white">{gate.id.replace(/-/g, ' ')}</p>
+                  <span className="rounded-full bg-slate-950/70 px-3 py-1 text-xs font-semibold capitalize text-slate-100 ring-1 ring-white/10">{gate.status}</span>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-slate-300">{gate.summary}</p>
+              </article>
+            );
+          })}
+        </div>
+        <div className="mt-5 rounded-2xl border border-white/10 bg-slate-950/55 p-4 ring-1 ring-white/5">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Operator narrative</p>
+          <div className="mt-3 grid gap-2 lg:grid-cols-2">
+            {opsEvidencePack.operatorNarrative.map((line) => (
+              <p key={line} className="rounded-2xl bg-white/[0.04] px-3 py-2 text-sm leading-6 text-slate-200 ring-1 ring-white/5">{line}</p>
+            ))}
+          </div>
         </div>
       </section>
 
