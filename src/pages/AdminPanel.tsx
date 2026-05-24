@@ -17,6 +17,8 @@ import ConfigSystem from './admin/ConfigSystem';
 import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
+import { savenLocalBackendGateway } from '../features/saven/services/savenLocalBackendGateway';
+import type { SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
 
 interface AdminPanelProps {
   onNavigate: (page: string) => void;
@@ -120,45 +122,50 @@ export default function AdminPanel({ onNavigate }: AdminPanelProps) {
 }
 
 function SavenOpsAdminSection() {
-  const opsCards = [
-    { label: 'Backend gateway', value: 'Contract ready', detail: 'One adapter boundary for tasks, commands, contacts, proof, and continuity.', tone: 'blue' },
-    { label: 'Monitoring', value: 'Signals defined', detail: 'Command latency, proof waits, failed routes, escalation waits, and endpoint health.', tone: 'green' },
-    { label: 'Admin control', value: 'Merged admin', detail: 'SAVEN operations live inside BioMath Core Admin instead of a separate console.', tone: 'gold' },
-    { label: 'Safety gates', value: 'Human confirmed', detail: 'Emergency, clinical, robot, and external dispatch stay behind confirmation gates.', tone: 'red' },
+  const [snapshot, setSnapshot] = useState<SavenMonitoringSnapshot | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    savenLocalBackendGateway.getMonitoringSnapshot()
+      .then((nextSnapshot) => {
+        if (mounted) setSnapshot(nextSnapshot);
+      })
+      .catch(() => {
+        notifyError('SAVEN monitoring snapshot load failed');
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const summaryCards = [
+    { label: 'Commands', value: String(snapshot?.summary.activeCommands ?? '-'), detail: 'Voice, text, and system intake', tone: 'blue' },
+    { label: 'Proof waits', value: String(snapshot?.summary.openProofWaits ?? '-'), detail: 'Actions waiting for confirmation', tone: 'gold' },
+    { label: 'Endpoints online', value: snapshot ? snapshot.summary.onlineEndpoints + '/4' : '-', detail: 'Devices, robot, and environment health', tone: 'green' },
+    { label: 'Robot policy', value: String(snapshot?.summary.robotReadinessOnly ?? '-'), detail: 'Readiness-only robot gates', tone: 'red' },
   ];
 
-  const lanes = [
-    ['Command intake', 'Voice/text command received, classified, and linked to a profile.'],
-    ['Assignment', 'Owner selected across person, caregiver, family, nurse, device, robot, or environment.'],
-    ['Verification', 'Proof request opened with method, deadline, and fallback escalation.'],
-    ['Continuity', 'Timeline and next support window update only after proof or admin decision.'],
-  ];
-
-  const monitorRows = [
-    ['Command latency', '< 2s target', 'Watch voice and text command routing.'],
-    ['Open proof waits', '0 urgent waits', 'Track actions stuck before confirmation.'],
-    ['Escalation backlog', 'Human review', 'Show nurse, doctor, family, and emergency queue.'],
-    ['Endpoint health', 'Devices + robots', 'Monitor gateway status before action.'],
-    ['Admin override log', 'Required', 'Every pause, reassign, or emergency route needs audit trail.'],
-  ];
+  const signals = snapshot?.signals ?? [];
+  const queueItems = snapshot?.queues ?? [];
 
   return (
-    <div className="space-y-6" data-saven-admin-ops="true">
+    <div className="space-y-6" data-saven-admin-ops="true" data-saven-admin-monitoring-live="true">
       <div className="rounded-3xl border border-blue-500/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">SAVEN Operations</p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight">Backend, monitoring, and admin control in one place.</h1>
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight">Backend monitoring snapshot inside BioMath Core Admin.</h1>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
-              This is the BioMath Core Admin entry point for SAVEN: commands, assignments, proof waits, endpoint health, and human safety gates.
+              Admin now reads the SAVEN local gateway snapshot: commands, proof waits, endpoints, robot gates, escalation routes, and safety status.
             </p>
           </div>
-          <button className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm">
-            Admin ready
-          </button>
+          <span className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm">
+            {snapshot ? 'Snapshot ready' : 'Loading snapshot'}
+          </span>
         </div>
         <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          {opsCards.map((card) => {
+          {summaryCards.map((card) => {
             const tone =
               card.tone === 'green'
                 ? 'border-emerald-300/20 bg-emerald-500/10'
@@ -168,9 +175,9 @@ function SavenOpsAdminSection() {
                     ? 'border-red-300/20 bg-red-500/10'
                     : 'border-blue-300/20 bg-blue-500/10';
             return (
-              <article key={card.label} className={'min-h-[160px] rounded-2xl border p-4 ring-1 ring-white/5 ' + tone}>
+              <article key={card.label} className={'min-h-[150px] rounded-2xl border p-4 ring-1 ring-white/5 ' + tone}>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{card.label}</p>
-                <h3 className="mt-3 text-xl font-semibold text-white">{card.value}</h3>
+                <h3 className="mt-3 text-3xl font-semibold text-white">{card.value}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-300">{card.detail}</p>
               </article>
             );
@@ -178,32 +185,52 @@ function SavenOpsAdminSection() {
         </div>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_440px]">
         <section className="rounded-3xl border border-slate-800 bg-slate-950 p-6 text-white shadow-xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/70">Operational backend path</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/70">Monitoring signals</p>
           <div className="mt-5 grid gap-3 md:grid-cols-2">
-            {lanes.map(([title, detail], index) => (
-              <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-xs font-bold text-white">{index + 1}</span>
-                <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-300">{detail}</p>
-              </div>
-            ))}
+            {signals.map((signal) => {
+              const stateTone =
+                signal.status === 'healthy'
+                  ? 'bg-emerald-500/10 text-emerald-100 ring-emerald-300/20'
+                  : signal.status === 'blocked'
+                    ? 'bg-red-500/10 text-red-100 ring-red-300/20'
+                    : 'bg-amber-500/10 text-amber-100 ring-amber-300/20';
+              return (
+                <div key={signal.id} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="font-semibold text-white">{signal.label}</h3>
+                    <span className={'rounded-full px-3 py-1 text-xs font-semibold ring-1 ' + stateTone}>{signal.status}</span>
+                  </div>
+                  <p className="mt-3 text-xl font-semibold text-white">{signal.value}</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">{signal.detail}</p>
+                </div>
+              );
+            })}
           </div>
         </section>
 
         <section className="rounded-3xl border border-slate-800 bg-slate-950 p-6 text-white shadow-xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-100/70">Monitoring queue</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-100/70">Live queues</p>
           <div className="mt-5 space-y-3">
-            {monitorRows.map(([label, value, detail]) => (
-              <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="font-semibold text-white">{label}</p>
-                  <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-100 ring-1 ring-emerald-300/20">{value}</span>
+            {queueItems.map((item) => {
+              const severityTone =
+                item.severity === 'critical'
+                  ? 'bg-red-500/10 text-red-100 ring-red-300/20'
+                  : item.severity === 'high'
+                    ? 'bg-amber-500/10 text-amber-100 ring-amber-300/20'
+                    : 'bg-blue-500/10 text-blue-100 ring-blue-300/20';
+              return (
+                <div key={item.id} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="font-semibold text-white">{item.title}</p>
+                    <span className={'rounded-full px-3 py-1 text-xs font-semibold ring-1 ' + severityTone}>{item.severity}</span>
+                  </div>
+                  <p className="mt-2 text-sm text-slate-300">{item.queue} · {item.owner}</p>
+                  <p className="mt-2 text-sm leading-5 text-slate-400">{item.waitingFor}</p>
                 </div>
-                <p className="mt-2 text-sm leading-5 text-slate-400">{detail}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       </div>

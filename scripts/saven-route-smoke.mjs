@@ -34,6 +34,7 @@ const sourceExpectations = [
   ['Backend Gateway map', ['SavenBackendGatewayPanel', 'Backend gateway map', 'Backend Gateway Map', 'backend gateway']],
   ['Monitoring Contract', ['SavenMonitoringSnapshot', 'createSavenMonitoringSnapshot', 'getMonitoringSnapshot']],
   ['Backend Monitoring Admin', ['data-saven-admin-ops="true"', 'SAVEN Backend, Monitoring, and Admin Foundation']],
+  ['Admin Monitoring Snapshot', ['data-saven-admin-monitoring-live="true"', 'getMonitoringSnapshot()']],
   ['Executor Command Rails', ['data-saven-executor-command="care"', 'data-saven-executor-command="robot"', 'data-saven-executor-command="device"']],
   ['Robot Device Service Matrix', ['Robot / Device Service Matrix', 'Robot Device Service Matrix', 'Physical orchestration', 'Physical support becomes visible', 'Physical support becomes visible, permissioned, and verified']],
   ['Device Verification Gateway', ['Device Gateway', 'verification gateway for real-world support']],

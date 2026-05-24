@@ -76,3 +76,15 @@ Implementation files:
 
 - `src/features/saven/services/savenMonitoringService.ts`
 - `src/features/saven/services/__tests__/savenMonitoringService.test.ts`
+
+## Admin Reads Monitoring Snapshot
+
+The BioMath Core Admin SAVEN Ops section now reads `savenLocalBackendGateway.getMonitoringSnapshot()` instead of showing only static placeholder rows.
+
+The admin UI exposes:
+
+- summary cards from `SavenMonitoringSnapshot.summary`
+- signal cards from `SavenMonitoringSnapshot.signals`
+- live queue rows from `SavenMonitoringSnapshot.queues`
+
+This keeps the current version local and safe while making the Admin section backend-adapter ready.
