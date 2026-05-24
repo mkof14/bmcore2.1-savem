@@ -41,7 +41,8 @@
     "ship:saven": "npm run ready:saven && npm run preview:saven:auto",
     "visual:saven": "node scripts/saven-visual-acceptance-audit.mjs",
     "commands:saven": "node scripts/saven-command-contract-audit.mjs",
-    "db:saven": "node scripts/saven-supabase-migration-audit.mjs"
+    "db:saven": "node scripts/saven-supabase-migration-audit.mjs",
+    "edge:saven": "node scripts/saven-edge-function-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

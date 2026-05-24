@@ -46,6 +46,7 @@ const sourceExpectations = [
   ['Supabase Persistence Bridge', ['createSavenSupabasePersistenceRepository', 'savenPersistenceTables', 'getPersistenceStatus', 'data-saven-admin-persistence-status="true"']],
   ['RLS Policy Draft', ['saven_rls_policy_draft', 'is_saven_admin', 'Critical writes']],
   ['Edge Function Gateway Draft', ['saven-gateway', 'ALLOWED_ACTIONS', 'No external dispatch']],
+  ['Edge Function Package', ['Edge Function Package', 'edge:saven', 'supabase/functions/saven-gateway/index.ts', 'review_command_permission']],
   ['Edge Function Backend Adapter', ['createSavenEdgeFunctionBackendAdapter', 'VITE_SAVEN_EDGE_FUNCTION_URL', 'apply_admin_override']],
   ['Backend Monitoring Admin', ['data-saven-admin-ops="true"', 'SAVEN Backend, Monitoring, and Admin Foundation']],
   ['Admin Monitoring Snapshot', ['data-saven-admin-monitoring-live="true"', 'getMonitoringSnapshot()']],

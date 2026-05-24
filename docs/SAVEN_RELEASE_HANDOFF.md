@@ -51,6 +51,16 @@ npm run db:saven
 
 Review `supabase/saven/001_saven_core_schema.sql` and `supabase/saven/002_saven_review_seed.sql` before production database setup.
 
+## Edge Function Package
+
+Run:
+
+```zsh
+npm run edge:saven
+```
+
+Review and deploy `supabase/functions/saven-gateway/index.ts` when SAVEN is ready for production Edge mode.
+
 ## Supabase And Edge Checklist
 
 - Apply the SAVEN schema draft from `docs/SAVEN_BACKEND_MONITORING_ADMIN.md`.

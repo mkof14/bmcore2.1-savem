@@ -360,3 +360,14 @@ SAVEN now has concrete Supabase review artifacts:
 - `npm run db:saven`
 
 The migration kit covers profiles, tasks, commands, verifications, admin overrides, event audit, incidents, indexes, and the `saven_rls_policy_draft` marker for production RLS review.
+
+
+## Edge Function Package
+
+SAVEN now has a concrete Supabase Edge Function package:
+
+- `supabase/functions/saven-gateway/index.ts`
+- `docs/SAVEN_EDGE_FUNCTION_PACKAGE.md`
+- `npm run edge:saven`
+
+The gateway draft supports `send_command`, `interpret_command`, `review_command_permission`, `persistence_status`, `list_events`, `incident_readiness`, and `apply_admin_override`. It intentionally performs no external dispatch and keeps emergency and robot paths gated for human review.
