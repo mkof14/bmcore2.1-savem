@@ -1173,7 +1173,7 @@ function SavenAppShell({
           </button>
         </aside>
         <div className="min-w-0 pb-20 lg:pb-0">
-          <header className="sticky top-0 z-20 border-b border-white/70 bg-[#f7f5f1]/88 px-5 py-4 backdrop-blur-xl dark:border-white/10 dark:bg-[#07111f]/88 sm:px-8 lg:px-10">
+          <header className="sticky top-[68px] z-20 border-b border-white/70 bg-[#f7f5f1]/88 px-5 py-4 backdrop-blur-xl dark:border-white/10 dark:bg-[#07111f]/88 sm:px-8 lg:px-10">
             <div className="mx-auto flex max-w-[1480px] flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">BioMath Core SAVEN</p>
@@ -1184,11 +1184,12 @@ function SavenAppShell({
                 <StatusPill tone="gold" label="Home Recovery" />
                 <StatusPill tone="green" label="Support active" />
                 <StatusPill tone="blue" label="Next window 15:00" />
-                <SavenVoiceLogoControl activePage={activePage} openPage={openPage} />
               </div>
             </div>
-            <SavenCommandStrip openPage={openPage} />
           </header>
+          <div className="mx-auto max-w-[1480px] px-5 pt-8 sm:px-8 lg:px-10">
+            <SavenCommandStrip activePage={activePage} openPage={openPage} />
+          </div>
           <main className="mx-auto max-w-[1480px] px-5 py-6 sm:px-8 lg:px-10">{children}</main>
         </div>
       </div>
@@ -1306,35 +1307,39 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
 }
 
 
-function SavenCommandStrip({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
+
+function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; openPage: (pageId: SavenPageId) => void }) {
   const [activeCommand, setActiveCommand] = useState('nurse');
+  const pageLabel = appNavItems.find((item) => item.id === activePage)?.label || 'SAVEN';
   const commands: Array<{ id: string; label: string; target: string; command: string; page: SavenPageId; tone: string }> = [
-    { id: 'caregiver', label: 'Caregiver', target: 'Maya Carter', command: 'Hey SAVEN, assign this support task to Maya and require verification.', page: 'app-circle', tone: 'blue' },
-    { id: 'nurse', label: 'Nurse', target: 'Nurse Olivia Grant', command: 'Hey SAVEN, request nurse follow-up and send the recovery context.', page: 'app-care-routes', tone: 'green' },
-    { id: 'doctor', label: 'Doctor', target: 'Dr. Elena Morris', command: 'Hey SAVEN, prepare a clinical summary for doctor review.', page: 'app-care-routes', tone: 'blue' },
-    { id: 'robot', label: 'Robot', target: 'Mobility robot', command: 'Hey SAVEN, check robot readiness and keep physical action approval locked.', page: 'app-robots', tone: 'gold' },
-    { id: 'device', label: 'Device', target: 'Wearable + home sensors', command: 'Hey SAVEN, check device telemetry and use it only for verification.', page: 'app-devices', tone: 'green' },
-    { id: 'emergency', label: 'Emergency', target: 'Emergency path', command: 'Hey SAVEN, show emergency escalation rules and who is contacted first.', page: 'app-care-routes', tone: 'red' },
+    { id: 'caregiver', label: 'Caregiver', target: 'Maya Carter', command: 'Assign support task to Maya and require verification.', page: 'app-circle', tone: 'blue' },
+    { id: 'nurse', label: 'Nurse', target: 'Nurse Olivia Grant', command: 'Request nurse follow-up and send recovery context.', page: 'app-care-routes', tone: 'green' },
+    { id: 'doctor', label: 'Doctor', target: 'Dr. Elena Morris', command: 'Prepare clinical summary for doctor review.', page: 'app-care-routes', tone: 'blue' },
+    { id: 'robot', label: 'Robot', target: 'Mobility robot', command: 'Check robot readiness and keep physical approval locked.', page: 'app-robots', tone: 'gold' },
+    { id: 'device', label: 'Device', target: 'Wearable + home sensors', command: 'Check device telemetry and use it for verification.', page: 'app-devices', tone: 'green' },
+    { id: 'emergency', label: 'Emergency', target: 'Emergency path', command: 'Show escalation rules and first contact.', page: 'app-care-routes', tone: 'red' },
   ];
   const selected = commands.find((item) => item.id === activeCommand) || commands[0];
+  const meterBars = [30, 46, 66, 82, 58, 40, 72, 50, 34, 64, 84, 44];
 
   return (
-    <div className="mt-4 rounded-[1.75rem] border border-blue-200/70 bg-[radial-gradient(circle_at_6%_20%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_96%_22%,rgba(249,115,22,0.14),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.82))] p-3 shadow-lg shadow-blue-950/5 dark:border-blue-300/20 dark:bg-[radial-gradient(circle_at_6%_20%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_96%_22%,rgba(249,115,22,0.14),transparent_26%),linear-gradient(135deg,rgba(6,16,31,0.96),rgba(15,23,42,0.88))] dark:ring-1 dark:ring-blue-300/15">
-      <div className="grid gap-3 xl:grid-cols-[240px_minmax(0,1fr)_auto] xl:items-center">
-        <button onClick={() => openPage('app-settings')} className="group flex items-center gap-3 rounded-2xl bg-slate-950 px-3 py-3 text-left text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-950 dark:bg-white dark:text-slate-950 dark:hover:bg-blue-100">
-          <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-slate-950 ring-1 ring-blue-300/30 dark:bg-slate-950">
-            <span className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_35%_35%,rgba(59,130,246,0.58),transparent_38%),radial-gradient(circle_at_70%_70%,rgba(249,115,22,0.52),transparent_35%)]" />
+    <section className="rounded-[1.65rem] border border-blue-200/70 bg-[radial-gradient(circle_at_6%_50%,rgba(59,130,246,0.18),transparent_28%),radial-gradient(circle_at_96%_40%,rgba(249,115,22,0.16),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.96),rgba(239,246,255,0.84))] p-3 shadow-lg shadow-blue-950/5 dark:border-blue-300/20 dark:bg-[radial-gradient(circle_at_6%_50%,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_96%_40%,rgba(249,115,22,0.18),transparent_24%),linear-gradient(135deg,rgba(6,16,31,0.98),rgba(15,23,42,0.9))] dark:ring-1 dark:ring-blue-300/15">
+      <div className="grid gap-3 xl:grid-cols-[230px_minmax(0,1fr)_310px] xl:items-center">
+        <div className="flex min-w-0 items-center gap-3 rounded-2xl bg-slate-950 px-3 py-2 text-white shadow-sm dark:bg-white dark:text-slate-950">
+          <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-slate-950 ring-1 ring-blue-300/30">
+            <span className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_35%_35%,rgba(59,130,246,0.62),transparent_38%),radial-gradient(circle_at_72%_72%,rgba(249,115,22,0.54),transparent_35%)]" />
             <img src="/saven-mark.png" alt="" className="relative h-full w-full object-cover" />
-            <span className="absolute bottom-1 right-1 h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.95)]" />
+            <span className="absolute bottom-1 right-1 h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.95)]" />
           </span>
-          <span>
-            <span className="block text-xs font-semibold uppercase tracking-[0.14em] opacity-75">Voice commands</span>
-            <span className="block text-sm font-semibold">Speak with SAVEN</span>
-          </span>
-        </button>
+          <div className="min-w-0">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] opacity-70">Voice rail</p>
+            <p className="truncate text-sm font-semibold">SAVEN commands</p>
+            <p className="truncate text-[11px] opacity-65">{pageLabel}</p>
+          </div>
+        </div>
 
         <div className="min-w-0">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {commands.map((item) => (
               <button
                 key={item.id}
@@ -1345,178 +1350,49 @@ function SavenCommandStrip({ openPage }: { openPage: (pageId: SavenPageId) => vo
               </button>
             ))}
           </div>
-          <p className="mt-2 break-words text-sm font-semibold leading-6 text-slate-800 dark:text-white">{selected.command}</p>
-          <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">{selected.target}</p>
+          <div className="mt-2 grid gap-2 lg:grid-cols-[minmax(0,1fr)_170px] lg:items-center">
+            <div className="min-w-0 rounded-2xl bg-white/76 px-3 py-2 text-slate-950 shadow-inner ring-1 ring-white/70 dark:bg-slate-950/56 dark:text-white dark:ring-white/10">
+              <p className="truncate text-sm font-semibold">Hey SAVEN, {selected.command}</p>
+              <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">Target: {selected.target}</p>
+            </div>
+            <div className="flex h-8 items-end gap-1 rounded-2xl bg-slate-950 px-2 py-1.5 shadow-inner dark:bg-black/50">
+              {meterBars.map((height, index) => (
+                <span
+                  key={index}
+                  className={(height > 76 ? 'bg-red-400' : height > 56 ? 'bg-amber-300' : 'bg-emerald-400') + ' w-full rounded-full transition-all duration-300'}
+                  style={{ height: Math.max(18, height - (activeCommand.length * index) % 38) + '%' }}
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 xl:justify-end">
-          <button onClick={() => openPage(selected.page)} className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-500">
-            Open route
+        <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-3">
+          <button onClick={() => openPage('app-settings')} className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-500">
+            Open mic
           </button>
-          <button onClick={() => openPage('app-settings')} className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-200 transition-all hover:-translate-y-0.5 hover:bg-slate-50 dark:bg-slate-950 dark:text-slate-200 dark:ring-white/10">
-            Mic settings
+          <button onClick={() => openPage(selected.page)} className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm ring-1 ring-slate-200 transition-all hover:-translate-y-0.5 hover:bg-blue-50 dark:bg-slate-950 dark:text-slate-100 dark:ring-white/10">
+            Open service
+          </button>
+          <button onClick={() => openPage('app-commands')} className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-blue-100">
+            All commands
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-
-function SavenVoiceLogoControl({ activePage, openPage }: { activePage: SavenPageId; openPage: (pageId: SavenPageId) => void }) {
-  const [openMenu, setOpenMenu] = useState(false);
-  const [selectedCommand, setSelectedCommand] = useState('caregiver');
-  const pageLabel = appNavItems.find((item) => item.id === activePage)?.label || 'SAVEN';
-  const pageCommand = 'Hey SAVEN, help me with ' + pageLabel.toLowerCase() + '.';
-  const commandPresets: Array<{ id: string; label: string; target: string; command: string; route: SavenPageId; tone: string }> = [
-    {
-      id: 'caregiver',
-      label: 'Worker / caregiver',
-      target: 'Maya Carter',
-      command: 'Hey SAVEN, assign the next support task to Maya and require verification.',
-      route: 'app-circle',
-      tone: 'blue',
-    },
-    {
-      id: 'nurse',
-      label: 'Nurse',
-      target: 'Nurse Olivia Grant',
-      command: 'Hey SAVEN, request nurse follow-up and send the recovery context.',
-      route: 'app-care-routes',
-      tone: 'green',
-    },
-    {
-      id: 'doctor',
-      label: 'Doctor',
-      target: 'Dr. Elena Morris',
-      command: 'Hey SAVEN, prepare a clinical summary for doctor review.',
-      route: 'app-care-routes',
-      tone: 'blue',
-    },
-    {
-      id: 'robot',
-      label: 'Robot',
-      target: 'Home mobility robot',
-      command: 'Hey SAVEN, check robot readiness and keep physical action approval locked.',
-      route: 'app-robots',
-      tone: 'gold',
-    },
-    {
-      id: 'device',
-      label: 'Device',
-      target: 'Wearable and home sensors',
-      command: 'Hey SAVEN, check device telemetry and use it only for verification.',
-      route: 'app-devices',
-      tone: 'green',
-    },
-    {
-      id: 'emergency',
-      label: 'Emergency',
-      target: 'Emergency path',
-      command: 'Hey SAVEN, show emergency escalation rules and who is contacted first.',
-      route: 'app-care-routes',
-      tone: 'red',
-    },
-  ];
-  const activeCommand = commandPresets.find((item) => item.id === selectedCommand) || commandPresets[0];
-  const toneClass =
-    activeCommand.tone === 'red'
-      ? 'border-red-200 bg-red-50 text-red-900 dark:border-red-300/25 dark:bg-red-500/10 dark:text-red-100'
-      : activeCommand.tone === 'green'
-        ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/25 dark:bg-emerald-500/10 dark:text-emerald-100'
-        : activeCommand.tone === 'gold'
-          ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/25 dark:bg-amber-500/10 dark:text-amber-100'
-          : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/25 dark:bg-blue-500/10 dark:text-blue-100';
-
-  const openRoute = (pageId: SavenPageId) => {
-    openPage(pageId);
-    setOpenMenu(false);
-  };
-
+function SavenVoiceLogoControl({ openPage }: { activePage: SavenPageId; openPage: (pageId: SavenPageId) => void }) {
   return (
-    <>
-      <button
-        onClick={() => setOpenMenu((value) => !value)}
-        className="group inline-flex items-center gap-2 rounded-full border border-blue-200/70 bg-white/86 px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white hover:shadow-lg dark:border-blue-300/20 dark:bg-slate-950/75 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/15 dark:hover:bg-slate-900"
-        aria-label="SAVEN voice and text commands"
-      >
-        <span className="relative grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-xl bg-slate-950 ring-1 ring-blue-300/30">
-          <span className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_55%_35%,rgba(96,165,250,0.5),transparent_38%),radial-gradient(circle_at_68%_72%,rgba(249,115,22,0.48),transparent_36%)]" />
-          <img src="/saven-mark.png" alt="" className="relative h-full w-full scale-110 object-cover transition-transform duration-500 group-hover:scale-125" />
-          <span className="absolute bottom-1 right-1 h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.95)]" />
-        </span>
-        <span className="hidden sm:inline">SAVEN Commands</span>
-      </button>
-
-      <button
-        onClick={() => setOpenMenu((value) => !value)}
-        className="fixed bottom-24 right-4 z-40 flex items-center gap-3 rounded-full border border-blue-200/70 bg-white/94 px-4 py-3 text-sm font-semibold text-slate-900 shadow-2xl shadow-blue-950/18 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-blue-300 hover:shadow-blue-950/25 dark:border-blue-300/25 dark:bg-slate-950/94 dark:text-white dark:ring-1 dark:ring-blue-300/20 lg:bottom-6 lg:right-6"
-        aria-label="Open SAVEN command layer"
-      >
-        <span className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-2xl bg-slate-950 ring-1 ring-blue-300/30">
-          <span className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_30%_28%,rgba(59,130,246,0.62),transparent_40%),radial-gradient(circle_at_76%_74%,rgba(249,115,22,0.56),transparent_36%)]" />
-          <img src="/saven-mark.png" alt="" className="relative h-full w-full object-cover" />
-          <span className="absolute bottom-1.5 right-1.5 h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.95)]" />
-        </span>
-        <span className="hidden min-w-0 text-left sm:block">
-          <span className="block text-xs uppercase tracking-[0.16em] text-blue-600 dark:text-blue-200">Voice + text</span>
-          <span className="block">SAVEN Commands</span>
-        </span>
-      </button>
-
-      {openMenu && (
-        <div className="fixed bottom-40 right-4 z-50 w-[min(440px,calc(100vw-2rem))] overflow-hidden rounded-[2rem] border border-white/70 bg-white/96 p-4 text-slate-950 shadow-2xl shadow-slate-950/18 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/96 dark:text-white dark:ring-1 dark:ring-white/10 lg:bottom-24 lg:right-6">
-          <div className="flex items-start gap-3">
-            <div className="relative grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-slate-950 ring-1 ring-blue-300/30">
-              <span className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_35%_35%,rgba(59,130,246,0.5),transparent_38%),radial-gradient(circle_at_70%_70%,rgba(249,115,22,0.46),transparent_35%)]" />
-              <img src="/saven-mark.png" alt="" className="relative h-full w-full object-cover" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Global SAVEN command layer</p>
-              <p className="mt-1 text-base font-semibold">Commands on every SAVEN page</p>
-              <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">Use voice or text to route work to people, nurses, doctors, devices, robots, and emergency paths.</p>
-            </div>
-          </div>
-
-          <div className="mt-4 grid gap-2 sm:grid-cols-2">
-            {commandPresets.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setSelectedCommand(item.id)}
-                className={(item.id === selectedCommand ? 'border-blue-300 bg-blue-600 text-white shadow-lg shadow-blue-950/20 dark:border-blue-300/40 dark:bg-blue-500/85' : 'border-slate-200 bg-white text-slate-700 hover:border-blue-200 hover:bg-blue-50 dark:border-white/10 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-blue-300/35') + ' rounded-2xl border px-3 py-2 text-left text-xs font-semibold transition-all hover:-translate-y-0.5'}
-              >
-                <span className="block">{item.label}</span>
-                <span className="mt-1 block truncate opacity-75">{item.target}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className={'mt-4 rounded-3xl border p-4 shadow-sm ' + toneClass}>
-            <div className="flex items-center justify-between gap-3">
-              <div className="min-w-0">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-70">{activeCommand.label}</p>
-                <p className="mt-1 break-words text-sm font-semibold">{activeCommand.target}</p>
-              </div>
-              <Mic className="h-5 w-5 shrink-0" />
-            </div>
-            <p className="mt-3 rounded-2xl bg-white/84 px-3 py-3 text-sm font-semibold leading-6 text-slate-900 shadow-sm dark:bg-slate-950/72 dark:text-white">{activeCommand.command}</p>
-            <p className="mt-3 break-words text-sm leading-6 opacity-85">Current page command: {pageCommand}</p>
-          </div>
-
-          <div className="mt-4 grid gap-2 sm:grid-cols-3">
-            <button onClick={() => openRoute('app-settings')} className="rounded-2xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-950/20 transition-all hover:-translate-y-0.5 hover:bg-blue-500">
-              Open mic
-            </button>
-            <button onClick={() => openRoute(activeCommand.route)} className="rounded-2xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-blue-100">
-              Open service
-            </button>
-            <button onClick={() => setOpenMenu(false)} className="rounded-2xl bg-slate-100 px-4 py-3 text-sm font-semibold text-slate-700 ring-1 ring-slate-200 transition-all hover:-translate-y-0.5 hover:bg-white dark:bg-slate-900 dark:text-slate-200 dark:ring-white/10">
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-    </>
+    <button
+      onClick={() => openPage('app-commands')}
+      className="inline-flex items-center gap-2 rounded-full border border-blue-200/70 bg-white/86 px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white hover:shadow-lg dark:border-blue-300/20 dark:bg-slate-950/75 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/15"
+      aria-label="Open SAVEN voice and text commands"
+    >
+      <Mic className="h-4 w-4" />
+      <span className="hidden sm:inline">Commands</span>
+    </button>
   );
 }
 
