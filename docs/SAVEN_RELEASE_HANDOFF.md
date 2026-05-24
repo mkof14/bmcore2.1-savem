@@ -127,6 +127,16 @@ npm run commands:saven
 
 This verifies SAVEN command fixtures for nurse, caregiver, doctor, device, robot, and emergency flows before release.
 
+## Security And Privacy Guardrails
+
+Run:
+
+```zsh
+npm run privacy:saven
+```
+
+Review SAVEN data classes, role visibility, family-digest redaction, robot gate retention, emergency route retention, and admin audit handling before production.
+
 ## Safety Gates
 
 - No robot or physical execution path should bypass command permission review.

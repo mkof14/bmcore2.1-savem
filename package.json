@@ -46,7 +46,8 @@
     "monitoring:saven": "node scripts/saven-monitoring-slo-audit.mjs",
     "admin:saven": "node scripts/saven-admin-ops-audit.mjs",
     "alerts:saven": "node scripts/saven-alerting-audit.mjs",
-    "admin-alerts:saven": "node scripts/saven-admin-alerts-audit.mjs"
+    "admin-alerts:saven": "node scripts/saven-admin-alerts-audit.mjs",
+    "privacy:saven": "node scripts/saven-privacy-guardrails-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

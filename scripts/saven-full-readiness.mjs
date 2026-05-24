@@ -3,6 +3,7 @@ import { spawnSync } from 'node:child_process';
 
 const steps = [
   { label: 'Backend readiness', command: 'npm', args: ['run', 'backend:saven'] },
+  { label: 'Privacy guardrails', command: 'npm', args: ['run', 'privacy:saven'] },
   { label: 'Monitoring SLO', command: 'npm', args: ['run', 'monitoring:saven'] },
   { label: 'Alerting runbook', command: 'npm', args: ['run', 'alerts:saven'] },
   { label: 'Admin Ops', command: 'npm', args: ['run', 'admin:saven'] },

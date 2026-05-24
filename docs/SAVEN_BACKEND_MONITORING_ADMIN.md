@@ -415,3 +415,14 @@ BioMath Core Admin now turns SAVEN alerts into action routes:
 - `npm run admin-alerts:saven`
 
 The panel shows Admin Ops, caregiver review, robot review, emergency review, and device review steps directly in the SAVEN Ops screen. It keeps incident response visible without forcing operators to leave the admin surface.
+
+
+## Security And Privacy Guardrails
+
+SAVEN now has explicit security and privacy guardrails:
+
+- `src/features/saven/services/savenPrivacyGuardrailsService.ts`
+- `docs/SAVEN_SECURITY_PRIVACY_GUARDRAILS.md`
+- `npm run privacy:saven`
+
+The guardrails classify support commands, care contacts, clinical context, device signals, robot gates, emergency routes, and admin audit. They define redaction behavior, role visibility, and review retention before production use.
