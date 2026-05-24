@@ -80,6 +80,7 @@ const sourceExpectations = [
   ['Launch Control Kit', ['SAVEN Launch Control Kit', 'createSavenLaunchControlReport', 'launch:saven', 'saven-launch-control-report']],
   ['Admin Launch Control Panel', ['data-saven-admin-launch-control="true"', 'SAVEN launch control', 'admin-launch:saven']],
   ['Final Ship Manifest', ['SAVEN Final Ship Manifest', 'manifest:saven', 'Voice And Worker Layer', 'Release Control']],
+  ['Release Candidate Snapshot', ['SAVEN Release Candidate Snapshot', 'rc:saven', 'Go / Hold Review', 'GitHub Release Prep']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

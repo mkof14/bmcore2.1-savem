@@ -502,3 +502,13 @@ SAVEN now has a single ship manifest:
 - `npm run manifest:saven`
 
 The manifest maps product surface, voice and worker layer, backend foundation, monitoring and admin, safety and privacy, release control, and production preconditions.
+
+
+## Release Candidate Snapshot
+
+SAVEN now has a release-candidate snapshot:
+
+- `docs/SAVEN_RELEASE_CANDIDATE_SNAPSHOT.md`
+- `npm run rc:saven`
+
+The snapshot records candidate identity, required review commands, go/hold review, GitHub release prep, and production preconditions. It is the short human handoff for a final tag or release review.

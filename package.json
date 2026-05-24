@@ -54,7 +54,8 @@
     "admin-evidence:saven": "node scripts/saven-admin-evidence-audit.mjs",
     "launch:saven": "node scripts/saven-launch-control-audit.mjs",
     "admin-launch:saven": "node scripts/saven-admin-launch-audit.mjs",
-    "manifest:saven": "node scripts/saven-final-ship-manifest-audit.mjs"
+    "manifest:saven": "node scripts/saven-final-ship-manifest-audit.mjs",
+    "rc:saven": "node scripts/saven-release-candidate-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

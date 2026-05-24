@@ -174,6 +174,16 @@ npm run manifest:saven
 
 Use `docs/SAVEN_FINAL_SHIP_MANIFEST.md` as the single final release map.
 
+## Release Candidate Snapshot
+
+Run:
+
+```zsh
+npm run rc:saven
+```
+
+Use `docs/SAVEN_RELEASE_CANDIDATE_SNAPSHOT.md` before creating a final tag or GitHub release.
+
 ## GitHub And Hosting Steps
 
 1. Push the current branch to `savem-origin/main`.

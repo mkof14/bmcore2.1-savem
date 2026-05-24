@@ -16,6 +16,7 @@ const steps = [
   { label: 'Ops evidence pack', command: 'npm', args: ['run', 'evidence:saven'] },
   { label: 'Launch control', command: 'npm', args: ['run', 'launch:saven'] },
   { label: 'Final ship manifest', command: 'npm', args: ['run', 'manifest:saven'] },
+  { label: 'Release candidate snapshot', command: 'npm', args: ['run', 'rc:saven'] },
   { label: 'Admin launch control', command: 'npm', args: ['run', 'admin-launch:saven'] },
   { label: 'Admin evidence pack', command: 'npm', args: ['run', 'admin-evidence:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },
