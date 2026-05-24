@@ -37,6 +37,11 @@ const checks = [
     file: 'docs/SAVEN_BACKEND_MONITORING_ADMIN.md',
     markers: ['Backend Gateway Selector', 'HTTP Backend Adapter', 'Admin Override Contract', 'Monitoring Contract Implementation'],
   },
+  {
+    label: 'Supabase schema draft',
+    file: 'supabase/migrations/20260524090000_saven_backend_schema_draft.sql',
+    markers: ['saven_profiles', 'saven_tasks', 'saven_commands', 'saven_verifications', 'saven_admin_overrides'],
+  },
 ];
 
 function read(relativePath) {

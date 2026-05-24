@@ -152,3 +152,22 @@ BioMath Core Admin now reads from `savenBackendGateway`, so it can stay local-sa
 - backend monitoring/admin documentation
 
 `npm run ready:saven` now runs this audit before contrast, typecheck, tests, smoke, and production build.
+
+## Supabase Schema Draft
+
+A review-only SAVEN schema draft now exists at:
+
+`supabase/migrations/20260524090000_saven_backend_schema_draft.sql`
+
+It defines the first backend persistence shape:
+
+- `saven_profiles`
+- `saven_people`
+- `saven_tasks`
+- `saven_commands`
+- `saven_endpoints`
+- `saven_verifications`
+- `saven_escalations`
+- `saven_admin_overrides`
+
+This migration should be reviewed before applying to any production Supabase project. It is intentionally treated as a schema draft until backend policies, RLS rules, and edge functions are finalized.
