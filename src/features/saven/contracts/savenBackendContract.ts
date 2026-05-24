@@ -41,6 +41,34 @@ export type SavenBackendCommandInput = {
   targetTaskId: string;
 };
 
+export type SavenCommandIntent =
+  | 'assign_support'
+  | 'request_care_contact'
+  | 'prepare_clinical_summary'
+  | 'check_robot_readiness'
+  | 'check_device_telemetry'
+  | 'check_environment_permissions'
+  | 'show_emergency_rules'
+  | 'unknown';
+
+export type SavenCommandSafetyGate =
+  | 'allowed'
+  | 'requires_human_confirmation'
+  | 'admin_review'
+  | 'blocked_external_dispatch';
+
+export type SavenCommandExecutionPlan = {
+  id: string;
+  input: SavenBackendCommandInput;
+  intent: SavenCommandIntent;
+  confidence: number;
+  target: string;
+  route: string[];
+  safetyGate: SavenCommandSafetyGate;
+  nextAction: string;
+  auditSummary: string;
+};
+
 export type SavenMonitoringSignal = {
   id: string;
   label: string;
@@ -190,6 +218,7 @@ export type SavenBackendGateway = {
   createTask(title: string): Promise<SavenControlApiResult>;
   assignTask(taskId: string, ownerId: string): Promise<SavenControlApiResult>;
   sendCommand(input: SavenBackendCommandInput): Promise<SavenControlApiResult>;
+  interpretCommand(input: SavenBackendCommandInput): Promise<SavenCommandExecutionPlan>;
   verifyAction(taskId: string, verifierId: string): Promise<SavenControlApiResult>;
   updateContinuity(taskId: string): Promise<SavenControlApiResult>;
   escalate(level: SavenMockEscalation['level']): Promise<SavenControlApiResult>;

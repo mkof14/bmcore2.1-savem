@@ -4,6 +4,7 @@ import { createSavenMonitoringSnapshot } from './savenMonitoringService';
 import { createSavenEventAuditRecords } from './savenEventAuditService';
 import { createSavenIncidentReadiness } from './savenIncidentReadinessService';
 import { applySavenIncidentAction } from './savenIncidentActionService';
+import { createSavenCommandExecutionPlan } from './savenCommandExecutionService';
 import type {
   SavenAdminOverrideInput,
   SavenBackendCommandInput,
@@ -136,6 +137,9 @@ export function createSavenLocalBackendGateway(state: SavenMockState = savenMock
     },
     async sendCommand(input: SavenBackendCommandInput) {
       return controlApi.sendCommand(input.text, input.targetTaskId);
+    },
+    async interpretCommand(input: SavenBackendCommandInput) {
+      return createSavenCommandExecutionPlan(input);
     },
     async verifyAction(taskId: string, verifierId: string) {
       return controlApi.verifyAction(taskId, verifierId);

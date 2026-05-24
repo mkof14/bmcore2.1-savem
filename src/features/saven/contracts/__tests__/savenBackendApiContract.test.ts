@@ -34,4 +34,12 @@ describe('savenBackendApiRoutes', () => {
       risk: 'admin',
     });
   });
+
+  it('documents the command interpretation endpoint', () => {
+    expect(getSavenBackendApiRoute('interpret-command')).toMatchObject({
+      httpPath: '/commands/interpret',
+      edgeAction: 'interpret_command',
+      risk: 'write',
+    });
+  });
 });

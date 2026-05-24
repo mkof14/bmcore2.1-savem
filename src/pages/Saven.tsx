@@ -37,6 +37,7 @@ import { VerificationCenter } from '../features/saven/pages/SavenVerificationPag
 import { EnvironmentSystem } from '../features/saven/pages/SavenEnvironmentsPage';
 import { RobotReadiness } from '../features/saven/pages/SavenRobotsPage';
 import { DeviceReadiness } from '../features/saven/pages/SavenDevicesPage';
+import { createSavenCommandExecutionPlan } from '../features/saven/services/savenCommandExecutionService';
 
 interface SavenProps {
   onNavigate: (page: string) => void;
@@ -1252,6 +1253,12 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
     setDraftCommand(active.command);
   }, [active.command]);
 
+  const commandPlan = createSavenCommandExecutionPlan({
+    source: draftCommand.toLowerCase().startsWith('hey saven') ? 'voice' : 'text',
+    text: draftCommand,
+    targetTaskId: 'task-mobility-1030',
+  });
+
   const colorMap: Record<string, string> = {
     blue: 'border-blue-300/25 bg-[#07111f] text-white ring-1 ring-blue-300/12',
     green: 'border-emerald-300/25 bg-[#061a17] text-white ring-1 ring-emerald-300/12',
@@ -1318,6 +1325,14 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
               <button onClick={() => openPage('app-settings')} className="rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
                 Mic settings
               </button>
+            </div>
+            <div className="mt-3 rounded-3xl border border-white/10 bg-white/[0.06] p-3" data-saven-command-execution-loop="true">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full bg-blue-500/15 px-3 py-1 text-xs font-semibold text-blue-100 ring-1 ring-blue-300/20">{commandPlan.intent.replace(/_/g, ' ')}</span>
+                <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-100 ring-1 ring-emerald-300/20">{Math.round(commandPlan.confidence * 100)}%</span>
+                <span className="rounded-full bg-amber-500/15 px-3 py-1 text-xs font-semibold text-amber-100 ring-1 ring-amber-300/20">{commandPlan.safetyGate.replace(/_/g, ' ')}</span>
+              </div>
+              <p className="mt-2 text-xs leading-5 text-slate-300">{commandPlan.nextAction}</p>
             </div>
           </div>
         </div>
@@ -1397,6 +1412,14 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
           <div className="mt-5 rounded-3xl bg-black/35 p-4 text-white shadow-inner ring-1 ring-white/10">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Prepared command</p>
             <p className="mt-2 line-clamp-3 text-sm font-semibold leading-6">{draftCommand}</p>
+          </div>
+          <div className="mt-4 rounded-3xl border border-white/10 bg-white/[0.06] p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-100/70">Intent route</p>
+            <div className="mt-3 grid gap-2">
+              {commandPlan.route.map((step) => (
+                <span key={step} className="rounded-2xl bg-slate-950/75 px-3 py-2 text-xs font-semibold text-slate-200 ring-1 ring-white/10">{step}</span>
+              ))}
+            </div>
           </div>
         </aside>
       </section>

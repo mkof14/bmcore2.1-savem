@@ -3,6 +3,7 @@ import type {
   SavenAdminOverrideInput,
   SavenAdminOverrideResult,
   SavenBackendCommandInput,
+  SavenCommandExecutionPlan,
   SavenBackendGateway,
   SavenCareContact,
   SavenContactRequest,
@@ -92,6 +93,12 @@ export function createSavenHttpBackendAdapter(options: SavenHttpBackendAdapterOp
     },
     sendCommand(input: SavenBackendCommandInput) {
       return request<SavenControlApiResult>('/commands', {
+        method: 'POST',
+        body: JSON.stringify(input),
+      });
+    },
+    interpretCommand(input: SavenBackendCommandInput) {
+      return request<SavenCommandExecutionPlan>('/commands/interpret', {
         method: 'POST',
         body: JSON.stringify(input),
       });

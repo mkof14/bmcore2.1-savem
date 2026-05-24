@@ -3,6 +3,7 @@ import type {
   SavenAdminOverrideInput,
   SavenAdminOverrideResult,
   SavenBackendCommandInput,
+  SavenCommandExecutionPlan,
   SavenBackendGateway,
   SavenCareContact,
   SavenContactRequest,
@@ -94,6 +95,9 @@ export function createSavenEdgeFunctionBackendAdapter(options: SavenEdgeFunction
     },
     sendCommand(input: SavenBackendCommandInput) {
       return call<SavenControlApiResult>('send_command', input);
+    },
+    interpretCommand(input: SavenBackendCommandInput) {
+      return call<SavenCommandExecutionPlan>('interpret_command', input);
     },
     verifyAction(taskId: string, verifierId: string) {
       return call<SavenControlApiResult>('verify_action', { taskId, verifierId });
