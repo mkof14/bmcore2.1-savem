@@ -154,11 +154,36 @@ export type SavenIncidentReadiness = {
   };
 };
 
+export type SavenIncidentAction = 'acknowledge' | 'assign_owner' | 'hold' | 'resolve';
+
+export type SavenIncidentActionInput = {
+  incidentId: string;
+  action: SavenIncidentAction;
+  actorId: string;
+  note: string;
+  assignTo?: string;
+};
+
+export type SavenIncidentActionResult = {
+  id: string;
+  incidentId: string;
+  action: SavenIncidentAction;
+  status: 'recorded' | 'requires_review';
+  message: string;
+  auditTrail: {
+    actorId: string;
+    note: string;
+    assignTo?: string;
+    recordedAt: string;
+  };
+};
+
 export type SavenBackendGateway = {
   getSnapshot(): Promise<SavenMockState>;
   getMonitoringSnapshot(): Promise<SavenMonitoringSnapshot>;
   listEventAudit(): Promise<SavenEventAuditRecord[]>;
   getIncidentReadiness(): Promise<SavenIncidentReadiness>;
+  applyIncidentAction(input: SavenIncidentActionInput): Promise<SavenIncidentActionResult>;
   listTasks(): Promise<SavenMockTask[]>;
   listEndpoints(): Promise<SavenMockEndpoint[]>;
   listCareContacts(): Promise<SavenCareContact[]>;

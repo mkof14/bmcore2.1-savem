@@ -108,6 +108,19 @@ create table if not exists public.saven_incidents (
 create index if not exists saven_incidents_profile_status_idx on public.saven_incidents(profile_id, status);
 create index if not exists saven_incidents_severity_idx on public.saven_incidents(severity);
 
+create table if not exists public.saven_incident_actions (
+  id uuid primary key default gen_random_uuid(),
+  incident_id uuid references public.saven_incidents(id) on delete cascade,
+  actor_user_id uuid references auth.users(id) on delete set null,
+  action text not null,
+  status text not null default 'recorded',
+  note text not null,
+  assign_to text,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists saven_incident_actions_incident_idx on public.saven_incident_actions(incident_id, created_at desc);
+
 create table if not exists public.saven_events (
   id uuid primary key default gen_random_uuid(),
   profile_id uuid references public.saven_profiles(id) on delete cascade,

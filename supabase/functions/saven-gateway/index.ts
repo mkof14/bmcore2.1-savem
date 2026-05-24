@@ -8,6 +8,7 @@ const ALLOWED_ACTIONS = new Set([
   "monitoring",
   "list_events",
   "incident_readiness",
+  "apply_incident_action",
   "list_tasks",
   "list_endpoints",
   "list_care_contacts",
@@ -101,6 +102,13 @@ Deno.serve(async (req: Request) => {
       return safeDraftResponse(action, caller.id, {
         ...payload,
         route: "SAVEN incident readiness",
+      });
+    }
+
+    if (action === "apply_incident_action") {
+      return safeDraftResponse(action, caller.id, {
+        ...payload,
+        audit: "incident action draft",
       });
     }
 

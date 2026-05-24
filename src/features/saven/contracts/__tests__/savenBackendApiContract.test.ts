@@ -26,4 +26,12 @@ describe('savenBackendApiRoutes', () => {
       risk: 'read',
     });
   });
+
+  it('documents the admin incident action endpoint', () => {
+    expect(getSavenBackendApiRoute('incident-action')).toMatchObject({
+      httpPath: '/incidents/:incidentId/actions',
+      edgeAction: 'apply_incident_action',
+      risk: 'admin',
+    });
+  });
 });

@@ -3,6 +3,7 @@ import { createSavenControlApiMock } from './savenControlApiMock';
 import { createSavenMonitoringSnapshot } from './savenMonitoringService';
 import { createSavenEventAuditRecords } from './savenEventAuditService';
 import { createSavenIncidentReadiness } from './savenIncidentReadinessService';
+import { applySavenIncidentAction } from './savenIncidentActionService';
 import type {
   SavenAdminOverrideInput,
   SavenBackendCommandInput,
@@ -10,6 +11,7 @@ import type {
   SavenCareContact,
   SavenContactRequest,
   SavenContactResult,
+  SavenIncidentActionInput,
 } from '../contracts/savenBackendContract';
 
 export const savenCareContacts: SavenCareContact[] = [
@@ -113,6 +115,9 @@ export function createSavenLocalBackendGateway(state: SavenMockState = savenMock
     },
     async getIncidentReadiness() {
       return createSavenIncidentReadiness(cloneState(state));
+    },
+    async applyIncidentAction(input: SavenIncidentActionInput) {
+      return applySavenIncidentAction(input);
     },
     async listTasks() {
       return cloneState(state).tasks;

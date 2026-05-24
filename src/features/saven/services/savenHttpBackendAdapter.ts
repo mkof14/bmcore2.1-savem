@@ -9,6 +9,8 @@ import type {
   SavenContactResult,
   SavenEventAuditRecord,
   SavenIncidentReadiness,
+  SavenIncidentActionInput,
+  SavenIncidentActionResult,
   SavenMonitoringSnapshot,
 } from '../contracts/savenBackendContract';
 import type { SavenMockEndpoint, SavenMockState, SavenMockTask } from '../mock/savenMockState';
@@ -60,6 +62,12 @@ export function createSavenHttpBackendAdapter(options: SavenHttpBackendAdapterOp
     },
     getIncidentReadiness() {
       return request<SavenIncidentReadiness>(route('incident-readiness')?.httpPath ?? '/incidents/readiness');
+    },
+    applyIncidentAction(input: SavenIncidentActionInput) {
+      return request<SavenIncidentActionResult>('/incidents/' + encodeURIComponent(input.incidentId) + '/actions', {
+        method: 'POST',
+        body: JSON.stringify(input),
+      });
     },
     listTasks() {
       return request<SavenMockTask[]>(route('tasks')?.httpPath ?? '/tasks');

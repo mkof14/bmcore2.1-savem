@@ -18,7 +18,7 @@ import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
-import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenIncidentReadiness, SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
+import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenIncidentAction, SavenIncidentActionResult, SavenIncidentReadiness, SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
 
 interface AdminPanelProps {
   onNavigate: (page: string) => void;
@@ -125,6 +125,7 @@ function SavenOpsAdminSection() {
   const [snapshot, setSnapshot] = useState<SavenMonitoringSnapshot | null>(null);
   const [eventAudit, setEventAudit] = useState<SavenEventAuditRecord[]>([]);
   const [incidentReadiness, setIncidentReadiness] = useState<SavenIncidentReadiness | null>(null);
+  const [incidentActionResult, setIncidentActionResult] = useState<SavenIncidentActionResult | null>(null);
   const [overrideResult, setOverrideResult] = useState<SavenAdminOverrideResult | null>(null);
 
   useEffect(() => {
@@ -185,6 +186,17 @@ function SavenOpsAdminSection() {
       note: 'Local SAVEN admin ops action.',
     });
     setOverrideResult(result);
+  };
+
+  const runIncidentAction = async (incidentId: string, action: SavenIncidentAction, note: string) => {
+    const result = await savenBackendGateway.applyIncidentAction({
+      incidentId,
+      action,
+      actorId: 'biomath-admin',
+      note,
+      assignTo: action === 'assign_owner' ? 'saven-ops-lead' : undefined,
+    });
+    setIncidentActionResult(result);
   };
 
   return (
@@ -299,8 +311,7 @@ function SavenOpsAdminSection() {
         </div>
       </section>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_440px]">
-      <section className="rounded-3xl border border-amber-300/20 bg-[#0b101c] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-incident-readiness="true">
+      <section className="rounded-3xl border border-amber-300/20 bg-[#0b101c] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-incident-readiness="true" data-saven-admin-incident-actions="true">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-100/70">Incident readiness</p>
@@ -332,12 +343,23 @@ function SavenOpsAdminSection() {
                 </div>
                 <h3 className="mt-3 text-sm font-semibold leading-6 text-white">{incident.title}</h3>
                 <p className="mt-2 text-xs leading-5 text-slate-400">{incident.nextStep}</p>
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  <button onClick={() => runIncidentAction(incident.id, 'acknowledge', 'Admin acknowledged this SAVEN incident.')} className="rounded-full bg-white px-3 py-2 text-xs font-semibold text-slate-950 transition-all hover:-translate-y-0.5">Acknowledge</button>
+                  <button onClick={() => runIncidentAction(incident.id, 'assign_owner', 'Assigned to SAVEN Ops lead for review.')} className="rounded-full bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition-all hover:-translate-y-0.5">Assign</button>
+                  <button onClick={() => runIncidentAction(incident.id, 'hold', 'Held until human safety review is complete.')} className="rounded-full bg-amber-500/15 px-3 py-2 text-xs font-semibold text-amber-100 ring-1 ring-amber-300/20 transition-all hover:-translate-y-0.5">Hold</button>
+                  <button onClick={() => runIncidentAction(incident.id, 'resolve', 'Resolved after admin review.')} className="rounded-full bg-emerald-500/15 px-3 py-2 text-xs font-semibold text-emerald-100 ring-1 ring-emerald-300/20 transition-all hover:-translate-y-0.5">Resolve</button>
+                </div>
               </article>
             );
           })}
           {incidentItems.length === 0 && (
             <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-sm text-slate-300">
               Incident readiness is waiting for the backend gateway.
+            </div>
+          )}
+          {incidentActionResult && (
+            <div className="rounded-2xl border border-emerald-300/20 bg-emerald-500/10 p-4 text-sm text-emerald-100">
+              {incidentActionResult.message}
             </div>
           )}
         </div>
