@@ -37,6 +37,7 @@ const sourceExpectations = [
   ['Alerting Runbook Kit', ['Alerting Runbook Kit', 'createSavenOpsAlerts', 'alerts:saven', 'emergency_review']],
   ['Event Audit Model', ['SavenEventAuditRecord', 'createSavenEventAuditRecords', 'listEventAudit', 'saven_events']],
   ['Command Contract Fixtures', ['savenCommandAcceptanceFixtures', 'nurse-follow-up', 'robot-readiness-review', 'emergency-rule-display']],
+  ['Worker Handoff Kit', ['SAVEN Worker Handoff Kit', 'savenWorkerEndpoints', 'workers:saven', 'automatic_external_dispatch']],
   ['HTTP Backend Adapter', ['createSavenHttpBackendAdapter', '/admin-overrides', '/monitoring']],
   ['Backend Gateway Selector', ['createSavenBackendGatewayFromEnv', 'VITE_SAVEN_BACKEND_MODE', 'savenBackendGateway']],
   ['Backend API Contract', ['savenBackendApiRoutes', 'getSavenBackendApiRoute', 'savenHumanConfirmedRouteIds', 'incident_readiness']],

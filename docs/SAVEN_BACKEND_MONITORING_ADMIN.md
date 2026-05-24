@@ -426,3 +426,14 @@ SAVEN now has explicit security and privacy guardrails:
 - `npm run privacy:saven`
 
 The guardrails classify support commands, care contacts, clinical context, device signals, robot gates, emergency routes, and admin audit. They define redaction behavior, role visibility, and review retention before production use.
+
+
+## Worker Handoff Kit
+
+SAVEN now has worker endpoint rules:
+
+- `src/features/saven/services/savenWorkerHandoffService.ts`
+- `docs/SAVEN_WORKER_HANDOFF_KIT.md`
+- `npm run workers:saven`
+
+The kit routes voice/text commands to caregiver, nurse, doctor, robot, device, emergency route, or Admin Ops. Robot physical action and emergency external dispatch stay blocked without explicit human confirmation.

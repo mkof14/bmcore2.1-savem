@@ -137,6 +137,16 @@ npm run privacy:saven
 
 Review SAVEN data classes, role visibility, family-digest redaction, robot gate retention, emergency route retention, and admin audit handling before production.
 
+## Worker Handoff Kit
+
+Run:
+
+```zsh
+npm run workers:saven
+```
+
+Worker handoff verifies SAVEN voice/text routing for caregiver, nurse, doctor, robot, device, emergency route, and Admin Ops before release.
+
 ## Safety Gates
 
 - No robot or physical execution path should bypass command permission review.
