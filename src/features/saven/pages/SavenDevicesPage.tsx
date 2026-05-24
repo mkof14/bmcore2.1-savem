@@ -63,7 +63,7 @@ const devices = [
     status: 'Active',
     environment: 'Home Recovery',
     telemetry: 'Room state and permission context',
-    capabilities: ['Room state', 'Robot safety', 'Verification support'],
+    capabilities: ['Room state', 'Robot safety', 'Proof support'],
   },
 ];
 
@@ -98,15 +98,15 @@ export function DeviceReadiness() {
   ];
 
   const consentRules = [
-    { label: 'Consent visible', detail: 'Device use is shown as part of support, not hidden monitoring.', icon: EyeOff, tone: 'blue' },
-    { label: 'Signal scoped', detail: 'Only support-relevant signals appear in SAVEN routes.', icon: ScanLine, tone: 'green' },
-    { label: 'Human decision', detail: 'Telemetry supports proof but does not replace human confirmation.', icon: ShieldCheck, tone: 'gold' },
-    { label: 'Backend ready', detail: 'Each signal can become an event behind the SAVEN gateway.', icon: Cable, tone: 'blue' },
+    { label: 'Consent visible', detail: 'Signals stay visible as part of support, never hidden monitoring.', icon: EyeOff, tone: 'blue' },
+    { label: 'Signal scoped', detail: 'Only support-relevant signals enter SAVEN routes.', icon: ScanLine, tone: 'green' },
+    { label: 'Human decision', detail: 'Telemetry supports proof and still waits for human confirmation.', icon: ShieldCheck, tone: 'gold' },
+    { label: 'Backend ready', detail: 'Each signal can become a gateway event.', icon: Cable, tone: 'blue' },
   ];
 
   return (
     <div className="space-y-6">
-      <PageIntro eyebrow="Device Readiness" title="Devices are the verification gateway for real-world support." text="Devices do not make care decisions. They confirm signals, support continuity, and give SAVEN enough reality context to keep people, robots, and environments aligned." />
+      <PageIntro eyebrow="Device Readiness" title="Device signals become proof channels." text="Devices do not decide. They provide scoped signals that help people, robots, rooms, and SAVEN agree on what happened." />
 
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
         <div className="grid gap-5 lg:grid-cols-2">
@@ -121,14 +121,14 @@ export function DeviceReadiness() {
             </span>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">Device Gateway</p>
-              <h3 className="mt-1 text-2xl font-semibold">Signals become proof, not noise.</h3>
+              <h3 className="mt-1 text-2xl font-semibold">Signals close the support loop.</h3>
             </div>
           </div>
           <div className="mt-6 space-y-3">
-            <SummaryLine label="Device role" value="Verification support" />
+            <SummaryLine label="Device role" value="Proof support" />
             <SummaryLine label="Decision authority" value="Human + policy" />
             <SummaryLine label="Robot bridge" value="Telemetry only" />
-            <SummaryLine label="Continuity update" value="After verification" />
+            <SummaryLine label="Continuity update" value="After proof" />
           </div>
         </div>
       </section>
@@ -136,10 +136,10 @@ export function DeviceReadiness() {
       <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(16,185,129,0.15),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(240,253,244,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.23),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(6,34,24,0.62))] dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Live signal routing</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Which device signal supports which task?</h3>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Proof signal routing</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Which signal closes the support loop?</h3>
           </div>
-          <StatusPill tone="green" label="Gateway active" />
+          <StatusPill tone="green" label="Proof active" />
         </div>
         <div className="mt-6 grid gap-3">
           {signalRoutes.map((signal) => {

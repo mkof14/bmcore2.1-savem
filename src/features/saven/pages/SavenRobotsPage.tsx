@@ -54,7 +54,7 @@ export function RobotReadiness() {
     {
       name: 'Mobility Base M2',
       model: 'Physical mobility platform',
-      readiness: 'Approval gated',
+      readiness: 'Gate gated',
       capability: 'Transfer positioning, path readiness, room obstacle reporting, low-speed assisted movement.',
       assignment: 'Assistive movement only with human present',
       limits: ['Human present', 'Room rules required', 'Stop command always active'],
@@ -85,7 +85,7 @@ export function RobotReadiness() {
     { service: 'Emergency safety', saven: 'Prepares context', robot: 'Stops action', device: 'Adds location state', human: 'Confirms route', status: 'Human only', tone: 'red' },
   ];
 
-  const physicalCommandStates = [
+  const physicalTaskStates = [
     { label: 'Readiness check', state: 'Allowed', detail: 'SAVEN may ask robots and devices for readiness state.', icon: Activity, tone: 'green' },
     { label: 'Move / lift / transfer', state: 'Locked', detail: 'Physical movement requires caregiver approval and environment rules.', icon: Bot, tone: 'gold' },
     { label: 'Device telemetry', state: 'Allowed', detail: 'Wearables and room sensors can support verification in mock mode.', icon: Gauge, tone: 'blue' },
@@ -119,13 +119,13 @@ export function RobotReadiness() {
         <div className="relative grid gap-7 xl:grid-cols-[minmax(0,1.02fr)_minmax(460px,0.98fr)] xl:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 dark:text-blue-200">Robot / Device Service Matrix</p>
-            <h2 className="mt-4 max-w-4xl text-5xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-6xl">Physical support becomes visible, permissioned, and verified.</h2>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">SAVEN connects humanoid robots, mobility systems, room sensors, wearables, environment rules, and human approval through one operational layer. Robots can participate, but they cannot decide care alone.</p>
+            <h2 className="mt-4 max-w-4xl text-5xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-6xl">Robots act only inside the SAVEN permission loop.</h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">SAVEN turns a support task into scoped robot readiness, room awareness, device proof, and human approval. Robots can help, but they never decide care alone.</p>
             <div className="mt-7 grid gap-3 sm:grid-cols-3">
               {[
-                ['Command', 'One SAVEN task source'],
-                ['Approval', 'Human-gated action'],
-                ['Proof', 'Telemetry plus confirmation'],
+                ['Task', 'One support source'],
+                ['Gate', 'Human-gated action'],
+                ['Reality', 'Signal plus human proof'],
               ].map(([label, value]) => (
                 <div key={label} className="rounded-3xl border border-white/70 bg-white/76 p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/60 dark:ring-1 dark:ring-white/10">
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{label}</p>
@@ -169,7 +169,7 @@ export function RobotReadiness() {
       </section>
 
       <section className="grid gap-4 xl:grid-cols-4">
-        {physicalCommandStates.map((item) => {
+        {physicalTaskStates.map((item) => {
           const Icon = item.icon;
           const tone =
             item.tone === 'green'
@@ -197,10 +197,10 @@ export function RobotReadiness() {
       <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Service matrix</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Who does what before a robot can help?</h3>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Permission matrix</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">The permission loop before movement.</h3>
           </div>
-          <StatusPill tone="blue" label="Operational layer" />
+          <StatusPill tone="blue" label="Loop active" />
         </div>
         <div className="mt-5 overflow-hidden rounded-3xl border border-slate-100 bg-[#f7f5f1] dark:border-white/10 dark:bg-slate-900/70">
           <div className="hidden grid-cols-[1.1fr_1fr_1fr_1fr_1fr_110px] gap-0 border-b border-slate-200/70 bg-white/70 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-400 xl:grid">
@@ -236,8 +236,8 @@ export function RobotReadiness() {
 
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
         <div className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_12%_16%,rgba(59,130,246,0.16),transparent_30%),radial-gradient(circle_at_88%_16%,rgba(16,185,129,0.14),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(240,253,244,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_12%_16%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_88%_16%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(6,34,24,0.62))] dark:ring-1 dark:ring-white/10">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Connected endpoints</p>
-          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Robots, devices, and environments are one network.</h3>
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Physical endpoints</p>
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Executors, sensors, and rooms share one control loop.</h3>
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
             {robots.map((robot) => (
               <article key={robot.name} className="group rounded-3xl border border-white/70 bg-white/78 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-xl dark:border-white/10 dark:bg-slate-950/60">
@@ -268,19 +268,19 @@ export function RobotReadiness() {
               <Workflow className="h-6 w-6" />
             </span>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">Physical orchestration</p>
-              <h3 className="mt-1 text-2xl font-semibold">Rules before action</h3>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">Action gate</p>
+              <h3 className="mt-1 text-2xl font-semibold">Permission before motion</h3>
             </div>
           </div>
           <div className="mt-6 grid gap-3">
-            <SummaryLine label="Command source" value="SAVEN task layer" />
-            <SummaryLine label="Physical action" value="Human approval required" />
+            <SummaryLine label="Task source" value="SAVEN task layer" />
+            <SummaryLine label="Physical action" value="Human gate required" />
             <SummaryLine label="Telemetry" value="Robot + device + room" />
-            <SummaryLine label="Continuity" value="Verified before update" />
+            <SummaryLine label="Continuity" value="Proof before continuity" />
             <SummaryLine label="Emergency" value="Stop and prepare context only" />
           </div>
           <div className="mt-6 rounded-3xl bg-white/7 p-4 text-sm leading-6 text-slate-300 ring-1 ring-white/10">
-            Backend note: robot services should become adapters behind the same SAVEN gateway contract, never page-specific direct integrations.
+            Backend rule: every robot service should be an adapter behind the SAVEN gateway, never a page-specific direct integration.
           </div>
         </div>
       </section>

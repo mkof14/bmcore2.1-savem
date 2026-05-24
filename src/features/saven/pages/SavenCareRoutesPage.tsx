@@ -129,22 +129,22 @@ export function SavenCareRoutes() {
   } as const;
 
   const routeSteps = [
-    { label: 'Reason', detail: 'SAVEN captures why help is needed and what changed.' },
-    { label: 'Context', detail: 'Profile, task, environment, devices, and verification state are attached.' },
-    { label: 'Route', detail: 'The right person or care path is prepared.' },
-    { label: 'Confirm', detail: 'Sensitive routes wait for human confirmation before action.' },
+    { label: 'Reason', detail: 'SAVEN records what changed and why help is needed.' },
+    { label: 'Context', detail: 'Person, task, environment, devices, and proof state travel together.' },
+    { label: 'Route', detail: 'The responsible human path is prepared.' },
+    { label: 'Confirm', detail: 'Sensitive routes wait at the human gate.' },
   ];
 
   return (
     <div className="space-y-6">
-      <PageIntro eyebrow="Care Routes" title="Reach the right person without losing context." text="SAVEN prepares caregiver, family, nurse, doctor, and emergency routes from the same support state. This is still a local development version: no real calls or messages are sent." />
+      <PageIntro eyebrow="Care Routes" title="Escalation map: route the right human with context." text="Caregiver, family, nurse, doctor, and urgent paths all start from the same support packet. Local version only: no real messages or calls are sent." />
 
       <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_16%_16%,rgba(0,180,255,0.18),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,178,54,0.18),transparent_28%),radial-gradient(circle_at_72%_88%,rgba(16,185,129,0.15),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.95),rgba(240,249,255,0.8),rgba(255,247,237,0.76))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_16%_16%,rgba(0,180,255,0.24),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,178,54,0.15),transparent_28%),radial-gradient(circle_at_72%_88%,rgba(16,185,129,0.12),transparent_30%),linear-gradient(135deg,rgba(3,7,18,0.98),rgba(7,20,39,0.9),rgba(35,19,7,0.68))] dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Contact router</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">One route panel for daily support and urgent escalation.</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">The interface shows what SAVEN will prepare: who receives the route, which context is attached, and whether confirmation is required.</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Escalation map</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">One map for caregiver, family, clinical, and urgent paths.</h3>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Every route carries reason, context, proof state, and the human gate.</p>
           </div>
           <StatusPill tone="gold" label="Local only" />
         </div>
@@ -199,7 +199,7 @@ export function SavenCareRoutes() {
           <div className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Prepared route</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Route packet</p>
                 <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">{selectedContact.name}</h3>
                 <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">{selectedContact.route}</p>
               </div>
@@ -207,15 +207,15 @@ export function SavenCareRoutes() {
             </div>
 
             <div className="mt-5 grid gap-3 md:grid-cols-2">
-              <LayeredPanel title="Availability" text={selectedContact.availability} items={['Current route state', selectedContact.responseTarget, 'No real external message sent']} />
-              <LayeredPanel title="Allowed reasons" text="SAVEN limits each contact to a practical reason list." items={selectedContact.allowedReasons} />
+              <LayeredPanel title="Reachability" text={selectedContact.availability} items={['Current route state', selectedContact.responseTarget, 'No real external message sent']} />
+              <LayeredPanel title="Route guardrails" text="SAVEN only allows practical reasons for each route." items={selectedContact.allowedReasons} />
             </div>
 
             <div className="mt-5 grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
               <div className="rounded-3xl bg-slate-950 p-4 text-white shadow-inner ring-1 ring-white/10">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100">Prepared text command</p>
-                  <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-100 ring-1 ring-blue-300/20">Live command</span>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100">Dispatch command</p>
+                  <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-100 ring-1 ring-blue-300/20">Ready packet</span>
                 </div>
                 <p className="mt-3 text-sm leading-7 text-slate-200">{selectedRouteCommand}</p>
               </div>
@@ -241,7 +241,7 @@ export function SavenCareRoutes() {
 
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               <label className="block rounded-3xl border border-white/70 bg-white/78 p-4 shadow-sm dark:border-white/10 dark:bg-slate-900/70">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Reason</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Need signal</span>
                 <textarea
                   value={routeReason}
                   onChange={(event) => setRouteReason(event.target.value)}
@@ -249,7 +249,7 @@ export function SavenCareRoutes() {
                 />
               </label>
               <label className="block rounded-3xl border border-white/70 bg-white/78 p-4 shadow-sm dark:border-white/10 dark:bg-slate-900/70">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Summary attached to route</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Context attached</span>
                 <textarea
                   value={routeSummary}
                   onChange={(event) => setRouteSummary(event.target.value)}
@@ -260,15 +260,15 @@ export function SavenCareRoutes() {
 
             {structuredRequest && (
               <div className="mt-4 rounded-3xl bg-slate-950 p-4 text-white shadow-inner ring-1 ring-white/10">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100">Structured backend request</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100">Gateway packet</p>
                 <pre className="mt-3 overflow-x-auto text-xs leading-6 text-slate-200">{JSON.stringify(structuredRequest, null, 2)}</pre>
               </div>
             )}
           </div>
 
           <aside className="rounded-[2rem] border border-white/70 bg-[#f7f5f1] p-6 shadow-sm dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Safety state</p>
-            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">Human-confirmed by design.</h3>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Confirmation gate</p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">No route jumps the human gate.</h3>
             <div className="mt-5 space-y-3">
               {routeSteps.map((step, index) => (
                 <div key={step.label} className="flex gap-3 rounded-3xl bg-white/80 p-3 shadow-sm ring-1 ring-slate-100 dark:bg-slate-900/70 dark:ring-white/10">
