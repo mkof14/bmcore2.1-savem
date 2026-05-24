@@ -35,7 +35,7 @@ const checks = [
   {
     label: 'Backend monitoring docs',
     file: 'docs/SAVEN_BACKEND_MONITORING_ADMIN.md',
-    markers: ['Backend API Contract', 'Backend Gateway Selector', 'HTTP Backend Adapter', 'Admin Override Contract', 'Monitoring Contract Implementation'],
+    markers: ['SAVEN Deploy Readiness', 'Backend API Contract', 'Backend Gateway Selector', 'HTTP Backend Adapter', 'Admin Override Contract', 'Monitoring Contract Implementation'],
   },
   {
     label: 'Supabase schema draft',

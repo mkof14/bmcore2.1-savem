@@ -246,6 +246,18 @@ The adapter maps the `SavenBackendGateway` interface to action/payload calls aga
 
 The default remains local mode.
 
+## SAVEN Deploy Readiness
+
+SAVEN now has a deploy readiness layer:
+
+- `createSavenDeployReadinessReport(env)`
+- `npm run deploy:saven`
+- `SAVEN_DEPLOY_TARGET=production`
+- `VITE_SAVEN_BACKEND_MODE`
+- `VITE_SAVEN_EDGE_FUNCTION_URL`
+
+Default review mode allows local/mock behavior with warnings. Production mode blocks unless Supabase public env vars are present, backend mode is `edge`, and the SAVEN Edge Function URL is configured. External dispatch remains disabled until a separately approved safety policy is implemented.
+
 ## Backend API Contract
 
 SAVEN now has one backend API route registry:

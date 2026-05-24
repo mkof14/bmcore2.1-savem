@@ -3,6 +3,7 @@ import { spawnSync } from 'node:child_process';
 
 const steps = [
   { label: 'Backend readiness', command: 'npm', args: ['run', 'backend:saven'] },
+  { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },
   { label: 'Theme contrast', command: 'npm', args: ['run', 'contrast:saven'] },
   { label: 'Typecheck', command: 'npm', args: ['run', 'typecheck'] },
   { label: 'Tests', command: 'npm', args: ['run', 'test', '--', '--run'] },
