@@ -69,6 +69,16 @@ Review and deploy `supabase/functions/saven-gateway/index.ts` when SAVEN is read
 - Confirm the gateway exposes command ingestion, persistence status, permission review, audit events, and incident readiness.
 - Keep local mode available for demo and fallback review.
 
+## Monitoring SLO Kit
+
+Run:
+
+```zsh
+npm run monitoring:saven
+```
+
+This checks SAVEN-specific operational signals before release: command backlog, proof waits, incident severity, robot gate, emergency gate, and endpoint availability.
+
 ## Admin And Monitoring Checklist
 
 - Confirm BioMath Core Admin shows SAVEN backend health.

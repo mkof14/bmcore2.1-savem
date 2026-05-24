@@ -371,3 +371,14 @@ SAVEN now has a concrete Supabase Edge Function package:
 - `npm run edge:saven`
 
 The gateway draft supports `send_command`, `interpret_command`, `review_command_permission`, `persistence_status`, `list_events`, `incident_readiness`, and `apply_admin_override`. It intentionally performs no external dispatch and keeps emergency and robot paths gated for human review.
+
+
+## Monitoring SLO Kit
+
+SAVEN Monitoring SLO Kit makes monitoring operational:
+
+- `src/features/saven/services/savenMonitoringSloService.ts`
+- `docs/SAVEN_MONITORING_SLO_KIT.md`
+- `npm run monitoring:saven`
+
+The SLO report tracks command backlog, proof wait SLO, incident severity, robot gate, emergency gate, and endpoint availability. These are SAVEN-specific safety signals, not generic uptime counters.

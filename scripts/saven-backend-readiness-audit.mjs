@@ -3,6 +3,11 @@ import fs from 'node:fs';
 
 const checks = [
   {
+    label: 'Monitoring SLO service',
+    file: 'src/features/saven/services/savenMonitoringSloService.ts',
+    markers: ['createSavenMonitoringSloReport', 'command-backlog', 'robot-gate', 'emergency-gate'],
+  },
+  {
     label: 'Supabase migration kit',
     file: 'supabase/saven/001_saven_core_schema.sql',
     markers: ['saven_profiles', 'saven_commands', 'saven_events', 'saven_incidents', 'saven_rls_policy_draft'],
