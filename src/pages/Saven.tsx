@@ -1187,11 +1187,9 @@ function SavenAppShell({
               </div>
             </div>
           </header>
-          <div className="mx-auto max-w-[1480px] px-5 pt-8 sm:px-8 lg:px-10">
-          </div>
-          <main className="mx-auto max-w-[1480px] px-5 py-6 sm:px-8 lg:px-10">
+          <main className="mx-auto max-w-[1480px] px-5 py-4 sm:px-8 lg:px-10">
             <SavenCommandStrip activePage={activePage} openPage={openPage} />
-            <div className="mt-6">{children}</div>
+            <div className="mt-5">{children}</div>
           </main>
         </div>
       </div>
@@ -1363,11 +1361,12 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
 }
 
 
+
 function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; openPage: (pageId: SavenPageId) => void }) {
   const [activeCommand, setActiveCommand] = useState('nurse');
   const [micActive, setMicActive] = useState(false);
   const [micError, setMicError] = useState('');
-  const [levels, setLevels] = useState<number[]>(Array.from({ length: 14 }, () => 6));
+  const [levels, setLevels] = useState<number[]>(Array.from({ length: 12 }, () => 6));
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const animationRef = useRef<number | null>(null);
@@ -1392,7 +1391,7 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
     void audioContextRef.current?.close();
     audioContextRef.current = null;
     setMicActive(false);
-    setLevels(Array.from({ length: 14 }, () => 6));
+    setLevels(Array.from({ length: 12 }, () => 6));
   };
 
   useEffect(() => stopMic, []);
@@ -1419,7 +1418,7 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
       const data = new Uint8Array(analyser.frequencyBinCount);
       const update = () => {
         analyser.getByteFrequencyData(data);
-        const barCount = 14;
+        const barCount = 12;
         const bucketSize = Math.max(1, Math.floor(data.length / barCount));
         const next = Array.from({ length: barCount }, (_, index) => {
           let sum = 0;
@@ -1439,45 +1438,44 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
   };
 
   return (
-    <section className="rounded-3xl border border-blue-200/70 bg-[linear-gradient(135deg,rgba(255,255,255,0.95),rgba(239,246,255,0.82),rgba(255,247,237,0.78))] px-4 py-3 shadow-lg shadow-blue-950/5 dark:border-blue-300/20 dark:bg-[linear-gradient(135deg,rgba(6,16,31,0.98),rgba(15,23,42,0.92),rgba(35,23,10,0.56))] dark:ring-1 dark:ring-blue-300/15">
-      <div className="grid gap-3 2xl:grid-cols-[190px_minmax(0,1fr)_330px] 2xl:items-center">
-        <div className="flex min-w-0 items-center gap-3">
-          <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-slate-950 ring-1 ring-blue-300/30">
-            <span className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_35%_35%,rgba(59,130,246,0.62),transparent_38%),radial-gradient(circle_at_72%_72%,rgba(249,115,22,0.54),transparent_35%)]" />
+    <section className="rounded-[1.35rem] border border-blue-200/60 bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(239,246,255,0.78),rgba(255,247,237,0.62))] px-3 py-2.5 shadow-md shadow-blue-950/5 dark:border-blue-300/18 dark:bg-[linear-gradient(135deg,rgba(6,16,31,0.94),rgba(15,23,42,0.88),rgba(35,23,10,0.42))] dark:ring-1 dark:ring-blue-300/10">
+      <div className="grid gap-2 xl:grid-cols-[168px_minmax(0,1fr)_260px] xl:items-center">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="relative grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-lg bg-slate-950 ring-1 ring-blue-300/30">
             <img src="/saven-mark.png" alt="" className="relative h-full w-full object-cover" />
-            <span className={(micActive ? 'bg-red-500 shadow-[0_0_14px_rgba(239,68,68,0.95)]' : 'bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.95)]') + ' absolute bottom-1 right-1 h-2 w-2 rounded-full'} />
+            <span className={(micActive ? 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.85)]' : 'bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.85)]') + ' absolute bottom-0.5 right-0.5 h-1.5 w-1.5 rounded-full'} />
           </span>
           <div className="min-w-0">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-700 dark:text-blue-200">Voice control</p>
-            <p className="truncate text-sm font-semibold text-slate-950 dark:text-white">SAVEN commands</p>
-            <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">{pageLabel}</p>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-blue-700 dark:text-blue-200">Voice</p>
+            <p className="truncate text-xs font-semibold text-slate-950 dark:text-white">SAVEN commands</p>
+            <p className="truncate text-[10px] text-slate-500 dark:text-slate-400">{pageLabel}</p>
           </div>
         </div>
 
         <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1">
             {commands.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setActiveCommand(item.id)}
-                className={(item.id === activeCommand ? 'bg-blue-600 text-white shadow-md shadow-blue-950/20 ring-blue-300/30' : 'bg-white/82 text-slate-700 ring-slate-200 hover:bg-white dark:bg-slate-950/70 dark:text-slate-200 dark:ring-white/10') + ' rounded-full px-3 py-1.5 text-xs font-semibold ring-1 transition-all hover:-translate-y-0.5'}
+                className={(item.id === activeCommand ? 'bg-blue-600 text-white shadow-sm shadow-blue-950/15 ring-blue-300/30' : 'bg-white/76 text-slate-700 ring-slate-200 hover:bg-white dark:bg-slate-950/62 dark:text-slate-200 dark:ring-white/10') + ' rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 transition-all hover:-translate-y-0.5'}
               >
                 {item.label}
               </button>
             ))}
           </div>
-          <div className="mt-2 min-w-0 rounded-2xl bg-white/72 px-3 py-2 text-slate-950 shadow-inner ring-1 ring-white/70 dark:bg-slate-950/56 dark:text-white dark:ring-white/10">
-            <p className="truncate text-sm font-semibold">Hey SAVEN, {selected.command}</p>
-            <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">Target: {selected.target}</p>
+          <div className="mt-1.5 min-w-0 rounded-2xl bg-white/64 px-3 py-1.5 text-slate-950 shadow-inner ring-1 ring-white/60 dark:bg-slate-950/48 dark:text-white dark:ring-white/10">
+            <p className="truncate text-xs font-semibold">Hey SAVEN, {selected.command}</p>
+            <p className="truncate text-[10px] text-slate-500 dark:text-slate-400">Target: {selected.target}</p>
           </div>
         </div>
 
-        <div className="grid gap-2 sm:grid-cols-[120px_1fr] sm:items-center">
-          <button onClick={toggleMic} className={(micActive ? 'bg-red-600 hover:bg-red-500' : 'bg-blue-600 hover:bg-blue-500') + ' rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5'}>
-            {micActive ? 'Mic on' : 'Open mic'}
+        <div className="grid gap-1.5 sm:grid-cols-[92px_1fr] sm:items-center">
+          <button onClick={toggleMic} className={(micActive ? 'bg-red-600 hover:bg-red-500' : 'bg-blue-600 hover:bg-blue-500') + ' rounded-full px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5'}>
+            {micActive ? 'Mic on' : 'Mic'}
           </button>
-          <div className="min-w-0 rounded-2xl bg-slate-950 px-3 py-2 shadow-inner dark:bg-black/50">
-            <div className="flex h-6 items-end gap-1">
+          <div className="min-w-0 rounded-2xl bg-slate-950 px-2.5 py-1.5 shadow-inner dark:bg-black/50">
+            <div className="flex h-4 items-end gap-1">
               {levels.map((height, index) => (
                 <span
                   key={index}
@@ -1486,15 +1484,15 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
                 />
               ))}
             </div>
-            <p className={(micError ? 'text-red-300' : 'text-slate-400') + ' mt-1 truncate text-[10px] font-semibold uppercase tracking-[0.14em]'}>
-              {micError || (micActive ? 'Live microphone level' : 'Mic level')}
+            <p className={(micError ? 'text-red-300' : 'text-slate-400') + ' mt-0.5 truncate text-[9px] font-semibold uppercase tracking-[0.14em]'}>
+              {micError || (micActive ? 'Live level' : 'Mic level')}
             </p>
           </div>
-          <button onClick={() => openPage(selected.page)} className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm ring-1 ring-slate-200 transition-all hover:-translate-y-0.5 hover:bg-blue-50 dark:bg-slate-950 dark:text-slate-100 dark:ring-white/10">
-            Open service
+          <button onClick={() => openPage(selected.page)} className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 shadow-sm ring-1 ring-slate-200 transition-all hover:-translate-y-0.5 hover:bg-blue-50 dark:bg-slate-950 dark:text-slate-100 dark:ring-white/10">
+            Service
           </button>
-          <button onClick={() => openPage('app-commands')} className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-blue-100">
-            All commands
+          <button onClick={() => openPage('app-commands')} className="rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-blue-100">
+            Commands
           </button>
         </div>
       </div>
