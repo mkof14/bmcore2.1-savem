@@ -10,11 +10,20 @@ npm run validate:saven
 
 This runs:
 
+- `npm run contrast:saven`
 - `npm run typecheck`
 - `npm run test -- --run`
 - `npm run smoke:saven:auto`
 
 The smoke check starts the local SAVEN dev server, verifies key routes, verifies important SAVEN page markers, and stops the server.
+
+## Theme Contrast Check
+
+```zsh
+npm run contrast:saven
+```
+
+This SAVEN-only check catches risky light-theme contrast combinations before they reach visual QA, especially white or very light text on pale surfaces.
 
 ## Production Build Check
 

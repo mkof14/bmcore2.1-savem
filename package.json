@@ -30,7 +30,7 @@
     "dev:saven": "vite --host 127.0.0.1 --port 5173 --strictPort --open /app/saven/settings",
     "smoke:saven": "node scripts/saven-route-smoke.mjs",
     "smoke:saven:auto": "node scripts/saven-route-smoke-with-server.mjs",
-    "validate:saven": "npm run typecheck && npm run test -- --run && npm run smoke:saven:auto",
+    "validate:saven": "npm run contrast:saven && npm run typecheck && npm run test -- --run && npm run smoke:saven:auto",
     "contrast:saven": "node scripts/saven-theme-contrast-audit.mjs"
   },
   "dependencies": {
