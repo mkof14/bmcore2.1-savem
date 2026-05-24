@@ -3,6 +3,7 @@ import { createSavenControlApiMock } from './savenControlApiMock';
 import { createSavenMonitoringSnapshot } from './savenMonitoringService';
 import { createSavenEventAuditRecords } from './savenEventAuditService';
 import { createSavenIncidentReadiness } from './savenIncidentReadinessService';
+import { createSavenPersistenceStatus } from './savenSupabasePersistenceRepository';
 import { applySavenIncidentAction } from './savenIncidentActionService';
 import { createSavenCommandExecutionPlan } from './savenCommandExecutionService';
 import { createSavenCommandPermissionReview } from './savenCommandPermissionService';
@@ -117,6 +118,9 @@ export function createSavenLocalBackendGateway(state: SavenMockState = savenMock
     },
     async getIncidentReadiness() {
       return createSavenIncidentReadiness(cloneState(state));
+    },
+    async getPersistenceStatus() {
+      return createSavenPersistenceStatus();
     },
     async applyIncidentAction(input: SavenIncidentActionInput) {
       return applySavenIncidentAction(input);

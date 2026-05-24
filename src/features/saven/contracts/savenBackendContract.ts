@@ -223,11 +223,30 @@ export type SavenIncidentActionResult = {
   };
 };
 
+export type SavenPersistenceTableStatus = {
+  table: string;
+  purpose: string;
+  mode: 'draft' | 'ready';
+  criticalWrites: boolean;
+};
+
+export type SavenPersistenceStatus = {
+  generatedAt: string;
+  mode: 'supabase_draft';
+  tables: SavenPersistenceTableStatus[];
+  safety: {
+    rlsDraftReady: boolean;
+    edgeGatewayDraftReady: boolean;
+    externalDispatchDisabled: boolean;
+  };
+};
+
 export type SavenBackendGateway = {
   getSnapshot(): Promise<SavenMockState>;
   getMonitoringSnapshot(): Promise<SavenMonitoringSnapshot>;
   listEventAudit(): Promise<SavenEventAuditRecord[]>;
   getIncidentReadiness(): Promise<SavenIncidentReadiness>;
+  getPersistenceStatus(): Promise<SavenPersistenceStatus>;
   applyIncidentAction(input: SavenIncidentActionInput): Promise<SavenIncidentActionResult>;
   listTasks(): Promise<SavenMockTask[]>;
   listEndpoints(): Promise<SavenMockEndpoint[]>;

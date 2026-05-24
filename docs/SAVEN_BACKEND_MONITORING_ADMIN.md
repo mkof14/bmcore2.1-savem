@@ -172,6 +172,18 @@ It defines the first backend persistence shape:
 
 This migration should be reviewed before applying to any production Supabase project. It is intentionally treated as a schema draft until backend policies, RLS rules, and edge functions are finalized.
 
+## Supabase Persistence Bridge
+
+SAVEN now has a client-side persistence bridge for the Supabase backend draft:
+
+- `savenPersistenceTables`
+- `createSavenPersistenceStatus()`
+- `createSavenSupabasePersistenceRepository(client)`
+- `SavenBackendGateway.getPersistenceStatus()`
+- `data-saven-admin-persistence-status="true"`
+
+The bridge documents exactly which tables support profile, people, task, command, event, incident, verification, and admin override records. Critical writes remain gated and external dispatch remains disabled until production policy is approved.
+
 ## RLS Policy Draft
 
 A review-only SAVEN RLS policy draft now exists at:

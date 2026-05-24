@@ -5,12 +5,12 @@ const checks = [
   {
     label: 'Backend gateway contract',
     file: 'src/features/saven/contracts/savenBackendContract.ts',
-    markers: ['SavenBackendGateway', 'SavenMonitoringSnapshot', 'SavenAdminOverrideResult', 'SavenEventAuditRecord', 'SavenIncidentReadiness', 'SavenCommandPermissionReview', 'applyAdminOverride', 'listEventAudit', 'getIncidentReadiness', 'reviewCommandPermission'],
+    markers: ['SavenBackendGateway', 'SavenMonitoringSnapshot', 'SavenAdminOverrideResult', 'SavenEventAuditRecord', 'SavenIncidentReadiness', 'SavenPersistenceStatus', 'SavenCommandPermissionReview', 'applyAdminOverride', 'listEventAudit', 'getIncidentReadiness', 'getPersistenceStatus', 'reviewCommandPermission'],
   },
   {
     label: 'Local backend gateway',
     file: 'src/features/saven/services/savenLocalBackendGateway.ts',
-    markers: ['createSavenLocalBackendGateway', 'getMonitoringSnapshot', 'listEventAudit', 'getIncidentReadiness', 'reviewCommandPermission', 'applyAdminOverride'],
+    markers: ['createSavenLocalBackendGateway', 'getMonitoringSnapshot', 'listEventAudit', 'getIncidentReadiness', 'getPersistenceStatus', 'reviewCommandPermission', 'applyAdminOverride'],
   },
   {
     label: 'Monitoring service',
@@ -20,7 +20,7 @@ const checks = [
   {
     label: 'HTTP backend adapter',
     file: 'src/features/saven/services/savenHttpBackendAdapter.ts',
-    markers: ['createSavenHttpBackendAdapter', 'getSavenBackendApiRoute', '/monitoring', '/events', '/incidents/readiness', '/commands/permission-review', '/admin-overrides'],
+    markers: ['createSavenHttpBackendAdapter', 'getSavenBackendApiRoute', '/monitoring', '/persistence/status', '/events', '/incidents/readiness', '/commands/permission-review', '/admin-overrides'],
   },
   {
     label: 'Backend gateway selector',
@@ -30,7 +30,7 @@ const checks = [
   {
     label: 'Admin Ops integration',
     file: 'src/pages/AdminPanel.tsx',
-    markers: ['data-saven-admin-ops="true"', 'data-saven-admin-monitoring-live="true"', 'data-saven-admin-overrides="true"', 'data-saven-admin-event-audit="true"', 'data-saven-admin-incident-readiness="true"', 'savenBackendGateway'],
+    markers: ['data-saven-admin-ops="true"', 'data-saven-admin-monitoring-live="true"', 'data-saven-admin-overrides="true"', 'data-saven-admin-persistence-status="true"', 'data-saven-admin-event-audit="true"', 'data-saven-admin-incident-readiness="true"', 'savenBackendGateway'],
   },
   {
     label: 'Backend monitoring docs',
@@ -50,12 +50,12 @@ const checks = [
   {
     label: 'Edge Function gateway draft',
     file: 'supabase/functions/saven-gateway/index.ts',
-    markers: ['ALLOWED_ACTIONS', 'list_events', 'incident_readiness', 'review_command_permission', 'apply_admin_override', 'No external dispatch', 'Admin access required'],
+    markers: ['ALLOWED_ACTIONS', 'persistence_status', 'list_events', 'incident_readiness', 'review_command_permission', 'apply_admin_override', 'No external dispatch', 'Admin access required'],
   },
   {
     label: 'Edge Function backend adapter',
     file: 'src/features/saven/services/savenEdgeFunctionBackendAdapter.ts',
-    markers: ['createSavenEdgeFunctionBackendAdapter', 'list_events', 'incident_readiness', 'review_command_permission', 'apply_admin_override', 'VITE_SAVEN_EDGE_FUNCTION_URL'],
+    markers: ['createSavenEdgeFunctionBackendAdapter', 'persistence_status', 'list_events', 'incident_readiness', 'review_command_permission', 'apply_admin_override', 'VITE_SAVEN_EDGE_FUNCTION_URL'],
   },
 ];
 

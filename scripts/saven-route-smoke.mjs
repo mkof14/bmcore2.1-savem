@@ -39,6 +39,7 @@ const sourceExpectations = [
   ['Backend API Contract', ['savenBackendApiRoutes', 'getSavenBackendApiRoute', 'savenHumanConfirmedRouteIds', 'incident_readiness']],
   ['Backend Readiness Audit', ['saven-backend-readiness-audit.mjs', 'backend:saven', 'Backend readiness']],
   ['Supabase Schema Draft', ['saven_backend_schema_draft', 'saven_admin_overrides', 'saven_verifications']],
+  ['Supabase Persistence Bridge', ['createSavenSupabasePersistenceRepository', 'savenPersistenceTables', 'getPersistenceStatus', 'data-saven-admin-persistence-status="true"']],
   ['RLS Policy Draft', ['saven_rls_policy_draft', 'is_saven_admin', 'Critical writes']],
   ['Edge Function Gateway Draft', ['saven-gateway', 'ALLOWED_ACTIONS', 'No external dispatch']],
   ['Edge Function Backend Adapter', ['createSavenEdgeFunctionBackendAdapter', 'VITE_SAVEN_EDGE_FUNCTION_URL', 'apply_admin_override']],

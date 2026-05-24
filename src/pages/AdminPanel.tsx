@@ -18,7 +18,7 @@ import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
-import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenIncidentAction, SavenIncidentActionResult, SavenIncidentReadiness, SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
+import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenIncidentAction, SavenIncidentActionResult, SavenIncidentReadiness, SavenMonitoringSnapshot, SavenPersistenceStatus } from '../features/saven/contracts/savenBackendContract';
 
 interface AdminPanelProps {
   onNavigate: (page: string) => void;
@@ -125,6 +125,7 @@ function SavenOpsAdminSection() {
   const [snapshot, setSnapshot] = useState<SavenMonitoringSnapshot | null>(null);
   const [eventAudit, setEventAudit] = useState<SavenEventAuditRecord[]>([]);
   const [incidentReadiness, setIncidentReadiness] = useState<SavenIncidentReadiness | null>(null);
+  const [persistenceStatus, setPersistenceStatus] = useState<SavenPersistenceStatus | null>(null);
   const [incidentActionResult, setIncidentActionResult] = useState<SavenIncidentActionResult | null>(null);
   const [overrideResult, setOverrideResult] = useState<SavenAdminOverrideResult | null>(null);
 
@@ -154,6 +155,14 @@ function SavenOpsAdminSection() {
         notifyError('SAVEN incident readiness load failed');
       });
 
+    savenBackendGateway.getPersistenceStatus()
+      .then((status) => {
+        if (mounted) setPersistenceStatus(status);
+      })
+      .catch(() => {
+        notifyError('SAVEN persistence status load failed');
+      });
+
     return () => {
       mounted = false;
     };
@@ -170,6 +179,7 @@ function SavenOpsAdminSection() {
   const queueItems = snapshot?.queues ?? [];
   const auditItems = eventAudit.slice(0, 8);
   const incidentItems = incidentReadiness?.incidents.slice(0, 6) ?? [];
+  const persistenceTables = persistenceStatus?.tables.slice(0, 6) ?? [];
   const adminOverrideActions: Array<{ action: SavenAdminOverrideAction; label: string; targetId: string; reason: string }> = [
     { action: 'pause_support', label: 'Pause support', targetId: 'person-anna', reason: 'Admin review before continued support.' },
     { action: 'reassign_owner', label: 'Reassign owner', targetId: 'task-mobility-1030', reason: 'Caregiver route needs review.' },
@@ -267,6 +277,35 @@ function SavenOpsAdminSection() {
             <p className="mt-2 text-xs text-slate-400">Actor: {overrideResult.auditTrail.actorId} · Target: {overrideResult.targetId}</p>
           </div>
         )}
+      </section>
+
+      <section className="rounded-3xl border border-blue-500/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-event-audit="true">
+      <section className="rounded-3xl border border-emerald-300/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-persistence-status="true">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-100/70">Persistence bridge</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">Supabase path is visible before production writes.</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
+              SAVEN tables, RLS, Edge gateway, and external-dispatch safety are tracked as a backend readiness layer.
+            </p>
+          </div>
+          <span className="w-fit rounded-full bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-100 ring-1 ring-emerald-300/20">
+            {persistenceStatus?.mode ?? 'loading'}
+          </span>
+        </div>
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {persistenceTables.map((item) => (
+            <article key={item.table} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="text-sm font-semibold text-white">{item.table}</h3>
+                <span className={(item.criticalWrites ? 'bg-amber-500/10 text-amber-100 ring-amber-300/20' : 'bg-blue-500/10 text-blue-100 ring-blue-300/20') + ' rounded-full px-3 py-1 text-xs font-semibold ring-1'}>
+                  {item.criticalWrites ? 'gated write' : 'read/audit'}
+                </span>
+              </div>
+              <p className="mt-2 text-xs leading-5 text-slate-400">{item.purpose}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="rounded-3xl border border-blue-500/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-event-audit="true">

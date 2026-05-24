@@ -6,6 +6,7 @@ const ALLOWED_ACTIONS = new Set([
   // Keep this list aligned with src/features/saven/contracts/savenBackendApiContract.ts.
   "snapshot",
   "monitoring",
+  "persistence_status",
   "list_events",
   "incident_readiness",
   "apply_incident_action",
@@ -90,6 +91,14 @@ Deno.serve(async (req: Request) => {
       return safeDraftResponse(action, caller.id, {
         ...payload,
         route: "SAVEN monitoring snapshot",
+      });
+    }
+
+    if (action === "persistence_status") {
+      return safeDraftResponse(action, caller.id, {
+        ...payload,
+        route: "SAVEN Supabase persistence status",
+        safety: "Persistence draft only; no external dispatch.",
       });
     }
 

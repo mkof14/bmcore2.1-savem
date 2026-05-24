@@ -27,6 +27,14 @@ describe('savenBackendApiRoutes', () => {
     });
   });
 
+  it('documents the persistence status endpoint', () => {
+    expect(getSavenBackendApiRoute('persistence-status')).toMatchObject({
+      httpPath: '/persistence/status',
+      edgeAction: 'persistence_status',
+      risk: 'read',
+    });
+  });
+
   it('documents the admin incident action endpoint', () => {
     expect(getSavenBackendApiRoute('incident-action')).toMatchObject({
       httpPath: '/incidents/:incidentId/actions',

@@ -14,6 +14,7 @@ import type {
   SavenIncidentActionInput,
   SavenIncidentActionResult,
   SavenMonitoringSnapshot,
+  SavenPersistenceStatus,
 } from '../contracts/savenBackendContract';
 import type { SavenControlApiResult } from './savenControlApiMock';
 
@@ -75,6 +76,9 @@ export function createSavenEdgeFunctionBackendAdapter(options: SavenEdgeFunction
     },
     getIncidentReadiness() {
       return call<SavenIncidentReadiness>('incident_readiness');
+    },
+    getPersistenceStatus() {
+      return call<SavenPersistenceStatus>('persistence_status');
     },
     applyIncidentAction(input: SavenIncidentActionInput) {
       return call<SavenIncidentActionResult>('apply_incident_action', input);

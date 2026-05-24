@@ -14,6 +14,7 @@ import type {
   SavenIncidentActionInput,
   SavenIncidentActionResult,
   SavenMonitoringSnapshot,
+  SavenPersistenceStatus,
 } from '../contracts/savenBackendContract';
 import type { SavenMockEndpoint, SavenMockState, SavenMockTask } from '../mock/savenMockState';
 import type { SavenControlApiResult } from './savenControlApiMock';
@@ -64,6 +65,9 @@ export function createSavenHttpBackendAdapter(options: SavenHttpBackendAdapterOp
     },
     getIncidentReadiness() {
       return request<SavenIncidentReadiness>(route('incident-readiness')?.httpPath ?? '/incidents/readiness');
+    },
+    getPersistenceStatus() {
+      return request<SavenPersistenceStatus>(route('persistence-status')?.httpPath ?? '/persistence/status');
     },
     applyIncidentAction(input: SavenIncidentActionInput) {
       return request<SavenIncidentActionResult>('/incidents/' + encodeURIComponent(input.incidentId) + '/actions', {
