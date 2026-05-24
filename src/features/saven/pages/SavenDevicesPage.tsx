@@ -26,7 +26,7 @@ function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; t
 function SummaryLine({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-b border-white/10 py-2 last:border-b-0">
-      <span className="text-sm text-slate-300">{label}</span>
+      <span className="text-sm text-slate-200">{label}</span>
       <span className="text-right text-sm font-semibold text-white">{value}</span>
     </div>
   );
@@ -108,12 +108,12 @@ export function DeviceReadiness() {
     <div className="space-y-6">
       <PageIntro eyebrow="Device Readiness" title="Device signals become proof channels." text="Devices do not decide. They provide scoped signals that help people, robots, rooms, and SAVEN agree on what happened." />
 
-      <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#020817]/88 p-4 shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-relay="device">
+      <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#020817] p-4 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-relay="device">
         <div className="pointer-events-none absolute inset-x-6 top-1/2 hidden h-px bg-gradient-to-r from-emerald-300/45 via-blue-400/40 to-amber-300/45 lg:block" />
         <div className="relative grid gap-3 lg:grid-cols-4">
           {['Signal seen', 'Scope checked', 'Human proof', 'Continuity update'].map((label, index) => (
-            <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.055] px-4 py-3 text-sm font-semibold text-slate-100 shadow-sm">
-              <span className="mb-2 inline-flex rounded-full bg-white/10 px-2.5 py-1 text-[11px] text-emerald-100 ring-1 ring-white/10">D{index + 1}</span>
+            <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.09] px-4 py-3 text-sm font-semibold text-white shadow-sm">
+              <span className="mb-2 inline-flex rounded-full bg-white/12 px-2.5 py-1 text-[11px] text-white ring-1 ring-white/10">D{index + 1}</span>
               <p>{label}</p>
             </div>
           ))}

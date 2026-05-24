@@ -1596,7 +1596,7 @@ function SavenStartPath({ openPage }: { openPage: (pageId: SavenPageId) => void 
   ];
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#07111f]/88 p-5 shadow-xl shadow-slate-950/20 backdrop-blur-xl ring-1 ring-white/10">
+    <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/20 backdrop-blur-xl ring-1 ring-white/10">
       <div className="absolute left-8 right-8 top-[88px] hidden h-px bg-gradient-to-r from-blue-400/40 via-emerald-300/45 to-amber-300/45 lg:block" />
       <div className="grid gap-4 lg:grid-cols-3">
         {pathItems.map((item) => {
@@ -1605,19 +1605,19 @@ function SavenStartPath({ openPage }: { openPage: (pageId: SavenPageId) => void 
             <button
               key={item.id}
               onClick={() => openPage(item.page)}
-              className="group relative min-h-[210px] overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#020817]/82 p-5 text-left shadow-sm ring-1 ring-white/10 transition-all hover:-translate-y-0.5 hover:border-blue-300/30 hover:bg-[#07111f] hover:shadow-xl hover:shadow-blue-950/20"
+              className="group relative min-h-[210px] overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#020817] p-5 text-left text-white shadow-sm ring-1 ring-white/10 transition-all hover:-translate-y-0.5 hover:border-blue-300/35 hover:bg-[#07111f] hover:shadow-xl hover:shadow-blue-950/20"
             >
               <span className={'absolute left-0 top-0 h-1 w-full bg-gradient-to-r ' + item.tone} />
-              <span className={'grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br text-white shadow-sm ' + item.tone}>
+              <span className={'grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 text-white shadow-sm ring-1 ring-white/15 ' + item.tone}>
                 <Icon className="h-5 w-5" />
               </span>
               <div className="mt-5 flex items-center gap-3">
-                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-blue-100 ring-1 ring-white/10">{item.step}</span>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{item.title}</p>
+                <span className="rounded-full bg-white/12 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/15">{item.step}</span>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-200">{item.title}</p>
               </div>
               <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">{item.action}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{item.detail}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-200">
+              <p className="mt-3 text-sm leading-6 text-slate-100/90">{item.detail}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-cyan-100">
                 Enter path
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </span>

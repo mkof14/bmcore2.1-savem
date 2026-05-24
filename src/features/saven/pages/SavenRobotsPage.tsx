@@ -160,7 +160,7 @@ export function RobotReadiness() {
               </div>
               <div className="absolute inset-x-4 bottom-4 grid gap-2 sm:grid-cols-3">
                 {['Robot ready', 'Devices live', 'Human approval'].map((label) => (
-                  <div key={label} className="rounded-2xl bg-white/8 px-3 py-2 text-center text-xs font-semibold text-slate-100 ring-1 ring-white/10">{label}</div>
+                  <div key={label} className="rounded-2xl bg-white/[0.11] px-3 py-2 text-center text-xs font-semibold text-white ring-1 ring-white/10">{label}</div>
                 ))}
               </div>
             </div>
@@ -168,12 +168,12 @@ export function RobotReadiness() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#020817]/88 p-4 shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-relay="robot">
+      <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#020817] p-4 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-relay="robot">
         <div className="pointer-events-none absolute inset-x-6 top-1/2 hidden h-px bg-gradient-to-r from-blue-400/40 via-amber-300/45 to-emerald-300/45 lg:block" />
         <div className="relative grid gap-3 lg:grid-cols-5">
           {['Task source', 'Policy check', 'Human gate', 'Robot ready', 'Proof return'].map((label, index) => (
-            <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.055] px-4 py-3 text-sm font-semibold text-slate-100 shadow-sm">
-              <span className="mb-2 inline-flex rounded-full bg-white/10 px-2.5 py-1 text-[11px] text-blue-100 ring-1 ring-white/10">R{index + 1}</span>
+            <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.09] px-4 py-3 text-sm font-semibold text-white shadow-sm">
+              <span className="mb-2 inline-flex rounded-full bg-white/12 px-2.5 py-1 text-[11px] text-white ring-1 ring-white/10">R{index + 1}</span>
               <p>{label}</p>
             </div>
           ))}
