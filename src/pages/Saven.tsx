@@ -21,7 +21,7 @@ import {
   UsersRound,
   Waypoints,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BackButton from '../components/BackButton';
 import SEO from '../components/SEO';
 import { SavenCareRoutes } from '../features/saven/pages/SavenCareRoutesPage';
@@ -1173,7 +1173,7 @@ function SavenAppShell({
           </button>
         </aside>
         <div className="min-w-0 pb-20 lg:pb-0">
-          <header className="sticky top-[68px] z-20 border-b border-white/70 bg-[#f7f5f1]/88 px-5 py-4 backdrop-blur-xl dark:border-white/10 dark:bg-[#07111f]/88 sm:px-8 lg:px-10">
+          <header className="relative z-10 border-b border-white/70 bg-[#f7f5f1]/88 px-5 py-4 backdrop-blur-xl dark:border-white/10 dark:bg-[#07111f]/88 sm:px-8 lg:px-10">
             <div className="mx-auto flex max-w-[1480px] flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">BioMath Core SAVEN</p>
@@ -1188,9 +1188,11 @@ function SavenAppShell({
             </div>
           </header>
           <div className="mx-auto max-w-[1480px] px-5 pt-8 sm:px-8 lg:px-10">
-            <SavenCommandStrip activePage={activePage} openPage={openPage} />
           </div>
-          <main className="mx-auto max-w-[1480px] px-5 py-6 sm:px-8 lg:px-10">{children}</main>
+          <main className="mx-auto max-w-[1480px] px-5 py-6 sm:px-8 lg:px-10">
+            <SavenCommandStrip activePage={activePage} openPage={openPage} />
+            <div className="mt-6">{children}</div>
+          </main>
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-white/70 bg-white/92 px-2 py-2 shadow-2xl backdrop-blur-xl dark:border-white/10 dark:bg-[#07111f]/94 lg:hidden">
@@ -1308,38 +1310,100 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
 
 
 
+
 function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; openPage: (pageId: SavenPageId) => void }) {
   const [activeCommand, setActiveCommand] = useState('nurse');
+  const [micActive, setMicActive] = useState(false);
+  const [micError, setMicError] = useState('');
+  const [levels, setLevels] = useState<number[]>(Array.from({ length: 14 }, () => 6));
+  const mediaStreamRef = useRef<MediaStream | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const animationRef = useRef<number | null>(null);
   const pageLabel = appNavItems.find((item) => item.id === activePage)?.label || 'SAVEN';
-  const commands: Array<{ id: string; label: string; target: string; command: string; page: SavenPageId; tone: string }> = [
-    { id: 'caregiver', label: 'Caregiver', target: 'Maya Carter', command: 'Assign support task to Maya and require verification.', page: 'app-circle', tone: 'blue' },
-    { id: 'nurse', label: 'Nurse', target: 'Nurse Olivia Grant', command: 'Request nurse follow-up and send recovery context.', page: 'app-care-routes', tone: 'green' },
-    { id: 'doctor', label: 'Doctor', target: 'Dr. Elena Morris', command: 'Prepare clinical summary for doctor review.', page: 'app-care-routes', tone: 'blue' },
-    { id: 'robot', label: 'Robot', target: 'Mobility robot', command: 'Check robot readiness and keep physical approval locked.', page: 'app-robots', tone: 'gold' },
-    { id: 'device', label: 'Device', target: 'Wearable + home sensors', command: 'Check device telemetry and use it for verification.', page: 'app-devices', tone: 'green' },
-    { id: 'emergency', label: 'Emergency', target: 'Emergency path', command: 'Show escalation rules and first contact.', page: 'app-care-routes', tone: 'red' },
+  const commands: Array<{ id: string; label: string; target: string; command: string; page: SavenPageId }> = [
+    { id: 'caregiver', label: 'Caregiver', target: 'Maya Carter', command: 'Assign support task to Maya and require verification.', page: 'app-circle' },
+    { id: 'nurse', label: 'Nurse', target: 'Nurse Olivia Grant', command: 'Request nurse follow-up and send recovery context.', page: 'app-care-routes' },
+    { id: 'doctor', label: 'Doctor', target: 'Dr. Elena Morris', command: 'Prepare clinical summary for doctor review.', page: 'app-care-routes' },
+    { id: 'robot', label: 'Robot', target: 'Mobility robot', command: 'Check robot readiness and keep physical approval locked.', page: 'app-robots' },
+    { id: 'device', label: 'Device', target: 'Wearable + home sensors', command: 'Check device telemetry and use it for verification.', page: 'app-devices' },
+    { id: 'emergency', label: 'Emergency', target: 'Emergency path', command: 'Show escalation rules and first contact.', page: 'app-care-routes' },
   ];
   const selected = commands.find((item) => item.id === activeCommand) || commands[0];
-  const meterBars = [30, 46, 66, 82, 58, 40, 72, 50, 34, 64, 84, 44];
+
+  const stopMic = () => {
+    if (animationRef.current !== null) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
+    }
+    mediaStreamRef.current?.getTracks().forEach((track) => track.stop());
+    mediaStreamRef.current = null;
+    void audioContextRef.current?.close();
+    audioContextRef.current = null;
+    setMicActive(false);
+    setLevels(Array.from({ length: 14 }, () => 6));
+  };
+
+  useEffect(() => stopMic, []);
+
+  const toggleMic = async () => {
+    if (micActive) {
+      stopMic();
+      return;
+    }
+    setMicError('');
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const AudioContextCtor = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioContextCtor) throw new Error('AudioContext is not available in this browser.');
+      const audioContext = new AudioContextCtor();
+      const analyser = audioContext.createAnalyser();
+      analyser.fftSize = 256;
+      analyser.smoothingTimeConstant = 0.72;
+      audioContext.createMediaStreamSource(stream).connect(analyser);
+      mediaStreamRef.current = stream;
+      audioContextRef.current = audioContext;
+      setMicActive(true);
+
+      const data = new Uint8Array(analyser.frequencyBinCount);
+      const update = () => {
+        analyser.getByteFrequencyData(data);
+        const barCount = 14;
+        const bucketSize = Math.max(1, Math.floor(data.length / barCount));
+        const next = Array.from({ length: barCount }, (_, index) => {
+          let sum = 0;
+          for (let offset = 0; offset < bucketSize; offset += 1) {
+            sum += data[index * bucketSize + offset] || 0;
+          }
+          return Math.max(5, Math.round((sum / bucketSize / 255) * 100));
+        });
+        setLevels(next);
+        animationRef.current = requestAnimationFrame(update);
+      };
+      update();
+    } catch (error) {
+      setMicError(error instanceof Error ? error.message : 'Microphone is not available.');
+      stopMic();
+    }
+  };
 
   return (
-    <section className="rounded-[1.65rem] border border-blue-200/70 bg-[radial-gradient(circle_at_6%_50%,rgba(59,130,246,0.18),transparent_28%),radial-gradient(circle_at_96%_40%,rgba(249,115,22,0.16),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.96),rgba(239,246,255,0.84))] p-3 shadow-lg shadow-blue-950/5 dark:border-blue-300/20 dark:bg-[radial-gradient(circle_at_6%_50%,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_96%_40%,rgba(249,115,22,0.18),transparent_24%),linear-gradient(135deg,rgba(6,16,31,0.98),rgba(15,23,42,0.9))] dark:ring-1 dark:ring-blue-300/15">
-      <div className="grid gap-3 xl:grid-cols-[230px_minmax(0,1fr)_310px] xl:items-center">
-        <div className="flex min-w-0 items-center gap-3 rounded-2xl bg-slate-950 px-3 py-2 text-white shadow-sm dark:bg-white dark:text-slate-950">
+    <section className="rounded-3xl border border-blue-200/70 bg-[linear-gradient(135deg,rgba(255,255,255,0.95),rgba(239,246,255,0.82),rgba(255,247,237,0.78))] px-4 py-3 shadow-lg shadow-blue-950/5 dark:border-blue-300/20 dark:bg-[linear-gradient(135deg,rgba(6,16,31,0.98),rgba(15,23,42,0.92),rgba(35,23,10,0.56))] dark:ring-1 dark:ring-blue-300/15">
+      <div className="grid gap-3 2xl:grid-cols-[190px_minmax(0,1fr)_330px] 2xl:items-center">
+        <div className="flex min-w-0 items-center gap-3">
           <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-slate-950 ring-1 ring-blue-300/30">
             <span className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_35%_35%,rgba(59,130,246,0.62),transparent_38%),radial-gradient(circle_at_72%_72%,rgba(249,115,22,0.54),transparent_35%)]" />
             <img src="/saven-mark.png" alt="" className="relative h-full w-full object-cover" />
-            <span className="absolute bottom-1 right-1 h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.95)]" />
+            <span className={(micActive ? 'bg-red-500 shadow-[0_0_14px_rgba(239,68,68,0.95)]' : 'bg-emerald-400 shadow-[0_0_14px_rgba(52,211,153,0.95)]') + ' absolute bottom-1 right-1 h-2 w-2 rounded-full'} />
           </span>
           <div className="min-w-0">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] opacity-70">Voice rail</p>
-            <p className="truncate text-sm font-semibold">SAVEN commands</p>
-            <p className="truncate text-[11px] opacity-65">{pageLabel}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-700 dark:text-blue-200">Voice control</p>
+            <p className="truncate text-sm font-semibold text-slate-950 dark:text-white">SAVEN commands</p>
+            <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">{pageLabel}</p>
           </div>
         </div>
 
         <div className="min-w-0">
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
             {commands.map((item) => (
               <button
                 key={item.id}
@@ -1350,27 +1414,30 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
               </button>
             ))}
           </div>
-          <div className="mt-2 grid gap-2 lg:grid-cols-[minmax(0,1fr)_170px] lg:items-center">
-            <div className="min-w-0 rounded-2xl bg-white/76 px-3 py-2 text-slate-950 shadow-inner ring-1 ring-white/70 dark:bg-slate-950/56 dark:text-white dark:ring-white/10">
-              <p className="truncate text-sm font-semibold">Hey SAVEN, {selected.command}</p>
-              <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">Target: {selected.target}</p>
-            </div>
-            <div className="flex h-8 items-end gap-1 rounded-2xl bg-slate-950 px-2 py-1.5 shadow-inner dark:bg-black/50">
-              {meterBars.map((height, index) => (
-                <span
-                  key={index}
-                  className={(height > 76 ? 'bg-red-400' : height > 56 ? 'bg-amber-300' : 'bg-emerald-400') + ' w-full rounded-full transition-all duration-300'}
-                  style={{ height: Math.max(18, height - (activeCommand.length * index) % 38) + '%' }}
-                />
-              ))}
-            </div>
+          <div className="mt-2 min-w-0 rounded-2xl bg-white/72 px-3 py-2 text-slate-950 shadow-inner ring-1 ring-white/70 dark:bg-slate-950/56 dark:text-white dark:ring-white/10">
+            <p className="truncate text-sm font-semibold">Hey SAVEN, {selected.command}</p>
+            <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">Target: {selected.target}</p>
           </div>
         </div>
 
-        <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-3">
-          <button onClick={() => openPage('app-settings')} className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-500">
-            Open mic
+        <div className="grid gap-2 sm:grid-cols-[120px_1fr] sm:items-center">
+          <button onClick={toggleMic} className={(micActive ? 'bg-red-600 hover:bg-red-500' : 'bg-blue-600 hover:bg-blue-500') + ' rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5'}>
+            {micActive ? 'Mic on' : 'Open mic'}
           </button>
+          <div className="min-w-0 rounded-2xl bg-slate-950 px-3 py-2 shadow-inner dark:bg-black/50">
+            <div className="flex h-6 items-end gap-1">
+              {levels.map((height, index) => (
+                <span
+                  key={index}
+                  className={(height > 78 ? 'bg-red-400' : height > 52 ? 'bg-amber-300' : 'bg-emerald-400') + ' w-full rounded-full transition-[height,background-color] duration-75'}
+                  style={{ height: height + '%' }}
+                />
+              ))}
+            </div>
+            <p className={(micError ? 'text-red-300' : 'text-slate-400') + ' mt-1 truncate text-[10px] font-semibold uppercase tracking-[0.14em]'}>
+              {micError || (micActive ? 'Live microphone level' : 'Mic level')}
+            </p>
+          </div>
           <button onClick={() => openPage(selected.page)} className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm ring-1 ring-slate-200 transition-all hover:-translate-y-0.5 hover:bg-blue-50 dark:bg-slate-950 dark:text-slate-100 dark:ring-white/10">
             Open service
           </button>
