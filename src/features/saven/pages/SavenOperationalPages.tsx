@@ -48,6 +48,25 @@ export function TaskLifecycleService() {
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Task Lifecycle Service" title="Every support need moves through one visible lifecycle." text="SAVEN keeps one path from detected need to verified continuity." />
+
+      <section className="grid gap-4 rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-operations-rail="lifecycle">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/70">Lifecycle rail</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">No hidden task state.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">Every support need must show owner, permission, action, proof, and continuity.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, show where the walking task is in the lifecycle.</p>
+          <p className="mt-2 text-sm text-blue-100">Target: assisted walking session</p>
+        </div>
+        <div className="grid gap-2">
+          {['Owner selected', 'Action visible', 'Proof required'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="grid gap-4 xl:grid-cols-6">
         {lifecycle.map(([title, state], index) => (
           <article key={title} className="relative min-h-[210px] rounded-3xl border border-blue-200 bg-blue-50 p-4 text-blue-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100">
@@ -73,6 +92,25 @@ export function DailySupportPlanBuilder() {
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Daily Support Plan" title="A simple daily plan that becomes real support work." text="SAVEN organizes time windows, owners, commands, verification, fallback, and continuity effect." />
+
+      <section className="grid gap-4 rounded-[2rem] border border-amber-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-operations-rail="daily-plan">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-100/70">Daily plan rail</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">The day is a support script.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">Each window has an owner, proof rule, fallback, and continuity impact.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, build today around hydration, walking, rest, and family summary.</p>
+          <p className="mt-2 text-sm text-amber-100">Target: Anna Roberts, Home Recovery</p>
+        </div>
+        <div className="grid gap-2">
+          {['Time window', 'Human owner', 'Proof rule'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
         <div className="space-y-3">
           {rows.map(([time, action, owner, proof]) => (
@@ -128,6 +166,25 @@ export function ContinuityOperations() {
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Continuity Operations" title="Continuity is the final SAVEN product outcome." text="SAVEN shows whether real support continuity is stable, interrupted, waiting, or escalating." />
+
+      <section className="grid gap-4 rounded-[2rem] border border-emerald-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-operations-rail="continuity">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100/70">Continuity rail</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Support stability is earned.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">Continuity rises only when support is done, confirmed, and ready for the next window.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, explain what is keeping continuity at 86.</p>
+          <p className="mt-2 text-sm text-emerald-100">Target: today support continuity</p>
+        </div>
+        <div className="grid gap-2">
+          {['4 verified', '1 waiting', 'Next window clear'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="grid gap-5 xl:grid-cols-[420px_minmax(0,1fr)]">
         <div className="rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Continuity score</p>
