@@ -57,6 +57,16 @@ Optional direct backend mode:
 - Confirm event audit entries are inspectable.
 - Confirm production QA and deploy readiness checks pass before release.
 
+## Command Contract Fixtures
+
+Run:
+
+```zsh
+npm run commands:saven
+```
+
+This verifies SAVEN command fixtures for nurse, caregiver, doctor, device, robot, and emergency flows before release.
+
 ## Safety Gates
 
 - No robot or physical execution path should bypass command permission review.

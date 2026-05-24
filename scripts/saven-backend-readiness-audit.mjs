@@ -3,6 +3,11 @@ import fs from 'node:fs';
 
 const checks = [
   {
+    label: 'Command acceptance fixtures',
+    file: 'src/features/saven/services/savenCommandAcceptanceFixtures.ts',
+    markers: ['savenCommandAcceptanceFixtures', 'nurse-follow-up', 'robot-readiness-review', 'emergency-rule-display'],
+  },
+  {
     label: 'Backend gateway contract',
     file: 'src/features/saven/contracts/savenBackendContract.ts',
     markers: ['SavenBackendGateway', 'SavenMonitoringSnapshot', 'SavenAdminOverrideResult', 'SavenEventAuditRecord', 'SavenIncidentReadiness', 'SavenPersistenceStatus', 'SavenCommandPermissionReview', 'applyAdminOverride', 'listEventAudit', 'getIncidentReadiness', 'getPersistenceStatus', 'reviewCommandPermission'],

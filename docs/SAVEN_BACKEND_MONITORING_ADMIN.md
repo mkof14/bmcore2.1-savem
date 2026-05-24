@@ -334,3 +334,17 @@ SAVEN Visual Acceptance is now tracked as a release gate:
 - `docs/SAVEN_VISUAL_ACCEPTANCE.md` defines SAVEN-specific interface rules.
 - `npm run visual:saven` checks command rail, mic level indicator, light-theme contrast guardrails, dark-operational surfaces, and operator-facing screen coverage.
 - SAVEN should stay visually distinct from generic BioMath Core pages while still connecting to BioMath Core Admin.
+
+
+## Command Contract Fixtures
+
+SAVEN command acceptance fixtures now cover the core voice/backend/admin loop:
+
+- nurse follow-up
+- caregiver assignment
+- doctor clinical summary
+- device telemetry confirmation
+- robot readiness with approval lock
+- emergency rule display without automatic dispatch
+
+`npm run commands:saven` verifies that every fixture maps through execution planning, permission review, local backend gateway behavior, and admin-facing evidence.

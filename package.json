@@ -39,7 +39,8 @@
     "release:saven": "node scripts/saven-release-readiness-audit.mjs",
     "preview:saven:auto": "node scripts/saven-production-preview-smoke.mjs",
     "ship:saven": "npm run ready:saven && npm run preview:saven:auto",
-    "visual:saven": "node scripts/saven-visual-acceptance-audit.mjs"
+    "visual:saven": "node scripts/saven-visual-acceptance-audit.mjs",
+    "commands:saven": "node scripts/saven-command-contract-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

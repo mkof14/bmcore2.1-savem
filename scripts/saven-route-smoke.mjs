@@ -34,6 +34,7 @@ const sourceExpectations = [
   ['Backend Gateway map', ['SavenBackendGatewayPanel', 'Backend gateway map', 'Backend Gateway Map', 'backend gateway']],
   ['Monitoring Contract', ['SavenMonitoringSnapshot', 'createSavenMonitoringSnapshot', 'getMonitoringSnapshot']],
   ['Event Audit Model', ['SavenEventAuditRecord', 'createSavenEventAuditRecords', 'listEventAudit', 'saven_events']],
+  ['Command Contract Fixtures', ['savenCommandAcceptanceFixtures', 'nurse-follow-up', 'robot-readiness-review', 'emergency-rule-display']],
   ['HTTP Backend Adapter', ['createSavenHttpBackendAdapter', '/admin-overrides', '/monitoring']],
   ['Backend Gateway Selector', ['createSavenBackendGatewayFromEnv', 'VITE_SAVEN_BACKEND_MODE', 'savenBackendGateway']],
   ['Backend API Contract', ['savenBackendApiRoutes', 'getSavenBackendApiRoute', 'savenHumanConfirmedRouteIds', 'incident_readiness']],
