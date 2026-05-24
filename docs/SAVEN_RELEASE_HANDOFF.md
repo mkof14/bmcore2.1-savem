@@ -69,6 +69,16 @@ Review and deploy `supabase/functions/saven-gateway/index.ts` when SAVEN is read
 - Confirm the gateway exposes command ingestion, persistence status, permission review, audit events, and incident readiness.
 - Keep local mode available for demo and fallback review.
 
+## Admin Alert Routes Panel
+
+Run:
+
+```zsh
+npm run admin-alerts:saven
+```
+
+Admin Ops should show active SAVEN alert routes and runbook steps when SLO metrics move into watch or breach.
+
 ## Alerting Runbook Kit
 
 Run:

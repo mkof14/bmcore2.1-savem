@@ -404,3 +404,14 @@ SAVEN alerting now has route-specific runbooks:
 - `npm run alerts:saven`
 
 Alerts route to Admin Ops, caregiver review, robot review, emergency review, or device review. This turns monitoring SLO posture into concrete operator action.
+
+
+## Admin Alert Routes Panel
+
+BioMath Core Admin now turns SAVEN alerts into action routes:
+
+- `data-saven-admin-alerts="true"`
+- `createSavenOpsAlerts`
+- `npm run admin-alerts:saven`
+
+The panel shows Admin Ops, caregiver review, robot review, emergency review, and device review steps directly in the SAVEN Ops screen. It keeps incident response visible without forcing operators to leave the admin surface.

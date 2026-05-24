@@ -19,6 +19,7 @@ import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
 import { createSavenMonitoringSloReport, type SavenMonitoringSloReport } from '../features/saven/services/savenMonitoringSloService';
+import { createSavenOpsAlerts, type SavenOpsAlert } from '../features/saven/services/savenAlertingService';
 import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenIncidentAction, SavenIncidentActionResult, SavenIncidentReadiness, SavenMonitoringSnapshot, SavenPersistenceStatus } from '../features/saven/contracts/savenBackendContract';
 
 interface AdminPanelProps {
@@ -182,6 +183,7 @@ function SavenOpsAdminSection() {
   const incidentItems = incidentReadiness?.incidents.slice(0, 6) ?? [];
   const persistenceTables = persistenceStatus?.tables.slice(0, 6) ?? [];
   const sloReport: SavenMonitoringSloReport | null = snapshot ? createSavenMonitoringSloReport(snapshot) : null;
+  const activeAlerts: SavenOpsAlert[] = sloReport ? createSavenOpsAlerts(sloReport) : [];
   const sloTone = sloReport?.status === 'breach' ? 'border-red-300/25 bg-red-500/10 text-red-100' : sloReport?.status === 'watch' ? 'border-amber-300/25 bg-amber-500/10 text-amber-100' : 'border-emerald-300/25 bg-emerald-500/10 text-emerald-100';
   const adminOverrideActions: Array<{ action: SavenAdminOverrideAction; label: string; targetId: string; reason: string }> = [
     { action: 'pause_support', label: 'Pause support', targetId: 'person-anna', reason: 'Admin review before continued support.' },
@@ -279,6 +281,56 @@ function SavenOpsAdminSection() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-amber-300/15 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-alerts="true">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-100/70">SAVEN alert routes</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">When support is at risk, Admin sees the next move.</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">Alerts translate SAVEN SLO watch and breach states into action routes: Admin Ops, caregiver review, robot review, emergency review, and device review.</p>
+          </div>
+          <span className="w-fit rounded-full border border-white/10 bg-slate-950/70 px-4 py-2 text-sm font-semibold text-slate-100">
+            {activeAlerts.length ? activeAlerts.length + ' active' : 'No active alerts'}
+          </span>
+        </div>
+        <div className="mt-5 grid gap-3 xl:grid-cols-2">
+          {activeAlerts.length ? activeAlerts.map((alert) => {
+            const alertTone =
+              alert.severity === 'critical'
+                ? 'border-red-300/25 bg-red-500/10'
+                : alert.severity === 'urgent'
+                  ? 'border-orange-300/25 bg-orange-500/10'
+                  : alert.severity === 'watch'
+                    ? 'border-amber-300/25 bg-amber-500/10'
+                    : 'border-blue-300/25 bg-blue-500/10';
+            return (
+              <article key={alert.id} className={'rounded-2xl border p-4 ring-1 ring-white/5 ' + alertTone}>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-white">{alert.title}</p>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">{alert.route.replace(/_/g, ' ')}</p>
+                  </div>
+                  <span className="rounded-full bg-slate-950/70 px-3 py-1 text-xs font-semibold capitalize text-slate-100 ring-1 ring-white/10">{alert.severity}</span>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-slate-300">{alert.message}</p>
+                <div className="mt-4 grid gap-2">
+                  {alert.runbook.map((step, index) => (
+                    <div key={step} className="flex gap-3 rounded-2xl bg-slate-950/55 px-3 py-2 text-sm text-slate-200 ring-1 ring-white/10">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-semibold text-white">{index + 1}</span>
+                      <span>{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            );
+          }) : (
+            <article className="rounded-2xl border border-emerald-300/20 bg-emerald-500/10 p-4 ring-1 ring-white/5">
+              <p className="text-sm font-semibold text-emerald-50">SAVEN has no active alert routes.</p>
+              <p className="mt-2 text-sm leading-6 text-emerald-100/75">Command, proof, robot, emergency, and endpoint posture are within review limits.</p>
+            </article>
+          )}
         </div>
       </section>
 

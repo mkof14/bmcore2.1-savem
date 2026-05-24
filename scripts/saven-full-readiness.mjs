@@ -6,6 +6,7 @@ const steps = [
   { label: 'Monitoring SLO', command: 'npm', args: ['run', 'monitoring:saven'] },
   { label: 'Alerting runbook', command: 'npm', args: ['run', 'alerts:saven'] },
   { label: 'Admin Ops', command: 'npm', args: ['run', 'admin:saven'] },
+  { label: 'Admin alert routes', command: 'npm', args: ['run', 'admin-alerts:saven'] },
   { label: 'Supabase migration kit', command: 'npm', args: ['run', 'db:saven'] },
   { label: 'Edge Function package', command: 'npm', args: ['run', 'edge:saven'] },
   { label: 'Command contract', command: 'npm', args: ['run', 'commands:saven'] },
