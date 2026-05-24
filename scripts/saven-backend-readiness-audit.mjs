@@ -52,6 +52,11 @@ const checks = [
     file: 'supabase/functions/saven-gateway/index.ts',
     markers: ['ALLOWED_ACTIONS', 'apply_admin_override', 'No external dispatch', 'Admin access required'],
   },
+  {
+    label: 'Edge Function backend adapter',
+    file: 'src/features/saven/services/savenEdgeFunctionBackendAdapter.ts',
+    markers: ['createSavenEdgeFunctionBackendAdapter', 'apply_admin_override', 'VITE_SAVEN_EDGE_FUNCTION_URL'],
+  },
 ];
 
 function read(relativePath) {

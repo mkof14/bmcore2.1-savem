@@ -1,10 +1,12 @@
 import type { SavenBackendGateway } from '../contracts/savenBackendContract';
+import { createSavenEdgeFunctionBackendAdapter } from './savenEdgeFunctionBackendAdapter';
 import { createSavenHttpBackendAdapter } from './savenHttpBackendAdapter';
 import { savenLocalBackendGateway } from './savenLocalBackendGateway';
 
 type SavenBackendGatewaySelectorEnv = {
   VITE_SAVEN_BACKEND_MODE?: string;
   VITE_SAVEN_BACKEND_URL?: string;
+  VITE_SAVEN_EDGE_FUNCTION_URL?: string;
 };
 
 type SavenBackendGatewaySelectorOptions = {
@@ -30,6 +32,19 @@ export function createSavenBackendGatewayFromEnv(options: SavenBackendGatewaySel
 
     return createSavenHttpBackendAdapter({
       baseUrl: url,
+      fetchImpl: options.fetchImpl,
+      getAuthToken: options.getAuthToken,
+    });
+  }
+
+  if (mode === 'edge') {
+    const functionUrl = env.VITE_SAVEN_EDGE_FUNCTION_URL;
+    if (!functionUrl) {
+      throw new Error('SAVEN Edge Function backend mode requires VITE_SAVEN_EDGE_FUNCTION_URL.');
+    }
+
+    return createSavenEdgeFunctionBackendAdapter({
+      functionUrl,
       fetchImpl: options.fetchImpl,
       getAuthToken: options.getAuthToken,
     });

@@ -216,3 +216,20 @@ Safety rules:
 - critical writes remain behind the gateway boundary
 
 This draft should be reviewed before deployment, especially service-role access, audit logging, RLS interaction, and production route mapping.
+
+## Edge Function Backend Adapter
+
+SAVEN now has a client-side adapter for the Supabase Edge Function gateway:
+
+- `createSavenEdgeFunctionBackendAdapter(options)`
+- selector mode: `VITE_SAVEN_BACKEND_MODE=edge`
+- required URL: `VITE_SAVEN_EDGE_FUNCTION_URL`
+
+The adapter maps the `SavenBackendGateway` interface to action/payload calls against `saven-gateway`, for example:
+
+- `monitoring`
+- `send_command`
+- `apply_admin_override`
+- `request_care_contact`
+
+The default remains local mode.
