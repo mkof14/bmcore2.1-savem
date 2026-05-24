@@ -17,6 +17,20 @@ This runs:
 
 The smoke check starts the local SAVEN dev server, verifies key routes, verifies important SAVEN page markers, and stops the server.
 
+## Full Readiness Gate
+
+```zsh
+npm run ready:saven
+```
+
+Use this before a push or release handoff. It runs SAVEN theme contrast, TypeScript, tests, route smoke with an auto-started SAVEN dev server, and a production build with public Supabase variables removed so the fallback path is verified.
+
+After the build, restore generated build metadata before committing:
+
+```zsh
+git restore public/version.json
+```
+
 ## Theme Contrast Check
 
 ```zsh
