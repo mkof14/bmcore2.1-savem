@@ -42,6 +42,11 @@ const checks = [
     file: 'supabase/migrations/20260524090000_saven_backend_schema_draft.sql',
     markers: ['saven_profiles', 'saven_tasks', 'saven_commands', 'saven_verifications', 'saven_admin_overrides'],
   },
+  {
+    label: 'RLS policy draft',
+    file: 'supabase/migrations/20260524091000_saven_rls_policy_draft.sql',
+    markers: ['is_saven_admin', 'enable row level security', 'saven admin overrides admin only', 'Critical writes'],
+  },
 ];
 
 function read(relativePath) {

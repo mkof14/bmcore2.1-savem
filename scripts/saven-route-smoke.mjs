@@ -37,6 +37,7 @@ const sourceExpectations = [
   ['Backend Gateway Selector', ['createSavenBackendGatewayFromEnv', 'VITE_SAVEN_BACKEND_MODE', 'savenBackendGateway']],
   ['Backend Readiness Audit', ['saven-backend-readiness-audit.mjs', 'backend:saven', 'Backend readiness']],
   ['Supabase Schema Draft', ['saven_backend_schema_draft', 'saven_admin_overrides', 'saven_verifications']],
+  ['RLS Policy Draft', ['saven_rls_policy_draft', 'is_saven_admin', 'Critical writes']],
   ['Backend Monitoring Admin', ['data-saven-admin-ops="true"', 'SAVEN Backend, Monitoring, and Admin Foundation']],
   ['Admin Monitoring Snapshot', ['data-saven-admin-monitoring-live="true"', 'getMonitoringSnapshot()']],
   ['Admin Override Contract', ['data-saven-admin-overrides="true"', 'SavenAdminOverrideResult', 'applyAdminOverride']],

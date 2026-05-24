@@ -171,3 +171,24 @@ It defines the first backend persistence shape:
 - `saven_admin_overrides`
 
 This migration should be reviewed before applying to any production Supabase project. It is intentionally treated as a schema draft until backend policies, RLS rules, and edge functions are finalized.
+
+## RLS Policy Draft
+
+A review-only SAVEN RLS policy draft now exists at:
+
+`supabase/migrations/20260524091000_saven_rls_policy_draft.sql`
+
+The draft uses the current BioMath Core admin flag:
+
+- `public.profiles.id = auth.uid()`
+- `public.profiles.is_admin = true`
+
+Policy intent:
+
+- profile owners can read their own SAVEN profile data
+- admins can operate SAVEN Ops
+- command creation may come from the owner or admin
+- escalations and admin overrides are admin-only
+- critical writes stay behind approved Edge Functions or admin controls
+
+Do not apply this draft to production until RLS recursion, service-role paths, and Edge Function write paths are reviewed.
