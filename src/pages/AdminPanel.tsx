@@ -28,6 +28,7 @@ export default function AdminPanel({ onNavigate }: AdminPanelProps) {
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'saven-ops', label: 'SAVEN Ops', icon: Shield },
     { id: 'support-chat', label: 'Support Chat', icon: MessageSquare },
     { id: 'config-system', label: 'Config System (Vault)', icon: Database },
     { id: 'api-keys', label: 'API Keys & Services', icon: Key },
@@ -96,6 +97,7 @@ export default function AdminPanel({ onNavigate }: AdminPanelProps) {
             <BackButton onNavigate={onNavigate} />
 
             {activeSection === 'dashboard' && <DashboardSection />}
+            {activeSection === 'saven-ops' && <SavenOpsAdminSection />}
             {activeSection === 'support-chat' && <SupportChatPanel />}
             {activeSection === 'config-system' && <ConfigSystem />}
             {activeSection === 'api-keys' && <AllAPIKeysManager />}
@@ -112,6 +114,98 @@ export default function AdminPanel({ onNavigate }: AdminPanelProps) {
             {activeSection === 'settings' && <SettingsSection />}
           </div>
         </main>
+      </div>
+    </div>
+  );
+}
+
+function SavenOpsAdminSection() {
+  const opsCards = [
+    { label: 'Backend gateway', value: 'Contract ready', detail: 'One adapter boundary for tasks, commands, contacts, proof, and continuity.', tone: 'blue' },
+    { label: 'Monitoring', value: 'Signals defined', detail: 'Command latency, proof waits, failed routes, escalation waits, and endpoint health.', tone: 'green' },
+    { label: 'Admin control', value: 'Merged admin', detail: 'SAVEN operations live inside BioMath Core Admin instead of a separate console.', tone: 'gold' },
+    { label: 'Safety gates', value: 'Human confirmed', detail: 'Emergency, clinical, robot, and external dispatch stay behind confirmation gates.', tone: 'red' },
+  ];
+
+  const lanes = [
+    ['Command intake', 'Voice/text command received, classified, and linked to a profile.'],
+    ['Assignment', 'Owner selected across person, caregiver, family, nurse, device, robot, or environment.'],
+    ['Verification', 'Proof request opened with method, deadline, and fallback escalation.'],
+    ['Continuity', 'Timeline and next support window update only after proof or admin decision.'],
+  ];
+
+  const monitorRows = [
+    ['Command latency', '< 2s target', 'Watch voice and text command routing.'],
+    ['Open proof waits', '0 urgent waits', 'Track actions stuck before confirmation.'],
+    ['Escalation backlog', 'Human review', 'Show nurse, doctor, family, and emergency queue.'],
+    ['Endpoint health', 'Devices + robots', 'Monitor gateway status before action.'],
+    ['Admin override log', 'Required', 'Every pause, reassign, or emergency route needs audit trail.'],
+  ];
+
+  return (
+    <div className="space-y-6" data-saven-admin-ops="true">
+      <div className="rounded-3xl border border-blue-500/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">SAVEN Operations</p>
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight">Backend, monitoring, and admin control in one place.</h1>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-300">
+              This is the BioMath Core Admin entry point for SAVEN: commands, assignments, proof waits, endpoint health, and human safety gates.
+            </p>
+          </div>
+          <button className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm">
+            Admin ready
+          </button>
+        </div>
+        <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {opsCards.map((card) => {
+            const tone =
+              card.tone === 'green'
+                ? 'border-emerald-300/20 bg-emerald-500/10'
+                : card.tone === 'gold'
+                  ? 'border-amber-300/20 bg-amber-500/10'
+                  : card.tone === 'red'
+                    ? 'border-red-300/20 bg-red-500/10'
+                    : 'border-blue-300/20 bg-blue-500/10';
+            return (
+              <article key={card.label} className={'min-h-[160px] rounded-2xl border p-4 ring-1 ring-white/5 ' + tone}>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{card.label}</p>
+                <h3 className="mt-3 text-xl font-semibold text-white">{card.value}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-300">{card.detail}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+        <section className="rounded-3xl border border-slate-800 bg-slate-950 p-6 text-white shadow-xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/70">Operational backend path</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-2">
+            {lanes.map(([title, detail], index) => (
+              <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-xs font-bold text-white">{index + 1}</span>
+                <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-300">{detail}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-slate-800 bg-slate-950 p-6 text-white shadow-xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-100/70">Monitoring queue</p>
+          <div className="mt-5 space-y-3">
+            {monitorRows.map(([label, value, detail]) => (
+              <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="font-semibold text-white">{label}</p>
+                  <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-100 ring-1 ring-emerald-300/20">{value}</span>
+                </div>
+                <p className="mt-2 text-sm leading-5 text-slate-400">{detail}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );

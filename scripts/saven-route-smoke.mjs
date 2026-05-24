@@ -32,6 +32,7 @@ const sourceExpectations = [
   ['Life Setup Rail', ['data-saven-life-setup-rail="true"', 'Setup command rail']],
   ['Care Routes page', ['function SavenCareRoutes()', 'Care Routes']],
   ['Backend Gateway map', ['SavenBackendGatewayPanel', 'Backend gateway map', 'Backend Gateway Map', 'backend gateway']],
+  ['Backend Monitoring Admin', ['data-saven-admin-ops="true"', 'SAVEN Backend, Monitoring, and Admin Foundation']],
   ['Executor Command Rails', ['data-saven-executor-command="care"', 'data-saven-executor-command="robot"', 'data-saven-executor-command="device"']],
   ['Robot Device Service Matrix', ['Robot / Device Service Matrix', 'Robot Device Service Matrix', 'Physical orchestration', 'Physical support becomes visible', 'Physical support becomes visible, permissioned, and verified']],
   ['Device Verification Gateway', ['Device Gateway', 'verification gateway for real-world support']],
@@ -91,6 +92,8 @@ async function main() {
 
   const savenPage = readProjectFile('src/pages/Saven.tsx');
   const readinessReport = readProjectFile('docs/SAVEN_FINAL_READINESS_REPORT.md');
+  const adminPanel = readProjectFile('src/pages/AdminPanel.tsx');
+  const backendMonitoringAdmin = readProjectFile('docs/SAVEN_BACKEND_MONITORING_ADMIN.md');
   const splitPageDir = new URL('../src/features/saven/pages/', import.meta.url);
   const splitPages = fs.existsSync(splitPageDir)
     ? fs.readdirSync(splitPageDir)
@@ -98,7 +101,7 @@ async function main() {
         .map((file) => fs.readFileSync(new URL(file, splitPageDir), 'utf8'))
         .join('\n')
     : '';
-  const combined = savenPage + '\n' + readinessReport + '\n' + splitPages;
+  const combined = savenPage + '\n' + readinessReport + '\n' + adminPanel + '\n' + backendMonitoringAdmin + '\n' + splitPages;
 
   for (const [label, expectedOptions] of sourceExpectations) {
     const matched = expectedOptions.some((expected) => combined.includes(expected));
