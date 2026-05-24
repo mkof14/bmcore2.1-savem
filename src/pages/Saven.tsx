@@ -1592,6 +1592,8 @@ function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: Sav
 
       <SavenStartPath openPage={openPage} />
 
+      <SavenLaunchAssurance openPage={openPage} />
+
       <SupportFlowGraphic current="Support Task Created" />
     </div>
   );
@@ -1744,6 +1746,66 @@ function SavenStartPath({ openPage }: { openPage: (pageId: SavenPageId) => void 
             </button>
           );
         })}
+      </div>
+    </section>
+  );
+}
+
+function SavenLaunchAssurance({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
+  const lanes: Array<{ label: string; title: string; detail: string; page: SavenPageId; tone: string }> = [
+    {
+      label: 'Signal',
+      title: 'Who needs support?',
+      detail: 'Profile, rhythm, comfort, and environment.',
+      page: 'app-life-setup',
+      tone: 'border-blue-300/25 bg-blue-500/10 text-blue-100',
+    },
+    {
+      label: 'Dispatch',
+      title: 'Who should act?',
+      detail: 'Family, caregiver, nurse, device, or robot.',
+      page: 'app-commands',
+      tone: 'border-cyan-300/25 bg-cyan-500/10 text-cyan-100',
+    },
+    {
+      label: 'Proof',
+      title: 'What confirms it?',
+      detail: 'Human check, device trend, photo, or environment rule.',
+      page: 'app-verification',
+      tone: 'border-emerald-300/25 bg-emerald-500/10 text-emerald-100',
+    },
+    {
+      label: 'Continuity',
+      title: 'What changes next?',
+      detail: 'Timeline, next window, escalation, and recovery pattern.',
+      page: 'app-continuity',
+      tone: 'border-amber-300/25 bg-amber-500/10 text-amber-100',
+    },
+  ];
+
+  return (
+    <section className="rounded-[2rem] border border-white/10 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-launch-assurance="true">
+      <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">Launch assurance</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">SAVEN starts only when action, owner, and proof are visible.</h3>
+        </div>
+        <button onClick={() => openPage('app-today')} className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
+          Open live support
+        </button>
+      </div>
+      <div className="mt-5 grid gap-3 md:grid-cols-2 2xl:grid-cols-4">
+        {lanes.map((lane) => (
+          <button
+            key={lane.label}
+            onClick={() => openPage(lane.page)}
+            className={'min-h-[154px] rounded-[1.5rem] border p-4 text-left shadow-sm ring-1 ring-white/5 transition-all hover:-translate-y-0.5 hover:bg-white/[0.08] hover:shadow-xl hover:shadow-blue-950/20 ' + lane.tone}
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] opacity-80">{lane.label}</p>
+            <h4 className="mt-3 text-xl font-semibold leading-6 text-white">{lane.title}</h4>
+            <p className="mt-3 text-sm leading-6 text-slate-200">{lane.detail}</p>
+          </button>
+        ))}
       </div>
     </section>
   );

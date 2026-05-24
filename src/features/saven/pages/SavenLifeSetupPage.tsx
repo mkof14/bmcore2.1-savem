@@ -141,6 +141,37 @@ export function LifeSetup({
           </div>
         </section>
 
+        <section className="grid gap-4 rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[300px_minmax(0,1fr)_270px]" data-saven-life-setup-rail="true">
+          <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-200">Setup command rail</p>
+            <h3 className="mt-2 text-xl font-semibold">Create support by voice or touch.</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-300">SAVEN turns setup answers into daily support, people, devices, and proof.</p>
+          </div>
+
+          <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/70 p-4">
+            <div className="flex flex-wrap gap-2">
+              {['Person', 'Home', 'Nurse', 'Family', 'Daily plan'].map((item) => (
+                <span key={item} className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs font-semibold text-slate-200">{item}</span>
+              ))}
+            </div>
+            <p className="mt-4 text-lg font-semibold leading-7">Hey SAVEN, create a support profile for Anna Roberts in Home Recovery.</p>
+            <p className="mt-2 text-sm text-slate-400">Then add nurse follow-up, family updates, reminders, and mobility support.</p>
+          </div>
+
+          <div className="grid gap-2">
+            {[
+              ['01', 'Person context'],
+              ['02', 'Support circle'],
+              ['03', 'First daily plan'],
+            ].map(([step, label]) => (
+              <div key={step} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-3 py-2">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-xs font-bold text-white">{step}</span>
+                <span className="text-sm font-semibold text-slate-200">{label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <LifeSetupSection
           step="01"
           tone="blue"

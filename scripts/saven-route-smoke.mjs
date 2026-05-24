@@ -4,6 +4,7 @@ const baseUrl = process.env.SAVEN_SMOKE_BASE_URL || 'http://127.0.0.1:5173';
 
 const routes = [
   '/app/saven',
+  '/app/saven/life-setup',
   '/app/saven/today',
   '/app/saven/commands',
   '/app/saven/support',
@@ -27,6 +28,8 @@ const sourceExpectations = [
   ['Dedicated Commands page', ['SAVEN Dispatch', 'Voice becomes assigned support', 'Command pad', 'Prepared command']],
   ['Operating Chain', ['data-saven-operating-chain="true"', 'SAVEN operating chain']],
   ['Start Operator Shortcuts', ['data-saven-start-shortcuts="true"', 'Operator shortcuts']],
+  ['Launch Assurance', ['data-saven-launch-assurance="true"', 'Launch assurance']],
+  ['Life Setup Rail', ['data-saven-life-setup-rail="true"', 'Setup command rail']],
   ['Care Routes page', ['function SavenCareRoutes()', 'Care Routes']],
   ['Backend Gateway map', ['SavenBackendGatewayPanel', 'Backend gateway map', 'Backend Gateway Map', 'backend gateway']],
   ['Executor Command Rails', ['data-saven-executor-command="care"', 'data-saven-executor-command="robot"', 'data-saven-executor-command="device"']],
