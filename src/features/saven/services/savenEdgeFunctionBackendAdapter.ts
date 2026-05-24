@@ -8,6 +8,7 @@ import type {
   SavenContactRequest,
   SavenContactResult,
   SavenEventAuditRecord,
+  SavenIncidentReadiness,
   SavenMonitoringSnapshot,
 } from '../contracts/savenBackendContract';
 import type { SavenControlApiResult } from './savenControlApiMock';
@@ -67,6 +68,9 @@ export function createSavenEdgeFunctionBackendAdapter(options: SavenEdgeFunction
     },
     listEventAudit() {
       return call<SavenEventAuditRecord[]>('list_events');
+    },
+    getIncidentReadiness() {
+      return call<SavenIncidentReadiness>('incident_readiness');
     },
     listTasks() {
       return call<SavenMockTask[]>('list_tasks');

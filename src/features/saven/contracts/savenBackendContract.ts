@@ -127,10 +127,38 @@ export type SavenEventAuditRecord = {
   createdAt: string;
 };
 
+export type SavenIncidentSeverity = 'watch' | 'urgent' | 'critical';
+
+export type SavenIncidentStatus = 'open' | 'waiting_human' | 'admin_review';
+
+export type SavenIncidentRecord = {
+  id: string;
+  title: string;
+  severity: SavenIncidentSeverity;
+  status: SavenIncidentStatus;
+  owner: string;
+  sourceEventId?: string;
+  nextStep: string;
+  createdAt: string;
+};
+
+export type SavenIncidentReadiness = {
+  generatedAt: string;
+  profileId: string;
+  incidents: SavenIncidentRecord[];
+  summary: {
+    open: number;
+    urgent: number;
+    critical: number;
+    waitingHuman: number;
+  };
+};
+
 export type SavenBackendGateway = {
   getSnapshot(): Promise<SavenMockState>;
   getMonitoringSnapshot(): Promise<SavenMonitoringSnapshot>;
   listEventAudit(): Promise<SavenEventAuditRecord[]>;
+  getIncidentReadiness(): Promise<SavenIncidentReadiness>;
   listTasks(): Promise<SavenMockTask[]>;
   listEndpoints(): Promise<SavenMockEndpoint[]>;
   listCareContacts(): Promise<SavenCareContact[]>;

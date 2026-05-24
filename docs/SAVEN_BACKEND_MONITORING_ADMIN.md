@@ -250,3 +250,14 @@ The event timeline records command intake, proof waits, escalation preparation, 
 BioMath Core Admin now reads `SavenBackendGateway.listEventAudit()` and renders the SAVEN Ops event timeline with `data-saven-admin-event-audit="true"`.
 
 This gives administrators a visible explanation layer for command intake, proof waits, robot review, escalation preparation, and future backend audit records.
+
+## Incident Readiness Model
+
+SAVEN now derives admin-ready incidents from the event audit model:
+
+- `SavenIncidentReadiness`
+- `createSavenIncidentReadiness(state)`
+- `SavenBackendGateway.getIncidentReadiness()`
+- `saven_incidents`
+
+Incident readiness separates normal activity from items needing attention: proof waits, escalation preparation, robot readiness review, and admin override review. BioMath Core Admin renders this layer with `data-saven-admin-incident-readiness="true"`.

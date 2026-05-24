@@ -18,7 +18,7 @@ import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
-import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
+import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenIncidentReadiness, SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
 
 interface AdminPanelProps {
   onNavigate: (page: string) => void;
@@ -124,6 +124,7 @@ export default function AdminPanel({ onNavigate }: AdminPanelProps) {
 function SavenOpsAdminSection() {
   const [snapshot, setSnapshot] = useState<SavenMonitoringSnapshot | null>(null);
   const [eventAudit, setEventAudit] = useState<SavenEventAuditRecord[]>([]);
+  const [incidentReadiness, setIncidentReadiness] = useState<SavenIncidentReadiness | null>(null);
   const [overrideResult, setOverrideResult] = useState<SavenAdminOverrideResult | null>(null);
 
   useEffect(() => {
@@ -144,6 +145,14 @@ function SavenOpsAdminSection() {
         notifyError('SAVEN event audit load failed');
       });
 
+    savenBackendGateway.getIncidentReadiness()
+      .then((readiness) => {
+        if (mounted) setIncidentReadiness(readiness);
+      })
+      .catch(() => {
+        notifyError('SAVEN incident readiness load failed');
+      });
+
     return () => {
       mounted = false;
     };
@@ -159,6 +168,7 @@ function SavenOpsAdminSection() {
   const signals = snapshot?.signals ?? [];
   const queueItems = snapshot?.queues ?? [];
   const auditItems = eventAudit.slice(0, 8);
+  const incidentItems = incidentReadiness?.incidents.slice(0, 6) ?? [];
   const adminOverrideActions: Array<{ action: SavenAdminOverrideAction; label: string; targetId: string; reason: string }> = [
     { action: 'pause_support', label: 'Pause support', targetId: 'person-anna', reason: 'Admin review before continued support.' },
     { action: 'reassign_owner', label: 'Reassign owner', targetId: 'task-mobility-1030', reason: 'Caregiver route needs review.' },
@@ -247,7 +257,6 @@ function SavenOpsAdminSection() {
         )}
       </section>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_440px]">
       <section className="rounded-3xl border border-blue-500/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-event-audit="true">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -285,6 +294,50 @@ function SavenOpsAdminSection() {
           {auditItems.length === 0 && (
             <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-sm text-slate-300">
               Event audit is waiting for the backend gateway.
+            </div>
+          )}
+        </div>
+      </section>
+
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_440px]">
+      <section className="rounded-3xl border border-amber-300/20 bg-[#0b101c] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-incident-readiness="true">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-100/70">Incident readiness</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">Admin attention is separated from ordinary activity.</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
+              SAVEN groups proof waits, escalation routes, robot review, and admin overrides into a short incident list.
+            </p>
+          </div>
+          <div className="grid grid-cols-4 gap-2 text-center">
+            <span className="rounded-2xl bg-white/[0.06] px-3 py-2 text-xs text-slate-300"><b className="block text-lg text-white">{incidentReadiness?.summary.open ?? '-'}</b>open</span>
+            <span className="rounded-2xl bg-amber-500/10 px-3 py-2 text-xs text-amber-100"><b className="block text-lg">{incidentReadiness?.summary.urgent ?? '-'}</b>urgent</span>
+            <span className="rounded-2xl bg-red-500/10 px-3 py-2 text-xs text-red-100"><b className="block text-lg">{incidentReadiness?.summary.critical ?? '-'}</b>critical</span>
+            <span className="rounded-2xl bg-cyan-500/10 px-3 py-2 text-xs text-cyan-100"><b className="block text-lg">{incidentReadiness?.summary.waitingHuman ?? '-'}</b>human</span>
+          </div>
+        </div>
+        <div className="mt-5 grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
+          {incidentItems.map((incident) => {
+            const incidentTone =
+              incident.severity === 'critical'
+                ? 'border-red-300/20 bg-red-500/10 text-red-100'
+                : incident.severity === 'urgent'
+                  ? 'border-amber-300/20 bg-amber-500/10 text-amber-100'
+                  : 'border-cyan-300/20 bg-cyan-500/10 text-cyan-100';
+            return (
+              <article key={incident.id} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className={'rounded-full border px-3 py-1 text-xs font-semibold ' + incidentTone}>{incident.severity}</span>
+                  <span className="rounded-full bg-slate-950/80 px-3 py-1 text-xs font-semibold text-slate-300 ring-1 ring-white/10">{incident.status.replace(/_/g, ' ')}</span>
+                </div>
+                <h3 className="mt-3 text-sm font-semibold leading-6 text-white">{incident.title}</h3>
+                <p className="mt-2 text-xs leading-5 text-slate-400">{incident.nextStep}</p>
+              </article>
+            );
+          })}
+          {incidentItems.length === 0 && (
+            <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-sm text-slate-300">
+              Incident readiness is waiting for the backend gateway.
             </div>
           )}
         </div>

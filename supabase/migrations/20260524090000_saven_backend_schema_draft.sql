@@ -92,6 +92,22 @@ create table if not exists public.saven_admin_overrides (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.saven_incidents (
+  id uuid primary key default gen_random_uuid(),
+  profile_id uuid references public.saven_profiles(id) on delete cascade,
+  source_event_id uuid,
+  title text not null,
+  severity text not null,
+  status text not null default 'open',
+  owner text not null,
+  next_step text not null,
+  created_at timestamptz not null default now(),
+  resolved_at timestamptz
+);
+
+create index if not exists saven_incidents_profile_status_idx on public.saven_incidents(profile_id, status);
+create index if not exists saven_incidents_severity_idx on public.saven_incidents(severity);
+
 create table if not exists public.saven_events (
   id uuid primary key default gen_random_uuid(),
   profile_id uuid references public.saven_profiles(id) on delete cascade,

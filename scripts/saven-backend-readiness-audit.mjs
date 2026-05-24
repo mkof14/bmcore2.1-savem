@@ -5,12 +5,12 @@ const checks = [
   {
     label: 'Backend gateway contract',
     file: 'src/features/saven/contracts/savenBackendContract.ts',
-    markers: ['SavenBackendGateway', 'SavenMonitoringSnapshot', 'SavenAdminOverrideResult', 'SavenEventAuditRecord', 'applyAdminOverride', 'listEventAudit'],
+    markers: ['SavenBackendGateway', 'SavenMonitoringSnapshot', 'SavenAdminOverrideResult', 'SavenEventAuditRecord', 'SavenIncidentReadiness', 'applyAdminOverride', 'listEventAudit', 'getIncidentReadiness'],
   },
   {
     label: 'Local backend gateway',
     file: 'src/features/saven/services/savenLocalBackendGateway.ts',
-    markers: ['createSavenLocalBackendGateway', 'getMonitoringSnapshot', 'listEventAudit', 'applyAdminOverride'],
+    markers: ['createSavenLocalBackendGateway', 'getMonitoringSnapshot', 'listEventAudit', 'getIncidentReadiness', 'applyAdminOverride'],
   },
   {
     label: 'Monitoring service',
@@ -20,7 +20,7 @@ const checks = [
   {
     label: 'HTTP backend adapter',
     file: 'src/features/saven/services/savenHttpBackendAdapter.ts',
-    markers: ['createSavenHttpBackendAdapter', '/monitoring', '/events', '/admin-overrides'],
+    markers: ['createSavenHttpBackendAdapter', '/monitoring', '/events', '/incidents/readiness', '/admin-overrides'],
   },
   {
     label: 'Backend gateway selector',
@@ -30,7 +30,7 @@ const checks = [
   {
     label: 'Admin Ops integration',
     file: 'src/pages/AdminPanel.tsx',
-    markers: ['data-saven-admin-ops="true"', 'data-saven-admin-monitoring-live="true"', 'data-saven-admin-overrides="true"', 'data-saven-admin-event-audit="true"', 'savenBackendGateway'],
+    markers: ['data-saven-admin-ops="true"', 'data-saven-admin-monitoring-live="true"', 'data-saven-admin-overrides="true"', 'data-saven-admin-event-audit="true"', 'data-saven-admin-incident-readiness="true"', 'savenBackendGateway'],
   },
   {
     label: 'Backend monitoring docs',
@@ -40,22 +40,22 @@ const checks = [
   {
     label: 'Supabase schema draft',
     file: 'supabase/migrations/20260524090000_saven_backend_schema_draft.sql',
-    markers: ['saven_profiles', 'saven_tasks', 'saven_commands', 'saven_verifications', 'saven_admin_overrides', 'saven_events'],
+    markers: ['saven_profiles', 'saven_tasks', 'saven_commands', 'saven_verifications', 'saven_admin_overrides', 'saven_events', 'saven_incidents'],
   },
   {
     label: 'RLS policy draft',
     file: 'supabase/migrations/20260524091000_saven_rls_policy_draft.sql',
-    markers: ['is_saven_admin', 'enable row level security', 'saven events owner or admin read', 'saven admin overrides admin only', 'Critical writes'],
+    markers: ['is_saven_admin', 'enable row level security', 'saven incidents owner or admin read', 'saven events owner or admin read', 'saven admin overrides admin only', 'Critical writes'],
   },
   {
     label: 'Edge Function gateway draft',
     file: 'supabase/functions/saven-gateway/index.ts',
-    markers: ['ALLOWED_ACTIONS', 'list_events', 'apply_admin_override', 'No external dispatch', 'Admin access required'],
+    markers: ['ALLOWED_ACTIONS', 'list_events', 'incident_readiness', 'apply_admin_override', 'No external dispatch', 'Admin access required'],
   },
   {
     label: 'Edge Function backend adapter',
     file: 'src/features/saven/services/savenEdgeFunctionBackendAdapter.ts',
-    markers: ['createSavenEdgeFunctionBackendAdapter', 'list_events', 'apply_admin_override', 'VITE_SAVEN_EDGE_FUNCTION_URL'],
+    markers: ['createSavenEdgeFunctionBackendAdapter', 'list_events', 'incident_readiness', 'apply_admin_override', 'VITE_SAVEN_EDGE_FUNCTION_URL'],
   },
 ];
 
