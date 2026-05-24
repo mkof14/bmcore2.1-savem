@@ -221,6 +221,16 @@ npm run evidence:saven
 
 The evidence pack summarizes command fixtures, worker handoff, privacy, monitoring, alerts, and Admin Ops into one operator release posture.
 
+## Admin Launch Control Panel
+
+Run:
+
+```zsh
+npm run admin-launch:saven
+```
+
+Admin Ops should show SAVEN launch decision, gates, required holds, and next actions before final handoff.
+
 ## Launch Control Kit
 
 Run:

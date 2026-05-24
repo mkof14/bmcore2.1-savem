@@ -78,6 +78,7 @@ const sourceExpectations = [
   ['Ops Evidence Pack', ['SAVEN Ops Evidence Pack', 'createSavenOpsEvidencePack', 'evidence:saven', 'saven-ops-evidence-pack']],
   ['Admin Ops Evidence Panel', ['data-saven-admin-evidence-pack="true"', 'SAVEN ops evidence', 'admin-evidence:saven']],
   ['Launch Control Kit', ['SAVEN Launch Control Kit', 'createSavenLaunchControlReport', 'launch:saven', 'saven-launch-control-report']],
+  ['Admin Launch Control Panel', ['data-saven-admin-launch-control="true"', 'SAVEN launch control', 'admin-launch:saven']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

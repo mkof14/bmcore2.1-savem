@@ -18,6 +18,7 @@ import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
+import { createSavenLaunchControlReport } from '../features/saven/services/savenLaunchControlService';
 import { createSavenOpsEvidencePack } from '../features/saven/services/savenOpsEvidenceService';
 import { createSavenWorkerShiftBoard } from '../features/saven/services/savenWorkerHandoffService';
 import { createSavenMonitoringSloReport, type SavenMonitoringSloReport } from '../features/saven/services/savenMonitoringSloService';
@@ -187,6 +188,7 @@ function SavenOpsAdminSection() {
   const sloReport: SavenMonitoringSloReport | null = snapshot ? createSavenMonitoringSloReport(snapshot) : null;
   const activeAlerts: SavenOpsAlert[] = sloReport ? createSavenOpsAlerts(sloReport) : [];
   const opsEvidencePack = createSavenOpsEvidencePack();
+  const launchControlReport = createSavenLaunchControlReport();
   const workerShiftBoard = createSavenWorkerShiftBoard([
     { source: 'voice' as const, text: 'Hey SAVEN, request nurse follow-up and send recovery context.', targetTaskId: 'task-medication-0900' },
     { source: 'voice' as const, text: 'Hey SAVEN, assign caregiver Maya to this support task.', targetTaskId: 'task-mobility-1030' },
@@ -291,6 +293,64 @@ function SavenOpsAdminSection() {
               </article>
             );
           })}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-sky-300/15 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-launch-control="true">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-sky-100/70">SAVEN launch control</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">Final handoff has a visible go / hold decision.</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">Launch Control combines ops evidence, command-worker loop, privacy, monitoring, backend foundation, admin visibility, and production preview into one operator decision.</p>
+          </div>
+          <span className={(launchControlReport.decision === 'go' ? 'border-emerald-300/25 bg-emerald-500/10 text-emerald-100' : 'border-red-300/25 bg-red-500/10 text-red-100') + ' w-fit rounded-full border px-5 py-2 text-sm font-semibold uppercase tracking-[0.14em]'}>
+            {launchControlReport.decision}
+          </span>
+        </div>
+        <div className="mt-5 grid gap-3 lg:grid-cols-2 xl:grid-cols-4">
+          {launchControlReport.gates.map((gate) => {
+            const gateTone =
+              gate.status === 'blocked'
+                ? 'border-red-300/25 bg-red-500/10'
+                : gate.status === 'watch'
+                  ? 'border-amber-300/25 bg-amber-500/10'
+                  : 'border-emerald-300/25 bg-emerald-500/10';
+            return (
+              <article key={gate.id} className={'rounded-2xl border p-4 ring-1 ring-white/5 ' + gateTone}>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-semibold text-white">{gate.label}</p>
+                  <span className="rounded-full bg-slate-950/70 px-3 py-1 text-xs font-semibold capitalize text-slate-100 ring-1 ring-white/10">{gate.status}</span>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-slate-300">{gate.evidence}</p>
+                {gate.requiredBeforeProduction && (
+                  <p className="mt-3 rounded-2xl bg-slate-950/55 px-3 py-2 text-xs font-semibold text-slate-200 ring-1 ring-white/10">Required before production</p>
+                )}
+              </article>
+            );
+          })}
+        </div>
+        <div className="mt-5 grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <article className="rounded-2xl border border-white/10 bg-slate-950/55 p-4 ring-1 ring-white/5">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Required holds</p>
+            <div className="mt-3 grid gap-2">
+              {launchControlReport.requiredHolds.length ? launchControlReport.requiredHolds.map((hold) => (
+                <p key={hold} className="rounded-2xl bg-red-500/10 px-3 py-2 text-sm font-semibold text-red-100 ring-1 ring-red-300/20">{hold}</p>
+              )) : (
+                <p className="rounded-2xl bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-100 ring-1 ring-emerald-300/20">No blocking hold gates</p>
+              )}
+            </div>
+          </article>
+          <article className="rounded-2xl border border-white/10 bg-slate-950/55 p-4 ring-1 ring-white/5">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Next actions</p>
+            <div className="mt-3 grid gap-2">
+              {launchControlReport.nextActions.map((action, index) => (
+                <div key={action} className="flex gap-3 rounded-2xl bg-white/[0.04] px-3 py-2 text-sm leading-6 text-slate-200 ring-1 ring-white/5">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-semibold text-white">{index + 1}</span>
+                  <span>{action}</span>
+                </div>
+              ))}
+            </div>
+          </article>
         </div>
       </section>
 

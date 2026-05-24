@@ -481,3 +481,14 @@ SAVEN now has a launch decision model:
 - `npm run launch:saven`
 
 Launch Control turns ops evidence, command-worker loop, privacy, monitoring, backend foundation, admin visibility, and production preview into a `go` or `hold` release decision.
+
+
+## Admin Launch Control Panel
+
+BioMath Core Admin now shows the SAVEN Launch Control report:
+
+- `data-saven-admin-launch-control="true"`
+- `createSavenLaunchControlReport`
+- `npm run admin-launch:saven`
+
+The panel shows the visible `go` or `hold` decision, launch gates, required holds, and next actions. This gives SAVEN one admin-facing place for final release review.
