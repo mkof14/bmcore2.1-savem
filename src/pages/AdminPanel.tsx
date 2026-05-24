@@ -18,6 +18,7 @@ import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
+import { createSavenMonitoringSloReport, type SavenMonitoringSloReport } from '../features/saven/services/savenMonitoringSloService';
 import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenIncidentAction, SavenIncidentActionResult, SavenIncidentReadiness, SavenMonitoringSnapshot, SavenPersistenceStatus } from '../features/saven/contracts/savenBackendContract';
 
 interface AdminPanelProps {
@@ -180,6 +181,8 @@ function SavenOpsAdminSection() {
   const auditItems = eventAudit.slice(0, 8);
   const incidentItems = incidentReadiness?.incidents.slice(0, 6) ?? [];
   const persistenceTables = persistenceStatus?.tables.slice(0, 6) ?? [];
+  const sloReport: SavenMonitoringSloReport | null = snapshot ? createSavenMonitoringSloReport(snapshot) : null;
+  const sloTone = sloReport?.status === 'breach' ? 'border-red-300/25 bg-red-500/10 text-red-100' : sloReport?.status === 'watch' ? 'border-amber-300/25 bg-amber-500/10 text-amber-100' : 'border-emerald-300/25 bg-emerald-500/10 text-emerald-100';
   const adminOverrideActions: Array<{ action: SavenAdminOverrideAction; label: string; targetId: string; reason: string }> = [
     { action: 'pause_support', label: 'Pause support', targetId: 'person-anna', reason: 'Admin review before continued support.' },
     { action: 'reassign_owner', label: 'Reassign owner', targetId: 'task-mobility-1030', reason: 'Caregiver route needs review.' },
@@ -244,6 +247,40 @@ function SavenOpsAdminSection() {
           })}
         </div>
       </div>
+
+      <section className="rounded-3xl border border-emerald-300/15 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-slo="true">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-100/70">SAVEN SLO posture</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">Support health is measured by safety gates, not generic uptime.</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">Admin Ops now reads SAVEN command backlog, proof waits, incident severity, robot gate, emergency gate, and endpoint availability as one operating posture.</p>
+          </div>
+          <span className={'w-fit rounded-full border px-4 py-2 text-sm font-semibold capitalize ' + sloTone}>
+            {sloReport?.status ?? 'loading'}
+          </span>
+        </div>
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {(sloReport?.metrics ?? []).map((metric) => {
+            const metricTone =
+              metric.status === 'breach'
+                ? 'border-red-300/20 bg-red-500/10'
+                : metric.status === 'watch'
+                  ? 'border-amber-300/20 bg-amber-500/10'
+                  : 'border-emerald-300/20 bg-emerald-500/10';
+            return (
+              <article key={metric.id} className={'rounded-2xl border p-4 ring-1 ring-white/5 ' + metricTone}>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-semibold text-white">{metric.label}</p>
+                  <span className="rounded-full bg-slate-950/70 px-3 py-1 text-xs font-semibold capitalize text-slate-200 ring-1 ring-white/10">{metric.status}</span>
+                </div>
+                <p className="mt-3 text-2xl font-semibold text-white">{metric.value}</p>
+                <p className="mt-3 text-sm leading-6 text-slate-300">{metric.objective}</p>
+                <p className="mt-3 rounded-2xl bg-slate-950/55 px-3 py-2 text-xs font-semibold leading-5 text-slate-200 ring-1 ring-white/10">{metric.action}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
 
       <section className="rounded-3xl border border-blue-500/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-overrides="true">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">

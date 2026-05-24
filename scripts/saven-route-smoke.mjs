@@ -51,6 +51,7 @@ const sourceExpectations = [
   ['Edge Function Backend Adapter', ['createSavenEdgeFunctionBackendAdapter', 'VITE_SAVEN_EDGE_FUNCTION_URL', 'apply_admin_override']],
   ['Backend Monitoring Admin', ['data-saven-admin-ops="true"', 'SAVEN Backend, Monitoring, and Admin Foundation']],
   ['Admin Monitoring Snapshot', ['data-saven-admin-monitoring-live="true"', 'getMonitoringSnapshot()']],
+  ['Admin SLO Panel', ['data-saven-admin-slo="true"', 'SAVEN SLO posture', 'createSavenMonitoringSloReport']],
   ['Admin Override Contract', ['data-saven-admin-overrides="true"', 'SavenAdminOverrideResult', 'applyAdminOverride']],
   ['Admin Event Audit Review', ['data-saven-admin-event-audit="true"', 'SAVEN Ops event timeline', 'listEventAudit()']],
   ['Incident Readiness Model', ['SavenIncidentReadiness', 'createSavenIncidentReadiness', 'data-saven-admin-incident-readiness="true"', 'saven_incidents']],

@@ -382,3 +382,14 @@ SAVEN Monitoring SLO Kit makes monitoring operational:
 - `npm run monitoring:saven`
 
 The SLO report tracks command backlog, proof wait SLO, incident severity, robot gate, emergency gate, and endpoint availability. These are SAVEN-specific safety signals, not generic uptime counters.
+
+
+## Admin SLO Panel
+
+BioMath Core Admin now includes a SAVEN SLO posture panel:
+
+- `data-saven-admin-slo="true"`
+- `createSavenMonitoringSloReport`
+- `npm run admin:saven`
+
+The panel makes command backlog, proof waits, incident severity, robot gate, emergency gate, and endpoint availability visible inside Admin Ops. This keeps SAVEN monitoring connected to BioMath Core Admin without making SAVEN feel like a generic admin table.

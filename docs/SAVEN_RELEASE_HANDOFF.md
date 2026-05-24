@@ -79,6 +79,16 @@ npm run monitoring:saven
 
 This checks SAVEN-specific operational signals before release: command backlog, proof waits, incident severity, robot gate, emergency gate, and endpoint availability.
 
+## Admin SLO Panel
+
+Run:
+
+```zsh
+npm run admin:saven
+```
+
+Admin Ops should show SAVEN SLO posture inside BioMath Core Admin: command backlog, proof wait, incident severity, robot gate, emergency gate, and endpoint availability.
+
 ## Admin And Monitoring Checklist
 
 - Confirm BioMath Core Admin shows SAVEN backend health.
