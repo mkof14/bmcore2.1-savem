@@ -64,6 +64,7 @@ const sourceExpectations = [
   ['Human Recovery Rails', ['data-saven-human-rail="timeline"', 'data-saven-human-rail="circle"', 'data-saven-human-rail="recovery"']],
   ['Voice Settings', ['Speak with SAVEN']],
   ['Practice Training Layer', ['data-saven-practice-layer="faq"', 'data-saven-practice-layer="learning"']],
+  ['Visual Acceptance', ['Visual Acceptance', 'visual:saven', 'SAVEN_VISUAL_ACCEPTANCE', 'dark-operational']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

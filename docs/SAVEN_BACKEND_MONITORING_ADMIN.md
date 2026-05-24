@@ -325,3 +325,12 @@ SAVEN production preview is now a release gate:
 - `npm run preview:saven:auto` builds and serves the production bundle.
 - `npm run ship:saven` runs full readiness plus production preview smoke.
 - The preview gate checks SAVEN routes, command layer bundle markers, and stale `Loading Application` fallback behavior.
+
+
+## Visual Acceptance
+
+SAVEN Visual Acceptance is now tracked as a release gate:
+
+- `docs/SAVEN_VISUAL_ACCEPTANCE.md` defines SAVEN-specific interface rules.
+- `npm run visual:saven` checks command rail, mic level indicator, light-theme contrast guardrails, dark-operational surfaces, and operator-facing screen coverage.
+- SAVEN should stay visually distinct from generic BioMath Core pages while still connecting to BioMath Core Admin.

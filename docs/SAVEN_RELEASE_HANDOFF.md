@@ -73,6 +73,18 @@ Optional direct backend mode:
 5. Build with public environment variables unset for fallback verification.
 6. Preview the production bundle before handing the link to reviewers.
 
+## Visual Acceptance
+
+Run:
+
+```zsh
+npm run visual:saven
+```
+
+This keeps SAVEN from drifting into generic site patterns and checks the main command rail, mic level indicator, dark-operational surfaces, and light-theme readability guardrails.
+
+See `docs/SAVEN_VISUAL_ACCEPTANCE.md`.
+
 ## Production Preview Gate
 
 Before final handoff, run the production preview gate:
