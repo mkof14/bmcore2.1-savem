@@ -192,3 +192,27 @@ Policy intent:
 - critical writes stay behind approved Edge Functions or admin controls
 
 Do not apply this draft to production until RLS recursion, service-role paths, and Edge Function write paths are reviewed.
+
+## Edge Function Gateway Draft
+
+A review-only Supabase Edge Function draft now exists at:
+
+`supabase/functions/saven-gateway/index.ts`
+
+It defines one controlled SAVEN backend entrypoint for:
+
+- snapshot
+- monitoring
+- task lifecycle
+- command intake
+- care contact routing
+- admin overrides
+
+Safety rules:
+
+- caller must be authenticated
+- admin-only actions require `profiles.is_admin = true`
+- no external dispatch is performed by this draft gateway
+- critical writes remain behind the gateway boundary
+
+This draft should be reviewed before deployment, especially service-role access, audit logging, RLS interaction, and production route mapping.

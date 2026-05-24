@@ -47,6 +47,11 @@ const checks = [
     file: 'supabase/migrations/20260524091000_saven_rls_policy_draft.sql',
     markers: ['is_saven_admin', 'enable row level security', 'saven admin overrides admin only', 'Critical writes'],
   },
+  {
+    label: 'Edge Function gateway draft',
+    file: 'supabase/functions/saven-gateway/index.ts',
+    markers: ['ALLOWED_ACTIONS', 'apply_admin_override', 'No external dispatch', 'Admin access required'],
+  },
 ];
 
 function read(relativePath) {
