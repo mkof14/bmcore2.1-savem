@@ -5,12 +5,12 @@ const checks = [
   {
     label: 'Backend gateway contract',
     file: 'src/features/saven/contracts/savenBackendContract.ts',
-    markers: ['SavenBackendGateway', 'SavenMonitoringSnapshot', 'SavenAdminOverrideResult', 'applyAdminOverride'],
+    markers: ['SavenBackendGateway', 'SavenMonitoringSnapshot', 'SavenAdminOverrideResult', 'SavenEventAuditRecord', 'applyAdminOverride', 'listEventAudit'],
   },
   {
     label: 'Local backend gateway',
     file: 'src/features/saven/services/savenLocalBackendGateway.ts',
-    markers: ['createSavenLocalBackendGateway', 'getMonitoringSnapshot', 'applyAdminOverride'],
+    markers: ['createSavenLocalBackendGateway', 'getMonitoringSnapshot', 'listEventAudit', 'applyAdminOverride'],
   },
   {
     label: 'Monitoring service',
@@ -20,7 +20,7 @@ const checks = [
   {
     label: 'HTTP backend adapter',
     file: 'src/features/saven/services/savenHttpBackendAdapter.ts',
-    markers: ['createSavenHttpBackendAdapter', '/monitoring', '/admin-overrides'],
+    markers: ['createSavenHttpBackendAdapter', '/monitoring', '/events', '/admin-overrides'],
   },
   {
     label: 'Backend gateway selector',
@@ -40,22 +40,22 @@ const checks = [
   {
     label: 'Supabase schema draft',
     file: 'supabase/migrations/20260524090000_saven_backend_schema_draft.sql',
-    markers: ['saven_profiles', 'saven_tasks', 'saven_commands', 'saven_verifications', 'saven_admin_overrides'],
+    markers: ['saven_profiles', 'saven_tasks', 'saven_commands', 'saven_verifications', 'saven_admin_overrides', 'saven_events'],
   },
   {
     label: 'RLS policy draft',
     file: 'supabase/migrations/20260524091000_saven_rls_policy_draft.sql',
-    markers: ['is_saven_admin', 'enable row level security', 'saven admin overrides admin only', 'Critical writes'],
+    markers: ['is_saven_admin', 'enable row level security', 'saven events owner or admin read', 'saven admin overrides admin only', 'Critical writes'],
   },
   {
     label: 'Edge Function gateway draft',
     file: 'supabase/functions/saven-gateway/index.ts',
-    markers: ['ALLOWED_ACTIONS', 'apply_admin_override', 'No external dispatch', 'Admin access required'],
+    markers: ['ALLOWED_ACTIONS', 'list_events', 'apply_admin_override', 'No external dispatch', 'Admin access required'],
   },
   {
     label: 'Edge Function backend adapter',
     file: 'src/features/saven/services/savenEdgeFunctionBackendAdapter.ts',
-    markers: ['createSavenEdgeFunctionBackendAdapter', 'apply_admin_override', 'VITE_SAVEN_EDGE_FUNCTION_URL'],
+    markers: ['createSavenEdgeFunctionBackendAdapter', 'list_events', 'apply_admin_override', 'VITE_SAVEN_EDGE_FUNCTION_URL'],
   },
 ];
 

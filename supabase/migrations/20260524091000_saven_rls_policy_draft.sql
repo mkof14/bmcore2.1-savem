@@ -25,6 +25,7 @@ alter table public.saven_endpoints enable row level security;
 alter table public.saven_verifications enable row level security;
 alter table public.saven_escalations enable row level security;
 alter table public.saven_admin_overrides enable row level security;
+alter table public.saven_events enable row level security;
 
 create policy "saven profiles owner or admin read"
 on public.saven_profiles
@@ -118,6 +119,18 @@ create policy "saven escalations admin read"
 on public.saven_escalations
 for select
 using (public.is_saven_admin());
+
+create policy "saven events owner or admin read"
+on public.saven_events
+for select
+using (
+  public.is_saven_admin()
+  or exists (
+    select 1 from public.saven_profiles p
+    where p.id = saven_events.profile_id
+      and p.owner_user_id = auth.uid()
+  )
+);
 
 create policy "saven admin overrides admin only"
 on public.saven_admin_overrides

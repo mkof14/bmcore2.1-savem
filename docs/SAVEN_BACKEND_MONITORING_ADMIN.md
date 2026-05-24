@@ -233,3 +233,14 @@ The adapter maps the `SavenBackendGateway` interface to action/payload calls aga
 - `request_care_contact`
 
 The default remains local mode.
+
+## Event Audit Model
+
+SAVEN now has an event audit model for backend, monitoring, and admin review:
+
+- `SavenEventAuditRecord`
+- `createSavenEventAuditRecords(state)`
+- `SavenBackendGateway.listEventAudit()`
+- `saven_events`
+
+The event timeline records command intake, proof waits, escalation preparation, robot readiness review, admin overrides, and continuity updates. It is audit-first: current local and Edge Function drafts do not perform external dispatch.

@@ -1,6 +1,7 @@
 import { savenMockState, type SavenMockEscalation, type SavenMockState } from '../mock/savenMockState';
 import { createSavenControlApiMock } from './savenControlApiMock';
 import { createSavenMonitoringSnapshot } from './savenMonitoringService';
+import { createSavenEventAuditRecords } from './savenEventAuditService';
 import type {
   SavenAdminOverrideInput,
   SavenBackendCommandInput,
@@ -105,6 +106,9 @@ export function createSavenLocalBackendGateway(state: SavenMockState = savenMock
     },
     async getMonitoringSnapshot() {
       return createSavenMonitoringSnapshot(cloneState(state));
+    },
+    async listEventAudit() {
+      return createSavenEventAuditRecords(cloneState(state));
     },
     async listTasks() {
       return cloneState(state).tasks;

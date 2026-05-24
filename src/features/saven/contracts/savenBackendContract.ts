@@ -103,9 +103,34 @@ export type SavenAdminOverrideResult = {
   };
 };
 
+export type SavenEventType =
+  | 'command_received'
+  | 'task_created'
+  | 'task_assigned'
+  | 'proof_waiting'
+  | 'verification_received'
+  | 'continuity_updated'
+  | 'care_contact_prepared'
+  | 'robot_review_required'
+  | 'admin_override'
+  | 'escalation_prepared';
+
+export type SavenEventAuditRecord = {
+  id: string;
+  type: SavenEventType;
+  profileId: string;
+  actorId: string;
+  targetId?: string;
+  severity: 'info' | 'watch' | 'urgent' | 'critical';
+  summary: string;
+  metadata: Record<string, unknown>;
+  createdAt: string;
+};
+
 export type SavenBackendGateway = {
   getSnapshot(): Promise<SavenMockState>;
   getMonitoringSnapshot(): Promise<SavenMonitoringSnapshot>;
+  listEventAudit(): Promise<SavenEventAuditRecord[]>;
   listTasks(): Promise<SavenMockTask[]>;
   listEndpoints(): Promise<SavenMockEndpoint[]>;
   listCareContacts(): Promise<SavenCareContact[]>;
