@@ -1222,7 +1222,147 @@ function SavenAppShell({
 
 
 
+
 function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
+  const commandCatalog: Array<{
+    id: string;
+    group: string;
+    label: string;
+    target: string;
+    command: string;
+    page: SavenPageId;
+    color: string;
+    icon: typeof Mic;
+    proof: string;
+    route: string[];
+  }> = [
+    { id: 'caregiver', group: 'People', label: 'Caregiver', target: 'Maya Carter', command: 'Hey SAVEN, assign the next support task to Maya and require verification.', page: 'app-circle', color: 'blue', icon: UsersRound, proof: 'Task ready for Maya.', route: ['Assign', 'Notify', 'Verify'] },
+    { id: 'nurse', group: 'Clinical', label: 'Nurse', target: 'Olivia Grant', command: 'Hey SAVEN, request nurse follow-up and send the recovery context.', page: 'app-care-routes', color: 'green', icon: PhoneCall, proof: 'Nurse follow-up prepared.', route: ['Context', 'Contact', 'Update'] },
+    { id: 'doctor', group: 'Clinical', label: 'Doctor', target: 'Dr. Morris', command: 'Hey SAVEN, prepare a clinical summary for doctor review.', page: 'app-care-routes', color: 'blue', icon: ShieldCheck, proof: 'Doctor summary ready.', route: ['Collect', 'Summarize', 'Review'] },
+    { id: 'family', group: 'People', label: 'Family', target: 'Daniel Roberts', command: 'Hey SAVEN, send the family a calm daily update.', page: 'app-care-routes', color: 'gold', icon: UsersRound, proof: 'Family update drafted.', route: ['Digest', 'Send', 'Quiet'] },
+    { id: 'robot', group: 'Physical', label: 'Robot', target: 'Mobility robot', command: 'Hey SAVEN, check robot readiness and keep physical action approval locked.', page: 'app-robots', color: 'gold', icon: Bot, proof: 'Robot stays permissioned.', route: ['Ready', 'Lock', 'Approve'] },
+    { id: 'device', group: 'Physical', label: 'Device', target: 'Wearable sensors', command: 'Hey SAVEN, check device telemetry for verification.', page: 'app-devices', color: 'green', icon: Cpu, proof: 'Telemetry supports proof.', route: ['Signal', 'Verify', 'Record'] },
+    { id: 'environment', group: 'Rules', label: 'Room', target: 'Home Recovery', command: 'Hey SAVEN, show environment permissions before support action.', page: 'app-environments', color: 'blue', icon: Waypoints, proof: 'Room rules checked.', route: ['Room', 'Rule', 'Allow'] },
+    { id: 'emergency', group: 'Escalation', label: 'Emergency', target: 'Emergency path', command: 'Hey SAVEN, show emergency escalation rules.', page: 'app-care-routes', color: 'red', icon: AlertCircle, proof: 'Escalation path visible.', route: ['Urgent', 'Call', 'Log'] },
+  ];
+  const [activeId, setActiveId] = useState('nurse');
+  const active = commandCatalog.find((item) => item.id === activeId) || commandCatalog[0];
+  const [draftCommand, setDraftCommand] = useState(active.command);
+
+  useEffect(() => {
+    setDraftCommand(active.command);
+  }, [active.command]);
+
+  const colorMap: Record<string, string> = {
+    blue: 'border-blue-200 bg-blue-50/72 text-blue-950 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100',
+    green: 'border-emerald-200 bg-emerald-50/72 text-emerald-950 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100',
+    gold: 'border-amber-200 bg-amber-50/72 text-amber-950 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100',
+    red: 'border-red-200 bg-red-50/72 text-red-950 dark:border-red-300/20 dark:bg-red-500/10 dark:text-red-100',
+  };
+  const accentMap: Record<string, string> = {
+    blue: 'from-blue-500 to-cyan-400',
+    green: 'from-emerald-500 to-teal-300',
+    gold: 'from-amber-400 to-orange-400',
+    red: 'from-red-500 to-orange-400',
+  };
+
+  return (
+    <div className="space-y-5">
+      <section className="overflow-hidden rounded-[2rem] border border-blue-200/70 bg-[radial-gradient(circle_at_10%_12%,rgba(59,130,246,0.18),transparent_28%),radial-gradient(circle_at_92%_18%,rgba(249,115,22,0.14),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.96),rgba(239,246,255,0.84))] p-6 shadow-lg shadow-blue-950/5 dark:border-blue-300/20 dark:bg-[radial-gradient(circle_at_10%_12%,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_92%_18%,rgba(249,115,22,0.16),transparent_26%),linear-gradient(135deg,rgba(6,16,31,0.98),rgba(15,23,42,0.9))] dark:ring-1 dark:ring-blue-300/15">
+        <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_390px] xl:items-stretch">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-700 dark:text-blue-200">SAVEN Commands</p>
+            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">Tell SAVEN what to do.</h2>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">Choose who or what should act. SAVEN keeps the route and verification visible.</p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {['Voice', 'Text', 'People', 'Robots', 'Emergency'].map((item, index) => (
+                <span key={item} className={(index === 0 ? 'bg-blue-600 text-white' : 'bg-white/76 text-slate-700 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-slate-200 dark:ring-white/10') + ' rounded-full px-4 py-2 text-sm font-semibold shadow-sm'}>
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[1.75rem] border border-white/70 bg-white/82 p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/68">
+            <div className="flex items-center gap-3">
+              <span className={'grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br text-white shadow-sm ' + accentMap[active.color]}>
+                <MessageSquareText className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Composer</p>
+                <h3 className="mt-1 text-xl font-semibold text-slate-950 dark:text-white">{active.label}</h3>
+              </div>
+            </div>
+            <textarea
+              value={draftCommand}
+              onChange={(event) => setDraftCommand(event.target.value)}
+              className="mt-4 min-h-[96px] w-full resize-none rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold leading-6 text-slate-950 shadow-inner outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 dark:border-white/10 dark:bg-slate-950 dark:text-white dark:focus:border-blue-300"
+            />
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <button onClick={() => openPage(active.page)} className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-500">
+                Open service
+              </button>
+              <button onClick={() => openPage('app-settings')} className="rounded-full bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-950">
+                Test mic
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-4">
+          {commandCatalog.map((item) => {
+            const Icon = item.icon;
+            const activeCard = item.id === activeId;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveId(item.id)}
+                className={(activeCard ? 'scale-[1.01] border-blue-300 shadow-xl shadow-blue-950/10 ring-4 ring-blue-500/10 dark:border-blue-300/40' : 'shadow-sm hover:-translate-y-0.5 hover:shadow-lg') + ' relative overflow-hidden rounded-[1.5rem] border p-4 text-left transition-all ' + colorMap[item.color]}
+              >
+                <span className={'absolute left-0 top-0 h-1 w-full bg-gradient-to-r ' + accentMap[item.color]} />
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.15em] opacity-65">{item.group}</p>
+                    <h3 className="mt-2 text-xl font-semibold">{item.label}</h3>
+                    <p className="mt-1 truncate text-sm font-semibold opacity-75">{item.target}</p>
+                  </div>
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white/72 shadow-inner ring-1 ring-white/80 dark:bg-slate-950/58 dark:ring-white/10">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                </div>
+                <p className="mt-4 line-clamp-2 text-sm leading-6 opacity-86">{item.command}</p>
+              </button>
+            );
+          })}
+        </div>
+
+        <aside className="rounded-[2rem] border border-slate-200 bg-white/82 p-5 shadow-sm dark:border-white/10 dark:bg-slate-950/70">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Route</p>
+          <h3 className="mt-2 text-2xl font-semibold text-slate-950 dark:text-white">{active.target}</h3>
+          <p className="mt-2 text-sm font-semibold text-blue-700 dark:text-blue-200">{active.proof}</p>
+          <div className="mt-5 grid gap-2">
+            {active.route.map((step, index) => (
+              <div key={step} className="flex items-center gap-3">
+                <span className={'grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br text-sm font-semibold text-white shadow-sm ' + accentMap[active.color]}>{index + 1}</span>
+                <div className="min-w-0 rounded-2xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-white/10 dark:text-slate-100">
+                  {step}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-5 rounded-3xl bg-slate-950 p-4 text-white shadow-inner dark:bg-white dark:text-slate-950">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Ready command</p>
+            <p className="mt-2 line-clamp-3 text-sm font-semibold leading-6">{draftCommand}</p>
+          </div>
+        </aside>
+      </section>
+    </div>
+  );
+}
+
+: { openPage: (pageId: SavenPageId) => void }) {
   const commandCatalog: Array<{
     id: string;
     group: string;
