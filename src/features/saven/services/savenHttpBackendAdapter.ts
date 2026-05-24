@@ -4,6 +4,7 @@ import type {
   SavenAdminOverrideResult,
   SavenBackendCommandInput,
   SavenCommandExecutionPlan,
+  SavenCommandPermissionReview,
   SavenBackendGateway,
   SavenCareContact,
   SavenContactRequest,
@@ -101,6 +102,12 @@ export function createSavenHttpBackendAdapter(options: SavenHttpBackendAdapterOp
       return request<SavenCommandExecutionPlan>('/commands/interpret', {
         method: 'POST',
         body: JSON.stringify(input),
+      });
+    },
+    reviewCommandPermission(input: SavenBackendCommandInput, actorId?: string) {
+      return request<SavenCommandPermissionReview>('/commands/permission-review', {
+        method: 'POST',
+        body: JSON.stringify({ ...input, actorId }),
       });
     },
     verifyAction(taskId: string, verifierId: string) {

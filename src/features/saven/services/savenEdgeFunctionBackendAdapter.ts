@@ -4,6 +4,7 @@ import type {
   SavenAdminOverrideResult,
   SavenBackendCommandInput,
   SavenCommandExecutionPlan,
+  SavenCommandPermissionReview,
   SavenBackendGateway,
   SavenCareContact,
   SavenContactRequest,
@@ -98,6 +99,9 @@ export function createSavenEdgeFunctionBackendAdapter(options: SavenEdgeFunction
     },
     interpretCommand(input: SavenBackendCommandInput) {
       return call<SavenCommandExecutionPlan>('interpret_command', input);
+    },
+    reviewCommandPermission(input: SavenBackendCommandInput, actorId?: string) {
+      return call<SavenCommandPermissionReview>('review_command_permission', { ...input, actorId });
     },
     verifyAction(taskId: string, verifierId: string) {
       return call<SavenControlApiResult>('verify_action', { taskId, verifierId });

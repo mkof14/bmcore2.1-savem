@@ -69,6 +69,23 @@ export type SavenCommandExecutionPlan = {
   auditSummary: string;
 };
 
+export type SavenCommandPermissionDecision =
+  | 'allowed'
+  | 'requires_human_confirmation'
+  | 'admin_review'
+  | 'blocked';
+
+export type SavenCommandPermissionReview = {
+  id: string;
+  plan: SavenCommandExecutionPlan;
+  actorId: string;
+  decision: SavenCommandPermissionDecision;
+  requiredPermission: string;
+  allowedRoles: string[];
+  reason: string;
+  handoff: string;
+};
+
 export type SavenMonitoringSignal = {
   id: string;
   label: string;
@@ -219,6 +236,7 @@ export type SavenBackendGateway = {
   assignTask(taskId: string, ownerId: string): Promise<SavenControlApiResult>;
   sendCommand(input: SavenBackendCommandInput): Promise<SavenControlApiResult>;
   interpretCommand(input: SavenBackendCommandInput): Promise<SavenCommandExecutionPlan>;
+  reviewCommandPermission(input: SavenBackendCommandInput, actorId?: string): Promise<SavenCommandPermissionReview>;
   verifyAction(taskId: string, verifierId: string): Promise<SavenControlApiResult>;
   updateContinuity(taskId: string): Promise<SavenControlApiResult>;
   escalate(level: SavenMockEscalation['level']): Promise<SavenControlApiResult>;

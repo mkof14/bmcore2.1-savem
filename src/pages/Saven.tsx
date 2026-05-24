@@ -38,6 +38,8 @@ import { EnvironmentSystem } from '../features/saven/pages/SavenEnvironmentsPage
 import { RobotReadiness } from '../features/saven/pages/SavenRobotsPage';
 import { DeviceReadiness } from '../features/saven/pages/SavenDevicesPage';
 import { createSavenCommandExecutionPlan } from '../features/saven/services/savenCommandExecutionService';
+import { createSavenCommandPermissionReview } from '../features/saven/services/savenCommandPermissionService';
+import { savenMockState } from '../features/saven/mock/savenMockState';
 
 interface SavenProps {
   onNavigate: (page: string) => void;
@@ -1259,6 +1261,8 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
     targetTaskId: 'task-mobility-1030',
   });
 
+  const permissionReview = createSavenCommandPermissionReview(savenMockState, commandPlan.input);
+
   const colorMap: Record<string, string> = {
     blue: 'border-blue-300/25 bg-[#07111f] text-white ring-1 ring-blue-300/12',
     green: 'border-emerald-300/25 bg-[#061a17] text-white ring-1 ring-emerald-300/12',
@@ -1333,6 +1337,13 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
                 <span className="rounded-full bg-amber-500/15 px-3 py-1 text-xs font-semibold text-amber-100 ring-1 ring-amber-300/20">{commandPlan.safetyGate.replace(/_/g, ' ')}</span>
               </div>
               <p className="mt-2 text-xs leading-5 text-slate-300">{commandPlan.nextAction}</p>
+            </div>
+            <div className="mt-3 rounded-3xl border border-emerald-300/15 bg-emerald-500/[0.07] p-3" data-saven-command-permission-review="true">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-100 ring-1 ring-emerald-300/20">{permissionReview.decision.replace(/_/g, ' ')}</span>
+                <span className="rounded-full bg-slate-950/70 px-3 py-1 text-xs font-semibold text-slate-200 ring-1 ring-white/10">{permissionReview.requiredPermission}</span>
+              </div>
+              <p className="mt-2 text-xs leading-5 text-slate-300">{permissionReview.handoff}</p>
             </div>
           </div>
         </div>
@@ -1420,6 +1431,11 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
                 <span key={step} className="rounded-2xl bg-slate-950/75 px-3 py-2 text-xs font-semibold text-slate-200 ring-1 ring-white/10">{step}</span>
               ))}
             </div>
+          </div>
+          <div className="mt-4 rounded-3xl border border-emerald-300/15 bg-emerald-500/[0.07] p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-100/70">Permission review</p>
+            <p className="mt-2 text-sm font-semibold text-white">{permissionReview.decision.replace(/_/g, ' ')}</p>
+            <p className="mt-2 text-xs leading-5 text-slate-300">{permissionReview.reason}</p>
           </div>
         </aside>
       </section>

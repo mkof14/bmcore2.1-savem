@@ -42,4 +42,12 @@ describe('savenBackendApiRoutes', () => {
       risk: 'write',
     });
   });
+
+  it('documents the command permission review endpoint', () => {
+    expect(getSavenBackendApiRoute('command-permission-review')).toMatchObject({
+      httpPath: '/commands/permission-review',
+      edgeAction: 'review_command_permission',
+      risk: 'human_confirmed',
+    });
+  });
 });

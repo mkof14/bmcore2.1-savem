@@ -16,6 +16,7 @@ const ALLOWED_ACTIONS = new Set([
   "assign_task",
   "send_command",
   "interpret_command",
+  "review_command_permission",
   "verify_action",
   "update_continuity",
   "request_care_contact",
@@ -132,6 +133,14 @@ Deno.serve(async (req: Request) => {
         ...payload,
         route: "command intent draft",
         safety: "Intent classification only; no external dispatch.",
+      });
+    }
+
+    if (action === "review_command_permission") {
+      return safeDraftResponse(action, caller.id, {
+        ...payload,
+        route: "command permission review draft",
+        safety: "Permission review only; no external dispatch.",
       });
     }
 
