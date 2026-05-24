@@ -13,6 +13,7 @@ import type {
 } from '../contracts/savenBackendContract';
 import type { SavenMockEndpoint, SavenMockState, SavenMockTask } from '../mock/savenMockState';
 import type { SavenControlApiResult } from './savenControlApiMock';
+import { getSavenBackendApiRoute } from '../contracts/savenBackendApiContract';
 
 type SavenHttpBackendAdapterOptions = {
   baseUrl: string;
@@ -31,6 +32,7 @@ async function parseJsonResponse<T>(response: Response, path: string): Promise<T
 export function createSavenHttpBackendAdapter(options: SavenHttpBackendAdapterOptions): SavenBackendGateway {
   const fetchImpl = options.fetchImpl ?? fetch;
   const baseUrl = options.baseUrl.replace(/\/$/, '');
+  const route = getSavenBackendApiRoute;
 
   async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     const token = await options.getAuthToken?.();
@@ -48,25 +50,25 @@ export function createSavenHttpBackendAdapter(options: SavenHttpBackendAdapterOp
 
   return {
     getSnapshot() {
-      return request<SavenMockState>('/snapshot');
+      return request<SavenMockState>(route('snapshot')?.httpPath ?? '/snapshot');
     },
     getMonitoringSnapshot() {
-      return request<SavenMonitoringSnapshot>('/monitoring');
+      return request<SavenMonitoringSnapshot>(route('monitoring')?.httpPath ?? '/monitoring');
     },
     listEventAudit() {
-      return request<SavenEventAuditRecord[]>('/events');
+      return request<SavenEventAuditRecord[]>(route('event-audit')?.httpPath ?? '/events');
     },
     getIncidentReadiness() {
-      return request<SavenIncidentReadiness>('/incidents/readiness');
+      return request<SavenIncidentReadiness>(route('incident-readiness')?.httpPath ?? '/incidents/readiness');
     },
     listTasks() {
-      return request<SavenMockTask[]>('/tasks');
+      return request<SavenMockTask[]>(route('tasks')?.httpPath ?? '/tasks');
     },
     listEndpoints() {
-      return request<SavenMockEndpoint[]>('/endpoints');
+      return request<SavenMockEndpoint[]>(route('endpoints')?.httpPath ?? '/endpoints');
     },
     listCareContacts() {
-      return request<SavenCareContact[]>('/care-contacts');
+      return request<SavenCareContact[]>(route('care-contacts')?.httpPath ?? '/care-contacts');
     },
     createTask(title: string) {
       return request<SavenControlApiResult>('/tasks', {

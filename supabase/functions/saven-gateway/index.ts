@@ -3,6 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders, fail, ok } from "../_shared/response.ts";
 
 const ALLOWED_ACTIONS = new Set([
+  // Keep this list aligned with src/features/saven/contracts/savenBackendApiContract.ts.
   "snapshot",
   "monitoring",
   "list_events",

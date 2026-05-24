@@ -20,7 +20,7 @@ const checks = [
   {
     label: 'HTTP backend adapter',
     file: 'src/features/saven/services/savenHttpBackendAdapter.ts',
-    markers: ['createSavenHttpBackendAdapter', '/monitoring', '/events', '/incidents/readiness', '/admin-overrides'],
+    markers: ['createSavenHttpBackendAdapter', 'getSavenBackendApiRoute', '/monitoring', '/events', '/incidents/readiness', '/admin-overrides'],
   },
   {
     label: 'Backend gateway selector',
@@ -35,7 +35,7 @@ const checks = [
   {
     label: 'Backend monitoring docs',
     file: 'docs/SAVEN_BACKEND_MONITORING_ADMIN.md',
-    markers: ['Backend Gateway Selector', 'HTTP Backend Adapter', 'Admin Override Contract', 'Monitoring Contract Implementation'],
+    markers: ['Backend API Contract', 'Backend Gateway Selector', 'HTTP Backend Adapter', 'Admin Override Contract', 'Monitoring Contract Implementation'],
   },
   {
     label: 'Supabase schema draft',

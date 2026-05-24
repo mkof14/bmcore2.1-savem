@@ -234,6 +234,17 @@ The adapter maps the `SavenBackendGateway` interface to action/payload calls aga
 
 The default remains local mode.
 
+## Backend API Contract
+
+SAVEN now has one backend API route registry:
+
+- `savenBackendApiRoutes`
+- `getSavenBackendApiRoute(id)`
+- `savenHumanConfirmedRouteIds`
+- `incident_readiness`
+
+This registry keeps HTTP routes, Edge Function actions, and safety risk levels aligned before a real backend is deployed. Routes that can affect people, care contacts, emergency paths, robot action, or admin override remain marked as human-confirmed or admin-controlled.
+
 ## Event Audit Model
 
 SAVEN now has an event audit model for backend, monitoring, and admin review:
