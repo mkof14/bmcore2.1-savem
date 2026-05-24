@@ -2,6 +2,7 @@ import { savenMockState, type SavenMockEscalation, type SavenMockState } from '.
 import { createSavenControlApiMock } from './savenControlApiMock';
 import { createSavenMonitoringSnapshot } from './savenMonitoringService';
 import type {
+  SavenAdminOverrideInput,
   SavenBackendCommandInput,
   SavenBackendGateway,
   SavenCareContact,
@@ -74,6 +75,27 @@ function buildContactResult(request: SavenContactRequest, contact: SavenCareCont
   };
 }
 
+function buildAdminOverrideResult(input: SavenAdminOverrideInput) {
+  const requiresReview = input.action === 'approve_robot_action' || input.action === 'hold_escalation';
+  const actionLabel = input.action.replace(/_/g, ' ');
+
+  return {
+    id: `admin-override-${input.action}-${input.targetId}`,
+    status: requiresReview ? 'requires_review' : 'recorded',
+    action: input.action,
+    targetId: input.targetId,
+    message: requiresReview
+      ? `SAVEN admin override prepared for review: ${actionLabel}.`
+      : `SAVEN admin override recorded: ${actionLabel}.`,
+    auditTrail: {
+      actorId: input.actorId,
+      reason: input.reason,
+      note: input.note,
+      recordedAt: 'development-snapshot',
+    },
+  } as const;
+}
+
 export function createSavenLocalBackendGateway(state: SavenMockState = savenMockState): SavenBackendGateway {
   const controlApi = createSavenControlApiMock(state);
 
@@ -119,6 +141,9 @@ export function createSavenLocalBackendGateway(state: SavenMockState = savenMock
       }
 
       return buildContactResult(request, contact);
+    },
+    async applyAdminOverride(input: SavenAdminOverrideInput) {
+      return buildAdminOverrideResult(input);
     },
   };
 }

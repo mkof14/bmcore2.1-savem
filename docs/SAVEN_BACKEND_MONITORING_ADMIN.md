@@ -88,3 +88,14 @@ The admin UI exposes:
 - live queue rows from `SavenMonitoringSnapshot.queues`
 
 This keeps the current version local and safe while making the Admin section backend-adapter ready.
+
+## Admin Override Contract
+
+SAVEN now models admin override actions through the backend gateway:
+
+- `SavenAdminOverrideAction`
+- `SavenAdminOverrideInput`
+- `SavenAdminOverrideResult`
+- `SavenBackendGateway.applyAdminOverride(input)`
+
+Current local actions are audit-first and do not perform real external dispatch. Robot action approval and escalation hold return `requires_review` to preserve the safety boundary.

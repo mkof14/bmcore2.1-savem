@@ -73,6 +73,36 @@ export type SavenMonitoringSnapshot = {
   };
 };
 
+export type SavenAdminOverrideAction =
+  | 'pause_support'
+  | 'resume_support'
+  | 'reassign_owner'
+  | 'approve_robot_action'
+  | 'deny_robot_action'
+  | 'hold_escalation';
+
+export type SavenAdminOverrideInput = {
+  action: SavenAdminOverrideAction;
+  actorId: string;
+  targetId: string;
+  reason: string;
+  note?: string;
+};
+
+export type SavenAdminOverrideResult = {
+  id: string;
+  status: 'recorded' | 'requires_review';
+  action: SavenAdminOverrideAction;
+  targetId: string;
+  message: string;
+  auditTrail: {
+    actorId: string;
+    reason: string;
+    note?: string;
+    recordedAt: string;
+  };
+};
+
 export type SavenBackendGateway = {
   getSnapshot(): Promise<SavenMockState>;
   getMonitoringSnapshot(): Promise<SavenMonitoringSnapshot>;
@@ -86,4 +116,5 @@ export type SavenBackendGateway = {
   updateContinuity(taskId: string): Promise<SavenControlApiResult>;
   escalate(level: SavenMockEscalation['level']): Promise<SavenControlApiResult>;
   requestCareContact(request: SavenContactRequest): Promise<SavenContactResult>;
+  applyAdminOverride(input: SavenAdminOverrideInput): Promise<SavenAdminOverrideResult>;
 };

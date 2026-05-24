@@ -18,7 +18,7 @@ import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenLocalBackendGateway } from '../features/saven/services/savenLocalBackendGateway';
-import type { SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
+import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
 
 interface AdminPanelProps {
   onNavigate: (page: string) => void;
@@ -123,6 +123,7 @@ export default function AdminPanel({ onNavigate }: AdminPanelProps) {
 
 function SavenOpsAdminSection() {
   const [snapshot, setSnapshot] = useState<SavenMonitoringSnapshot | null>(null);
+  const [overrideResult, setOverrideResult] = useState<SavenAdminOverrideResult | null>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -148,6 +149,23 @@ function SavenOpsAdminSection() {
 
   const signals = snapshot?.signals ?? [];
   const queueItems = snapshot?.queues ?? [];
+  const adminOverrideActions: Array<{ action: SavenAdminOverrideAction; label: string; targetId: string; reason: string }> = [
+    { action: 'pause_support', label: 'Pause support', targetId: 'person-anna', reason: 'Admin review before continued support.' },
+    { action: 'reassign_owner', label: 'Reassign owner', targetId: 'task-mobility-1030', reason: 'Caregiver route needs review.' },
+    { action: 'approve_robot_action', label: 'Review robot action', targetId: 'robot-r1', reason: 'Robot physical action requires explicit approval.' },
+    { action: 'hold_escalation', label: 'Hold escalation', targetId: 'esc-care', reason: 'Escalation should wait for admin confirmation.' },
+  ];
+
+  const runAdminOverride = async (action: SavenAdminOverrideAction, targetId: string, reason: string) => {
+    const result = await savenLocalBackendGateway.applyAdminOverride({
+      action,
+      actorId: 'biomath-admin',
+      targetId,
+      reason,
+      note: 'Local SAVEN admin ops action.',
+    });
+    setOverrideResult(result);
+  };
 
   return (
     <div className="space-y-6" data-saven-admin-ops="true" data-saven-admin-monitoring-live="true">
@@ -184,6 +202,40 @@ function SavenOpsAdminSection() {
           })}
         </div>
       </div>
+
+      <section className="rounded-3xl border border-blue-500/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-overrides="true">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">Admin overrides</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">Human admin controls stay audit-first.</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">These local actions model pause, reassignment, robot approval review, and escalation hold before real backend wiring.</p>
+          </div>
+          {overrideResult && (
+            <span className="w-fit rounded-full bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-100 ring-1 ring-emerald-300/20">
+              {overrideResult.status}
+            </span>
+          )}
+        </div>
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {adminOverrideActions.map((item) => (
+            <button
+              key={item.action}
+              onClick={() => runAdminOverride(item.action, item.targetId, item.reason)}
+              className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 text-left ring-1 ring-white/5 transition-all hover:-translate-y-0.5 hover:border-blue-300/35 hover:bg-white/[0.1]"
+            >
+              <p className="text-sm font-semibold text-white">{item.label}</p>
+              <p className="mt-2 text-xs leading-5 text-slate-400">{item.reason}</p>
+            </button>
+          ))}
+        </div>
+        {overrideResult && (
+          <div className="mt-5 rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Last override</p>
+            <p className="mt-2 text-sm font-semibold text-white">{overrideResult.message}</p>
+            <p className="mt-2 text-xs text-slate-400">Actor: {overrideResult.auditTrail.actorId} · Target: {overrideResult.targetId}</p>
+          </div>
+        )}
+      </section>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_440px]">
         <section className="rounded-3xl border border-slate-800 bg-slate-950 p-6 text-white shadow-xl">
