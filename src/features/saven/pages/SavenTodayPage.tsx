@@ -84,11 +84,16 @@ function InfoTile({ label, value }: { label: string; value: string }) {
 
 function MetricCard({ label, value, tone }: { label: string; value: number; tone: string }) {
   const color = tone === 'green' ? 'from-emerald-500 to-cyan-400' : tone === 'amber' ? 'from-orange-500 to-amber-300' : 'from-blue-600 to-cyan-400';
+  const surface = tone === 'green'
+    ? 'bg-emerald-50/78 text-emerald-950 dark:bg-emerald-500/10 dark:text-emerald-100'
+    : tone === 'amber'
+      ? 'bg-amber-50/78 text-amber-950 dark:bg-amber-500/10 dark:text-amber-100'
+      : 'bg-blue-50/78 text-blue-950 dark:bg-blue-500/10 dark:text-blue-100';
   return (
-    <article className="rounded-3xl border border-white/70 bg-white/82 p-5 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:shadow-lg dark:border-white/10 dark:bg-slate-950/65">
+    <article className={'rounded-3xl border border-white/70 p-5 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:shadow-lg dark:border-white/10 ' + surface}>
       <div className={'h-1.5 w-16 rounded-full bg-gradient-to-r ' + color} />
-      <p className="mt-5 text-sm font-semibold text-slate-500 dark:text-slate-400">{label}</p>
-      <p className="mt-2 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white">{value}</p>
+      <p className="mt-5 text-sm font-semibold opacity-70">{label}</p>
+      <p className="mt-2 text-4xl font-semibold tracking-tight">{value}</p>
     </article>
   );
 }
@@ -569,7 +574,7 @@ function HumanSupportHeader({ setup }: { setup: LifeSetupState }) {
 
 function SupportActionCard({ task }: { task: SupportTask }) {
   return (
-    <article className="group rounded-[2rem] border border-white/70 bg-white/82 p-5 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
+    <article className="group relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/86 p-5 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/62 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80"><span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 via-emerald-400 to-amber-300 opacity-85" />
       <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-start">
         <div>
           <div className="flex flex-wrap items-center gap-2">

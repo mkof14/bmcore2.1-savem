@@ -1517,7 +1517,7 @@ function SavenVoiceLogoControl({ openPage }: { activePage: SavenPageId; openPage
 function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: SavenPageId) => void; profileCreated: boolean }) {
   return (
     <div className="space-y-8">
-      <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-8 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
+      <section className="overflow-hidden rounded-[2rem] border border-blue-200/60 bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.16),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.96),rgba(239,246,255,0.82),rgba(255,247,237,0.62))] p-8 shadow-sm backdrop-blur-xl dark:border-blue-300/18 dark:bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(6,16,31,0.96),rgba(15,23,42,0.86),rgba(35,23,10,0.38))] dark:ring-1 dark:ring-blue-300/10">
         <div className="grid gap-8 xl:grid-cols-[1fr_420px] xl:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Real SAVEN begins here</p>
@@ -1557,11 +1557,23 @@ function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: Sav
 }
 
 function SystemEntryCard({ title, text, onClick }: { title: string; text: string; onClick: () => void }) {
+  const tone = title.includes('person')
+    ? 'from-blue-500 to-cyan-400'
+    : title.includes('circle')
+      ? 'from-emerald-500 to-teal-300'
+      : 'from-amber-400 to-orange-400';
+  const iconTone = title.includes('person')
+    ? 'from-blue-600 to-cyan-500'
+    : title.includes('circle')
+      ? 'from-emerald-600 to-teal-500'
+      : 'from-amber-500 to-orange-500';
+
   return (
-    <button onClick={onClick} className="group rounded-[2rem] border border-white/70 bg-white/82 p-6 text-left shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
+    <button onClick={onClick} className="group relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/86 p-6 text-left shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/62 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
+      <span className={'absolute left-0 top-0 h-1 w-full bg-gradient-to-r ' + tone} />
       <div className="flex items-start justify-between gap-4">
         <h3 className="text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h3>
-        <span className="grid h-11 w-11 place-items-center rounded-full bg-slate-950 text-white shadow-sm ring-1 ring-slate-900/10 transition-all group-hover:scale-105 group-hover:bg-blue-600 dark:bg-slate-950/75 dark:text-blue-100 dark:ring-blue-300/20 dark:group-hover:bg-blue-950/80">
+        <span className={'grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br text-white shadow-sm ring-1 ring-white/40 transition-all group-hover:scale-105 ' + iconTone}>
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </span>
       </div>
@@ -1569,7 +1581,6 @@ function SystemEntryCard({ title, text, onClick }: { title: string; text: string
     </button>
   );
 }
-
 
 function StatusPill({ label, tone }: { label: string; tone: 'blue' | 'gold' | 'green' }) {
   const color =

@@ -113,7 +113,7 @@ export function DualModeArchitecture() {
               </div>
               <div className="space-y-2">
                 {['Execution engine', 'Verification engine', 'Timeline', 'Access system', 'Device layer', 'Robot layer'].map((item) => (
-                  <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.07] px-4 py-3 text-sm font-semibold text-slate-100">
+                  <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 shadow-sm transition-all hover:bg-white/[0.12]">
                     {item}
                   </div>
                 ))}
@@ -215,7 +215,7 @@ function ModePanel({
       : 'from-blue-50 via-white to-white text-blue-800 dark:from-slate-950/90 dark:via-blue-950/42 dark:to-slate-950/70 dark:text-blue-100';
 
   return (
-    <article className={`rounded-[2rem] border border-white/70 bg-gradient-to-br ${toneClass} p-6 shadow-sm dark:border-white/10`}>
+    <article className={`relative overflow-hidden rounded-[2rem] border border-white/70 bg-gradient-to-br ${toneClass} p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10`}><span className={(tone === 'gold' ? 'from-amber-400 to-orange-400' : 'from-blue-500 to-cyan-400') + ' absolute left-0 top-0 h-1 w-full bg-gradient-to-r'} />
       <p className="text-xs font-semibold uppercase tracking-[0.22em] opacity-75">{eyebrow}</p>
       <h3 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h3>
       <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">{text}</p>
