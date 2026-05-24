@@ -306,3 +306,13 @@ SAVEN now derives admin-ready incidents from the event audit model:
 - `saven_incidents`
 
 Incident readiness separates normal activity from items needing attention: proof waits, escalation preparation, robot readiness review, and admin override review. BioMath Core Admin renders this layer with `data-saven-admin-incident-readiness="true"`.
+
+
+## Release Handoff
+
+SAVEN Release Handoff is now tracked as a release artifact instead of a loose checklist.
+
+- `.env.saven.example` documents local, Edge Function, and HTTP backend modes.
+- `docs/SAVEN_RELEASE_HANDOFF.md` keeps GitHub, hosting, Supabase, Edge Function, Admin Ops, monitoring, and safety gates together.
+- `npm run release:saven` verifies release handoff materials.
+- Production handoff requires `SAVEN_DEPLOY_TARGET=production` and `VITE_SAVEN_BACKEND_MODE=edge` when the Edge Function gateway is used.
