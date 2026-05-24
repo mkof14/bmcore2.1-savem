@@ -59,3 +59,20 @@ Real emergency, clinical, robot, external notification, and family-routing actio
 ## Current Implementation Marker
 
 `src/pages/AdminPanel.tsx` now includes a SAVEN Ops section with `data-saven-admin-ops="true"`.
+
+## Monitoring Contract Implementation
+
+SAVEN now has a local monitoring model that can become the backend monitoring adapter:
+
+- `SavenMonitoringSignal`
+- `SavenMonitoringQueueItem`
+- `SavenMonitoringSnapshot`
+- `createSavenMonitoringSnapshot(state)`
+- `SavenBackendGateway.getMonitoringSnapshot()`
+
+The monitoring snapshot covers command intake, proof waits, endpoint health, robot policy, escalation routes, and emergency safety gates.
+
+Implementation files:
+
+- `src/features/saven/services/savenMonitoringService.ts`
+- `src/features/saven/services/__tests__/savenMonitoringService.test.ts`

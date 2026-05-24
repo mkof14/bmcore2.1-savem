@@ -41,8 +41,41 @@ export type SavenBackendCommandInput = {
   targetTaskId: string;
 };
 
+export type SavenMonitoringSignal = {
+  id: string;
+  label: string;
+  status: 'healthy' | 'watch' | 'blocked';
+  value: string;
+  detail: string;
+};
+
+export type SavenMonitoringQueueItem = {
+  id: string;
+  queue: 'command' | 'proof' | 'escalation' | 'endpoint' | 'admin_override';
+  title: string;
+  owner: string;
+  severity: 'low' | 'normal' | 'high' | 'critical';
+  waitingFor: string;
+};
+
+export type SavenMonitoringSnapshot = {
+  generatedAt: string;
+  mode: SavenMockState['mode'];
+  activePersonId: string;
+  signals: SavenMonitoringSignal[];
+  queues: SavenMonitoringQueueItem[];
+  summary: {
+    openProofWaits: number;
+    activeCommands: number;
+    escalationRoutes: number;
+    onlineEndpoints: number;
+    robotReadinessOnly: number;
+  };
+};
+
 export type SavenBackendGateway = {
   getSnapshot(): Promise<SavenMockState>;
+  getMonitoringSnapshot(): Promise<SavenMonitoringSnapshot>;
   listTasks(): Promise<SavenMockTask[]>;
   listEndpoints(): Promise<SavenMockEndpoint[]>;
   listCareContacts(): Promise<SavenCareContact[]>;

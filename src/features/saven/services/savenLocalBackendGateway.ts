@@ -1,5 +1,6 @@
 import { savenMockState, type SavenMockEscalation, type SavenMockState } from '../mock/savenMockState';
 import { createSavenControlApiMock } from './savenControlApiMock';
+import { createSavenMonitoringSnapshot } from './savenMonitoringService';
 import type {
   SavenBackendCommandInput,
   SavenBackendGateway,
@@ -79,6 +80,9 @@ export function createSavenLocalBackendGateway(state: SavenMockState = savenMock
   return {
     async getSnapshot() {
       return cloneState(state);
+    },
+    async getMonitoringSnapshot() {
+      return createSavenMonitoringSnapshot(cloneState(state));
     },
     async listTasks() {
       return cloneState(state).tasks;
