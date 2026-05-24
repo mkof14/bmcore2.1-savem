@@ -1264,6 +1264,20 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
     gold: 'from-amber-400 to-orange-400',
     red: 'from-red-500 to-orange-400',
   };
+  const operatingChain: Array<{
+    label: string;
+    title: string;
+    detail: string;
+    page: SavenPageId;
+    tone: string;
+  }> = [
+    { label: 'Command', title: 'Speak or type once', detail: 'SAVEN turns intent into route, owner, proof, and next move.', page: 'app-commands', tone: 'from-blue-500 to-cyan-300' },
+    { label: 'Human', title: 'Assign responsibility', detail: 'Caregiver, family, nurse, doctor, or emergency path becomes visible.', page: 'app-care-routes', tone: 'from-emerald-500 to-teal-300' },
+    { label: 'Physical', title: 'Check endpoints', detail: 'Robots and devices report readiness while action stays gated.', page: 'app-robots', tone: 'from-amber-400 to-orange-400' },
+    { label: 'Room', title: 'Permission gate', detail: 'SAVEN checks environment rules before physical support moves.', page: 'app-environments', tone: 'from-indigo-500 to-blue-400' },
+    { label: 'Proof', title: 'Confirm reality', detail: 'Human confirmation and scoped signals update continuity.', page: 'app-verification', tone: 'from-emerald-400 to-blue-400' },
+    { label: 'Continue', title: 'Next support window', detail: 'The day settles into the next calm action.', page: 'app-continuity', tone: 'from-orange-400 to-red-400' },
+  ];
 
   return (
     <div className="space-y-5">
@@ -1306,6 +1320,35 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="overflow-hidden rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10" data-saven-operating-chain="true">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">SAVEN operating chain</p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-tight">One command travels through the whole support system.</h3>
+          </div>
+          <button onClick={() => openPage('app-today')} className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
+            Open Today
+          </button>
+        </div>
+        <div className="mt-5 grid gap-3 lg:grid-cols-3 2xl:grid-cols-6">
+          {operatingChain.map((step, index) => (
+            <button
+              key={step.label}
+              onClick={() => openPage(step.page)}
+              className="group min-h-[164px] rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4 text-left shadow-sm ring-1 ring-white/5 transition-all hover:-translate-y-0.5 hover:border-blue-300/35 hover:bg-white/[0.1] hover:shadow-xl hover:shadow-blue-950/20"
+            >
+              <span className={'block h-1.5 w-16 rounded-full bg-gradient-to-r ' + step.tone} />
+              <div className="mt-4 flex items-center gap-2">
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-xs font-semibold text-white ring-1 ring-white/10">{index + 1}</span>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-300">{step.label}</p>
+              </div>
+              <h4 className="mt-3 text-lg font-semibold leading-6 text-white">{step.title}</h4>
+              <p className="mt-2 line-clamp-3 text-sm leading-5 text-slate-300">{step.detail}</p>
+            </button>
+          ))}
         </div>
       </section>
 
