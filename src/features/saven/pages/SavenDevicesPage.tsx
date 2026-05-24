@@ -108,6 +108,18 @@ export function DeviceReadiness() {
     <div className="space-y-6">
       <PageIntro eyebrow="Device Readiness" title="Device signals become proof channels." text="Devices do not decide. They provide scoped signals that help people, robots, rooms, and SAVEN agree on what happened." />
 
+      <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#020817]/88 p-4 shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-relay="device">
+        <div className="pointer-events-none absolute inset-x-6 top-1/2 hidden h-px bg-gradient-to-r from-emerald-300/45 via-blue-400/40 to-amber-300/45 lg:block" />
+        <div className="relative grid gap-3 lg:grid-cols-4">
+          {['Signal seen', 'Scope checked', 'Human proof', 'Continuity update'].map((label, index) => (
+            <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.055] px-4 py-3 text-sm font-semibold text-slate-100 shadow-sm">
+              <span className="mb-2 inline-flex rounded-full bg-white/10 px-2.5 py-1 text-[11px] text-emerald-100 ring-1 ring-white/10">D{index + 1}</span>
+              <p>{label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
         <div className="grid gap-5 lg:grid-cols-2">
           {devices.map((device) => (

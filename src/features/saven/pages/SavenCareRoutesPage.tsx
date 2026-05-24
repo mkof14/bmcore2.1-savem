@@ -139,6 +139,18 @@ export function SavenCareRoutes() {
     <div className="space-y-6">
       <PageIntro eyebrow="Care Routes" title="Escalation map: route the right human with context." text="Caregiver, family, nurse, doctor, and urgent paths all start from the same support packet. Local version only: no real messages or calls are sent." />
 
+      <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#020817]/88 p-4 shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-relay="care">
+        <div className="pointer-events-none absolute inset-x-6 top-1/2 hidden h-px bg-gradient-to-r from-blue-400/40 via-emerald-300/45 to-amber-300/45 lg:block" />
+        <div className="relative grid gap-3 lg:grid-cols-4">
+          {['Need signal', 'Route packet', 'Human gate', 'Audit trail'].map((label, index) => (
+            <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.055] px-4 py-3 text-sm font-semibold text-slate-100 shadow-sm">
+              <span className="mb-2 inline-flex rounded-full bg-white/10 px-2.5 py-1 text-[11px] text-blue-100 ring-1 ring-white/10">0{index + 1}</span>
+              <p>{label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_16%_16%,rgba(0,180,255,0.18),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,178,54,0.18),transparent_28%),radial-gradient(circle_at_72%_88%,rgba(16,185,129,0.15),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.95),rgba(240,249,255,0.8),rgba(255,247,237,0.76))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_16%_16%,rgba(0,180,255,0.24),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,178,54,0.15),transparent_28%),radial-gradient(circle_at_72%_88%,rgba(16,185,129,0.12),transparent_30%),linear-gradient(135deg,rgba(3,7,18,0.98),rgba(7,20,39,0.9),rgba(35,19,7,0.68))] dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
           <div>
