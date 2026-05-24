@@ -1267,14 +1267,14 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
 
   return (
     <div className="space-y-5">
-      <section className="overflow-hidden rounded-[2rem] border border-blue-200/70 bg-[radial-gradient(circle_at_10%_12%,rgba(59,130,246,0.18),transparent_28%),radial-gradient(circle_at_92%_18%,rgba(249,115,22,0.14),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.96),rgba(239,246,255,0.84))] p-6 shadow-lg shadow-blue-950/5 dark:border-blue-300/20 dark:bg-[radial-gradient(circle_at_10%_12%,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_92%_18%,rgba(249,115,22,0.16),transparent_26%),linear-gradient(135deg,rgba(6,16,31,0.98),rgba(15,23,42,0.9))] dark:ring-1 dark:ring-blue-300/15">
+      <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_10%_12%,rgba(59,130,246,0.22),transparent_28%),radial-gradient(circle_at_92%_18%,rgba(249,115,22,0.15),transparent_26%),linear-gradient(135deg,rgba(3,9,20,0.98),rgba(8,20,38,0.94),rgba(30,19,12,0.72))] p-6 shadow-xl shadow-slate-950/20 ring-1 ring-white/10">
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_390px] xl:items-stretch">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-700 dark:text-blue-200">SAVEN Commands</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-4xl">Ask SAVEN. Route the action.</h2>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">Choose a person, robot, device, or care path. SAVEN keeps proof visible.</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-700 dark:text-blue-200">SAVEN Dispatch</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-4xl">Voice becomes assigned support.</h2>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">Speak once. SAVEN turns it into owner, route, proof, and next move.</p>
             <div className="mt-5 flex flex-wrap gap-2">
-              {['Voice', 'Text', 'People', 'Robots', 'Emergency'].map((item, index) => (
+              {['Voice path', 'Typed path', 'Humans', 'Robots', 'Urgent'].map((item, index) => (
                 <span key={item} className={(index === 0 ? 'bg-blue-600 text-white' : 'bg-white/76 text-slate-700 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-slate-200 dark:ring-white/10') + ' rounded-full px-4 py-2 text-sm font-semibold shadow-sm'}>
                   {item}
                 </span>
@@ -1288,7 +1288,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
                 <MessageSquareText className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Composer</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Command pad</p>
                 <h3 className="mt-1 text-xl font-semibold text-slate-950 dark:text-white">{active.label}</h3>
               </div>
             </div>
@@ -1299,10 +1299,10 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
             />
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               <button onClick={() => openPage(active.page)} className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-500">
-                Open service
+                Open route
               </button>
               <button onClick={() => openPage('app-settings')} className="rounded-full bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-950">
-                Test mic
+                Mic settings
               </button>
             </div>
           </div>
@@ -1338,7 +1338,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
         </div>
 
         <aside className="rounded-[2rem] border border-slate-200 bg-white/82 p-5 shadow-sm dark:border-white/10 dark:bg-slate-950/70">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Route</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Execution route</p>
           <h3 className="mt-2 text-2xl font-semibold text-slate-950 dark:text-white">{active.target}</h3>
           <p className="mt-2 text-sm font-semibold text-blue-700 dark:text-blue-200">{active.proof}</p>
           <div className="mt-5 grid gap-2">
@@ -1352,7 +1352,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
             ))}
           </div>
           <div className="mt-5 rounded-3xl bg-slate-950 p-4 text-white shadow-inner dark:bg-white dark:text-slate-950">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Ready command</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Prepared command</p>
             <p className="mt-2 line-clamp-3 text-sm font-semibold leading-6">{draftCommand}</p>
           </div>
         </aside>
@@ -1618,7 +1618,7 @@ function SavenStartPath({ openPage }: { openPage: (pageId: SavenPageId) => void 
               <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">{item.action}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-300">{item.detail}</p>
               <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-200">
-                Open path
+                Enter path
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </span>
             </button>

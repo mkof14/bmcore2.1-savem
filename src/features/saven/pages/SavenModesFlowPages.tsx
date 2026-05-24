@@ -87,15 +87,15 @@ export function DualModeArchitecture() {
   return (
     <div className="space-y-6">
       <PageIntro
-        eyebrow="Dual Operational Architecture"
-        title="SAVEN works with BioMath Core or independently."
-        text="Connected Mode uses BioMath Core for deeper human understanding. Autonomous Mode keeps SAVEN functional with built-in support logic, workflows, environment rules, verification, and robotics-ready execution."
+        eyebrow="SAVEN Operating Modes"
+        title="One support system, two ways to run."
+        text="Connected mode reads BioMath context. Autonomous mode runs from profile, rules, people, devices, robots, and verification."
       />
 
       <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#0b1726]/88">
         <div className="grid gap-5 xl:grid-cols-[1fr_300px_1fr] xl:items-stretch">
           <ModePanel
-            title="BioMath Connected SAVEN"
+            title="Connected SAVEN"
             eyebrow="Connected Mode"
             text="BioMath Core provides physiological patterns, behavior context, recovery patterns, adaptive thresholds, and personalized support recommendations."
             status="BioMath signal active"
@@ -108,8 +108,8 @@ export function DualModeArchitecture() {
             <div className="relative flex h-full flex-col justify-between gap-6">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100">Shared Core</p>
-                <h3 className="mt-3 text-3xl font-semibold tracking-tight">SAVEN Execution System</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">One operational core supports both modes.</p>
+                <h3 className="mt-3 text-3xl font-semibold tracking-tight">Execution core</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-300">The same core assigns, verifies, and keeps continuity.</p>
               </div>
               <div className="space-y-2">
                 {['Execution engine', 'Verification engine', 'Timeline', 'Access system', 'Device layer', 'Robot layer'].map((item) => (
@@ -121,7 +121,7 @@ export function DualModeArchitecture() {
             </div>
           </div>
           <ModePanel
-            title="Autonomous SAVEN"
+            title="Standalone SAVEN"
             eyebrow="Standalone Mode"
             text="SAVEN generates support tasks from profile, environment, rhythm, availability, predefined workflows, and verification requirements without BioMath Core."
             status="Standalone support ready"
@@ -136,7 +136,7 @@ export function DualModeArchitecture() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Human to Reality Flow</p>
-              <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Insight becomes verified support.</h3>
+              <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Need becomes verified support.</h3>
             </div>
             <StatusPill tone="green" label="Operational continuity" />
           </div>
@@ -235,7 +235,7 @@ function ContinuityEnginePanel() {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Continuity Engine</p>
-      <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Operational stability, not medical scoring.</h3>
+      <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Stability for the support day.</h3>
       <div className="mt-5 space-y-3">
         {continuityFactors.map((factor) => (
           <div key={factor.label} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 rounded-3xl border border-slate-100 bg-[#f7f5f1] px-4 py-3 dark:border-white/10 dark:bg-slate-950/50">

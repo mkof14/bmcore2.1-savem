@@ -17,7 +17,7 @@ const routes = [
 ];
 
 const sourceExpectations = [
-  ['Dedicated Commands page', ['SAVEN Commands', 'Ask SAVEN', 'Composer', 'Ready command']],
+  ['Dedicated Commands page', ['SAVEN Dispatch', 'Voice becomes assigned support', 'Command pad', 'Prepared command']],
   ['Care Routes page', ['function SavenCareRoutes()', 'Care Routes']],
   ['Backend Gateway map', ['SavenBackendGatewayPanel', 'Backend gateway map', 'Backend Gateway Map', 'backend gateway']],
   ['Robot Device Service Matrix', ['Robot / Device Service Matrix', 'Robot Device Service Matrix', 'Physical orchestration', 'Physical support becomes visible', 'Physical support becomes visible, permissioned, and verified']],

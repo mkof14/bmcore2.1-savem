@@ -237,11 +237,11 @@ const continuityFactors = [
 export function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeSetupState; openPage: (pageId: 'app-support' | 'app-plan' | 'app-circle' | 'app-command' | 'app-environments' | 'app-verification' | 'app-continuity') => void; profileCreated: boolean }) {
   const stats = useMemo(
     () => [
-      { label: 'Active', value: supportTasks.filter((task) => task.status === 'active' || task.status === 'planned').length, tone: 'blue' },
-      { label: 'Completed', value: supportTasks.filter((task) => task.status === 'completed').length, tone: 'green' },
-      { label: 'Needs attention', value: supportTasks.filter((task) => task.status === 'needs_attention' || task.status === 'pending_confirmation').length, tone: 'amber' },
-      { label: 'Delayed', value: supportTasks.filter((task) => task.status === 'delayed').length, tone: 'amber' },
-      { label: 'Pending confirmation', value: supportTasks.filter((task) => task.status === 'pending_confirmation').length, tone: 'blue' },
+      { label: 'In shift', value: supportTasks.filter((task) => task.status === 'active' || task.status === 'planned').length, tone: 'blue' },
+      { label: 'Done', value: supportTasks.filter((task) => task.status === 'completed').length, tone: 'green' },
+      { label: 'Watch', value: supportTasks.filter((task) => task.status === 'needs_attention' || task.status === 'pending_confirmation').length, tone: 'amber' },
+      { label: 'Late', value: supportTasks.filter((task) => task.status === 'delayed').length, tone: 'amber' },
+      { label: 'Proof due', value: supportTasks.filter((task) => task.status === 'pending_confirmation').length, tone: 'blue' },
     ],
     []
   );
@@ -263,11 +263,11 @@ export function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeS
         <section className="space-y-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Today’s work</p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Support in motion</h2>
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Today’s support shift</p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Live handoffs</h2>
             </div>
             <button onClick={() => openPage('app-support')} className="group inline-flex items-center gap-2 rounded-full border border-white/70 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700 hover:shadow-md dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:text-slate-200 dark:hover:border-blue-300/30 dark:hover:text-blue-100">
-              Review flow
+              Open shift flow
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>
@@ -299,7 +299,7 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
     {
       label: 'Need',
       title: 'Mobility support need detected',
-      detail: 'SAVEN sees Anna needs a walking support window.',
+      detail: 'SAVEN sees a walking support window.',
       command: 'Hey SAVEN, show the next recovery need.',
       result: 'Need is visible and converted into a support task.',
       page: 'app-support',
@@ -308,7 +308,7 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
     {
       label: 'Task',
       title: 'Support task created',
-      detail: 'SAVEN creates the walking task with owner, time, and proof.',
+      detail: 'The need becomes owner, time, and proof.',
       command: 'Create walking support task for 10:30.',
       result: 'Task exists in the daily plan.',
       page: 'app-plan',
@@ -317,7 +317,7 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
     {
       label: 'Assign',
       title: 'Maya Carter assigned',
-      detail: 'Circle rules send the task to Maya first. Robot action stays locked.',
+      detail: 'Maya receives the task first. Robot action stays locked.',
       command: 'Assign walking support to Maya.',
       result: 'Maya becomes responsible; family remains fallback.',
       page: 'app-circle',
@@ -326,7 +326,7 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
     {
       label: 'Command',
       title: 'Voice or text command sent',
-      detail: 'Voice or text starts the same support action.',
+      detail: 'Voice or text starts the same real action.',
       command: 'Hey SAVEN, start assisted walking support.',
       result: 'Command is interpreted as a task action.',
       page: 'app-command',
@@ -335,7 +335,7 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
     {
       label: 'Care',
       title: 'Care network remains ready',
-      detail: 'If care risk rises, SAVEN shows nurse, doctor, family, or emergency path.',
+      detail: 'If risk rises, nurse, doctor, family, or urgent path appears.',
       command: 'If Maya cannot confirm, notify Daniel and prepare nurse follow-up.',
       result: 'Escalation path is visible, but no real external service is called.',
       page: 'app-environments',
@@ -344,7 +344,7 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
     {
       label: 'Verify',
       title: 'Reality confirmed',
-      detail: 'SAVEN waits for caregiver proof and device support.',
+      detail: 'Caregiver proof and device signal close the loop.',
       command: 'Confirm walking session completed.',
       result: 'Verification received and timeline event created.',
       page: 'app-verification',
@@ -353,7 +353,7 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
     {
       label: 'Continue',
       title: 'Continuity updated',
-      detail: 'The day settles: task done, next window clear, family update ready.',
+      detail: 'The shift settles: task done, next window clear, family update ready.',
       command: 'Update continuity and show next support window.',
       result: 'Continuity state becomes Strong.',
       page: 'app-continuity',
@@ -718,7 +718,7 @@ function CareContactNetwork({ compact = false }: { compact?: boolean }) {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Care connection network</p>
-          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Care circle ready.</h3>
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Care circle online.</h3>
           {!compact && <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Choose the right person fast. SAVEN keeps the path visible.</p>}
         </div>
         <StatusPill tone="green" label="Care contacts ready" />
