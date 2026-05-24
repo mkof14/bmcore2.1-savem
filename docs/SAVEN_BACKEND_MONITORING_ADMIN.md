@@ -448,3 +448,14 @@ BioMath Core Admin now shows SAVEN worker handoffs as a shift board:
 - `npm run admin-workers:saven`
 
 The board shows nurse, caregiver, device, robot, and emergency command packets with prepared, requires confirmation, and blocked statuses. This makes worker routing visible before live dispatch is connected.
+
+
+## Ops Evidence Pack
+
+SAVEN now has one operational evidence object:
+
+- `src/features/saven/services/savenOpsEvidenceService.ts`
+- `docs/SAVEN_OPS_EVIDENCE_PACK.md`
+- `npm run evidence:saven`
+
+The pack summarizes command fixtures, worker handoff, privacy guardrails, monitoring SLO, alert routes, and Admin Ops visibility. It reports `review_ready`, `needs_operator_review`, or `blocked` as an operator release posture.

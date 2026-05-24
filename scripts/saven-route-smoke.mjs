@@ -75,6 +75,7 @@ const sourceExpectations = [
   ['Practice Training Layer', ['data-saven-practice-layer="faq"', 'data-saven-practice-layer="learning"']],
   ['Visual Acceptance', ['Visual Acceptance', 'visual:saven', 'SAVEN_VISUAL_ACCEPTANCE', 'dark-operational']],
   ['Security Privacy Guardrails', ['SAVEN Security And Privacy Guardrails', 'privacy:saven', 'savenPrivacyPolicyMatrix', 'emergency_route']],
+  ['Ops Evidence Pack', ['SAVEN Ops Evidence Pack', 'createSavenOpsEvidencePack', 'evidence:saven', 'saven-ops-evidence-pack']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

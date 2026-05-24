@@ -201,6 +201,16 @@ For final shipping review:
 npm run ship:saven
 ```
 
+## Ops Evidence Pack
+
+Run:
+
+```zsh
+npm run evidence:saven
+```
+
+The evidence pack summarizes command fixtures, worker handoff, privacy, monitoring, alerts, and Admin Ops into one operator release posture.
+
 ## Release Blockers
 
 - Missing Supabase production credentials.
