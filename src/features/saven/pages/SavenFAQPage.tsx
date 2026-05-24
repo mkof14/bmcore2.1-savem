@@ -104,6 +104,27 @@ export function SavenFAQ() {
     <div className="space-y-6">
       <PageIntro eyebrow="FAQ for SAVEN" title="Clear answers for operating SAVEN." text="A practical guide to SAVEN as a daily support operating system: people, robots, voice commands, verification, environments, and safety rules." />
 
+      <section className="grid gap-4 rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[300px_minmax(0,1fr)]" data-saven-practice-layer="faq">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/70">Ask SAVEN, then check proof</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">FAQ becomes a practice desk.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">Use these as first commands when training a caregiver, nurse, or family member.</p>
+        </div>
+        <div className="grid gap-3 lg:grid-cols-3">
+          {[
+            ['Status', 'Hey SAVEN, what needs attention right now?', 'Shows owner, proof, next action'],
+            ['Human route', 'Hey SAVEN, request nurse follow-up.', 'Prepares context; no auto-call'],
+            ['Physical gate', 'Hey SAVEN, can the robot help here?', 'Checks room, approval, telemetry'],
+          ].map(([label, command, result]) => (
+            <div key={label} className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{label}</p>
+              <p className="mt-2 text-sm font-semibold leading-6 text-white">{command}</p>
+              <p className="mt-2 text-xs leading-5 text-blue-100">{result}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="grid gap-5 xl:grid-cols-[minmax(0,0.9fr)_minmax(420px,1.1fr)]">
         <aside className="overflow-hidden rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
           <div className="flex items-center gap-3">
@@ -112,7 +133,7 @@ export function SavenFAQ() {
             </span>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">SAVEN knowledge base</p>
-              <h3 className="mt-1 text-2xl font-semibold">Traditional FAQ</h3>
+              <h3 className="mt-1 text-2xl font-semibold">Operator answers</h3>
             </div>
           </div>
           <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-4">

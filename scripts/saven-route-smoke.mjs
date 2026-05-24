@@ -31,6 +31,7 @@ const sourceExpectations = [
   ['Today Operational Clarity', ['Today operational clarity', 'TodayOperationalClarity']],
   ['Timeline Operational Clarity', ['TimelineOperationalClarity', 'Timeline clarity']],
   ['Voice Settings', ['Speak with SAVEN']],
+  ['Practice Training Layer', ['data-saven-practice-layer="faq"', 'data-saven-practice-layer="learning"']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

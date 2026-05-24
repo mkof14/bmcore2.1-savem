@@ -78,6 +78,24 @@ export function SavenLearningCenter() {
     <div className="space-y-6">
       <PageIntro eyebrow="SAVEN Learning Center" title="Learn SAVEN step by step." text="A guided, practical training center for operating SAVEN clearly: profile, circle, daily support, voice commands, robots, verification, and settings." />
 
+      <section className="grid gap-4 rounded-[2rem] border border-emerald-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[300px_minmax(0,1fr)_270px]" data-saven-practice-layer="learning">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100/70">SAVEN practice path</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Train by running one real loop.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">Each lesson should end with a visible owner, permission, proof, or continuity update.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Practice command</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, walk me through assisted walking support from need to proof.</p>
+          <p className="mt-2 text-sm text-emerald-100">Then open Today, Circle, Environment, and Verification in order.</p>
+        </div>
+        <div className="grid gap-2">
+          {['Need detected', 'Human assigned', 'Room allowed', 'Proof returned'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(249,115,22,0.18),transparent_30%),radial-gradient(circle_at_70%_86%,rgba(16,185,129,0.18),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(255,247,237,0.74))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.28),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(249,115,22,0.16),transparent_30%),radial-gradient(circle_at_70%_86%,rgba(16,185,129,0.14),transparent_30%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(8,22,42,0.9),rgba(33,22,10,0.7))] dark:ring-1 dark:ring-white/10">
         <div className="grid gap-5 xl:grid-cols-[360px_minmax(0,1fr)]">
           <aside className="rounded-[2rem] bg-slate-950 p-5 text-white shadow-2xl shadow-slate-950/20 ring-1 ring-white/10">
