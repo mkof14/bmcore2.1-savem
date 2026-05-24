@@ -1253,10 +1253,10 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
   }, [active.command]);
 
   const colorMap: Record<string, string> = {
-    blue: 'border-blue-200 bg-blue-50/72 text-blue-950 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100',
-    green: 'border-emerald-200 bg-emerald-50/72 text-emerald-950 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100',
-    gold: 'border-amber-200 bg-amber-50/72 text-amber-950 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100',
-    red: 'border-red-200 bg-red-50/72 text-red-950 dark:border-red-300/20 dark:bg-red-500/10 dark:text-red-100',
+    blue: 'border-blue-300/25 bg-[#07111f] text-white ring-1 ring-blue-300/12',
+    green: 'border-emerald-300/25 bg-[#061a17] text-white ring-1 ring-emerald-300/12',
+    gold: 'border-amber-300/25 bg-[#1f1608] text-white ring-1 ring-amber-300/12',
+    red: 'border-red-300/25 bg-[#210d12] text-white ring-1 ring-red-300/12',
   };
   const accentMap: Record<string, string> = {
     blue: 'from-blue-500 to-cyan-400',
@@ -1282,26 +1282,26 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
             </div>
           </div>
 
-          <div className="rounded-[1.75rem] border border-white/70 bg-white/92 p-4 text-slate-950 shadow-sm dark:border-white/10 dark:bg-slate-950/68 dark:text-white">
+          <div className="rounded-[1.75rem] border border-blue-300/20 bg-[#07111f]/95 p-4 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10">
             <div className="flex items-center gap-3">
               <span className={'grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br text-white shadow-sm ' + accentMap[active.color]}>
                 <MessageSquareText className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Command pad</p>
-                <h3 className="mt-1 text-xl font-semibold text-slate-950 dark:text-white">{active.label}</h3>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-100/75">Command pad</p>
+                <h3 className="mt-1 text-xl font-semibold text-white">{active.label}</h3>
               </div>
             </div>
             <textarea
               value={draftCommand}
               onChange={(event) => setDraftCommand(event.target.value)}
-              className="mt-4 min-h-[84px] w-full resize-none rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold leading-6 text-slate-950 shadow-inner outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 dark:border-white/10 dark:bg-slate-950 dark:text-white dark:focus:border-blue-300"
+              className="mt-4 min-h-[84px] w-full resize-none rounded-3xl border border-white/10 bg-slate-950/82 px-4 py-3 text-sm font-semibold leading-6 text-white shadow-inner outline-none transition placeholder:text-slate-500 focus:border-blue-300 focus:ring-4 focus:ring-blue-500/15"
             />
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               <button onClick={() => openPage(active.page)} className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-500">
                 Open route
               </button>
-              <button onClick={() => openPage('app-settings')} className="rounded-full bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-950">
+              <button onClick={() => openPage('app-settings')} className="rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
                 Mic settings
               </button>
             </div>
@@ -1337,21 +1337,21 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
           })}
         </div>
 
-        <aside className="rounded-[2rem] border border-slate-200 bg-white/82 p-5 shadow-sm dark:border-white/10 dark:bg-slate-950/70">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Execution route</p>
-          <h3 className="mt-2 text-2xl font-semibold text-slate-950 dark:text-white">{active.target}</h3>
-          <p className="mt-2 text-sm font-semibold text-blue-700 dark:text-blue-200">{active.proof}</p>
+        <aside className="rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100/70">Execution route</p>
+          <h3 className="mt-2 text-2xl font-semibold text-white">{active.target}</h3>
+          <p className="mt-2 text-sm font-semibold text-blue-100">{active.proof}</p>
           <div className="mt-5 grid gap-2">
             {active.route.map((step, index) => (
               <div key={step} className="flex items-center gap-3">
                 <span className={'grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br text-sm font-semibold text-white shadow-sm ' + accentMap[active.color]}>{index + 1}</span>
-                <div className="min-w-0 rounded-2xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-800 dark:bg-white/10 dark:text-slate-100">
+                <div className="min-w-0 rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10">
                   {step}
                 </div>
               </div>
             ))}
           </div>
-          <div className="mt-5 rounded-3xl bg-slate-950 p-4 text-white shadow-inner dark:bg-white dark:text-slate-950">
+          <div className="mt-5 rounded-3xl bg-black/35 p-4 text-white shadow-inner ring-1 ring-white/10">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Prepared command</p>
             <p className="mt-2 line-clamp-3 text-sm font-semibold leading-6">{draftCommand}</p>
           </div>

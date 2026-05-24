@@ -39,9 +39,9 @@ function StatusPill({ label, tone }: { label: string; tone: Tone }) {
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
-      <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
-      <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
+      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">{eyebrow}</p>
+      <h2 className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-5xl">{title}</h2>
+      <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-200">{text}</p>
     </section>
   );
 }
@@ -49,8 +49,8 @@ function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; t
 function LayeredPanel({ title, text, items }: { title: string; text: string; items: string[] }) {
   return (
     <article className="rounded-3xl border border-white/70 bg-white/78 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-slate-950/58">
-      <h4 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h4>
-      <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{text}</p>
+      <h4 className="text-xl font-semibold tracking-tight text-white">{title}</h4>
+      <p className="mt-3 text-sm leading-6 text-slate-200">{text}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {items.map((item) => (
           <span key={item} className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-500/10 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/20">{item}</span>
@@ -135,8 +135,8 @@ function SettingSlider({ label, low, high, value, tone, onChange }: { label: str
     <div className="rounded-3xl border border-white/70 bg-white/78 p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/58">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-sm font-semibold text-slate-950 dark:text-white">{label}</p>
-          <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{low} to {high}</p>
+          <p className="text-sm font-semibold text-white">{label}</p>
+          <p className="mt-1 text-xs text-slate-300">{low} to {high}</p>
         </div>
         <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-slate-700 shadow-sm dark:bg-slate-950 dark:text-slate-100 dark:ring-1 dark:ring-white/10">{numericValue}%</span>
       </div>
@@ -505,12 +505,12 @@ export function SavenSettings() {
       <PageIntro eyebrow="Settings" title="Adapt SAVEN to the person." text="Control how SAVEN behaves around one person: reminders, cognitive load, escalation, devices, robots, privacy, recovery emphasis, and verified execution rules." />
 
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
-        <div className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950 dark:ring-1 dark:ring-white/10">
+        <div className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
           <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Person Operating Profile</p>
-              <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Daily support behavior</h3>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">These settings define how SAVEN should act before it creates tasks, assigns responsibility, or asks people to confirm reality.</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">Person Operating Profile</p>
+              <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Daily support behavior</h3>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-200">These settings define how SAVEN should act before it creates tasks, assigns responsibility, or asks people to confirm reality.</p>
             </div>
             <StatusPill tone="green" label="System ready" />
           </div>
@@ -524,13 +524,13 @@ export function SavenSettings() {
           </div>
         </div>
 
-        <div className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950 dark:ring-1 dark:ring-white/10">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">System Output</p>
-          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Generated rules</h3>
+        <div className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">System Output</p>
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Generated rules</h3>
           <div className="mt-5 space-y-2">
             {systemRules.map((rule) => (
-              <div key={rule.label} className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 rounded-2xl border border-slate-100 bg-[#f7f5f1] px-4 py-3 text-sm dark:border-white/10 dark:bg-slate-900">
-                <span className="text-slate-500 dark:text-slate-400">{rule.label}</span>
+              <div key={rule.label} className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-sm dark:border-white/10 dark:bg-slate-900">
+                <span className="text-slate-300">{rule.label}</span>
                 <span className="text-right font-semibold text-slate-900 dark:text-white">{rule.value}</span>
               </div>
             ))}
@@ -541,9 +541,9 @@ export function SavenSettings() {
       <section className="rounded-[2rem] border border-white/70 bg-white/82 p-5 shadow-sm backdrop-blur-xl transition-all hover:border-blue-200 hover:shadow-xl hover:shadow-blue-950/10 dark:border-white/10 dark:bg-slate-950 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="min-w-0">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Voice Control</p>
-            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">Speak with SAVEN</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Tune mic, tone, and command behavior.</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">Voice Control</p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">Speak with SAVEN</h3>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-200">Tune mic, tone, and command behavior.</p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-2">
             <StatusPill tone={settings.voiceControl ? 'green' : 'gold'} label={settings.voiceControl ? 'Voice active' : 'Voice paused'} />
@@ -560,7 +560,7 @@ export function SavenSettings() {
 
         <div className="mt-5 grid gap-4 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div className="space-y-4">
-            <div className="rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 dark:border-white/10 dark:bg-slate-900">
+            <div className="rounded-3xl border border-white/10 bg-white/8 p-4 dark:border-white/10 dark:bg-slate-900">
               <div className="flex flex-wrap gap-2">
                 {voiceCommands.map((item) => (
                   <button key={item.id} onClick={() => setActiveVoiceCommand(item.id)} className={(item.id === activeVoiceCommand ? 'bg-blue-600 text-white shadow-lg shadow-blue-950/25 ring-blue-300/30' : 'bg-white text-slate-700 ring-slate-200 hover:bg-blue-50 dark:bg-slate-950 dark:text-slate-200 dark:ring-white/10 dark:hover:bg-slate-800') + ' max-w-full rounded-full px-3 py-1.5 text-xs font-semibold ring-1 transition-all hover:-translate-y-0.5'}>
@@ -569,16 +569,16 @@ export function SavenSettings() {
                 ))}
               </div>
               <div className="mt-4 rounded-2xl bg-white p-4 ring-1 ring-slate-100 dark:bg-slate-950 dark:ring-white/10">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Command</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Command</p>
                 <p className="mt-3 min-h-[56px] overflow-hidden break-words text-base font-semibold leading-7 text-slate-950 dark:text-blue-100">
                   {typedVoiceCommand}<span className="animate-pulse text-blue-500 dark:text-blue-300">|</span>
                 </p>
               </div>
             </div>
 
-            <label className="block rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 dark:border-white/10 dark:bg-slate-900">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Type a command</span>
-              <textarea value={manualCommand} onChange={(event) => setManualCommand(event.target.value)} rows={3} className="mt-3 w-full resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm leading-6 text-slate-950 outline-none transition-all placeholder:text-slate-400 focus:border-blue-300 focus:ring-2 focus:ring-blue-400/20 dark:border-white/10 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-blue-300/60" />
+            <label className="block rounded-3xl border border-white/10 bg-white/8 p-4 dark:border-white/10 dark:bg-slate-900">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Type a command</span>
+              <textarea value={manualCommand} onChange={(event) => setManualCommand(event.target.value)} rows={3} className="mt-3 w-full resize-none rounded-2xl border border-slate-200 bg-slate-950/72 px-4 py-3 text-sm leading-6 text-white outline-none transition-all placeholder:text-slate-400 focus:border-blue-300 focus:ring-2 focus:ring-blue-400/20 dark:border-white/10 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-blue-300/60" />
               <div className="mt-3 flex flex-wrap gap-2">
                 <button type="button" onClick={runTextCommand} className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-950/20 transition-all hover:-translate-y-0.5 hover:bg-emerald-400">
                   Send
@@ -594,20 +594,20 @@ export function SavenSettings() {
           </div>
 
           <div className="space-y-4">
-            <div className={(voiceSpeaking ? 'ring-blue-300/40 shadow-blue-950/20' : 'ring-slate-100 dark:ring-white/10') + ' min-h-[236px] rounded-3xl border border-slate-100 bg-white p-4 shadow-sm ring-1 transition-all dark:border-white/10 dark:bg-slate-900'}>
+            <div className={(voiceSpeaking ? 'ring-blue-300/40 shadow-blue-950/20' : 'ring-slate-100 dark:ring-white/10') + ' min-h-[236px] rounded-3xl border border-white/10 bg-slate-950/70 p-4 shadow-sm ring-1 transition-all dark:border-white/10 dark:bg-slate-900'}>
               <div className="flex items-center justify-between gap-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">SAVEN reply</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">SAVEN reply</p>
                 <span className={(voiceSpeaking ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-200' : 'bg-slate-100 text-slate-500 dark:bg-slate-950 dark:text-slate-400') + ' rounded-full px-3 py-1 text-xs font-semibold'}>{voiceSpeaking ? 'Speaking' : 'Ready'}</span>
               </div>
-              <p className="mt-4 max-h-[144px] overflow-y-auto break-words text-base font-semibold leading-7 text-slate-950 dark:text-white">
+              <p className="mt-4 max-h-[144px] overflow-y-auto break-words text-base font-semibold leading-7 text-white">
                 {typedVoiceResponse}<span className="animate-pulse text-blue-500 dark:text-blue-300">|</span>
               </p>
             </div>
 
-            <div className="rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 dark:border-white/10 dark:bg-slate-900">
+            <div className="rounded-3xl border border-white/10 bg-white/8 p-4 dark:border-white/10 dark:bg-slate-900">
               <div className="mb-3 flex items-center justify-between gap-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Recent commands</p>
-                <span className={(interimSpeech ? 'text-amber-600 dark:text-amber-300' : 'text-slate-500 dark:text-slate-400') + ' text-xs font-semibold'}>{interimSpeech ? 'Listening...' : 'Recent'}</span>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Recent commands</p>
+                <span className={(interimSpeech ? 'text-amber-600 dark:text-amber-300' : 'text-slate-300') + ' text-xs font-semibold'}>{interimSpeech ? 'Listening...' : 'Recent'}</span>
               </div>
               {interimSpeech && (
                 <div className="mb-3 rounded-2xl border border-amber-300/30 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:bg-amber-400/10 dark:text-amber-100">
@@ -616,12 +616,12 @@ export function SavenSettings() {
               )}
               <div className="space-y-2">
                 {commandLog.slice(0, 3).map((entry, index) => (
-                  <div key={entry.time + '-' + entry.command + '-' + index} className="rounded-2xl border border-slate-100 bg-white px-4 py-3 transition-all hover:border-blue-200 hover:shadow-sm dark:border-white/10 dark:bg-slate-950 dark:hover:border-blue-300/40">
+                  <div key={entry.time + '-' + entry.command + '-' + index} className="rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 transition-all hover:border-blue-200 hover:shadow-sm dark:border-white/10 dark:bg-slate-950 dark:hover:border-blue-300/40">
                     <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
                       <span className="rounded-full bg-blue-50 px-2.5 py-1 text-blue-700 dark:bg-blue-500/15 dark:text-blue-100">{entry.source}</span>
                       <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-100">{entry.status}</span>
                     </div>
-                    <p className="mt-2 line-clamp-2 break-words text-sm font-semibold text-slate-950 dark:text-white">{entry.command}</p>
+                    <p className="mt-2 line-clamp-2 break-words text-sm font-semibold text-white">{entry.command}</p>
                   </div>
                 ))}
               </div>
@@ -636,41 +636,41 @@ export function SavenSettings() {
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950 dark:ring-1 dark:ring-white/10">
+      <section className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Voice coverage</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Commands across SAVEN</h3>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">Voice coverage</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Commands across SAVEN</h3>
           </div>
           <StatusPill tone="blue" label="Voice layer" />
         </div>
         <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           {voiceCommands.map((item) => (
-            <button key={item.id} onClick={() => setActiveVoiceCommand(item.id)} className="rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 text-left transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md dark:border-white/10 dark:bg-slate-900 dark:hover:border-blue-300/30">
+            <button key={item.id} onClick={() => setActiveVoiceCommand(item.id)} className="rounded-3xl border border-white/10 bg-white/8 p-4 text-left transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md dark:border-white/10 dark:bg-slate-900 dark:hover:border-blue-300/30">
               <span className="mb-4 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-slate-950 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25">{item.service}</span>
-              <p className="font-semibold text-slate-950 dark:text-white">{item.label}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">{item.command}</p>
+              <p className="font-semibold text-white">{item.label}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-300">{item.command}</p>
             </button>
           ))}
         </div>
         <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
           {voiceServices.map((service) => (
-            <div key={service.label} className="min-w-0 rounded-2xl border border-slate-100 bg-white p-4 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-sm dark:border-white/10 dark:bg-slate-900 dark:hover:border-blue-300/30">
+            <div key={service.label} className="min-w-0 rounded-2xl border border-white/10 bg-slate-950/70 p-4 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-sm dark:border-white/10 dark:bg-slate-900 dark:hover:border-blue-300/30">
               <div className="mb-3 flex items-center justify-between gap-3">
-                <p className="min-w-0 truncate font-semibold text-slate-950 dark:text-white">{service.label}</p>
+                <p className="min-w-0 truncate font-semibold text-white">{service.label}</p>
                 <span className={(service.active ? 'bg-emerald-500' : 'bg-slate-500') + ' h-2.5 w-2.5 shrink-0 rounded-full'} />
               </div>
-              <p className="line-clamp-2 break-words text-sm leading-6 text-slate-500 dark:text-slate-400">{service.value}</p>
+              <p className="line-clamp-2 break-words text-sm leading-6 text-slate-300">{service.value}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950 dark:ring-1 dark:ring-white/10">
+      <section className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Regulators</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Tune the support engine</h3>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">Regulators</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Tune the support engine</h3>
           </div>
           <StatusPill tone="blue" label="Live configuration" />
         </div>
@@ -681,11 +681,11 @@ export function SavenSettings() {
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950 dark:ring-1 dark:ring-white/10">
+      <section className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Permissions and switches</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Control what SAVEN is allowed to do</h3>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">Permissions and switches</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Control what SAVEN is allowed to do</h3>
           </div>
           <StatusPill tone="gold" label="Human approval layer" />
         </div>
@@ -699,9 +699,9 @@ export function SavenSettings() {
       <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_18%_20%,rgba(59,130,246,0.2),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(249,115,22,0.16),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.92),rgba(239,246,255,0.76),rgba(255,247,237,0.74))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_18%_20%,rgba(59,130,246,0.26),transparent_32%),radial-gradient(circle_at_88%_18%,rgba(249,115,22,0.18),transparent_30%),linear-gradient(135deg,rgba(6,14,28,0.96),rgba(15,23,42,0.86),rgba(35,24,10,0.66))] dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Robot Connection Center</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Connect robots as permissioned SAVEN endpoints.</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Robots connect through readiness, capability, environment rules, device telemetry, human approval, and verification. SAVEN keeps physical action visible and controlled.</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">Robot Connection Center</p>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Connect robots as permissioned SAVEN endpoints.</h3>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-200">Robots connect through readiness, capability, environment rules, device telemetry, human approval, and verification. SAVEN keeps physical action visible and controlled.</p>
           </div>
           <StatusPill tone={settings.robotReadiness ? 'green' : 'gold'} label={settings.robotReadiness ? 'Robot layer visible' : 'Robot layer paused'} />
         </div>
@@ -724,12 +724,12 @@ export function SavenSettings() {
                         <Icon className="h-4 w-4" />
                       </span>
                       <div>
-                        <p className="font-semibold text-slate-950 dark:text-white">{item.label}</p>
-                        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">{item.status}</p>
+                        <p className="font-semibold text-white">{item.label}</p>
+                        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-300">{item.status}</p>
                       </div>
                     </div>
                   </div>
-                  <p className="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.detail}</p>
+                  <p className="mt-4 text-sm leading-6 text-slate-200">{item.detail}</p>
                 </article>
               );
             })}
@@ -766,16 +766,16 @@ export function SavenSettings() {
       </section>
 
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_380px]">
-        <div className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950 dark:ring-1 dark:ring-white/10">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Daily rule schedule</p>
-          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">How the settings become actions</h3>
+        <div className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">Daily rule schedule</p>
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">How the settings become actions</h3>
           <div className="mt-6 space-y-3">
             {scheduleRows.map((row) => (
-              <div key={row.time} className="grid gap-3 rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 dark:border-white/10 dark:bg-slate-900 md:grid-cols-[80px_minmax(0,1fr)_180px] md:items-center">
+              <div key={row.time} className="grid gap-3 rounded-3xl border border-white/10 bg-white/8 p-4 dark:border-white/10 dark:bg-slate-900 md:grid-cols-[80px_minmax(0,1fr)_180px] md:items-center">
                 <span className="rounded-full bg-white px-3 py-1 text-center text-sm font-semibold text-slate-600 shadow-sm dark:bg-slate-950 dark:text-slate-200 dark:ring-1 dark:ring-white/10">{row.time}</span>
                 <div>
-                  <p className="font-semibold text-slate-950 dark:text-white">{row.action}</p>
-                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Owner: {row.owner}</p>
+                  <p className="font-semibold text-white">{row.action}</p>
+                  <p className="mt-1 text-sm text-slate-300">Owner: {row.owner}</p>
                 </div>
                 <span className="rounded-full bg-blue-50 px-3 py-1 text-center text-xs font-semibold text-blue-700 dark:bg-slate-950 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25">{row.mode}</span>
               </div>
