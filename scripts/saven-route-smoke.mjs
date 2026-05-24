@@ -24,6 +24,7 @@ const sourceExpectations = [
   ['Robot Device Service Matrix', ['Robot / Device Service Matrix', 'Robot Device Service Matrix', 'Physical orchestration', 'Physical support becomes visible', 'Physical support becomes visible, permissioned, and verified']],
   ['Device Verification Gateway', ['Device Gateway', 'verification gateway for real-world support']],
   ['Environment Permissions', ['Environment permissions', 'Environment flow']],
+  ['Gate Proof Centers', ['data-saven-gate-center="environment"', 'data-saven-gate-center="verification"']],
   ['Verification Engine', ['Verification Engine', 'Open verifications']],
   ['Live Shift Belt', ['Live shift belt', 'SavenLiveShiftBelt']],
   ['Today Operational Clarity', ['Today operational clarity', 'TodayOperationalClarity']],

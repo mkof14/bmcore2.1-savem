@@ -85,6 +85,24 @@ export function VerificationCenter() {
     <div className="space-y-6">
       <PageIntro eyebrow="Verification Engine" title="SAVEN updates continuity only after proof." text="Verification turns real-world support into accountable continuity. The system shows what is waiting, who confirms it, what proof is required, and what happens next." />
 
+      <section className="grid gap-4 rounded-[2rem] border border-emerald-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[300px_minmax(0,1fr)_300px]" data-saven-gate-center="verification">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100/70">Proof gate</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Continuity waits for proof.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">A task closes only when the right person or signal confirms reality.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, verify the walking session with Maya and wearable motion trend.</p>
+          <p className="mt-2 text-sm text-emerald-100">Target: Assisted walking session, continuity +2 after proof.</p>
+        </div>
+        <div className="grid gap-2">
+          {['Owner confirms', 'Signal supports', 'Continuity updates'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
         <div className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(16,185,129,0.15),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(240,253,244,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.23),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(6,34,24,0.62))] dark:ring-1 dark:ring-white/10">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
