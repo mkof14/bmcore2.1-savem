@@ -46,6 +46,41 @@ const demoScenarios = [
   'Robot-assisted environment',
 ];
 
+
+function SavenLifecycleCommandStrip() {
+  const commands = [
+    ['Need', 'Hey SAVEN, show the next support need.', 'Need becomes visible'],
+    ['Assign', 'Assign walking support to Maya first.', 'Human owner selected'],
+    ['Gate', 'Check hallway permission and keep robot locked.', 'Room gate checked'],
+    ['Proof', 'Verify the action with Maya and wearable trend.', 'Continuity can update'],
+  ];
+
+  return (
+    <section className="overflow-hidden rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10" data-saven-lifecycle-command="true">
+      <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">Lifecycle command strip</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Every support task has the same spine.</h3>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-200">Need, owner, permission, proof, and continuity are always visible.</p>
+        </div>
+        <span className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm">Verified before continuity</span>
+      </div>
+      <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        {commands.map(([label, command, result], index) => (
+          <div key={label} className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4 ring-1 ring-white/5">
+            <div className="flex items-center gap-3">
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-blue-600 text-xs font-semibold text-white">{index + 1}</span>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{label}</p>
+            </div>
+            <p className="mt-3 text-sm font-semibold leading-6 text-white">{command}</p>
+            <p className="mt-2 text-xs leading-5 text-blue-100">{result}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-7 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
@@ -286,6 +321,7 @@ export function SupportFlowPage() {
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Support Flow" title="Support is actively happening." text="SAVEN visualizes the path from detected need to verified continuity. The same execution flow works in Connected Mode and Autonomous Mode." />
+      <SavenLifecycleCommandStrip />
       <div className="grid gap-5 lg:grid-cols-2">
         <LayeredPanel title="Connected source" text="BioMath Core sends insight, recommendation, support need, priority, and adaptive threshold context." items={['BioMath signal', 'Human model context', 'Recovery pattern', 'Personal threshold']} />
         <LayeredPanel title="Autonomous source" text="SAVEN creates support tasks from profile, workflow templates, environment rules, availability, and verification requirements." items={['Support profile', 'Built-in workflow', 'Environment rule', 'Continuity state']} />
@@ -305,7 +341,7 @@ export function SupportFlowGraphic({ current }: { current: string }) {
   const currentIndex = steps.indexOf(current);
 
   return (
-    <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#0b1726]/88">
+    <section className="rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/18 backdrop-blur-xl ring-1 ring-white/10">
       <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
         {steps.map((step, index) => {
           const done = index < currentIndex;

@@ -31,6 +31,7 @@ const sourceExpectations = [
   ['Live Shift Belt', ['Live shift belt', 'SavenLiveShiftBelt']],
   ['Today Operational Clarity', ['Today operational clarity', 'TodayOperationalClarity']],
   ['Timeline Operational Clarity', ['TimelineOperationalClarity', 'Timeline clarity']],
+  ['Lifecycle Command Strip', ['data-saven-lifecycle-command="true"', 'Lifecycle command strip']],
   ['Voice Settings', ['Speak with SAVEN']],
   ['Practice Training Layer', ['data-saven-practice-layer="faq"', 'data-saven-practice-layer="learning"']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
