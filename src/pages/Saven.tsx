@@ -992,7 +992,7 @@ function SavenHome({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">Real system entry</p>
             <h3 className="mt-3 text-2xl font-semibold text-gray-950 dark:text-white">Start SAVEN</h3>
             <p className="mt-3 text-sm leading-6 text-gray-700 dark:text-gray-300">
-              Set up real-life support for a person through Person, Support Circle, Daily Support, and Verified Actions.
+              Create a profile, connect people, and start verified daily help.
             </p>
             <button
               onClick={() => openPage('app-start')}
@@ -1115,7 +1115,7 @@ function SavenAppShell({
             </span>
             <span>
               <span className="block text-xl font-semibold tracking-tight text-slate-950 dark:text-white">SAVEN</span>
-              <span className="block text-xs text-slate-500 dark:text-slate-400">Real support system</span>
+              <span className="block text-xs text-slate-500 dark:text-slate-400">Daily support</span>
             </span>
           </button>
           <div className="mt-4 overflow-hidden rounded-2xl border border-blue-200/60 bg-[linear-gradient(135deg,#ffffff,#eff6ff_52%,#fff7ed)] p-3 shadow-sm shadow-blue-950/5 dark:border-blue-300/15 dark:bg-[linear-gradient(135deg,#06101f,#0b1728_58%,#21170b)] dark:ring-1 dark:ring-blue-300/10">
@@ -1169,7 +1169,7 @@ function SavenAppShell({
             onClick={() => openPage('home')}
             className="mt-4 flex w-full items-center justify-between rounded-xl border border-slate-200 bg-white/60 px-3 py-2.5 text-left text-sm font-semibold text-slate-600 transition-colors hover:border-slate-300 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:text-white"
           >
-            Public website
+            BioMath site
             <ArrowRight className="h-4 w-4" />
           </button>
         </aside>
@@ -1178,13 +1178,13 @@ function SavenAppShell({
             <div className="mx-auto flex max-w-[1480px] flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">BioMath Core SAVEN</p>
-                <h1 className="mt-1 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">Daily human support operations</h1>
+                <h1 className="mt-1 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">SAVEN support console</h1>
               </div>
               <div className="flex flex-wrap items-center gap-2 text-sm">
                 <StatusPill tone="blue" label="Anna Roberts" />
                 <StatusPill tone="gold" label="Home Recovery" />
                 <StatusPill tone="green" label="Support active" />
-                <StatusPill tone="blue" label="Next window 15:00" />
+                <StatusPill tone="blue" label="Next 15:00" />
               </div>
             </div>
           </header>
@@ -1271,8 +1271,8 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_390px] xl:items-stretch">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-700 dark:text-blue-200">SAVEN Commands</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-4xl">Tell SAVEN what to do.</h2>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">Pick a target. SAVEN shows the route, proof, and next service.</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-4xl">Ask SAVEN. Route the action.</h2>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">Choose a person, robot, device, or care path. SAVEN keeps proof visible.</p>
             <div className="mt-5 flex flex-wrap gap-2">
               {['Voice', 'Text', 'People', 'Robots', 'Emergency'].map((item, index) => (
                 <span key={item} className={(index === 0 ? 'bg-blue-600 text-white' : 'bg-white/76 text-slate-700 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-slate-200 dark:ring-white/10') + ' rounded-full px-4 py-2 text-sm font-semibold shadow-sm'}>
@@ -1447,8 +1447,8 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
             <span className={(micActive ? 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.85)]' : 'bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.85)]') + ' absolute bottom-0.5 right-0.5 h-1.5 w-1.5 rounded-full'} />
           </span>
           <div className="min-w-0">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-blue-700 dark:text-blue-200">Voice</p>
-            <p className="truncate text-xs font-semibold text-slate-950 dark:text-white">SAVEN commands</p>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-blue-700 dark:text-blue-200">Voice rail</p>
+            <p className="truncate text-xs font-semibold text-slate-950 dark:text-white">Ask SAVEN</p>
             <p className="truncate text-[10px] text-slate-500 dark:text-slate-400">{pageLabel}</p>
           </div>
         </div>
@@ -1523,15 +1523,15 @@ function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: Sav
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Real SAVEN begins here</p>
             <h2 className="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-6xl">Start SAVEN</h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-              Set up real-life support for a person. This is where SAVEN stops being a website and becomes a daily support operating system.
+              Create a support profile, connect the circle, and begin verified daily help.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <button onClick={() => openPage(profileCreated ? 'app-today' : 'app-life-setup')} className="group inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,#0f172a,#1d4ed8)] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-950/10 transition-all hover:-translate-y-0.5 hover:shadow-xl dark:from-blue-500/85 dark:to-slate-800">
-                {profileCreated ? "Open Today's Support" : 'Begin Life Setup'}
+                {profileCreated ? "Open Today's Support" : 'Start setup'}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </button>
               <button onClick={() => openPage('home')} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:text-slate-200">
-                View public site
+                View BioMath site
               </button>
             </div>
           </div>
@@ -1546,9 +1546,9 @@ function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: Sav
       </section>
 
       <div className="grid gap-5 lg:grid-cols-3">
-        <SystemEntryCard title="Set Up a Person" text="Create a support profile for yourself, a family member, or someone under care." onClick={() => openPage('app-life-setup')} />
-        <SystemEntryCard title="Connect Support Circle" text="Add family, caregivers, professionals, devices, and future robots." onClick={() => openPage('app-circle')} />
-        <SystemEntryCard title="Activate Daily Support" text="Create the first daily support plan and begin verified actions." onClick={() => openPage('app-today')} />
+        <SystemEntryCard title="Set up a person" text="Create a support profile for yourself, a family member, or someone under care." onClick={() => openPage('app-life-setup')} />
+        <SystemEntryCard title="Connect the circle" text="Add family, caregivers, professionals, devices, and future robots." onClick={() => openPage('app-circle')} />
+        <SystemEntryCard title="Activate daily help" text="Create the first daily support plan and begin verified actions." onClick={() => openPage('app-today')} />
       </div>
 
       <SupportFlowGraphic current="Support Task Created" />

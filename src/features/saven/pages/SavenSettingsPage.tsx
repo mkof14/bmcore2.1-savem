@@ -312,7 +312,7 @@ export function SavenSettings() {
   };
 
   const runTextCommand = () => {
-    addCommandLog(manualCommand, 'Text command', activeVoice.response, 'Queued');
+    addCommandLog(manualCommand, 'Type a command', activeVoice.response, 'Queued');
     typeSavenResponse(activeVoice.response);
   };
 
@@ -543,7 +543,7 @@ export function SavenSettings() {
           <div className="min-w-0">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Voice Control</p>
             <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">Speak with SAVEN</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Test the real microphone, voice style, and command behavior.</p>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Tune mic, tone, and command behavior.</p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-2">
             <StatusPill tone={settings.voiceControl ? 'green' : 'gold'} label={settings.voiceControl ? 'Voice active' : 'Voice paused'} />
@@ -577,14 +577,14 @@ export function SavenSettings() {
             </div>
 
             <label className="block rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 dark:border-white/10 dark:bg-slate-900">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Text command</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Type a command</span>
               <textarea value={manualCommand} onChange={(event) => setManualCommand(event.target.value)} rows={3} className="mt-3 w-full resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm leading-6 text-slate-950 outline-none transition-all placeholder:text-slate-400 focus:border-blue-300 focus:ring-2 focus:ring-blue-400/20 dark:border-white/10 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-blue-300/60" />
               <div className="mt-3 flex flex-wrap gap-2">
                 <button type="button" onClick={runTextCommand} className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-950/20 transition-all hover:-translate-y-0.5 hover:bg-emerald-400">
                   Send
                 </button>
                 <button type="button" onClick={() => speakVoicePreview()} disabled={!settings.voiceControl} className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-950/20 transition-all hover:-translate-y-0.5 hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50">
-                  Hear response
+                  Play response
                 </button>
                 <button type="button" onClick={stopVoicePreview} className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-700 ring-1 ring-slate-200 transition-all hover:-translate-y-0.5 hover:bg-slate-50 dark:bg-slate-950 dark:text-slate-200 dark:ring-white/10 dark:hover:bg-slate-800">
                   Stop
@@ -596,7 +596,7 @@ export function SavenSettings() {
           <div className="space-y-4">
             <div className={(voiceSpeaking ? 'ring-blue-300/40 shadow-blue-950/20' : 'ring-slate-100 dark:ring-white/10') + ' min-h-[236px] rounded-3xl border border-slate-100 bg-white p-4 shadow-sm ring-1 transition-all dark:border-white/10 dark:bg-slate-900'}>
               <div className="flex items-center justify-between gap-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">SAVEN Response</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">SAVEN reply</p>
                 <span className={(voiceSpeaking ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-200' : 'bg-slate-100 text-slate-500 dark:bg-slate-950 dark:text-slate-400') + ' rounded-full px-3 py-1 text-xs font-semibold'}>{voiceSpeaking ? 'Speaking' : 'Ready'}</span>
               </div>
               <p className="mt-4 max-h-[144px] overflow-y-auto break-words text-base font-semibold leading-7 text-slate-950 dark:text-white">
@@ -606,7 +606,7 @@ export function SavenSettings() {
 
             <div className="rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 dark:border-white/10 dark:bg-slate-900">
               <div className="mb-3 flex items-center justify-between gap-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Command log</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Recent commands</p>
                 <span className={(interimSpeech ? 'text-amber-600 dark:text-amber-300' : 'text-slate-500 dark:text-slate-400') + ' text-xs font-semibold'}>{interimSpeech ? 'Listening...' : 'Recent'}</span>
               </div>
               {interimSpeech && (
@@ -640,9 +640,9 @@ export function SavenSettings() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Voice coverage</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Voice and text commands for every SAVEN service</h3>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Commands across SAVEN</h3>
           </div>
-          <StatusPill tone="blue" label="Command layer" />
+          <StatusPill tone="blue" label="Voice layer" />
         </div>
         <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           {voiceCommands.map((item) => (
