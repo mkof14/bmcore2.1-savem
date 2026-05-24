@@ -470,3 +470,14 @@ BioMath Core Admin now shows the SAVEN Ops Evidence Pack:
 - `npm run admin-evidence:saven`
 
 The panel shows release posture, evidence counts, gate status, and operator narrative in the SAVEN Ops screen. It turns release evidence into something visible before handoff, not only a hidden test result.
+
+
+## Launch Control Kit
+
+SAVEN now has a launch decision model:
+
+- `src/features/saven/services/savenLaunchControlService.ts`
+- `docs/SAVEN_LAUNCH_CONTROL_KIT.md`
+- `npm run launch:saven`
+
+Launch Control turns ops evidence, command-worker loop, privacy, monitoring, backend foundation, admin visibility, and production preview into a `go` or `hold` release decision.

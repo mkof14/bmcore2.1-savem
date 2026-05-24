@@ -51,7 +51,8 @@
     "workers:saven": "node scripts/saven-worker-handoff-audit.mjs",
     "admin-workers:saven": "node scripts/saven-admin-worker-shift-audit.mjs",
     "evidence:saven": "node scripts/saven-ops-evidence-audit.mjs",
-    "admin-evidence:saven": "node scripts/saven-admin-evidence-audit.mjs"
+    "admin-evidence:saven": "node scripts/saven-admin-evidence-audit.mjs",
+    "launch:saven": "node scripts/saven-launch-control-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

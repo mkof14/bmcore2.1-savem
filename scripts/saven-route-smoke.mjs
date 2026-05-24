@@ -77,6 +77,7 @@ const sourceExpectations = [
   ['Security Privacy Guardrails', ['SAVEN Security And Privacy Guardrails', 'privacy:saven', 'savenPrivacyPolicyMatrix', 'emergency_route']],
   ['Ops Evidence Pack', ['SAVEN Ops Evidence Pack', 'createSavenOpsEvidencePack', 'evidence:saven', 'saven-ops-evidence-pack']],
   ['Admin Ops Evidence Panel', ['data-saven-admin-evidence-pack="true"', 'SAVEN ops evidence', 'admin-evidence:saven']],
+  ['Launch Control Kit', ['SAVEN Launch Control Kit', 'createSavenLaunchControlReport', 'launch:saven', 'saven-launch-control-report']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

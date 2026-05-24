@@ -221,6 +221,16 @@ npm run evidence:saven
 
 The evidence pack summarizes command fixtures, worker handoff, privacy, monitoring, alerts, and Admin Ops into one operator release posture.
 
+## Launch Control Kit
+
+Run:
+
+```zsh
+npm run launch:saven
+```
+
+Launch Control summarizes SAVEN release gates into a `go` or `hold` decision before production handoff.
+
 ## Release Blockers
 
 - Missing Supabase production credentials.
