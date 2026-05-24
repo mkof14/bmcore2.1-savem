@@ -258,6 +258,16 @@ SAVEN now has a deploy readiness layer:
 
 Default review mode allows local/mock behavior with warnings. Production mode blocks unless Supabase public env vars are present, backend mode is `edge`, and the SAVEN Edge Function URL is configured. External dispatch remains disabled until a separately approved safety policy is implemented.
 
+## Production QA Audit
+
+SAVEN now has a production QA audit:
+
+- `npm run qa:saven`
+- `scripts/saven-production-qa-audit.mjs`
+- `docs/SAVEN_PRODUCTION_QA_CHECKLIST.md`
+
+The audit checks that the SAVEN command layer, permission review, Admin Ops, deploy readiness, route smoke coverage, and production QA checklist remain present before a release candidate is accepted.
+
 ## Backend API Contract
 
 SAVEN now has one backend API route registry:

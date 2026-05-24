@@ -39,6 +39,7 @@ const sourceExpectations = [
   ['Backend API Contract', ['savenBackendApiRoutes', 'getSavenBackendApiRoute', 'savenHumanConfirmedRouteIds', 'incident_readiness']],
   ['Backend Readiness Audit', ['saven-backend-readiness-audit.mjs', 'backend:saven', 'Backend readiness']],
   ['Deploy Readiness Audit', ['saven-deploy-readiness-audit.mjs', 'deploy:saven', 'SAVEN Deploy Readiness', 'SAVEN_DEPLOY_TARGET']],
+  ['Production QA Audit', ['saven-production-qa-audit.mjs', 'qa:saven', 'SAVEN Production QA Checklist', 'Release decision']],
   ['Supabase Schema Draft', ['saven_backend_schema_draft', 'saven_admin_overrides', 'saven_verifications']],
   ['Supabase Persistence Bridge', ['createSavenSupabasePersistenceRepository', 'savenPersistenceTables', 'getPersistenceStatus', 'data-saven-admin-persistence-status="true"']],
   ['RLS Policy Draft', ['saven_rls_policy_draft', 'is_saven_admin', 'Critical writes']],
