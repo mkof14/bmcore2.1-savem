@@ -12,6 +12,7 @@ const steps = [
   { label: 'Edge Function package', command: 'npm', args: ['run', 'edge:saven'] },
   { label: 'Command contract', command: 'npm', args: ['run', 'commands:saven'] },
   { label: 'Worker handoff', command: 'npm', args: ['run', 'workers:saven'] },
+  { label: 'Admin worker shift', command: 'npm', args: ['run', 'admin-workers:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },
   { label: 'Production QA audit', command: 'npm', args: ['run', 'qa:saven'] },
   { label: 'Theme contrast', command: 'npm', args: ['run', 'contrast:saven'] },

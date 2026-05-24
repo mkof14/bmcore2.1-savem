@@ -48,7 +48,8 @@
     "alerts:saven": "node scripts/saven-alerting-audit.mjs",
     "admin-alerts:saven": "node scripts/saven-admin-alerts-audit.mjs",
     "privacy:saven": "node scripts/saven-privacy-guardrails-audit.mjs",
-    "workers:saven": "node scripts/saven-worker-handoff-audit.mjs"
+    "workers:saven": "node scripts/saven-worker-handoff-audit.mjs",
+    "admin-workers:saven": "node scripts/saven-admin-worker-shift-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

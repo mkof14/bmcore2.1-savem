@@ -437,3 +437,14 @@ SAVEN now has worker endpoint rules:
 - `npm run workers:saven`
 
 The kit routes voice/text commands to caregiver, nurse, doctor, robot, device, emergency route, or Admin Ops. Robot physical action and emergency external dispatch stay blocked without explicit human confirmation.
+
+
+## Admin Worker Shift Board
+
+BioMath Core Admin now shows SAVEN worker handoffs as a shift board:
+
+- `data-saven-admin-worker-shift="true"`
+- `createSavenWorkerShiftBoard`
+- `npm run admin-workers:saven`
+
+The board shows nurse, caregiver, device, robot, and emergency command packets with prepared, requires confirmation, and blocked statuses. This makes worker routing visible before live dispatch is connected.

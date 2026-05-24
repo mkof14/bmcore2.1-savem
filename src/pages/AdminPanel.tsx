@@ -18,6 +18,7 @@ import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
+import { createSavenWorkerShiftBoard } from '../features/saven/services/savenWorkerHandoffService';
 import { createSavenMonitoringSloReport, type SavenMonitoringSloReport } from '../features/saven/services/savenMonitoringSloService';
 import { createSavenOpsAlerts, type SavenOpsAlert } from '../features/saven/services/savenAlertingService';
 import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenIncidentAction, SavenIncidentActionResult, SavenIncidentReadiness, SavenMonitoringSnapshot, SavenPersistenceStatus } from '../features/saven/contracts/savenBackendContract';
@@ -184,6 +185,13 @@ function SavenOpsAdminSection() {
   const persistenceTables = persistenceStatus?.tables.slice(0, 6) ?? [];
   const sloReport: SavenMonitoringSloReport | null = snapshot ? createSavenMonitoringSloReport(snapshot) : null;
   const activeAlerts: SavenOpsAlert[] = sloReport ? createSavenOpsAlerts(sloReport) : [];
+  const workerShiftBoard = createSavenWorkerShiftBoard([
+    { source: 'voice' as const, text: 'Hey SAVEN, request nurse follow-up and send recovery context.', targetTaskId: 'task-medication-0900' },
+    { source: 'voice' as const, text: 'Hey SAVEN, assign caregiver Maya to this support task.', targetTaskId: 'task-mobility-1030' },
+    { source: 'voice' as const, text: 'Hey SAVEN, check wearable sensor and attach proof.', targetTaskId: 'task-mobility-1030' },
+    { source: 'voice' as const, text: 'Hey SAVEN, check robot readiness and keep physical approval locked.', targetTaskId: 'task-mobility-1030' },
+    { source: 'voice' as const, text: 'Hey SAVEN, urgent emergency help now.', targetTaskId: 'task-emergency' },
+  ]);
   const sloTone = sloReport?.status === 'breach' ? 'border-red-300/25 bg-red-500/10 text-red-100' : sloReport?.status === 'watch' ? 'border-amber-300/25 bg-amber-500/10 text-amber-100' : 'border-emerald-300/25 bg-emerald-500/10 text-emerald-100';
   const adminOverrideActions: Array<{ action: SavenAdminOverrideAction; label: string; targetId: string; reason: string }> = [
     { action: 'pause_support', label: 'Pause support', targetId: 'person-anna', reason: 'Admin review before continued support.' },
@@ -278,6 +286,52 @@ function SavenOpsAdminSection() {
                 <p className="mt-3 text-2xl font-semibold text-white">{metric.value}</p>
                 <p className="mt-3 text-sm leading-6 text-slate-300">{metric.objective}</p>
                 <p className="mt-3 rounded-2xl bg-slate-950/55 px-3 py-2 text-xs font-semibold leading-5 text-slate-200 ring-1 ring-white/10">{metric.action}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-cyan-300/15 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-worker-shift="true">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100/70">SAVEN worker shift board</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">Voice commands become role-specific handoffs.</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">Admin can see how SAVEN routes live commands to nurse, caregiver, device, robot, and emergency endpoints before real dispatch is connected.</p>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-center text-xs font-semibold">
+            <span className="rounded-2xl border border-emerald-300/20 bg-emerald-500/10 px-3 py-2 text-emerald-100">{workerShiftBoard.summary.prepared} prepared</span>
+            <span className="rounded-2xl border border-amber-300/20 bg-amber-500/10 px-3 py-2 text-amber-100">{workerShiftBoard.summary.requiresConfirmation} confirm</span>
+            <span className="rounded-2xl border border-red-300/20 bg-red-500/10 px-3 py-2 text-red-100">{workerShiftBoard.summary.blocked} blocked</span>
+          </div>
+        </div>
+        <div className="mt-5 grid gap-3 xl:grid-cols-2">
+          {workerShiftBoard.packets.map((packet) => {
+            const packetTone =
+              packet.status === 'blocked'
+                ? 'border-red-300/25 bg-red-500/10'
+                : packet.status === 'requires_confirmation'
+                  ? 'border-amber-300/25 bg-amber-500/10'
+                  : 'border-emerald-300/25 bg-emerald-500/10';
+            return (
+              <article key={packet.id} className={'rounded-2xl border p-4 ring-1 ring-white/5 ' + packetTone}>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-white">{packet.worker.label}</p>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">{packet.worker.role} · {packet.worker.handoffRoute}</p>
+                  </div>
+                  <span className="rounded-full bg-slate-950/70 px-3 py-1 text-xs font-semibold capitalize text-slate-100 ring-1 ring-white/10">{packet.status.replace(/_/g, ' ')}</span>
+                </div>
+                <p className="mt-3 rounded-2xl bg-slate-950/55 px-3 py-2 text-sm font-semibold leading-6 text-slate-100 ring-1 ring-white/10">{packet.command.text}</p>
+                <p className="mt-3 text-sm leading-6 text-slate-300">{packet.message}</p>
+                <div className="mt-4 grid gap-2">
+                  {packet.nextSteps.map((step, index) => (
+                    <div key={step} className="flex gap-3 rounded-2xl bg-slate-950/55 px-3 py-2 text-sm text-slate-200 ring-1 ring-white/10">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-semibold text-white">{index + 1}</span>
+                      <span>{step}</span>
+                    </div>
+                  ))}
+                </div>
               </article>
             );
           })}

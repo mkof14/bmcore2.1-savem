@@ -137,6 +137,16 @@ npm run privacy:saven
 
 Review SAVEN data classes, role visibility, family-digest redaction, robot gate retention, emergency route retention, and admin audit handling before production.
 
+## Admin Worker Shift Board
+
+Run:
+
+```zsh
+npm run admin-workers:saven
+```
+
+Admin Ops should show SAVEN worker command packets before live worker dispatch is connected.
+
 ## Worker Handoff Kit
 
 Run:
