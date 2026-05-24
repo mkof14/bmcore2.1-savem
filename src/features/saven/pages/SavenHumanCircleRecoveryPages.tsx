@@ -181,6 +181,25 @@ export function HumanSupportTimeline() {
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Support Timeline" title="Real history of support and care continuity." text="This timeline is not an audit log. It shows verified actions in plain human language." />
+
+      <section className="grid gap-4 rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-human-rail="timeline">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/70">Timeline rail</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">History stays human-readable.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">Every event says what happened, who confirmed it, and what changed next.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, explain today&apos;s verified support history.</p>
+          <p className="mt-2 text-sm text-blue-100">Target: proof trail, not raw logs.</p>
+        </div>
+        <div className="grid gap-2">
+          {['What happened', 'Who confirmed', 'Continuity effect'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <TimelineOperationalClarity />
       <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
         <div className="space-y-4">
@@ -217,6 +236,25 @@ export function SupportCircle() {
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Support Circle" title="Who is helping this person?" text="The relationship map shows people, devices, robots, environments, and verification moving around one supported person." />
+
+      <section className="grid gap-4 rounded-[2rem] border border-emerald-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-human-rail="circle">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100/70">Circle rail</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Responsibility has shape.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">SAVEN shows who acts first, who is fallback, and who verifies reality.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, show who should handle the next recovery task.</p>
+          <p className="mt-2 text-sm text-emerald-100">Target: Maya first, Daniel fallback, nurse if unresolved.</p>
+        </div>
+        <div className="grid gap-2">
+          {['Primary owner', 'Fallback route', 'Proof role'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="relative min-h-[700px] overflow-hidden rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_24%_18%,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_78%_22%,rgba(16,185,129,0.2),transparent_28%),radial-gradient(circle_at_50%_92%,rgba(245,158,11,0.28),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.96),rgba(235,245,255,0.82),rgba(255,247,226,0.78))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_24%_18%,rgba(59,130,246,0.32),transparent_30%),radial-gradient(circle_at_80%_24%,rgba(16,185,129,0.18),transparent_30%),radial-gradient(circle_at_50%_92%,rgba(245,158,11,0.16),transparent_30%),linear-gradient(135deg,rgba(6,14,28,0.98),rgba(11,25,43,0.94),rgba(33,25,14,0.74))]">
         <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(59,130,246,0.13)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.12)_1px,transparent_1px)] [background-size:48px_48px] dark:opacity-30" />
 
@@ -330,6 +368,25 @@ export function RecoveryMode() {
   return (
     <div className="space-y-6">
       <PageIntro eyebrow="Recovery Mode" title="Simplified support for recovery." text="Recovery mode reduces cognitive load, prioritizes the next action, and tracks verified progression." />
+
+      <section className="grid gap-4 rounded-[2rem] border border-amber-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-human-rail="recovery">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-100/70">Recovery rail</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">One next action at a time.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">Recovery mode lowers noise and keeps the next verified step visible.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, what is Anna&apos;s next recovery action?</p>
+          <p className="mt-2 text-sm text-amber-100">Target: assisted walking, Maya owner, proof required.</p>
+        </div>
+        <div className="grid gap-2">
+          {['Reduce noise', 'Show next step', 'Verify progress'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
         <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
           <div>
