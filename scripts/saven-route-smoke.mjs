@@ -35,6 +35,7 @@ const sourceExpectations = [
   ['Monitoring Contract', ['SavenMonitoringSnapshot', 'createSavenMonitoringSnapshot', 'getMonitoringSnapshot']],
   ['HTTP Backend Adapter', ['createSavenHttpBackendAdapter', '/admin-overrides', '/monitoring']],
   ['Backend Gateway Selector', ['createSavenBackendGatewayFromEnv', 'VITE_SAVEN_BACKEND_MODE', 'savenBackendGateway']],
+  ['Backend Readiness Audit', ['saven-backend-readiness-audit.mjs', 'backend:saven', 'Backend readiness']],
   ['Backend Monitoring Admin', ['data-saven-admin-ops="true"', 'SAVEN Backend, Monitoring, and Admin Foundation']],
   ['Admin Monitoring Snapshot', ['data-saven-admin-monitoring-live="true"', 'getMonitoringSnapshot()']],
   ['Admin Override Contract', ['data-saven-admin-overrides="true"', 'SavenAdminOverrideResult', 'applyAdminOverride']],

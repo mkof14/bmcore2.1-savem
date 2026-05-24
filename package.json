@@ -32,7 +32,8 @@
     "smoke:saven:auto": "node scripts/saven-route-smoke-with-server.mjs",
     "validate:saven": "npm run contrast:saven && npm run typecheck && npm run test -- --run && npm run smoke:saven:auto",
     "contrast:saven": "node scripts/saven-theme-contrast-audit.mjs",
-    "ready:saven": "node scripts/saven-full-readiness.mjs"
+    "ready:saven": "node scripts/saven-full-readiness.mjs",
+    "backend:saven": "node scripts/saven-backend-readiness-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

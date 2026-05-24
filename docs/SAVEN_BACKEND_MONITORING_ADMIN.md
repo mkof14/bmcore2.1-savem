@@ -138,3 +138,17 @@ SAVEN now has a safe gateway selector:
 - HTTP mode: requires `VITE_SAVEN_BACKEND_MODE=http` and `VITE_SAVEN_BACKEND_URL`
 
 BioMath Core Admin now reads from `savenBackendGateway`, so it can stay local-safe today and switch to the HTTP backend adapter later without rewriting the Admin UI.
+
+## Backend Readiness Audit
+
+`npm run backend:saven` verifies that the SAVEN backend foundation remains present:
+
+- backend gateway contract
+- local backend gateway
+- monitoring service
+- HTTP backend adapter
+- backend gateway selector
+- Admin Ops integration
+- backend monitoring/admin documentation
+
+`npm run ready:saven` now runs this audit before contrast, typecheck, tests, smoke, and production build.
