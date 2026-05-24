@@ -36,7 +36,9 @@
     "backend:saven": "node scripts/saven-backend-readiness-audit.mjs",
     "deploy:saven": "node scripts/saven-deploy-readiness-audit.mjs",
     "qa:saven": "node scripts/saven-production-qa-audit.mjs",
-    "release:saven": "node scripts/saven-release-readiness-audit.mjs"
+    "release:saven": "node scripts/saven-release-readiness-audit.mjs",
+    "preview:saven:auto": "node scripts/saven-production-preview-smoke.mjs",
+    "ship:saven": "npm run ready:saven && npm run preview:saven:auto"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

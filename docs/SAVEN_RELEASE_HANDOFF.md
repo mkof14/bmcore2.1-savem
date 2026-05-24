@@ -73,6 +73,22 @@ Optional direct backend mode:
 5. Build with public environment variables unset for fallback verification.
 6. Preview the production bundle before handing the link to reviewers.
 
+## Production Preview Gate
+
+Before final handoff, run the production preview gate:
+
+```zsh
+npm run preview:saven:auto
+```
+
+This gate builds the production bundle, serves it through Vite preview, checks SAVEN routes, verifies bundle markers, and fails if the app falls back to stale `Loading Application` behavior.
+
+For final shipping review:
+
+```zsh
+npm run ship:saven
+```
+
 ## Release Blockers
 
 - Missing Supabase production credentials.

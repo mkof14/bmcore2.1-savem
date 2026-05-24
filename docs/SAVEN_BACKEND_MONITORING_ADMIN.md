@@ -316,3 +316,12 @@ SAVEN Release Handoff is now tracked as a release artifact instead of a loose ch
 - `docs/SAVEN_RELEASE_HANDOFF.md` keeps GitHub, hosting, Supabase, Edge Function, Admin Ops, monitoring, and safety gates together.
 - `npm run release:saven` verifies release handoff materials.
 - Production handoff requires `SAVEN_DEPLOY_TARGET=production` and `VITE_SAVEN_BACKEND_MODE=edge` when the Edge Function gateway is used.
+
+
+## Production Preview Gate
+
+SAVEN production preview is now a release gate:
+
+- `npm run preview:saven:auto` builds and serves the production bundle.
+- `npm run ship:saven` runs full readiness plus production preview smoke.
+- The preview gate checks SAVEN routes, command layer bundle markers, and stale `Loading Application` fallback behavior.

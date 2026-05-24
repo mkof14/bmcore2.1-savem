@@ -52,7 +52,7 @@ const checks = [
 ];
 
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
-if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
+if (packageJson.scripts?.['preview:saven:auto'] !== 'node scripts/saven-production-preview-smoke.mjs') {\n  throw new Error('package.json is missing preview:saven:auto script.');\n}\nconsole.log('[release] ok package preview:saven:auto script');\n\nif (packageJson.scripts?.['ship:saven'] !== 'npm run ready:saven && npm run preview:saven:auto') {\n  throw new Error('package.json is missing ship:saven script.');\n}\nconsole.log('[release] ok package ship:saven script');\n\nif (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');
 }
 console.log('[release] ok package release:saven script');
