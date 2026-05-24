@@ -99,3 +99,31 @@ SAVEN now models admin override actions through the backend gateway:
 - `SavenBackendGateway.applyAdminOverride(input)`
 
 Current local actions are audit-first and do not perform real external dispatch. Robot action approval and escalation hold return `requires_review` to preserve the safety boundary.
+
+## HTTP Backend Adapter
+
+SAVEN now has a production-facing HTTP adapter skeleton:
+
+- `createSavenHttpBackendAdapter(options)`
+- backend base URL normalization
+- optional auth token injection
+- typed gateway methods matching `SavenBackendGateway`
+- backend error handling
+
+Current route contract:
+
+- `GET /snapshot`
+- `GET /monitoring`
+- `GET /tasks`
+- `GET /endpoints`
+- `GET /care-contacts`
+- `POST /tasks`
+- `POST /tasks/:taskId/assignment`
+- `POST /tasks/:taskId/verification`
+- `POST /tasks/:taskId/continuity`
+- `POST /commands`
+- `POST /escalations`
+- `POST /care-contact-requests`
+- `POST /admin-overrides`
+
+The adapter is not activated by default. The current UI remains on the local gateway until a real backend service is deployed and intentionally wired.
