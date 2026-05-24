@@ -542,8 +542,8 @@ export function SavenSettings() {
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="min-w-0">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Voice Control</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Speak with SAVEN</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Voice and text commands for support, verification, caregiver flow, devices, and robotics. The sound bar below reacts to the real microphone.</p>
+            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">Speak with SAVEN</h3>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Test the real microphone, voice style, and command behavior.</p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-2">
             <StatusPill tone={settings.voiceControl ? 'green' : 'gold'} label={settings.voiceControl ? 'Voice active' : 'Voice paused'} />
@@ -554,7 +554,7 @@ export function SavenSettings() {
           </div>
         </div>
 
-        <div className="mt-4 max-w-3xl">
+        <div className="mt-4 max-w-2xl">
           <MicLevelBar level={audioLevel} active={microphoneOpen} error={micError} onToggle={startMicrophone} />
         </div>
 

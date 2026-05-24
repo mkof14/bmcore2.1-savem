@@ -713,8 +713,8 @@ function CareContactNetwork({ compact = false }: { compact?: boolean }) {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Care connection network</p>
-          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Doctor, nurse, emergency, and family are connected by clear escalation rules.</h3>
-          {!compact && <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">SAVEN should never blur normal support with emergency response. This layer shows who gets contacted, when, and what information is sent.</p>}
+          <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Care contacts are ready.</h3>
+          {!compact && <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Choose the right person fast. SAVEN keeps the contact path visible.</p>}
         </div>
         <StatusPill tone="green" label="Care contacts ready" />
       </div>
@@ -731,17 +731,17 @@ function CareContactNetwork({ compact = false }: { compact?: boolean }) {
                   ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100'
                   : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
             return (
-              <article key={contact.role} className={'group min-w-0 rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
+              <article key={contact.role} className={'group min-w-0 rounded-3xl border p-4 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.12em] opacity-65">{contact.role}</p>
-                    <h4 className="mt-2 break-words text-xl font-semibold leading-7">{contact.name}</h4>
+                    <h4 className="mt-2 break-words text-lg font-semibold leading-6">{contact.name}</h4>
                   </div>
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-white/70 transition-transform group-hover:scale-105 dark:bg-slate-950/70 dark:ring-white/10">
                     <Icon className="h-5 w-5" />
                   </span>
                 </div>
-                <p className="mt-4 inline-flex max-w-full rounded-2xl bg-white/82 px-3 py-1.5 text-xs font-semibold leading-5 shadow-sm dark:bg-slate-950/70">{contact.availability}</p>
+                <p className="mt-3 inline-flex max-w-full rounded-2xl bg-white/82 px-3 py-1.5 text-xs font-semibold leading-5 shadow-sm dark:bg-slate-950/70">{contact.availability}</p>
                 {!compact && <p className="mt-4 text-sm leading-6 opacity-85">{contact.trigger}</p>}
                 <button className="mt-4 min-h-11 w-full rounded-2xl bg-slate-950 px-4 py-2 text-sm font-semibold leading-5 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:hover:bg-blue-100">
                   {contact.action}

@@ -1272,8 +1272,8 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_390px] xl:items-stretch">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-700 dark:text-blue-200">SAVEN Commands</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">Tell SAVEN what to do.</h2>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">Choose who or what should act. SAVEN keeps the route and verification visible.</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-4xl">Tell SAVEN what to do.</h2>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-300">Pick a target. SAVEN shows the route, proof, and next service.</p>
             <div className="mt-5 flex flex-wrap gap-2">
               {['Voice', 'Text', 'People', 'Robots', 'Emergency'].map((item, index) => (
                 <span key={item} className={(index === 0 ? 'bg-blue-600 text-white' : 'bg-white/76 text-slate-700 ring-1 ring-slate-200 dark:bg-slate-950/60 dark:text-slate-200 dark:ring-white/10') + ' rounded-full px-4 py-2 text-sm font-semibold shadow-sm'}>
@@ -1296,7 +1296,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
             <textarea
               value={draftCommand}
               onChange={(event) => setDraftCommand(event.target.value)}
-              className="mt-4 min-h-[96px] w-full resize-none rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold leading-6 text-slate-950 shadow-inner outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 dark:border-white/10 dark:bg-slate-950 dark:text-white dark:focus:border-blue-300"
+              className="mt-4 min-h-[84px] w-full resize-none rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold leading-6 text-slate-950 shadow-inner outline-none transition focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 dark:border-white/10 dark:bg-slate-950 dark:text-white dark:focus:border-blue-300"
             />
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               <button onClick={() => openPage(active.page)} className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-500">
@@ -1319,7 +1319,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
               <button
                 key={item.id}
                 onClick={() => setActiveId(item.id)}
-                className={(activeCard ? 'scale-[1.01] border-blue-300 shadow-xl shadow-blue-950/10 ring-4 ring-blue-500/10 dark:border-blue-300/40' : 'shadow-sm hover:-translate-y-0.5 hover:shadow-lg') + ' relative overflow-hidden rounded-[1.5rem] border p-4 text-left transition-all ' + colorMap[item.color]}
+                className={(activeCard ? 'scale-[1.01] border-blue-300 shadow-xl shadow-blue-950/10 ring-4 ring-blue-500/10 dark:border-blue-300/40' : 'shadow-sm hover:-translate-y-0.5 hover:shadow-lg') + ' relative overflow-hidden rounded-[1.5rem] border p-3 text-left transition-all ' + colorMap[item.color]}
               >
                 <span className={'absolute left-0 top-0 h-1 w-full bg-gradient-to-r ' + accentMap[item.color]} />
                 <div className="flex items-start justify-between gap-3">
@@ -1332,7 +1332,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
                     <Icon className="h-5 w-5" />
                   </span>
                 </div>
-                <p className="mt-4 line-clamp-2 text-sm leading-6 opacity-86">{item.command}</p>
+                <p className="mt-3 line-clamp-2 text-sm leading-5 opacity-82">{item.command}</p>
               </button>
             );
           })}
