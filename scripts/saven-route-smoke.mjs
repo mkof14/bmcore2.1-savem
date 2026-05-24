@@ -42,6 +42,7 @@ const sourceExpectations = [
   ['Deploy Readiness Audit', ['saven-deploy-readiness-audit.mjs', 'deploy:saven', 'SAVEN Deploy Readiness', 'SAVEN_DEPLOY_TARGET']],
   ['Production QA Audit', ['saven-production-qa-audit.mjs', 'qa:saven', 'SAVEN Production QA Checklist', 'Release decision']],
   ['Supabase Schema Draft', ['saven_backend_schema_draft', 'saven_admin_overrides', 'saven_verifications']],
+  ['Supabase Migration Kit', ['Supabase Migration Kit', '001_saven_core_schema.sql', '002_saven_review_seed.sql', 'db:saven']],
   ['Supabase Persistence Bridge', ['createSavenSupabasePersistenceRepository', 'savenPersistenceTables', 'getPersistenceStatus', 'data-saven-admin-persistence-status="true"']],
   ['RLS Policy Draft', ['saven_rls_policy_draft', 'is_saven_admin', 'Critical writes']],
   ['Edge Function Gateway Draft', ['saven-gateway', 'ALLOWED_ACTIONS', 'No external dispatch']],

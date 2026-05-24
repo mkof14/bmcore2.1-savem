@@ -348,3 +348,15 @@ SAVEN command acceptance fixtures now cover the core voice/backend/admin loop:
 - emergency rule display without automatic dispatch
 
 `npm run commands:saven` verifies that every fixture maps through execution planning, permission review, local backend gateway behavior, and admin-facing evidence.
+
+
+## Supabase Migration Kit
+
+SAVEN now has concrete Supabase review artifacts:
+
+- `supabase/saven/001_saven_core_schema.sql`
+- `supabase/saven/002_saven_review_seed.sql`
+- `docs/SAVEN_SUPABASE_MIGRATION_KIT.md`
+- `npm run db:saven`
+
+The migration kit covers profiles, tasks, commands, verifications, admin overrides, event audit, incidents, indexes, and the `saven_rls_policy_draft` marker for production RLS review.

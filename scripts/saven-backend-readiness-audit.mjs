@@ -3,6 +3,11 @@ import fs from 'node:fs';
 
 const checks = [
   {
+    label: 'Supabase migration kit',
+    file: 'supabase/saven/001_saven_core_schema.sql',
+    markers: ['saven_profiles', 'saven_commands', 'saven_events', 'saven_incidents', 'saven_rls_policy_draft'],
+  },
+  {
     label: 'Command acceptance fixtures',
     file: 'src/features/saven/services/savenCommandAcceptanceFixtures.ts',
     markers: ['savenCommandAcceptanceFixtures', 'nurse-follow-up', 'robot-readiness-review', 'emergency-rule-display'],

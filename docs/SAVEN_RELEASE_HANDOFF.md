@@ -41,6 +41,16 @@ Optional direct backend mode:
 - `VITE_SAVEN_BACKEND_MODE=http`
 - `VITE_SAVEN_BACKEND_URL`
 
+## Supabase Migration Kit
+
+Run:
+
+```zsh
+npm run db:saven
+```
+
+Review `supabase/saven/001_saven_core_schema.sql` and `supabase/saven/002_saven_review_seed.sql` before production database setup.
+
 ## Supabase And Edge Checklist
 
 - Apply the SAVEN schema draft from `docs/SAVEN_BACKEND_MONITORING_ADMIN.md`.

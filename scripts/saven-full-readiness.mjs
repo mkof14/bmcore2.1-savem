@@ -3,6 +3,7 @@ import { spawnSync } from 'node:child_process';
 
 const steps = [
   { label: 'Backend readiness', command: 'npm', args: ['run', 'backend:saven'] },
+  { label: 'Supabase migration kit', command: 'npm', args: ['run', 'db:saven'] },
   { label: 'Command contract', command: 'npm', args: ['run', 'commands:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },
   { label: 'Production QA audit', command: 'npm', args: ['run', 'qa:saven'] },
