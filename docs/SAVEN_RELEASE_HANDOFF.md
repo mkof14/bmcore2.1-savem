@@ -164,6 +164,16 @@ Worker handoff verifies SAVEN voice/text routing for caregiver, nurse, doctor, r
 - Production release should not rely on mock-only text for backend health.
 - The command layer must remain non-overlapping with SAVEN screens on desktop and mobile.
 
+## Final Ship Manifest
+
+Run:
+
+```zsh
+npm run manifest:saven
+```
+
+Use `docs/SAVEN_FINAL_SHIP_MANIFEST.md` as the single final release map.
+
 ## GitHub And Hosting Steps
 
 1. Push the current branch to `savem-origin/main`.

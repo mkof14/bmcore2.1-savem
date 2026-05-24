@@ -492,3 +492,13 @@ BioMath Core Admin now shows the SAVEN Launch Control report:
 - `npm run admin-launch:saven`
 
 The panel shows the visible `go` or `hold` decision, launch gates, required holds, and next actions. This gives SAVEN one admin-facing place for final release review.
+
+
+## Final Ship Manifest
+
+SAVEN now has a single ship manifest:
+
+- `docs/SAVEN_FINAL_SHIP_MANIFEST.md`
+- `npm run manifest:saven`
+
+The manifest maps product surface, voice and worker layer, backend foundation, monitoring and admin, safety and privacy, release control, and production preconditions.
