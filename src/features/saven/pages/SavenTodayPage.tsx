@@ -68,16 +68,16 @@ function SummaryLine({ label, value }: { label: string; value?: string }) {
   return (
     <div className="flex items-center justify-between gap-4 border-b border-slate-200/80 py-2 last:border-b-0 dark:border-white/10">
       <span>{label}</span>
-      <span className="text-right font-semibold text-slate-950 dark:text-white">{value}</span>
+      <span className="text-right font-semibold text-white">{value}</span>
     </div>
   );
 }
 
 function InfoTile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-3xl border border-white/70 bg-white/78 p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/58">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{label}</p>
-      <p className="mt-2 font-semibold text-slate-950 dark:text-white">{value}</p>
+    <div className="rounded-3xl border border-white/10 bg-white/[0.08] p-4 text-white shadow-sm ring-1 ring-white/10">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100/70">{label}</p>
+      <p className="mt-2 font-semibold text-white">{value}</p>
     </div>
   );
 }
@@ -234,6 +234,82 @@ const continuityFactors = [
   { label: 'Robot readiness', value: 'Ready', tone: 'blue' },
 ];
 
+
+function SavenLiveShiftBelt({ openPage }: { openPage: (pageId: 'app-support' | 'app-plan' | 'app-circle' | 'app-command' | 'app-environments' | 'app-verification' | 'app-continuity') => void }) {
+  const activeTask = supportTasks.find((task) => task.status === 'active') || supportTasks[0];
+  const proofTask = supportTasks.find((task) => task.status === 'pending_confirmation') || supportTasks[1];
+  const nextTask = supportTasks.find((task) => task.status === 'planned') || supportTasks[3];
+
+  const shiftCells = [
+    {
+      label: 'Now',
+      title: activeTask.title,
+      detail: activeTask.assignedTo + ' handles it by ' + activeTask.dueTime,
+      action: 'Open flow',
+      page: 'app-support' as const,
+      tone: 'from-blue-500 to-cyan-300',
+    },
+    {
+      label: 'Proof',
+      title: proofTask.title,
+      detail: proofTask.verificationMethod + ' needed',
+      action: 'Verify',
+      page: 'app-verification' as const,
+      tone: 'from-amber-400 to-orange-400',
+    },
+    {
+      label: 'Circle',
+      title: 'Maya first, Daniel fallback',
+      detail: 'Human route before robot action',
+      action: 'Care circle',
+      page: 'app-circle' as const,
+      tone: 'from-emerald-500 to-teal-300',
+    },
+    {
+      label: 'Next',
+      title: nextTask.title,
+      detail: nextTask.dueTime + ' window stays calm',
+      action: 'Daily plan',
+      page: 'app-plan' as const,
+      tone: 'from-indigo-500 to-blue-400',
+    },
+  ];
+
+  return (
+    <section className="overflow-hidden rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10">
+      <div className="grid gap-5 xl:grid-cols-[310px_minmax(0,1fr)] xl:items-stretch">
+        <div className="rounded-[1.6rem] border border-white/10 bg-black/22 p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/70">Live shift belt</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Anna is covered right now.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">One line for the current support truth: action, owner, proof, and next window.</p>
+          <button onClick={() => openPage('app-command')} className="mt-5 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
+            Send voice command
+          </button>
+        </div>
+
+        <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-4">
+          {shiftCells.map((cell) => (
+            <button
+              key={cell.label}
+              onClick={() => openPage(cell.page)}
+              className="group min-h-[154px] rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4 text-left shadow-sm ring-1 ring-white/5 transition-all hover:-translate-y-0.5 hover:border-blue-300/35 hover:bg-white/[0.1] hover:shadow-xl hover:shadow-blue-950/20"
+            >
+              <span className={'block h-1.5 w-16 rounded-full bg-gradient-to-r ' + cell.tone} />
+              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{cell.label}</p>
+              <h4 className="mt-2 line-clamp-2 text-lg font-semibold leading-6 text-white">{cell.title}</h4>
+              <p className="mt-2 line-clamp-2 text-sm leading-5 text-slate-300">{cell.detail}</p>
+              <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-100">
+                {cell.action}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeSetupState; openPage: (pageId: 'app-support' | 'app-plan' | 'app-circle' | 'app-command' | 'app-environments' | 'app-verification' | 'app-continuity') => void; profileCreated: boolean }) {
   const stats = useMemo(
     () => [
@@ -250,6 +326,7 @@ export function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeS
     <div className="space-y-6">
       {!profileCreated && <InfoNote tone="amber" title="Demo profile is active" text="Complete Life Setup to personalize SAVEN and generate a support plan for this person." />}
       <HumanSupportHeader setup={setup} />
+      <SavenLiveShiftBelt openPage={openPage} />
       <CareContactNetwork compact />
       <SavenEndToEndScenario openPage={openPage} />
       <TodayOperationalClarity />
@@ -552,12 +629,12 @@ function TimelineOperationalClarity() {
 
 function HumanSupportHeader({ setup }: { setup: LifeSetupState }) {
   return (
-    <section className="rounded-[2rem] border border-white/70 bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(239,246,255,0.72),rgba(250,244,232,0.88))] p-7 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.95),rgba(30,41,59,0.82),rgba(44,33,17,0.56))]">
+    <section className="rounded-[2rem] border border-blue-300/18 bg-[radial-gradient(circle_at_12%_16%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_86%_18%,rgba(249,115,22,0.13),transparent_28%),linear-gradient(135deg,#07111f,#0b1728_58%,#20160b)] p-7 text-white shadow-xl shadow-slate-950/18 backdrop-blur-xl ring-1 ring-white/10">
       <div className="grid gap-7 xl:grid-cols-[1fr_420px] xl:items-end">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Person status</p>
-          <h2 className="mt-3 text-5xl font-semibold tracking-tight text-slate-950 dark:text-white">{setup.preferredName || setup.firstName} Roberts</h2>
-          <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-100/70">Person status</p>
+          <h2 className="mt-3 text-5xl font-semibold tracking-tight text-white">{setup.preferredName || setup.firstName} Roberts</h2>
+          <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-200">
             {setup.supportMode}, {setup.mobility.toLowerCase()}, {setup.rhythm.toLowerCase()}.
           </p>
         </div>
@@ -574,18 +651,18 @@ function HumanSupportHeader({ setup }: { setup: LifeSetupState }) {
 
 function SupportActionCard({ task }: { task: SupportTask }) {
   return (
-    <article className="group relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/86 p-5 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/62 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80"><span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 via-emerald-400 to-amber-300 opacity-85" />
+    <article className="group relative overflow-hidden rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/12 backdrop-blur-xl ring-1 ring-white/10 transition-all hover:-translate-y-0.5 hover:border-blue-300/35 hover:bg-[#0b1728]"><span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 via-emerald-400 to-amber-300 opacity-85" />
       <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-start">
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <StatusBadge status={task.status} />
             <PriorityBadge priority={task.priority} />
-            <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-950/65 dark:text-slate-200 dark:ring-1 dark:ring-white/10">{task.category}</span>
+            <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-slate-100 ring-1 ring-white/10">{task.category}</span>
           </div>
-          <h3 className="mt-4 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">{task.title}</h3>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">{task.reason}</p>
+          <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{task.title}</h3>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-200">{task.reason}</p>
         </div>
-        <div className="rounded-3xl bg-[#f7f5f1] p-4 text-sm text-slate-600 dark:bg-slate-950/50 dark:text-slate-300 lg:min-w-[260px]">
+        <div className="rounded-3xl bg-white/[0.08] p-4 text-sm text-slate-200 ring-1 ring-white/10 lg:min-w-[260px]">
           <SummaryLine label="Responsible" value={task.assignedTo} />
           <SummaryLine label="Executor" value={task.executorType} />
           <SummaryLine label="Due" value={task.dueTime} />

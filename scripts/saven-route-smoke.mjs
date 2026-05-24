@@ -24,6 +24,7 @@ const sourceExpectations = [
   ['Device Verification Gateway', ['Device Gateway', 'verification gateway for real-world support']],
   ['Environment Permissions', ['Environment permissions', 'Environment flow']],
   ['Verification Engine', ['Verification Engine', 'Open verifications']],
+  ['Live Shift Belt', ['Live shift belt', 'SavenLiveShiftBelt']],
   ['Today Operational Clarity', ['Today operational clarity', 'TodayOperationalClarity']],
   ['Timeline Operational Clarity', ['TimelineOperationalClarity', 'Timeline clarity']],
   ['Voice Settings', ['Speak with SAVEN']],
