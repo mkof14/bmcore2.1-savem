@@ -34,6 +34,7 @@ const sourceExpectations = [
   ['Backend Gateway map', ['SavenBackendGatewayPanel', 'Backend gateway map', 'Backend Gateway Map', 'backend gateway']],
   ['Monitoring Contract', ['SavenMonitoringSnapshot', 'createSavenMonitoringSnapshot', 'getMonitoringSnapshot']],
   ['Monitoring SLO Kit', ['Monitoring SLO Kit', 'createSavenMonitoringSloReport', 'monitoring:saven', 'robot gate']],
+  ['Alerting Runbook Kit', ['Alerting Runbook Kit', 'createSavenOpsAlerts', 'alerts:saven', 'emergency_review']],
   ['Event Audit Model', ['SavenEventAuditRecord', 'createSavenEventAuditRecords', 'listEventAudit', 'saven_events']],
   ['Command Contract Fixtures', ['savenCommandAcceptanceFixtures', 'nurse-follow-up', 'robot-readiness-review', 'emergency-rule-display']],
   ['HTTP Backend Adapter', ['createSavenHttpBackendAdapter', '/admin-overrides', '/monitoring']],

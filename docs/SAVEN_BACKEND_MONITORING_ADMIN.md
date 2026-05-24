@@ -393,3 +393,14 @@ BioMath Core Admin now includes a SAVEN SLO posture panel:
 - `npm run admin:saven`
 
 The panel makes command backlog, proof waits, incident severity, robot gate, emergency gate, and endpoint availability visible inside Admin Ops. This keeps SAVEN monitoring connected to BioMath Core Admin without making SAVEN feel like a generic admin table.
+
+
+## Alerting Runbook Kit
+
+SAVEN alerting now has route-specific runbooks:
+
+- `src/features/saven/services/savenAlertingService.ts`
+- `docs/SAVEN_ALERTING_RUNBOOK_KIT.md`
+- `npm run alerts:saven`
+
+Alerts route to Admin Ops, caregiver review, robot review, emergency review, or device review. This turns monitoring SLO posture into concrete operator action.

@@ -4,6 +4,7 @@ import { spawnSync } from 'node:child_process';
 const steps = [
   { label: 'Backend readiness', command: 'npm', args: ['run', 'backend:saven'] },
   { label: 'Monitoring SLO', command: 'npm', args: ['run', 'monitoring:saven'] },
+  { label: 'Alerting runbook', command: 'npm', args: ['run', 'alerts:saven'] },
   { label: 'Admin Ops', command: 'npm', args: ['run', 'admin:saven'] },
   { label: 'Supabase migration kit', command: 'npm', args: ['run', 'db:saven'] },
   { label: 'Edge Function package', command: 'npm', args: ['run', 'edge:saven'] },

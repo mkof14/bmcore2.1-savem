@@ -44,7 +44,8 @@
     "db:saven": "node scripts/saven-supabase-migration-audit.mjs",
     "edge:saven": "node scripts/saven-edge-function-audit.mjs",
     "monitoring:saven": "node scripts/saven-monitoring-slo-audit.mjs",
-    "admin:saven": "node scripts/saven-admin-ops-audit.mjs"
+    "admin:saven": "node scripts/saven-admin-ops-audit.mjs",
+    "alerts:saven": "node scripts/saven-alerting-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
