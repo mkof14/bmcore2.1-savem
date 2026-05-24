@@ -114,6 +114,25 @@ export function RobotReadiness() {
 
   return (
     <div className="space-y-6">
+
+      <section className="grid gap-4 rounded-[2rem] border border-amber-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-executor-command="robot">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-100/70">Executor command rail</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Robots stay permissioned.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">SAVEN can ask for readiness, but physical action waits for approval.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, check robot readiness and keep physical action locked.</p>
+          <p className="mt-2 text-sm text-amber-100">Target: SAVEN Assist R1</p>
+        </div>
+        <div className="grid gap-2">
+          {['Readiness only', 'Caregiver approval', 'Telemetry proof'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="relative overflow-hidden rounded-[2.25rem] border border-white/70 bg-[radial-gradient(circle_at_18%_18%,rgba(0,180,255,0.24),transparent_30%),radial-gradient(circle_at_78%_16%,rgba(255,178,54,0.24),transparent_30%),radial-gradient(circle_at_84%_86%,rgba(16,185,129,0.2),transparent_30%),linear-gradient(135deg,#f8fbff,#eaf3ff_42%,#fff4e8)] p-6 shadow-xl shadow-blue-950/8 dark:border-white/10 dark:bg-[radial-gradient(circle_at_18%_18%,rgba(0,180,255,0.26),transparent_30%),radial-gradient(circle_at_78%_16%,rgba(255,178,54,0.2),transparent_30%),radial-gradient(circle_at_84%_86%,rgba(16,185,129,0.16),transparent_30%),linear-gradient(135deg,#020817,#08182d_52%,#201205)]">
         <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(59,130,246,0.16)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.14)_1px,transparent_1px)] [background-size:38px_38px] dark:opacity-35" />
         <div className="relative grid gap-7 xl:grid-cols-[minmax(0,1.02fr)_minmax(460px,0.98fr)] xl:items-center">

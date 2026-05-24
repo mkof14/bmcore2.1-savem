@@ -139,6 +139,24 @@ export function SavenCareRoutes() {
     <div className="space-y-6">
       <PageIntro eyebrow="Care Routes" title="Escalation map: route the right human with context." text="Caregiver, family, nurse, doctor, and urgent paths all start from the same support packet. Local version only: no real messages or calls are sent." />
 
+      <section className="grid gap-4 rounded-[2rem] border border-cyan-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-executor-command="care">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100/70">Executor command rail</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Route a human, not a page.</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-200">Care routes start as a command and stop at the right human gate.</p>
+        </div>
+        <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, request nurse follow-up and send the recovery context.</p>
+          <p className="mt-2 text-sm text-cyan-100">Target: Nurse Olivia Grant</p>
+        </div>
+        <div className="grid gap-2">
+          {['Human gate', 'No auto-call', 'Proof logged'].map((item) => (
+            <div key={item} className="rounded-2xl bg-white/[0.08] px-4 py-3 text-sm font-semibold text-slate-100 ring-1 ring-white/10">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#020817] p-4 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-relay="care">
         <div className="pointer-events-none absolute inset-x-6 top-1/2 hidden h-px bg-gradient-to-r from-blue-400/40 via-emerald-300/45 to-amber-300/45 lg:block" />
         <div className="relative grid gap-3 lg:grid-cols-4">

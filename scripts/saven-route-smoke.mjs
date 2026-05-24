@@ -20,6 +20,7 @@ const sourceExpectations = [
   ['Dedicated Commands page', ['SAVEN Dispatch', 'Voice becomes assigned support', 'Command pad', 'Prepared command']],
   ['Care Routes page', ['function SavenCareRoutes()', 'Care Routes']],
   ['Backend Gateway map', ['SavenBackendGatewayPanel', 'Backend gateway map', 'Backend Gateway Map', 'backend gateway']],
+  ['Executor Command Rails', ['data-saven-executor-command="care"', 'data-saven-executor-command="robot"', 'data-saven-executor-command="device"']],
   ['Robot Device Service Matrix', ['Robot / Device Service Matrix', 'Robot Device Service Matrix', 'Physical orchestration', 'Physical support becomes visible', 'Physical support becomes visible, permissioned, and verified']],
   ['Device Verification Gateway', ['Device Gateway', 'verification gateway for real-world support']],
   ['Environment Permissions', ['Environment permissions', 'Environment flow']],
