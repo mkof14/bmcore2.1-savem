@@ -30,7 +30,7 @@ const checks = [
   {
     label: 'Admin Ops integration',
     file: 'src/pages/AdminPanel.tsx',
-    markers: ['data-saven-admin-ops="true"', 'data-saven-admin-monitoring-live="true"', 'data-saven-admin-overrides="true"', 'savenBackendGateway'],
+    markers: ['data-saven-admin-ops="true"', 'data-saven-admin-monitoring-live="true"', 'data-saven-admin-overrides="true"', 'data-saven-admin-event-audit="true"', 'savenBackendGateway'],
   },
   {
     label: 'Backend monitoring docs',

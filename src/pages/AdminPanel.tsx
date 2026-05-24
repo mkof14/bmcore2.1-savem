@@ -18,7 +18,7 @@ import SupportChatPanel from './admin/SupportChatPanel';
 import { supabase } from '../lib/supabase';
 import { notifyError } from '../lib/adminNotify';
 import { savenBackendGateway } from '../features/saven/services/savenBackendGatewaySelector';
-import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
+import type { SavenAdminOverrideAction, SavenAdminOverrideResult, SavenEventAuditRecord, SavenMonitoringSnapshot } from '../features/saven/contracts/savenBackendContract';
 
 interface AdminPanelProps {
   onNavigate: (page: string) => void;
@@ -123,6 +123,7 @@ export default function AdminPanel({ onNavigate }: AdminPanelProps) {
 
 function SavenOpsAdminSection() {
   const [snapshot, setSnapshot] = useState<SavenMonitoringSnapshot | null>(null);
+  const [eventAudit, setEventAudit] = useState<SavenEventAuditRecord[]>([]);
   const [overrideResult, setOverrideResult] = useState<SavenAdminOverrideResult | null>(null);
 
   useEffect(() => {
@@ -133,6 +134,14 @@ function SavenOpsAdminSection() {
       })
       .catch(() => {
         notifyError('SAVEN monitoring snapshot load failed');
+      });
+
+    savenBackendGateway.listEventAudit()
+      .then((records) => {
+        if (mounted) setEventAudit(records);
+      })
+      .catch(() => {
+        notifyError('SAVEN event audit load failed');
       });
 
     return () => {
@@ -149,6 +158,7 @@ function SavenOpsAdminSection() {
 
   const signals = snapshot?.signals ?? [];
   const queueItems = snapshot?.queues ?? [];
+  const auditItems = eventAudit.slice(0, 8);
   const adminOverrideActions: Array<{ action: SavenAdminOverrideAction; label: string; targetId: string; reason: string }> = [
     { action: 'pause_support', label: 'Pause support', targetId: 'person-anna', reason: 'Admin review before continued support.' },
     { action: 'reassign_owner', label: 'Reassign owner', targetId: 'task-mobility-1030', reason: 'Caregiver route needs review.' },
@@ -235,6 +245,49 @@ function SavenOpsAdminSection() {
             <p className="mt-2 text-xs text-slate-400">Actor: {overrideResult.auditTrail.actorId} · Target: {overrideResult.targetId}</p>
           </div>
         )}
+      </section>
+
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_440px]">
+      <section className="rounded-3xl border border-blue-500/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-event-audit="true">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-100/70">Event audit</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">SAVEN explains every operational move.</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
+              Commands, proof waits, robot review, escalation, and admin actions are visible as one audit-first timeline.
+            </p>
+          </div>
+          <span className="w-fit rounded-full bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-100 ring-1 ring-emerald-300/20">
+            {auditItems.length} audit events
+          </span>
+        </div>
+        <div className="mt-5 grid gap-3 xl:grid-cols-2">
+          {auditItems.map((event) => {
+            const eventTone =
+              event.severity === 'critical'
+                ? 'border-red-300/20 bg-red-500/10 text-red-100'
+                : event.severity === 'urgent'
+                  ? 'border-amber-300/20 bg-amber-500/10 text-amber-100'
+                  : event.severity === 'watch'
+                    ? 'border-cyan-300/20 bg-cyan-500/10 text-cyan-100'
+                    : 'border-blue-300/20 bg-blue-500/10 text-blue-100';
+            return (
+              <article key={event.id} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className={'rounded-full border px-3 py-1 text-xs font-semibold ' + eventTone}>{event.severity}</span>
+                  <span className="rounded-full bg-slate-950/80 px-3 py-1 text-xs font-semibold text-slate-300 ring-1 ring-white/10">{event.type.replace(/_/g, ' ')}</span>
+                </div>
+                <h3 className="mt-3 text-sm font-semibold leading-6 text-white">{event.summary}</h3>
+                <p className="mt-2 text-xs leading-5 text-slate-400">Actor: {event.actorId} · Target: {event.targetId ?? 'system'} · {event.createdAt}</p>
+              </article>
+            );
+          })}
+          {auditItems.length === 0 && (
+            <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-sm text-slate-300">
+              Event audit is waiting for the backend gateway.
+            </div>
+          )}
+        </div>
       </section>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_440px]">

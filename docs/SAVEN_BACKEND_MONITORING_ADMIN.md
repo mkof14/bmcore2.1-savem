@@ -244,3 +244,9 @@ SAVEN now has an event audit model for backend, monitoring, and admin review:
 - `saven_events`
 
 The event timeline records command intake, proof waits, escalation preparation, robot readiness review, admin overrides, and continuity updates. It is audit-first: current local and Edge Function drafts do not perform external dispatch.
+
+## Admin Event Audit Review
+
+BioMath Core Admin now reads `SavenBackendGateway.listEventAudit()` and renders the SAVEN Ops event timeline with `data-saven-admin-event-audit="true"`.
+
+This gives administrators a visible explanation layer for command intake, proof waits, robot review, escalation preparation, and future backend audit records.
