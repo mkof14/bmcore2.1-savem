@@ -1545,40 +1545,87 @@ function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: Sav
         </div>
       </section>
 
-      <div className="grid gap-5 lg:grid-cols-3">
-        <SystemEntryCard title="Set up a person" text="Create a support profile for yourself, a family member, or someone under care." onClick={() => openPage('app-life-setup')} />
-        <SystemEntryCard title="Connect the circle" text="Add family, caregivers, professionals, devices, and future robots." onClick={() => openPage('app-circle')} />
-        <SystemEntryCard title="Activate daily help" text="Create the first daily support plan and begin verified actions." onClick={() => openPage('app-today')} />
-      </div>
+      <SavenStartPath openPage={openPage} />
 
       <SupportFlowGraphic current="Support Task Created" />
     </div>
   );
 }
 
-function SystemEntryCard({ title, text, onClick }: { title: string; text: string; onClick: () => void }) {
-  const tone = title.includes('person')
-    ? 'from-blue-500 to-cyan-400'
-    : title.includes('circle')
-      ? 'from-emerald-500 to-teal-300'
-      : 'from-amber-400 to-orange-400';
-  const iconTone = title.includes('person')
-    ? 'from-blue-600 to-cyan-500'
-    : title.includes('circle')
-      ? 'from-emerald-600 to-teal-500'
-      : 'from-amber-500 to-orange-500';
+function SavenStartPath({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
+  const pathItems: Array<{
+    id: string;
+    step: string;
+    title: string;
+    action: string;
+    detail: string;
+    page: SavenPageId;
+    tone: string;
+    icon: typeof UsersRound;
+  }> = [
+    {
+      id: 'person',
+      step: '01',
+      title: 'Person signal',
+      action: 'Build support profile',
+      detail: 'Who needs help, what feels safe, and what should never interrupt.',
+      page: 'app-life-setup',
+      tone: 'from-blue-500 to-cyan-400',
+      icon: UsersRound,
+    },
+    {
+      id: 'circle',
+      step: '02',
+      title: 'Human circle',
+      action: 'Connect real people',
+      detail: 'Family, caregiver, nurse, doctor, and escalation rules in one visible path.',
+      page: 'app-circle',
+      tone: 'from-emerald-500 to-teal-300',
+      icon: PhoneCall,
+    },
+    {
+      id: 'proof',
+      step: '03',
+      title: 'Daily proof',
+      action: 'Start verified support',
+      detail: 'Every task has an owner, a window, and a confirmation trail.',
+      page: 'app-today',
+      tone: 'from-amber-400 to-orange-400',
+      icon: ShieldCheck,
+    },
+  ];
 
   return (
-    <button onClick={onClick} className="group relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/86 p-6 text-left shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/62 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
-      <span className={'absolute left-0 top-0 h-1 w-full bg-gradient-to-r ' + tone} />
-      <div className="flex items-start justify-between gap-4">
-        <h3 className="text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h3>
-        <span className={'grid h-11 w-11 place-items-center rounded-full bg-gradient-to-br text-white shadow-sm ring-1 ring-white/40 transition-all group-hover:scale-105 ' + iconTone}>
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-        </span>
+    <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-5 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/64 dark:ring-1 dark:ring-white/10">
+      <div className="absolute left-8 right-8 top-[88px] hidden h-px bg-gradient-to-r from-blue-400/40 via-emerald-300/45 to-amber-300/45 lg:block" />
+      <div className="grid gap-4 lg:grid-cols-3">
+        {pathItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <button
+              key={item.id}
+              onClick={() => openPage(item.page)}
+              className="group relative min-h-[210px] overflow-hidden rounded-[1.75rem] border border-slate-200/75 bg-[#fbfaf7] p-5 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-[#07111f]/78 dark:hover:border-blue-300/30"
+            >
+              <span className={'absolute left-0 top-0 h-1 w-full bg-gradient-to-r ' + item.tone} />
+              <span className={'grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br text-white shadow-sm ' + item.tone}>
+                <Icon className="h-5 w-5" />
+              </span>
+              <div className="mt-5 flex items-center gap-3">
+                <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-semibold text-white dark:bg-white dark:text-slate-950">{item.step}</span>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{item.title}</p>
+              </div>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">{item.action}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.detail}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-blue-700 dark:text-blue-200">
+                Open path
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </button>
+          );
+        })}
       </div>
-      <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">{text}</p>
-    </button>
+    </section>
   );
 }
 
