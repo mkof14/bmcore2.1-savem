@@ -184,6 +184,16 @@ npm run rc:saven
 
 Use `docs/SAVEN_RELEASE_CANDIDATE_SNAPSHOT.md` before creating a final tag or GitHub release.
 
+## GitHub Release Package
+
+Run:
+
+```zsh
+npm run github-release:saven
+```
+
+Use `docs/SAVEN_GITHUB_RELEASE_NOTES.md` and `docs/SAVEN_GITHUB_RELEASE_CHECKLIST.md` when preparing the candidate tag or GitHub release.
+
 ## GitHub And Hosting Steps
 
 1. Push the current branch to `savem-origin/main`.

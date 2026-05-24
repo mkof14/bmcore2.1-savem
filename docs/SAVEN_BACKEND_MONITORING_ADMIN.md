@@ -512,3 +512,14 @@ SAVEN now has a release-candidate snapshot:
 - `npm run rc:saven`
 
 The snapshot records candidate identity, required review commands, go/hold review, GitHub release prep, and production preconditions. It is the short human handoff for a final tag or release review.
+
+
+## GitHub Release Package
+
+SAVEN now has GitHub release artifacts:
+
+- `docs/SAVEN_GITHUB_RELEASE_NOTES.md`
+- `docs/SAVEN_GITHUB_RELEASE_CHECKLIST.md`
+- `npm run github-release:saven`
+
+These artifacts summarize included systems, required checks, production holds, and reviewer notes before candidate tagging.
