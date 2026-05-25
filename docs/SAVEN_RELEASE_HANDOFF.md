@@ -194,6 +194,16 @@ npm run github-release:saven
 
 Use `docs/SAVEN_GITHUB_RELEASE_NOTES.md` and `docs/SAVEN_GITHUB_RELEASE_CHECKLIST.md` when preparing the candidate tag or GitHub release.
 
+## Live Monitoring Activation Package
+
+Run:
+
+```zsh
+npm run live-monitoring:saven
+```
+
+Use `docs/SAVEN_LIVE_MONITORING_ACTIVATION.md` to confirm first-hour metrics, alert routes, evidence, incidents, and Admin Ops monitoring before cutover.
+
 ## Live Backend Activation Package
 
 Run:

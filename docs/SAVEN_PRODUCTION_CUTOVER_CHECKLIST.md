@@ -78,3 +78,8 @@ This checklist is an operational cutover aid. It is not clinical, legal, emergen
 ## Live Backend Activation Package
 
 Run `npm run live-backend:saven` before cutover. Use `docs/SAVEN_LIVE_BACKEND_ACTIVATION.md` to confirm Supabase, RLS, Edge Function or HTTP backend, production env, Admin Ops persistence, event audit, and incident readiness.
+
+
+## Live Monitoring Activation Package
+
+Run `npm run live-monitoring:saven` before cutover. This confirms SLO posture, alerts, evidence, event audit, incident readiness, worker shift board, and first-hour monitoring ownership.

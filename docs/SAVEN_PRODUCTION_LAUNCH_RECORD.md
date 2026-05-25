@@ -97,3 +97,8 @@ Run `npm run cutover:saven` before changing the launch decision from `RC ONLY` t
 ## Live Backend Activation Package
 
 Before changing backend mode from local/review to Edge or HTTP, run `npm run live-backend:saven` and fill backend fields in the launch record.
+
+
+## Live Monitoring Activation Package
+
+Before first-hour watch starts, run `npm run live-monitoring:saven` and name the first-hour watch owner in the launch record.

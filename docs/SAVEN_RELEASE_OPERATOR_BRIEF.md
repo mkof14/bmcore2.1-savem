@@ -87,3 +87,8 @@ Run `npm run cutover:saven` and review `docs/SAVEN_PRODUCTION_CUTOVER_CHECKLIST.
 ## Live Backend Activation Package
 
 Run `npm run live-backend:saven` before production cutover. This confirms the backend path is ready to move from local/review to Edge or HTTP while robot, worker, and emergency actions stay gated.
+
+
+## Live Monitoring Activation Package
+
+Run `npm run live-monitoring:saven` before production cutover. This makes first-hour watch, SLO posture, alert routes, evidence, incidents, and Admin Ops monitoring visible.

@@ -96,6 +96,7 @@ const sourceExpectations = [
   ['RC Tag Command Package', ['SAVEN RC Tag Command Package', 'rc-tag:saven', 'Suggested RC Tag', 'Tag Holds']],
   ['Production Cutover Checklist', ['SAVEN Production Cutover Checklist', 'cutover:saven', 'Cutover Order', 'Immediate Hold Conditions']],
   ['Live Backend Activation Package', ['SAVEN Live Backend Activation Package', 'live-backend:saven', 'Activation Order', 'Backend Holds']],
+  ['Live Monitoring Activation Package', ['SAVEN Live Monitoring Activation Package', 'live-monitoring:saven', 'First-Hour Metrics', 'Monitoring Holds']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 
