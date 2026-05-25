@@ -271,6 +271,16 @@ npm run launch:saven
 
 Launch Control summarizes SAVEN release gates into a `go` or `hold` decision before production handoff.
 
+## Post-Launch Ops Package
+
+Run:
+
+```zsh
+npm run postlaunch:saven
+```
+
+Use `docs/SAVEN_POST_LAUNCH_OPS.md` for first 15 minutes, first hour, day 1, rollback triggers, and operator review after deployment.
+
 ## Release Blockers
 
 - Missing Supabase production credentials.

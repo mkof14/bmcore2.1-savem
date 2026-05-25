@@ -18,6 +18,7 @@ const steps = [
   { label: 'Final ship manifest', command: 'npm', args: ['run', 'manifest:saven'] },
   { label: 'Release candidate snapshot', command: 'npm', args: ['run', 'rc:saven'] },
   { label: 'GitHub release package', command: 'npm', args: ['run', 'github-release:saven'] },
+  { label: 'Post-launch ops package', command: 'npm', args: ['run', 'postlaunch:saven'] },
   { label: 'Admin launch control', command: 'npm', args: ['run', 'admin-launch:saven'] },
   { label: 'Admin evidence pack', command: 'npm', args: ['run', 'admin-evidence:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },

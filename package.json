@@ -56,7 +56,8 @@
     "admin-launch:saven": "node scripts/saven-admin-launch-audit.mjs",
     "manifest:saven": "node scripts/saven-final-ship-manifest-audit.mjs",
     "rc:saven": "node scripts/saven-release-candidate-audit.mjs",
-    "github-release:saven": "node scripts/saven-github-release-audit.mjs"
+    "github-release:saven": "node scripts/saven-github-release-audit.mjs",
+    "postlaunch:saven": "node scripts/saven-post-launch-ops-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

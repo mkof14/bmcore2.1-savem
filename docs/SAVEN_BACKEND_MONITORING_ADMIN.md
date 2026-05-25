@@ -523,3 +523,13 @@ SAVEN now has GitHub release artifacts:
 - `npm run github-release:saven`
 
 These artifacts summarize included systems, required checks, production holds, and reviewer notes before candidate tagging.
+
+
+## Post-Launch Ops Package
+
+SAVEN now has post-launch operator guidance:
+
+- `docs/SAVEN_POST_LAUNCH_OPS.md`
+- `npm run postlaunch:saven`
+
+The package covers first 15 minutes, first hour, day 1 review, rollback triggers, and human review notes after deployment.

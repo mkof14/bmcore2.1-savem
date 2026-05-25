@@ -53,3 +53,8 @@ npm run github-release:saven
 - Admin Ops should show SAVEN Launch Control, Ops Evidence, Worker Shift Board, Alert Routes, SLO posture, event audit, incident readiness, and persistence status.
 - Production preview must open SAVEN routes before external release.
 - This release candidate is not a clinical, legal, or emergency-service certification.
+
+
+## Post-Launch Ops
+
+After deployment, use `docs/SAVEN_POST_LAUNCH_OPS.md` and run `npm run postlaunch:saven` to check first 15 minutes, first hour, day 1, rollback triggers, and Admin Ops review.
