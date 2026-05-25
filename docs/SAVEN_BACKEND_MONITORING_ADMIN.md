@@ -603,3 +603,8 @@ Production admin access is verified by `npm run admin-access:saven`. The release
 ## Live Privacy Redaction
 
 Production privacy is verified by `npm run privacy-live:saven`. Admin Ops should show operational evidence without exposing raw clinical, family digest, emergency, robot gate, or admin audit context outside the allowed role visibility path.
+
+
+## Production Dispatch Lock
+
+Production dispatch safety is verified by `npm run dispatch-lock:saven`. Admin Ops may review prepared worker handoffs, but SAVEN must not call emergency services, send external messages, move robots, or change clinical plans without a separate human-approved activation.

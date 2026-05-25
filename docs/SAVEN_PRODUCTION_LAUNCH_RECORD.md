@@ -117,3 +117,10 @@ Before first-hour watch starts, run `npm run live-monitoring:saven` and name the
 - Privacy reviewer: TBD
 - Command: `npm run privacy-live:saven`
 - Evidence: privacy service, family digest redaction, clinical context review, robot gate review, emergency route review, admin audit visibility.
+
+
+## Production Dispatch Lock
+
+- Dispatch lock reviewer: TBD
+- Command: `npm run dispatch-lock:saven`
+- Evidence: worker handoff service, Admin worker shift board, Edge Function no-dispatch posture, robot gate locked, emergency route blocked.

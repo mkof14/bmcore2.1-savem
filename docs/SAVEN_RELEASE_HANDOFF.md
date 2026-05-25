@@ -450,3 +450,8 @@ Run `npm run admin-access:saven` before production release. Confirm BioMath Core
 ## Live Privacy Redaction
 
 Run `npm run privacy-live:saven` before production release. Confirm voice command text, clinical context, family digest, robot gates, emergency routes, and admin audit records follow SAVEN role visibility and redaction rules.
+
+
+## Production Dispatch Lock
+
+Run `npm run dispatch-lock:saven` before production release. SAVEN may prepare nurse, doctor, caregiver, device, robot, emergency, and admin handoffs, but live external dispatch remains locked until a separate legal and operational activation.

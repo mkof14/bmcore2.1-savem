@@ -102,3 +102,8 @@ Before the release window, run `npm run admin-access:saven`. The operator should
 ## Live Privacy Redaction
 
 Before the release window, run `npm run privacy-live:saven`. The operator should treat privacy as a release hold if family digest, clinical context, emergency route, robot gate, or admin audit visibility is unclear.
+
+
+## Production Dispatch Lock
+
+Before the release window, run `npm run dispatch-lock:saven`. Treat dispatch as locked unless the launch record explicitly names a future external-dispatch activation owner and legal/ops approval path.

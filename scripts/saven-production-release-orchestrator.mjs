@@ -26,6 +26,7 @@ const requiredScripts = [
   'launch-record:saven',
   'admin-access:saven',
   'privacy-live:saven',
+  'dispatch-lock:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -121,6 +122,15 @@ const checks = [
     markers: [
       'SAVEN Rollback Drill Package',
       'Recovery Proof',
+    ],
+  },
+  {
+    label: 'Production dispatch lock',
+    file: 'docs/SAVEN_PRODUCTION_DISPATCH_LOCK.md',
+    markers: [
+      'SAVEN Production Dispatch Lock Package',
+      'Dispatch Lock Model',
+      'Activation Holds',
     ],
   },
   {

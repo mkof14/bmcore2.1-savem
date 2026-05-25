@@ -93,3 +93,8 @@ Run `npm run admin-access:saven` before cutover. Confirm `profiles.is_admin = tr
 ## Live Privacy Redaction
 
 Run `npm run privacy-live:saven` before cutover. Hold if family digest redaction is unclear, clinical context can leak into non-clinical views, admin audit can be read outside Admin Ops, or robot/emergency details are broadcast as routine summaries.
+
+
+## Production Dispatch Lock
+
+Run `npm run dispatch-lock:saven` before cutover. Hold if emergency route is not `blocked_external_dispatch`, robot physical action is not approval-locked, worker routes do not require confirmation, or Admin worker shift board cannot render.

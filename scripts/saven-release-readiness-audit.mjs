@@ -14,6 +14,15 @@ const checks = [
     ],
   },
   {
+    label: 'Production dispatch lock package',
+    file: 'docs/SAVEN_PRODUCTION_DISPATCH_LOCK.md',
+    markers: [
+      'SAVEN Production Dispatch Lock Package',
+      'Dispatch Lock Model',
+      'Activation Holds',
+    ],
+  },
+  {
     label: 'Release env example',
     file: '.env.saven.example',
     markers: [
@@ -250,6 +259,11 @@ if (packageJson.scripts?.['privacy-live:saven'] !== 'node scripts/saven-live-pri
   throw new Error('package.json is missing privacy-live:saven script.');
 }
 console.log('[release] ok package privacy-live:saven script');
+
+if (packageJson.scripts?.['dispatch-lock:saven'] !== 'node scripts/saven-production-dispatch-lock-audit.mjs') {
+  throw new Error('package.json is missing dispatch-lock:saven script.');
+}
+console.log('[release] ok package dispatch-lock:saven script');
 
 if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');

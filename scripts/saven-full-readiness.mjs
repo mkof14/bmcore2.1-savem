@@ -36,6 +36,7 @@ const steps = [
   { label: 'Live monitoring activation package', command: 'npm', args: ['run', 'live-monitoring:saven'] },
   { label: 'Production admin access package', command: 'npm', args: ['run', 'admin-access:saven'] },
   { label: 'Live privacy redaction package', command: 'npm', args: ['run', 'privacy-live:saven'] },
+  { label: 'Production dispatch lock package', command: 'npm', args: ['run', 'dispatch-lock:saven'] },
   { label: 'Admin launch control', command: 'npm', args: ['run', 'admin-launch:saven'] },
   { label: 'Admin evidence pack', command: 'npm', args: ['run', 'admin-evidence:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },
