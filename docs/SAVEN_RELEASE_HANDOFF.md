@@ -194,6 +194,16 @@ npm run github-release:saven
 
 Use `docs/SAVEN_GITHUB_RELEASE_NOTES.md` and `docs/SAVEN_GITHUB_RELEASE_CHECKLIST.md` when preparing the candidate tag or GitHub release.
 
+## Production Evidence Index
+
+Run:
+
+```zsh
+npm run evidence-index:saven
+```
+
+Use `docs/SAVEN_PRODUCTION_EVIDENCE_INDEX.md` as the single human-readable map of ready evidence, production holds, safety gates, and final review commands.
+
 ## Production Release Orchestrator
 
 Run:

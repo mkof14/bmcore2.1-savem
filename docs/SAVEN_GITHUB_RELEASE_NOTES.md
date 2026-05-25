@@ -98,3 +98,8 @@ Run `npm run launch-record:saven` and fill `docs/SAVEN_PRODUCTION_LAUNCH_RECORD.
 ## Production Release Orchestrator
 
 Run `npm run production-release:saven` before the final release pass. It confirms all production gates, launch record, Admin deploy checklist, Go / No-Go package, production env, production URL smoke, rollback, and post-launch ops are connected.
+
+
+## Production Evidence Index
+
+Run `npm run evidence-index:saven` and review `docs/SAVEN_PRODUCTION_EVIDENCE_INDEX.md` before production promotion. The index summarizes ready evidence, production holds, and non-negotiable safety gates.

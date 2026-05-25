@@ -91,6 +91,7 @@ const sourceExpectations = [
   ['Production Go No-Go Package', ['SAVEN Production Go / No-Go Package', 'go-no-go:saven', 'Decision States', 'Non-Negotiable Safety Holds']],
   ['Production Launch Record', ['SAVEN Production Launch Record', 'launch-record:saven', 'Launch Identity', 'Safety Sign-Off']],
   ['Production Release Orchestrator', ['SAVEN Production Release Orchestrator', 'production-release:saven', 'Release Sequence', 'Final Human Decision']],
+  ['Production Evidence Index', ['SAVEN Production Evidence Index', 'evidence-index:saven', 'Evidence Map', 'Production Holds']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

@@ -54,3 +54,8 @@ The orchestrator can prove the release package is internally consistent. A human
 ## Human Approval Note
 
 This orchestrator is an operational release package check. It is not clinical, legal, emergency-service, medical-device, or robot-autonomy certification.
+
+
+## Production Evidence Index
+
+Run `npm run evidence-index:saven` before the final release pass. The index gives one human-readable map of ready evidence, production holds, and safety gates.

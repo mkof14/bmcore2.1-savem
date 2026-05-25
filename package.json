@@ -66,7 +66,8 @@
     "admin-deploy:saven": "node scripts/saven-admin-deploy-checklist-audit.mjs",
     "go-no-go:saven": "node scripts/saven-production-go-no-go-audit.mjs",
     "launch-record:saven": "node scripts/saven-production-launch-record-audit.mjs",
-    "production-release:saven": "node scripts/saven-production-release-orchestrator.mjs"
+    "production-release:saven": "node scripts/saven-production-release-orchestrator.mjs",
+    "evidence-index:saven": "node scripts/saven-production-evidence-index-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
