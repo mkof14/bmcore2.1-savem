@@ -90,6 +90,7 @@ const sourceExpectations = [
   ['BioMath Admin Deploy Checklist', ['SAVEN BioMath Admin Deploy Checklist', 'admin-deploy:saven', 'Admin Surface Contract', 'Admin Hold Rules']],
   ['Production Go No-Go Package', ['SAVEN Production Go / No-Go Package', 'go-no-go:saven', 'Decision States', 'Non-Negotiable Safety Holds']],
   ['Production Launch Record', ['SAVEN Production Launch Record', 'launch-record:saven', 'Launch Identity', 'Safety Sign-Off']],
+  ['Production Release Orchestrator', ['SAVEN Production Release Orchestrator', 'production-release:saven', 'Release Sequence', 'Final Human Decision']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

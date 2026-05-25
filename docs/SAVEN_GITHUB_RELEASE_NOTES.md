@@ -93,3 +93,8 @@ Run `npm run go-no-go:saven` before production promotion. The gate separates `GO
 ## Production Launch Record
 
 Run `npm run launch-record:saven` and fill `docs/SAVEN_PRODUCTION_LAUNCH_RECORD.md` before production promotion. Default decision remains `RC ONLY` until production URL, backend, reviewers, rollback owner, and first-hour watch owner are recorded.
+
+
+## Production Release Orchestrator
+
+Run `npm run production-release:saven` before the final release pass. It confirms all production gates, launch record, Admin deploy checklist, Go / No-Go package, production env, production URL smoke, rollback, and post-launch ops are connected.

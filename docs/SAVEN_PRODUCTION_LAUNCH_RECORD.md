@@ -82,3 +82,8 @@ Before GO, confirm:
 ## Human Approval Note
 
 This record is an operational release log. It is not clinical, legal, emergency-service, medical-device, or robot-autonomy certification.
+
+
+## Production Release Orchestrator
+
+Run `npm run production-release:saven` before filling final GO fields. This proves all release gates and docs are present before a human records production URL, backend mode, reviewers, rollback owner, and first-hour watch owner.

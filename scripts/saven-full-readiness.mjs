@@ -27,6 +27,7 @@ const steps = [
   { label: 'BioMath Admin deploy checklist', command: 'npm', args: ['run', 'admin-deploy:saven'] },
   { label: 'Production go/no-go package', command: 'npm', args: ['run', 'go-no-go:saven'] },
   { label: 'Production launch record', command: 'npm', args: ['run', 'launch-record:saven'] },
+  { label: 'Production release orchestrator', command: 'npm', args: ['run', 'production-release:saven'] },
   { label: 'Admin launch control', command: 'npm', args: ['run', 'admin-launch:saven'] },
   { label: 'Admin evidence pack', command: 'npm', args: ['run', 'admin-evidence:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },
