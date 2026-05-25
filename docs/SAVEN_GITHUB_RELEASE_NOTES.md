@@ -113,3 +113,8 @@ Run `npm run operator-brief:saven` and review `docs/SAVEN_RELEASE_OPERATOR_BRIEF
 ## RC Tag Command Package
 
 Run `npm run rc-tag:saven` before creating the release candidate tag. For the final pre-tag check, use `SAVEN_STRICT_TAG=1 npm run rc-tag:saven` after the working tree is clean.
+
+
+## Production Cutover Checklist
+
+Run `npm run cutover:saven` and review `docs/SAVEN_PRODUCTION_CUTOVER_CHECKLIST.md` before moving SAVEN from `RC ONLY` to a live production candidate.

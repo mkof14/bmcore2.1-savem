@@ -69,7 +69,8 @@
     "production-release:saven": "node scripts/saven-production-release-orchestrator.mjs",
     "evidence-index:saven": "node scripts/saven-production-evidence-index-audit.mjs",
     "operator-brief:saven": "node scripts/saven-release-operator-brief-audit.mjs",
-    "rc-tag:saven": "node scripts/saven-rc-tag-command-audit.mjs"
+    "rc-tag:saven": "node scripts/saven-rc-tag-command-audit.mjs",
+    "cutover:saven": "node scripts/saven-production-cutover-checklist-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

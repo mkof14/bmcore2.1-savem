@@ -87,3 +87,8 @@ This record is an operational release log. It is not clinical, legal, emergency-
 ## Production Release Orchestrator
 
 Run `npm run production-release:saven` before filling final GO fields. This proves all release gates and docs are present before a human records production URL, backend mode, reviewers, rollback owner, and first-hour watch owner.
+
+
+## Production Cutover Checklist
+
+Run `npm run cutover:saven` before changing the launch decision from `RC ONLY` to `GO`. The checklist keeps production URL, backend, admin, rollback, first-hour watch, and safety holds in one cutover order.

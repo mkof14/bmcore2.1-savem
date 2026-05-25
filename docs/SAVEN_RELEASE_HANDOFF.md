@@ -194,6 +194,16 @@ npm run github-release:saven
 
 Use `docs/SAVEN_GITHUB_RELEASE_NOTES.md` and `docs/SAVEN_GITHUB_RELEASE_CHECKLIST.md` when preparing the candidate tag or GitHub release.
 
+## Production Cutover Checklist
+
+Run:
+
+```zsh
+npm run cutover:saven
+```
+
+Use `docs/SAVEN_PRODUCTION_CUTOVER_CHECKLIST.md` at the moment SAVEN moves from `RC ONLY` to live production candidate.
+
 ## RC Tag Command Package
 
 Run:
