@@ -24,6 +24,7 @@ const requiredScripts = [
   'admin-deploy:saven',
   'go-no-go:saven',
   'launch-record:saven',
+  'admin-access:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -119,6 +120,15 @@ const checks = [
     markers: [
       'SAVEN Rollback Drill Package',
       'Recovery Proof',
+    ],
+  },
+  {
+    label: 'Production admin access',
+    file: 'docs/SAVEN_PRODUCTION_ADMIN_ACCESS.md',
+    markers: [
+      'SAVEN Production Admin Access Package',
+      'Admin Access Model',
+      'Production Access Holds',
     ],
   },
   {

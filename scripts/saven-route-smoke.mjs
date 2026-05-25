@@ -97,6 +97,7 @@ const sourceExpectations = [
   ['Production Cutover Checklist', ['SAVEN Production Cutover Checklist', 'cutover:saven', 'Cutover Order', 'Immediate Hold Conditions']],
   ['Live Backend Activation Package', ['SAVEN Live Backend Activation Package', 'live-backend:saven', 'Activation Order', 'Backend Holds']],
   ['Live Monitoring Activation Package', ['SAVEN Live Monitoring Activation Package', 'live-monitoring:saven', 'First-Hour Metrics', 'Monitoring Holds']],
+  ['Production Admin Access Package', ['SAVEN Production Admin Access Package', 'admin-access:saven', 'Admin Access Model', 'Production Access Holds']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

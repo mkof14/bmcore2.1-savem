@@ -102,3 +102,11 @@ Before changing backend mode from local/review to Edge or HTTP, run `npm run liv
 ## Live Monitoring Activation Package
 
 Before first-hour watch starts, run `npm run live-monitoring:saven` and name the first-hour watch owner in the launch record.
+
+
+## Production Admin Access
+
+- Admin access owner: TBD
+- Admin access reviewer: TBD
+- Command: `npm run admin-access:saven`
+- Evidence: BioMath Core Admin SAVEN Ops, RLS `profiles.is_admin = true`, Edge Function admin gate, event audit, launch control.

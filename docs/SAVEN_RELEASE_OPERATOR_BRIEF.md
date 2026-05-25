@@ -92,3 +92,8 @@ Run `npm run live-backend:saven` before production cutover. This confirms the ba
 ## Live Monitoring Activation Package
 
 Run `npm run live-monitoring:saven` before production cutover. This makes first-hour watch, SLO posture, alert routes, evidence, incidents, and Admin Ops monitoring visible.
+
+
+## Production Admin Access
+
+Before the release window, run `npm run admin-access:saven`. The operator should treat admin access as a production hold if BioMath Core Admin, RLS, Edge Function admin gating, or launch record ownership is unclear.

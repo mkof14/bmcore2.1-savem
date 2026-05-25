@@ -83,3 +83,8 @@ Run `npm run live-backend:saven` before cutover. Use `docs/SAVEN_LIVE_BACKEND_AC
 ## Live Monitoring Activation Package
 
 Run `npm run live-monitoring:saven` before cutover. This confirms SLO posture, alerts, evidence, event audit, incident readiness, worker shift board, and first-hour monitoring ownership.
+
+
+## Production Admin Access
+
+Run `npm run admin-access:saven` before cutover. Confirm `profiles.is_admin = true` only applies to named operators, Admin Ops renders launch control, override, incident, event audit, persistence, alerts, evidence, and SLO panels, and the launch record names the admin access owner.

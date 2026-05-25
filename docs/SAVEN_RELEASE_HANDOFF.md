@@ -440,3 +440,8 @@ Use `docs/SAVEN_ROLLBACK_DRILL.md` before production promotion and after any hol
 - Admin Ops cannot see backend or persistence status.
 - Command permission review is absent from the backend gateway.
 - Production QA, deploy readiness, release readiness, typecheck, tests, smoke, or build fails.
+
+
+## Production Admin Access
+
+Run `npm run admin-access:saven` before production release. Confirm BioMath Core Admin owns SAVEN operator access, `profiles.is_admin = true` is reviewed, RLS and Edge Function admin gates are active, and no client environment contains a service-role key.

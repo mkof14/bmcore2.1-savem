@@ -593,3 +593,8 @@ SAVEN launch record readiness is tracked through:
 - `npm run launch-record:saven`
 
 The launch record keeps production URL, backend mode, Supabase project, admin reviewer, rollback owner, first-hour watch owner, and safety sign-off tied to the final release decision.
+
+
+## Production Admin Access
+
+Production admin access is verified by `npm run admin-access:saven`. The release operator must review `profiles.is_admin = true`, RLS `public.is_saven_admin()`, Edge Function admin-only actions, Admin Ops launch control, overrides, incident actions, event audit, persistence status, alerts, SLO posture, and evidence panels. Admin actions are audit-first and do not create automatic external dispatch.

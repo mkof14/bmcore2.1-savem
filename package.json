@@ -72,7 +72,8 @@
     "rc-tag:saven": "node scripts/saven-rc-tag-command-audit.mjs",
     "cutover:saven": "node scripts/saven-production-cutover-checklist-audit.mjs",
     "live-backend:saven": "node scripts/saven-live-backend-activation-audit.mjs",
-    "live-monitoring:saven": "node scripts/saven-live-monitoring-activation-audit.mjs"
+    "live-monitoring:saven": "node scripts/saven-live-monitoring-activation-audit.mjs",
+    "admin-access:saven": "node scripts/saven-production-admin-access-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
