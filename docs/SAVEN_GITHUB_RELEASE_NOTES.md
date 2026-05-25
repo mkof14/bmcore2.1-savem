@@ -103,3 +103,8 @@ Run `npm run production-release:saven` before the final release pass. It confirm
 ## Production Evidence Index
 
 Run `npm run evidence-index:saven` and review `docs/SAVEN_PRODUCTION_EVIDENCE_INDEX.md` before production promotion. The index summarizes ready evidence, production holds, and non-negotiable safety gates.
+
+
+## Release Operator Brief
+
+Run `npm run operator-brief:saven` and review `docs/SAVEN_RELEASE_OPERATOR_BRIEF.md` before production promotion. The brief summarizes current decision, ready evidence, production holds, and next human actions.

@@ -78,3 +78,8 @@ SAVEN_PRODUCTION_URL=https://your-saven-domain.example npm run prod-smoke:saven
 ## Human Approval Note
 
 This evidence index is an operational readiness map. It is not clinical, legal, emergency-service, medical-device, or robot-autonomy certification.
+
+
+## Release Operator Brief
+
+Run `npm run operator-brief:saven` and review `docs/SAVEN_RELEASE_OPERATOR_BRIEF.md` before production promotion. The brief gives the short current decision, ready areas, production holds, and next human actions.

@@ -194,6 +194,16 @@ npm run github-release:saven
 
 Use `docs/SAVEN_GITHUB_RELEASE_NOTES.md` and `docs/SAVEN_GITHUB_RELEASE_CHECKLIST.md` when preparing the candidate tag or GitHub release.
 
+## Release Operator Brief
+
+Run:
+
+```zsh
+npm run operator-brief:saven
+```
+
+Use `docs/SAVEN_RELEASE_OPERATOR_BRIEF.md` as the short human handoff before reading the deeper evidence package.
+
 ## Production Evidence Index
 
 Run:

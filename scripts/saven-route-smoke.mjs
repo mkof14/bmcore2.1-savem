@@ -92,6 +92,7 @@ const sourceExpectations = [
   ['Production Launch Record', ['SAVEN Production Launch Record', 'launch-record:saven', 'Launch Identity', 'Safety Sign-Off']],
   ['Production Release Orchestrator', ['SAVEN Production Release Orchestrator', 'production-release:saven', 'Release Sequence', 'Final Human Decision']],
   ['Production Evidence Index', ['SAVEN Production Evidence Index', 'evidence-index:saven', 'Evidence Map', 'Production Holds']],
+  ['Release Operator Brief', ['SAVEN Release Operator Brief', 'operator-brief:saven', 'Current Decision', 'Short Handoff']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 
