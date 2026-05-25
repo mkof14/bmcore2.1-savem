@@ -73,3 +73,8 @@ Then watch the first-hour list in `docs/SAVEN_PRODUCTION_LAUNCH_RECORD.md`.
 ## Human Approval Note
 
 This checklist is an operational cutover aid. It is not clinical, legal, emergency-service, medical-device, or robot-autonomy certification.
+
+
+## Live Backend Activation Package
+
+Run `npm run live-backend:saven` before cutover. Use `docs/SAVEN_LIVE_BACKEND_ACTIVATION.md` to confirm Supabase, RLS, Edge Function or HTTP backend, production env, Admin Ops persistence, event audit, and incident readiness.

@@ -32,6 +32,7 @@ const steps = [
   { label: 'Release operator brief', command: 'npm', args: ['run', 'operator-brief:saven'] },
   { label: 'RC tag command package', command: 'npm', args: ['run', 'rc-tag:saven'] },
   { label: 'Production cutover checklist', command: 'npm', args: ['run', 'cutover:saven'] },
+  { label: 'Live backend activation package', command: 'npm', args: ['run', 'live-backend:saven'] },
   { label: 'Admin launch control', command: 'npm', args: ['run', 'admin-launch:saven'] },
   { label: 'Admin evidence pack', command: 'npm', args: ['run', 'admin-evidence:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },

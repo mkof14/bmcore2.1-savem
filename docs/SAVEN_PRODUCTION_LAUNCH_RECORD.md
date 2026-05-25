@@ -92,3 +92,8 @@ Run `npm run production-release:saven` before filling final GO fields. This prov
 ## Production Cutover Checklist
 
 Run `npm run cutover:saven` before changing the launch decision from `RC ONLY` to `GO`. The checklist keeps production URL, backend, admin, rollback, first-hour watch, and safety holds in one cutover order.
+
+
+## Live Backend Activation Package
+
+Before changing backend mode from local/review to Edge or HTTP, run `npm run live-backend:saven` and fill backend fields in the launch record.

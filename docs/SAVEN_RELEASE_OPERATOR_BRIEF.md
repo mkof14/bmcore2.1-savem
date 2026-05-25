@@ -82,3 +82,8 @@ Run `npm run rc-tag:saven` before creating a release candidate tag. Use `SAVEN_S
 ## Production Cutover Checklist
 
 Run `npm run cutover:saven` and review `docs/SAVEN_PRODUCTION_CUTOVER_CHECKLIST.md` when moving from `RC ONLY` to a live production candidate.
+
+
+## Live Backend Activation Package
+
+Run `npm run live-backend:saven` before production cutover. This confirms the backend path is ready to move from local/review to Edge or HTTP while robot, worker, and emergency actions stay gated.

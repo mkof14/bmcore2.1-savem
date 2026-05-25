@@ -194,6 +194,16 @@ npm run github-release:saven
 
 Use `docs/SAVEN_GITHUB_RELEASE_NOTES.md` and `docs/SAVEN_GITHUB_RELEASE_CHECKLIST.md` when preparing the candidate tag or GitHub release.
 
+## Live Backend Activation Package
+
+Run:
+
+```zsh
+npm run live-backend:saven
+```
+
+Use `docs/SAVEN_LIVE_BACKEND_ACTIVATION.md` to move SAVEN from local/review backend behavior toward Edge or HTTP production backend activation.
+
 ## Production Cutover Checklist
 
 Run:
