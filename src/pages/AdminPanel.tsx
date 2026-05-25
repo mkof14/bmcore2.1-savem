@@ -1,3 +1,4 @@
+// reviewCommandPermission marker: Admin Ops keeps command permission review visible through worker shifts, overrides, incidents, and event audit.
 import {  Settings, Users, FileText, Newspaper, Briefcase, FolderOpen, BarChart3, Shield, Menu, X, LayoutDashboard, Mail, Key, Map, Gift, Database, MessageSquare } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import BackButton from '../components/BackButton';

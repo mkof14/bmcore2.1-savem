@@ -455,3 +455,33 @@ Run `npm run privacy-live:saven` before production release. Confirm voice comman
 ## Production Dispatch Lock
 
 Run `npm run dispatch-lock:saven` before production release. SAVEN may prepare nurse, doctor, caregiver, device, robot, emergency, and admin handoffs, but live external dispatch remains locked until a separate legal and operational activation.
+
+
+## Robot Emergency Safety Gate
+
+Run `npm run robot-emergency:saven` before production release. Confirm robot physical action remains readiness-only and emergency route remains rules/context only until a separate legal, clinical, robotics, and operations activation exists.
+
+
+## Release Candidate Freeze
+
+Run `npm run rc-freeze:saven` after robot/emergency, dispatch, privacy, admin access, live backend, live monitoring, production release, and ready checks are connected. After freeze, accept only release-blocker fixes or production value updates.
+
+
+## Production Values Intake
+
+Run `npm run production-values:saven` in RC-safe mode to confirm the intake package exists. Before GO, run `SAVEN_STRICT_PRODUCTION_VALUES=1 npm run production-values:saven` after real production URL, Supabase project, backend URL, owner names, reviewer names, rollback owner, and first-hour watch owner are recorded.
+
+
+## GO Decision Dry Run
+
+Run `npm run go-dry-run:saven` while SAVEN remains RC-only. Before any real GO, run `SAVEN_STRICT_GO=1 npm run go-dry-run:saven`; if it fails, stay `RC ONLY` or choose `HOLD`.
+
+
+## Final Operator Packet
+
+Run `npm run final-operator:saven` as the short human entrypoint before final review. The packet points to RC checks, strict GO rehearsal, `SAVEN_STRICT_GO=1`, strict production values, strict tag, and the launch record decision.
+
+
+## Launch Room Runbook
+
+Run `npm run launch-room:saven` before live-day review. Use `docs/SAVEN_LAUNCH_ROOM_RUNBOOK.md` for T-24, T-1, T-0, first 15 minutes, first hour, rollback trigger, and launch-room role ownership.

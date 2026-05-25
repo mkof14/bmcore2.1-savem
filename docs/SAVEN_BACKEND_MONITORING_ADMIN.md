@@ -608,3 +608,8 @@ Production privacy is verified by `npm run privacy-live:saven`. Admin Ops should
 ## Production Dispatch Lock
 
 Production dispatch safety is verified by `npm run dispatch-lock:saven`. Admin Ops may review prepared worker handoffs, but SAVEN must not call emergency services, send external messages, move robots, or change clinical plans without a separate human-approved activation.
+
+
+## Robot Emergency Safety Gate
+
+Robot and emergency safety is verified by `npm run robot-emergency:saven`. Admin Ops may review robot readiness, incident posture, emergency route visibility, and alert evidence, but production stays non-automatic for robot movement and emergency dispatch.

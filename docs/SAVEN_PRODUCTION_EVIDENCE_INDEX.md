@@ -83,3 +83,38 @@ This evidence index is an operational readiness map. It is not clinical, legal, 
 ## Release Operator Brief
 
 Run `npm run operator-brief:saven` and review `docs/SAVEN_RELEASE_OPERATOR_BRIEF.md` before production promotion. The brief gives the short current decision, ready areas, production holds, and next human actions.
+
+
+## Release Candidate Freeze
+
+| Freeze package | `docs/SAVEN_RELEASE_CANDIDATE_FREEZE.md` | `npm run rc-freeze:saven` |
+
+The freeze package is the final local RC evidence layer before strict tagging and production value entry.
+
+
+## Production Values Intake
+
+| Production values intake | `docs/SAVEN_PRODUCTION_VALUES_INTAKE.md` | `npm run production-values:saven` |
+
+Strict GO mode: `SAVEN_STRICT_PRODUCTION_VALUES=1 npm run production-values:saven`. This is the line between an RC-ready package and a production-ready launch record.
+
+
+## GO Decision Dry Run
+
+| GO decision dry run | `docs/SAVEN_GO_DECISION_DRY_RUN.md` | `npm run go-dry-run:saven` |
+
+Strict GO rehearsal: `SAVEN_STRICT_GO=1 npm run go-dry-run:saven`. If strict mode fails, SAVEN remains an RC-ready package.
+
+
+## Final Operator Packet
+
+| Final operator packet | `docs/SAVEN_FINAL_OPERATOR_PACKET.md` | `npm run final-operator:saven` |
+
+This is the shortest human entrypoint for the final SAVEN release operator.
+
+
+## Launch Room Runbook
+
+| Launch room runbook | `docs/SAVEN_LAUNCH_ROOM_RUNBOOK.md` | `npm run launch-room:saven` |
+
+This is the live-day operating script for SAVEN launch room roles, timing, watch items, and rollback triggers.

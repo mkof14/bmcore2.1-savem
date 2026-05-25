@@ -67,7 +67,7 @@ const alertRules: AlertRule[] = [
     watchSeverity: 'urgent',
     breachSeverity: 'critical',
     title: 'Emergency gate is unsafe',
-    runbook: ['Show emergency rules', 'Require human confirmation', 'Do not perform automatic external dispatch'],
+    runbook: ['Show emergency rules', 'Keep emergency route visible only', 'Require human confirmation', 'Do not perform automatic external dispatch'],
   },
   {
     metricId: 'endpoint-availability',

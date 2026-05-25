@@ -98,3 +98,33 @@ Run `npm run privacy-live:saven` before cutover. Hold if family digest redaction
 ## Production Dispatch Lock
 
 Run `npm run dispatch-lock:saven` before cutover. Hold if emergency route is not `blocked_external_dispatch`, robot physical action is not approval-locked, worker routes do not require confirmation, or Admin worker shift board cannot render.
+
+
+## Robot Emergency Safety Gate
+
+Run `npm run robot-emergency:saven` before cutover. Hold if robot gate, emergency gate, alert routes, Edge Function safety language, Admin Ops incident review, or `blocked_external_dispatch` posture is missing.
+
+
+## Release Candidate Freeze
+
+Run `npm run rc-freeze:saven` before moving from `RC ONLY` toward `GO`. Hold if any freeze gate, strict tag gate, full readiness, production build, launch owner, or safety package is incomplete.
+
+
+## Production Values Intake
+
+Run `npm run production-values:saven` before cutover review. Run `SAVEN_STRICT_PRODUCTION_VALUES=1 npm run production-values:saven` only when the launch record has real values and no `pending`, `TBD`, or `RC ONLY` decision remains.
+
+
+## GO Decision Dry Run
+
+Run `npm run go-dry-run:saven` before cutover. Run `SAVEN_STRICT_GO=1 npm run go-dry-run:saven` only after production values, owners, reviewers, rollback owner, first-hour watch owner, and final decision are recorded.
+
+
+## Final Operator Packet
+
+Before cutover, run `npm run final-operator:saven`. This is the short entrypoint for deciding whether the release stays `RC ONLY`, moves to `HOLD`, or can proceed toward `GO`.
+
+
+## Launch Room Runbook
+
+Before cutover, run `npm run launch-room:saven`. The runbook keeps T-24, T-1, T-0, first 15 minutes, first hour, and rollback trigger visible to the operator.

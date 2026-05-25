@@ -75,7 +75,13 @@
     "live-monitoring:saven": "node scripts/saven-live-monitoring-activation-audit.mjs",
     "admin-access:saven": "node scripts/saven-production-admin-access-audit.mjs",
     "privacy-live:saven": "node scripts/saven-live-privacy-redaction-audit.mjs",
-    "dispatch-lock:saven": "node scripts/saven-production-dispatch-lock-audit.mjs"
+    "dispatch-lock:saven": "node scripts/saven-production-dispatch-lock-audit.mjs",
+    "robot-emergency:saven": "node scripts/saven-robot-emergency-safety-gate-audit.mjs",
+    "rc-freeze:saven": "node scripts/saven-release-candidate-freeze-audit.mjs",
+    "production-values:saven": "node scripts/saven-production-values-intake-audit.mjs",
+    "go-dry-run:saven": "node scripts/saven-go-decision-dry-run-audit.mjs",
+    "final-operator:saven": "node scripts/saven-final-operator-packet-audit.mjs",
+    "launch-room:saven": "node scripts/saven-launch-room-runbook-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

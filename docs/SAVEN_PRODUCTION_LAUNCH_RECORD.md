@@ -124,3 +124,47 @@ Before first-hour watch starts, run `npm run live-monitoring:saven` and name the
 - Dispatch lock reviewer: TBD
 - Command: `npm run dispatch-lock:saven`
 - Evidence: worker handoff service, Admin worker shift board, Edge Function no-dispatch posture, robot gate locked, emergency route blocked.
+
+
+## Robot Emergency Safety Gate
+
+- Robot/emergency safety reviewer: TBD
+- Command: `npm run robot-emergency:saven`
+- Evidence: robot readiness-only command path, emergency `blocked_external_dispatch`, monitoring SLO robot/emergency gates, alert runbooks, Admin Ops incident review.
+
+
+## Release Candidate Freeze
+
+- Freeze reviewer: TBD
+- Command: `npm run rc-freeze:saven`
+- Evidence: RC freeze package, production release orchestrator, ready check, production build, strict RC tag command, safety gates.
+
+
+## Production Values Intake
+
+- Production values reviewer: TBD
+- Command: `npm run production-values:saven`
+- Strict command before GO: `SAVEN_STRICT_PRODUCTION_VALUES=1 npm run production-values:saven`
+- Evidence: production URL, backend mode, Supabase project, backend URL, owners, reviewers, rollback owner, first-hour watch owner, and final decision.
+
+
+## GO Decision Dry Run
+
+- GO dry run reviewer: TBD
+- Command: `npm run go-dry-run:saven`
+- Strict command before GO: `SAVEN_STRICT_GO=1 npm run go-dry-run:saven`
+- Result: RC ONLY until strict mode passes and human operator records GO.
+
+
+## Final Operator Packet
+
+- Final operator reviewer: TBD
+- Command: `npm run final-operator:saven`
+- Evidence: final operator packet, strict GO rehearsal, production values intake, RC freeze, launch record owners, and human decision.
+
+
+## Launch Room Runbook
+
+- Launch room owner: TBD
+- Command: `npm run launch-room:saven`
+- Evidence: T-24, T-1, T-0, first 15 minutes, first hour, rollback trigger, first-hour watch owner, and final operator packet.

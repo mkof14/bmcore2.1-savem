@@ -107,3 +107,33 @@ Before the release window, run `npm run privacy-live:saven`. The operator should
 ## Production Dispatch Lock
 
 Before the release window, run `npm run dispatch-lock:saven`. Treat dispatch as locked unless the launch record explicitly names a future external-dispatch activation owner and legal/ops approval path.
+
+
+## Robot Emergency Safety Gate
+
+Before the release window, run `npm run robot-emergency:saven`. The operator should treat robot and emergency behavior as blocked for external or physical action unless a future activation package explicitly unlocks it.
+
+
+## Release Candidate Freeze
+
+Run `npm run rc-freeze:saven` before strict RC tagging. After this point, changes should be limited to release-blocker fixes, production values, owner names, or safety hold corrections.
+
+
+## Production Values Intake
+
+Run `npm run production-values:saven` while SAVEN is RC-only. Before GO, strict mode must pass: `SAVEN_STRICT_PRODUCTION_VALUES=1 npm run production-values:saven`.
+
+
+## GO Decision Dry Run
+
+Run `npm run go-dry-run:saven` in RC-safe mode. Before GO, strict mode must pass: `SAVEN_STRICT_GO=1 npm run go-dry-run:saven`.
+
+
+## Final Operator Packet
+
+Use `docs/SAVEN_FINAL_OPERATOR_PACKET.md` and run `npm run final-operator:saven` when handing SAVEN to the final release operator. Default remains `RC ONLY` until strict checks and real values pass.
+
+
+## Launch Room Runbook
+
+Use `docs/SAVEN_LAUNCH_ROOM_RUNBOOK.md` and run `npm run launch-room:saven` for the live-day operating script.

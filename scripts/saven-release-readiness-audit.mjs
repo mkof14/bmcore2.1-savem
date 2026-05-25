@@ -23,6 +23,61 @@ const checks = [
     ],
   },
   {
+    label: 'Robot emergency safety gate',
+    file: 'docs/SAVEN_ROBOT_EMERGENCY_SAFETY_GATE.md',
+    markers: [
+      'SAVEN Robot Emergency Safety Gate',
+      'Robot Boundary',
+      'Emergency Boundary',
+      'Production Holds',
+    ],
+  },
+  {
+    label: 'Release candidate freeze package',
+    file: 'docs/SAVEN_RELEASE_CANDIDATE_FREEZE.md',
+    markers: [
+      'SAVEN Release Candidate Freeze Package',
+      'Freeze State',
+      'Human Decision',
+    ],
+  },
+  {
+    label: 'Production values intake package',
+    file: 'docs/SAVEN_PRODUCTION_VALUES_INTAKE.md',
+    markers: [
+      'SAVEN Production Values Intake Package',
+      'Intake Model',
+      'Strict GO Mode',
+    ],
+  },
+  {
+    label: 'GO decision dry run package',
+    file: 'docs/SAVEN_GO_DECISION_DRY_RUN.md',
+    markers: [
+      'SAVEN GO Decision Dry Run Package',
+      'Strict Mode',
+      'GO Dry Run Result',
+    ],
+  },
+  {
+    label: 'Final operator packet',
+    file: 'docs/SAVEN_FINAL_OPERATOR_PACKET.md',
+    markers: [
+      'SAVEN Final Operator Packet',
+      'One-Pass RC Check',
+      'Strict GO Rehearsal',
+    ],
+  },
+  {
+    label: 'Launch room runbook',
+    file: 'docs/SAVEN_LAUNCH_ROOM_RUNBOOK.md',
+    markers: [
+      'SAVEN Launch Room Runbook',
+      'T-24 Hours',
+      'Rollback Trigger',
+    ],
+  },
+  {
     label: 'Release env example',
     file: '.env.saven.example',
     markers: [
@@ -264,6 +319,36 @@ if (packageJson.scripts?.['dispatch-lock:saven'] !== 'node scripts/saven-product
   throw new Error('package.json is missing dispatch-lock:saven script.');
 }
 console.log('[release] ok package dispatch-lock:saven script');
+
+if (packageJson.scripts?.['robot-emergency:saven'] !== 'node scripts/saven-robot-emergency-safety-gate-audit.mjs') {
+  throw new Error('package.json is missing robot-emergency:saven script.');
+}
+console.log('[release] ok package robot-emergency:saven script');
+
+if (packageJson.scripts?.['rc-freeze:saven'] !== 'node scripts/saven-release-candidate-freeze-audit.mjs') {
+  throw new Error('package.json is missing rc-freeze:saven script.');
+}
+console.log('[release] ok package rc-freeze:saven script');
+
+if (packageJson.scripts?.['production-values:saven'] !== 'node scripts/saven-production-values-intake-audit.mjs') {
+  throw new Error('package.json is missing production-values:saven script.');
+}
+console.log('[release] ok package production-values:saven script');
+
+if (packageJson.scripts?.['go-dry-run:saven'] !== 'node scripts/saven-go-decision-dry-run-audit.mjs') {
+  throw new Error('package.json is missing go-dry-run:saven script.');
+}
+console.log('[release] ok package go-dry-run:saven script');
+
+if (packageJson.scripts?.['final-operator:saven'] !== 'node scripts/saven-final-operator-packet-audit.mjs') {
+  throw new Error('package.json is missing final-operator:saven script.');
+}
+console.log('[release] ok package final-operator:saven script');
+
+if (packageJson.scripts?.['launch-room:saven'] !== 'node scripts/saven-launch-room-runbook-audit.mjs') {
+  throw new Error('package.json is missing launch-room:saven script.');
+}
+console.log('[release] ok package launch-room:saven script');
 
 if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Release readiness marker for SAVEN release audit.
 import { spawnSync } from 'node:child_process';
 
 const steps = [
@@ -37,6 +38,12 @@ const steps = [
   { label: 'Production admin access package', command: 'npm', args: ['run', 'admin-access:saven'] },
   { label: 'Live privacy redaction package', command: 'npm', args: ['run', 'privacy-live:saven'] },
   { label: 'Production dispatch lock package', command: 'npm', args: ['run', 'dispatch-lock:saven'] },
+  { label: 'Robot emergency safety gate', command: 'npm', args: ['run', 'robot-emergency:saven'] },
+  { label: 'Release candidate freeze package', command: 'npm', args: ['run', 'rc-freeze:saven'] },
+  { label: 'Production values intake package', command: 'npm', args: ['run', 'production-values:saven'] },
+  { label: 'GO decision dry run package', command: 'npm', args: ['run', 'go-dry-run:saven'] },
+  { label: 'Final operator packet', command: 'npm', args: ['run', 'final-operator:saven'] },
+  { label: 'Launch room runbook', command: 'npm', args: ['run', 'launch-room:saven'] },
   { label: 'Admin launch control', command: 'npm', args: ['run', 'admin-launch:saven'] },
   { label: 'Admin evidence pack', command: 'npm', args: ['run', 'admin-evidence:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },

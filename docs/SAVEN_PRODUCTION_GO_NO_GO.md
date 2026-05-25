@@ -86,3 +86,18 @@ This gate is an operational release decision aid. It is not clinical, legal, eme
 ## Production Launch Record
 
 Before calling `GO`, run `npm run launch-record:saven` and fill `docs/SAVEN_PRODUCTION_LAUNCH_RECORD.md` with production URL, backend mode, Supabase project, reviewers, rollback owner, first-hour watch owner, and safety sign-off.
+
+
+## Production Values Intake
+
+Use `npm run production-values:saven` to confirm the intake package. Use `SAVEN_STRICT_PRODUCTION_VALUES=1 npm run production-values:saven` before changing from `RC ONLY` to `GO`. If strict mode fails, choose `HOLD` or remain `RC ONLY`.
+
+
+## GO Decision Dry Run
+
+Use `npm run go-dry-run:saven` to rehearse the final decision. Use `SAVEN_STRICT_GO=1 npm run go-dry-run:saven` before changing the launch record to `GO`. If strict mode fails, choose `HOLD` or remain `RC ONLY`.
+
+
+## Final Operator Packet
+
+Use `docs/SAVEN_FINAL_OPERATOR_PACKET.md` before the final decision. If strict GO rehearsal or strict production values fail, do not record `GO`.

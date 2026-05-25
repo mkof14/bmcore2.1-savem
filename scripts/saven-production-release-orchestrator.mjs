@@ -27,6 +27,12 @@ const requiredScripts = [
   'admin-access:saven',
   'privacy-live:saven',
   'dispatch-lock:saven',
+  'robot-emergency:saven',
+  'rc-freeze:saven',
+  'production-values:saven',
+  'go-dry-run:saven',
+  'final-operator:saven',
+  'launch-room:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -122,6 +128,61 @@ const checks = [
     markers: [
       'SAVEN Rollback Drill Package',
       'Recovery Proof',
+    ],
+  },
+  {
+    label: 'Launch room runbook',
+    file: 'docs/SAVEN_LAUNCH_ROOM_RUNBOOK.md',
+    markers: [
+      'SAVEN Launch Room Runbook',
+      'T-24 Hours',
+      'Rollback Trigger',
+    ],
+  },
+  {
+    label: 'Final operator packet',
+    file: 'docs/SAVEN_FINAL_OPERATOR_PACKET.md',
+    markers: [
+      'SAVEN Final Operator Packet',
+      'One-Pass RC Check',
+      'Strict GO Rehearsal',
+    ],
+  },
+  {
+    label: 'GO decision dry run',
+    file: 'docs/SAVEN_GO_DECISION_DRY_RUN.md',
+    markers: [
+      'SAVEN GO Decision Dry Run Package',
+      'Strict Mode',
+      'GO Dry Run Result',
+    ],
+  },
+  {
+    label: 'Production values intake',
+    file: 'docs/SAVEN_PRODUCTION_VALUES_INTAKE.md',
+    markers: [
+      'SAVEN Production Values Intake Package',
+      'Intake Model',
+      'Strict GO Mode',
+    ],
+  },
+  {
+    label: 'Release candidate freeze',
+    file: 'docs/SAVEN_RELEASE_CANDIDATE_FREEZE.md',
+    markers: [
+      'SAVEN Release Candidate Freeze Package',
+      'Freeze State',
+      'Human Decision',
+    ],
+  },
+  {
+    label: 'Robot emergency safety gate',
+    file: 'docs/SAVEN_ROBOT_EMERGENCY_SAFETY_GATE.md',
+    markers: [
+      'SAVEN Robot Emergency Safety Gate',
+      'Robot Boundary',
+      'Emergency Boundary',
+      'Production Holds',
     ],
   },
   {

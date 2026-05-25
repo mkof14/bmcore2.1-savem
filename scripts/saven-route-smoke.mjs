@@ -100,6 +100,12 @@ const sourceExpectations = [
   ['Production Admin Access Package', ['SAVEN Production Admin Access Package', 'admin-access:saven', 'Admin Access Model', 'Production Access Holds']],
   ['Live Privacy Redaction Package', ['SAVEN Live Privacy Redaction Package', 'privacy-live:saven', 'Live Privacy Model', 'Live Review Holds']],
   ['Production Dispatch Lock Package', ['SAVEN Production Dispatch Lock Package', 'dispatch-lock:saven', 'Dispatch Lock Model', 'Activation Holds']],
+  ['Robot Emergency Safety Gate', ['SAVEN Robot Emergency Safety Gate', 'robot-emergency:saven', 'Robot Boundary', 'Emergency Boundary']],
+  ['Release Candidate Freeze Package', ['SAVEN Release Candidate Freeze Package', 'rc-freeze:saven', 'Freeze State', 'Human Decision']],
+  ['Production Values Intake Package', ['SAVEN Production Values Intake Package', 'production-values:saven', 'Strict GO Mode', 'Production Holds']],
+  ['GO Decision Dry Run Package', ['SAVEN GO Decision Dry Run Package', 'go-dry-run:saven', 'Strict Mode', 'GO Dry Run Result']],
+  ['Final Operator Packet', ['SAVEN Final Operator Packet', 'final-operator:saven', 'One-Pass RC Check', 'Strict GO Rehearsal']],
+  ['Launch Room Runbook', ['SAVEN Launch Room Runbook', 'launch-room:saven', 'T-24 Hours', 'Rollback Trigger']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 
