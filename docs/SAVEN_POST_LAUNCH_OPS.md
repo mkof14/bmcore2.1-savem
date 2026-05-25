@@ -60,3 +60,15 @@ SAVEN post-launch review is an operational safety check. It is not clinical, leg
 ## Rollback Drill Package
 
 Before promotion and after any hold event, run `npm run rollback:saven` and use `docs/SAVEN_ROLLBACK_DRILL.md`. The drill checks hold triggers, first five minutes, admin evidence, hosting rollback guidance, and recovery proof.
+
+## Post-Launch Control Stack
+
+Run these after the launch room package:
+
+```zsh
+npm run incident-drill:saven
+npm run rollback-proof:saven
+npm run operator-evidence:saven
+```
+
+These checks keep incident routing, rollback proof, and operator evidence visible during the first live operating window.

@@ -485,3 +485,13 @@ Run `npm run final-operator:saven` as the short human entrypoint before final re
 ## Launch Room Runbook
 
 Run `npm run launch-room:saven` before live-day review. Use `docs/SAVEN_LAUNCH_ROOM_RUNBOOK.md` for T-24, T-1, T-0, first 15 minutes, first hour, rollback trigger, and launch-room role ownership.
+
+## Post-Launch Control Stack
+
+The release handoff now includes:
+
+- `npm run incident-drill:saven`
+- `npm run rollback-proof:saven`
+- `npm run operator-evidence:saven`
+
+These commands prove SAVEN can be watched, contained, rolled back, and explained by a human operator after promotion.

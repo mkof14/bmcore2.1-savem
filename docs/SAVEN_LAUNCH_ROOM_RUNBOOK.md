@@ -111,3 +111,15 @@ Rollback or hold if:
 ```zsh
 npm run launch-room:saven
 ```
+
+## Post-Launch Control Stack
+
+After the launch room opens, run:
+
+```zsh
+npm run incident-drill:saven
+npm run rollback-proof:saven
+npm run operator-evidence:saven
+```
+
+The launch room should not move beyond RC-only unless incident drill, rollback proof, and operator evidence are reviewed by the owner group.

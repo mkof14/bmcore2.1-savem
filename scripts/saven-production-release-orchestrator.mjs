@@ -33,6 +33,9 @@ const requiredScripts = [
   'go-dry-run:saven',
   'final-operator:saven',
   'launch-room:saven',
+  'incident-drill:saven',
+  'rollback-proof:saven',
+  'operator-evidence:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -210,6 +213,33 @@ const checks = [
       'SAVEN Production Admin Access Package',
       'Admin Access Model',
       'Production Access Holds',
+    ],
+  },
+  {
+    label: 'Post-launch incident drill',
+    file: 'docs/SAVEN_POSTLAUNCH_INCIDENT_DRILL.md',
+    markers: [
+      'SAVEN Post-Launch Incident Drill',
+      'Drill Scenario',
+      'Hold Conditions',
+    ],
+  },
+  {
+    label: 'Rollback proof package',
+    file: 'docs/SAVEN_ROLLBACK_PROOF.md',
+    markers: [
+      'SAVEN Rollback Proof Package',
+      'Rollback Proof Model',
+      'Proof Sequence',
+    ],
+  },
+  {
+    label: 'Operator evidence package',
+    file: 'docs/SAVEN_OPERATOR_EVIDENCE.md',
+    markers: [
+      'SAVEN Operator Evidence Package',
+      'Evidence Model',
+      'Decision Language',
     ],
   },
   {

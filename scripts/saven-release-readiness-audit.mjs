@@ -78,6 +78,33 @@ const checks = [
     ],
   },
   {
+    label: 'Post-launch incident drill',
+    file: 'docs/SAVEN_POSTLAUNCH_INCIDENT_DRILL.md',
+    markers: [
+      'SAVEN Post-Launch Incident Drill',
+      'Drill Scenario',
+      'Hold Conditions',
+    ],
+  },
+  {
+    label: 'Rollback proof package',
+    file: 'docs/SAVEN_ROLLBACK_PROOF.md',
+    markers: [
+      'SAVEN Rollback Proof Package',
+      'Rollback Proof Model',
+      'Proof Sequence',
+    ],
+  },
+  {
+    label: 'Operator evidence package',
+    file: 'docs/SAVEN_OPERATOR_EVIDENCE.md',
+    markers: [
+      'SAVEN Operator Evidence Package',
+      'Evidence Model',
+      'Decision Language',
+    ],
+  },
+  {
     label: 'Release env example',
     file: '.env.saven.example',
     markers: [
@@ -349,6 +376,21 @@ if (packageJson.scripts?.['launch-room:saven'] !== 'node scripts/saven-launch-ro
   throw new Error('package.json is missing launch-room:saven script.');
 }
 console.log('[release] ok package launch-room:saven script');
+
+if (packageJson.scripts?.['incident-drill:saven'] !== 'node scripts/saven-postlaunch-incident-drill-audit.mjs') {
+  throw new Error('package.json is missing incident-drill:saven script.');
+}
+console.log('[release] ok package incident-drill:saven script');
+
+if (packageJson.scripts?.['rollback-proof:saven'] !== 'node scripts/saven-rollback-proof-audit.mjs') {
+  throw new Error('package.json is missing rollback-proof:saven script.');
+}
+console.log('[release] ok package rollback-proof:saven script');
+
+if (packageJson.scripts?.['operator-evidence:saven'] !== 'node scripts/saven-operator-evidence-audit.mjs') {
+  throw new Error('package.json is missing operator-evidence:saven script.');
+}
+console.log('[release] ok package operator-evidence:saven script');
 
 if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');

@@ -81,7 +81,10 @@
     "production-values:saven": "node scripts/saven-production-values-intake-audit.mjs",
     "go-dry-run:saven": "node scripts/saven-go-decision-dry-run-audit.mjs",
     "final-operator:saven": "node scripts/saven-final-operator-packet-audit.mjs",
-    "launch-room:saven": "node scripts/saven-launch-room-runbook-audit.mjs"
+    "launch-room:saven": "node scripts/saven-launch-room-runbook-audit.mjs",
+    "incident-drill:saven": "node scripts/saven-postlaunch-incident-drill-audit.mjs",
+    "rollback-proof:saven": "node scripts/saven-rollback-proof-audit.mjs",
+    "operator-evidence:saven": "node scripts/saven-operator-evidence-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

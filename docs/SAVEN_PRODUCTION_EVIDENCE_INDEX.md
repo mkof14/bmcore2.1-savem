@@ -118,3 +118,11 @@ This is the shortest human entrypoint for the final SAVEN release operator.
 | Launch room runbook | `docs/SAVEN_LAUNCH_ROOM_RUNBOOK.md` | `npm run launch-room:saven` |
 
 This is the live-day operating script for SAVEN launch room roles, timing, watch items, and rollback triggers.
+
+## Operator Evidence Package
+
+- `docs/SAVEN_POSTLAUNCH_INCIDENT_DRILL.md`
+- `docs/SAVEN_ROLLBACK_PROOF.md`
+- `docs/SAVEN_OPERATOR_EVIDENCE.md`
+
+These artifacts close the post-launch evidence loop: incident drill, rollback proof, and final operator evidence.
