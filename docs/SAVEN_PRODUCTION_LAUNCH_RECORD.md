@@ -110,3 +110,10 @@ Before first-hour watch starts, run `npm run live-monitoring:saven` and name the
 - Admin access reviewer: TBD
 - Command: `npm run admin-access:saven`
 - Evidence: BioMath Core Admin SAVEN Ops, RLS `profiles.is_admin = true`, Edge Function admin gate, event audit, launch control.
+
+
+## Live Privacy Redaction
+
+- Privacy reviewer: TBD
+- Command: `npm run privacy-live:saven`
+- Evidence: privacy service, family digest redaction, clinical context review, robot gate review, emergency route review, admin audit visibility.

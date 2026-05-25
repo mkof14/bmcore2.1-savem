@@ -88,3 +88,8 @@ Run `npm run live-monitoring:saven` before cutover. This confirms SLO posture, a
 ## Production Admin Access
 
 Run `npm run admin-access:saven` before cutover. Confirm `profiles.is_admin = true` only applies to named operators, Admin Ops renders launch control, override, incident, event audit, persistence, alerts, evidence, and SLO panels, and the launch record names the admin access owner.
+
+
+## Live Privacy Redaction
+
+Run `npm run privacy-live:saven` before cutover. Hold if family digest redaction is unclear, clinical context can leak into non-clinical views, admin audit can be read outside Admin Ops, or robot/emergency details are broadcast as routine summaries.

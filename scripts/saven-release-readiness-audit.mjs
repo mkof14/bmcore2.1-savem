@@ -5,6 +5,15 @@ const root = process.cwd();
 
 const checks = [
   {
+    label: 'Live privacy redaction package',
+    file: 'docs/SAVEN_LIVE_PRIVACY_REDACTION.md',
+    markers: [
+      'SAVEN Live Privacy Redaction Package',
+      'Live Privacy Model',
+      'Live Review Holds',
+    ],
+  },
+  {
     label: 'Release env example',
     file: '.env.saven.example',
     markers: [
@@ -232,7 +241,17 @@ if (packageJson.scripts?.['live-monitoring:saven'] !== 'node scripts/saven-live-
 }
 console.log('[release] ok package live-monitoring:saven script');
 
-if (packageJson.scripts?.['admin-access:saven'] !== 'node scripts/saven-production-admin-access-audit.mjs') {\n  throw new Error('package.json is missing admin-access:saven script.');\n}\nconsole.log('[release] ok package admin-access:saven script');\n\nif (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
+if (packageJson.scripts?.['admin-access:saven'] !== 'node scripts/saven-production-admin-access-audit.mjs') {
+  throw new Error('package.json is missing admin-access:saven script.');
+}
+console.log('[release] ok package admin-access:saven script');
+
+if (packageJson.scripts?.['privacy-live:saven'] !== 'node scripts/saven-live-privacy-redaction-audit.mjs') {
+  throw new Error('package.json is missing privacy-live:saven script.');
+}
+console.log('[release] ok package privacy-live:saven script');
+
+if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');
 }
 console.log('[release] ok package release:saven script');

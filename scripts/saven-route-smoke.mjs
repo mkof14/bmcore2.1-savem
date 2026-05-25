@@ -98,6 +98,7 @@ const sourceExpectations = [
   ['Live Backend Activation Package', ['SAVEN Live Backend Activation Package', 'live-backend:saven', 'Activation Order', 'Backend Holds']],
   ['Live Monitoring Activation Package', ['SAVEN Live Monitoring Activation Package', 'live-monitoring:saven', 'First-Hour Metrics', 'Monitoring Holds']],
   ['Production Admin Access Package', ['SAVEN Production Admin Access Package', 'admin-access:saven', 'Admin Access Model', 'Production Access Holds']],
+  ['Live Privacy Redaction Package', ['SAVEN Live Privacy Redaction Package', 'privacy-live:saven', 'Live Privacy Model', 'Live Review Holds']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

@@ -97,3 +97,8 @@ Run `npm run live-monitoring:saven` before production cutover. This makes first-
 ## Production Admin Access
 
 Before the release window, run `npm run admin-access:saven`. The operator should treat admin access as a production hold if BioMath Core Admin, RLS, Edge Function admin gating, or launch record ownership is unclear.
+
+
+## Live Privacy Redaction
+
+Before the release window, run `npm run privacy-live:saven`. The operator should treat privacy as a release hold if family digest, clinical context, emergency route, robot gate, or admin audit visibility is unclear.

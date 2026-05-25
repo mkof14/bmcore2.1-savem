@@ -445,3 +445,8 @@ Use `docs/SAVEN_ROLLBACK_DRILL.md` before production promotion and after any hol
 ## Production Admin Access
 
 Run `npm run admin-access:saven` before production release. Confirm BioMath Core Admin owns SAVEN operator access, `profiles.is_admin = true` is reviewed, RLS and Edge Function admin gates are active, and no client environment contains a service-role key.
+
+
+## Live Privacy Redaction
+
+Run `npm run privacy-live:saven` before production release. Confirm voice command text, clinical context, family digest, robot gates, emergency routes, and admin audit records follow SAVEN role visibility and redaction rules.

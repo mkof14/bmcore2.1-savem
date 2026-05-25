@@ -25,6 +25,7 @@ const requiredScripts = [
   'go-no-go:saven',
   'launch-record:saven',
   'admin-access:saven',
+  'privacy-live:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -120,6 +121,15 @@ const checks = [
     markers: [
       'SAVEN Rollback Drill Package',
       'Recovery Proof',
+    ],
+  },
+  {
+    label: 'Live privacy redaction',
+    file: 'docs/SAVEN_LIVE_PRIVACY_REDACTION.md',
+    markers: [
+      'SAVEN Live Privacy Redaction Package',
+      'Live Privacy Model',
+      'Live Review Holds',
     ],
   },
   {

@@ -598,3 +598,8 @@ The launch record keeps production URL, backend mode, Supabase project, admin re
 ## Production Admin Access
 
 Production admin access is verified by `npm run admin-access:saven`. The release operator must review `profiles.is_admin = true`, RLS `public.is_saven_admin()`, Edge Function admin-only actions, Admin Ops launch control, overrides, incident actions, event audit, persistence status, alerts, SLO posture, and evidence panels. Admin actions are audit-first and do not create automatic external dispatch.
+
+
+## Live Privacy Redaction
+
+Production privacy is verified by `npm run privacy-live:saven`. Admin Ops should show operational evidence without exposing raw clinical, family digest, emergency, robot gate, or admin audit context outside the allowed role visibility path.
