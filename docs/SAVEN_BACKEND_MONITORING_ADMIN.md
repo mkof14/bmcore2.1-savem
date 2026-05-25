@@ -533,3 +533,63 @@ SAVEN now has post-launch operator guidance:
 - `npm run postlaunch:saven`
 
 The package covers first 15 minutes, first hour, day 1 review, rollback triggers, and human review notes after deployment.
+
+
+## Rollback Drill Package
+
+SAVEN rollback readiness is tracked through:
+
+- `docs/SAVEN_ROLLBACK_DRILL.md`
+- `npm run rollback:saven`
+
+Rollback review must preserve human approval for robot action, emergency escalation, privacy-sensitive context, Edge Function permission checks, and Supabase migration compatibility.
+
+
+## Production Environment Gate
+
+Production env readiness is tracked through:
+
+- `docs/SAVEN_PRODUCTION_ENV_GATE.md`
+- `npm run prod-env:saven`
+
+Review mode can pass with local adapters. Production mode blocks missing Supabase public variables, missing Edge Function URL in Edge mode, missing HTTP backend URL in HTTP mode, and secret-like client variables.
+
+
+## Final Release Tag Gate
+
+The final release tag gate is tracked through:
+
+- `docs/SAVEN_FINAL_RELEASE_TAG_GATE.md`
+- `npm run tag:saven`
+
+It is the last local evidence check before creating a release tag. It keeps backend, monitoring, admin, production env, rollback, post-launch, command, worker, robot, and emergency-gate evidence connected.
+
+
+## BioMath Admin Deploy Checklist
+
+SAVEN Admin deployment readiness is tracked through:
+
+- `docs/SAVEN_BIOMATH_ADMIN_DEPLOY_CHECKLIST.md`
+- `npm run admin-deploy:saven`
+
+This checklist verifies that SAVEN remains inside BioMath Core Admin instead of becoming a separate console. It covers launch control, evidence, monitoring, alerts, workers, incidents, event audit, overrides, and persistence status.
+
+
+## Production Go / No-Go Package
+
+SAVEN production release decision readiness is tracked through:
+
+- `docs/SAVEN_PRODUCTION_GO_NO_GO.md`
+- `npm run go-no-go:saven`
+
+The gate connects backend, monitoring, admin, production env, production URL smoke, rollback, post-launch, tag, worker, robot, emergency, and privacy evidence into one human release decision.
+
+
+## Production Launch Record
+
+SAVEN launch record readiness is tracked through:
+
+- `docs/SAVEN_PRODUCTION_LAUNCH_RECORD.md`
+- `npm run launch-record:saven`
+
+The launch record keeps production URL, backend mode, Supabase project, admin reviewer, rollback owner, first-hour watch owner, and safety sign-off tied to the final release decision.

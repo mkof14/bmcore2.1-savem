@@ -55,3 +55,8 @@ npm run ship:saven
 ## Human Review Note
 
 SAVEN post-launch review is an operational safety check. It is not clinical, legal, emergency-service, or medical-device certification.
+
+
+## Rollback Drill Package
+
+Before promotion and after any hold event, run `npm run rollback:saven` and use `docs/SAVEN_ROLLBACK_DRILL.md`. The drill checks hold triggers, first five minutes, admin evidence, hosting rollback guidance, and recovery proof.

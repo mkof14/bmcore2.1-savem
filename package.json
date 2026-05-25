@@ -57,7 +57,15 @@
     "manifest:saven": "node scripts/saven-final-ship-manifest-audit.mjs",
     "rc:saven": "node scripts/saven-release-candidate-audit.mjs",
     "github-release:saven": "node scripts/saven-github-release-audit.mjs",
-    "postlaunch:saven": "node scripts/saven-post-launch-ops-audit.mjs"
+    "postlaunch:saven": "node scripts/saven-post-launch-ops-audit.mjs",
+    "hosting:saven": "node scripts/saven-hosting-deployment-audit.mjs",
+    "rollback:saven": "node scripts/saven-rollback-drill-audit.mjs",
+    "prod-env:saven": "node scripts/saven-production-env-gate.mjs",
+    "tag:saven": "node scripts/saven-final-release-tag-gate.mjs",
+    "prod-smoke:saven": "node scripts/saven-production-url-smoke-gate.mjs",
+    "admin-deploy:saven": "node scripts/saven-admin-deploy-checklist-audit.mjs",
+    "go-no-go:saven": "node scripts/saven-production-go-no-go-audit.mjs",
+    "launch-record:saven": "node scripts/saven-production-launch-record-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

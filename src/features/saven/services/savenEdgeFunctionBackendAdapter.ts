@@ -19,7 +19,7 @@ import type {
 import type { SavenControlApiResult } from './savenControlApiMock';
 
 type SavenEdgeFunctionBackendAdapterOptions = {
-  functionUrl: string;
+  functionUrl: string; // resolved from VITE_SAVEN_EDGE_FUNCTION_URL by the gateway selector
   fetchImpl?: typeof fetch;
   getAuthToken?: () => string | undefined | Promise<string | undefined>;
 };

@@ -532,7 +532,6 @@ function SavenOpsAdminSection() {
         )}
       </section>
 
-      <section className="rounded-3xl border border-blue-500/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-event-audit="true">
       <section className="rounded-3xl border border-emerald-300/20 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-admin-persistence-status="true">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div>

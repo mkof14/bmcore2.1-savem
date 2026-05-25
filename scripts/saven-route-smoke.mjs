@@ -82,6 +82,14 @@ const sourceExpectations = [
   ['Final Ship Manifest', ['SAVEN Final Ship Manifest', 'manifest:saven', 'Voice And Worker Layer', 'Release Control']],
   ['Release Candidate Snapshot', ['SAVEN Release Candidate Snapshot', 'rc:saven', 'Go / Hold Review', 'GitHub Release Prep']],
   ['GitHub Release Package', ['SAVEN GitHub Release Notes', 'github-release:saven', 'bmcore2.1-savem-rc1', 'Production Holds']],
+  ['Hosting Deployment Package', ['SAVEN Hosting Deployment Package', 'hosting:saven', 'Vercel Setup', 'Promotion Gate']],
+  ['Rollback Drill Package', ['SAVEN Rollback Drill Package', 'rollback:saven', 'Immediate Hold Triggers', 'Recovery Proof']],
+  ['Production Env Gate', ['SAVEN Production Environment Gate', 'prod-env:saven', 'Production Edge Mode', 'Production Hold Rules']],
+  ['Final Release Tag Gate', ['SAVEN Final Release Tag Gate', 'tag:saven', 'Required Local Proof', 'Tag Hold Rules']],
+  ['Production URL Smoke Gate', ['SAVEN Production URL Smoke Gate', 'prod-smoke:saven', 'Live URL Mode', 'Hold Rules']],
+  ['BioMath Admin Deploy Checklist', ['SAVEN BioMath Admin Deploy Checklist', 'admin-deploy:saven', 'Admin Surface Contract', 'Admin Hold Rules']],
+  ['Production Go No-Go Package', ['SAVEN Production Go / No-Go Package', 'go-no-go:saven', 'Decision States', 'Non-Negotiable Safety Holds']],
+  ['Production Launch Record', ['SAVEN Production Launch Record', 'launch-record:saven', 'Launch Identity', 'Safety Sign-Off']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 

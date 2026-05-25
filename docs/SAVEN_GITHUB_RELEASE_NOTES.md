@@ -58,3 +58,38 @@ npm run github-release:saven
 ## Post-Launch Ops
 
 After deployment, use `docs/SAVEN_POST_LAUNCH_OPS.md` and run `npm run postlaunch:saven` to check first 15 minutes, first hour, day 1, rollback triggers, and Admin Ops review.
+
+
+## Rollback Drill
+
+Before tagging or promoting production, run `npm run rollback:saven`. Use `docs/SAVEN_ROLLBACK_DRILL.md` for hold triggers, first five minutes, production rollback actions, and recovery proof.
+
+
+## Production Environment Gate
+
+Run `npm run prod-env:saven` before tagging. For production promotion, run it with `SAVEN_DEPLOY_TARGET=production` and real public env variables to block local backend mode or missing backend URLs.
+
+
+## Final Release Tag Gate
+
+Before creating or pushing the release tag, run `npm run tag:saven`. The gate checks release notes, final ship manifest, production env gate, rollback drill, post-launch ops, Admin Ops, and command surface.
+
+
+## Production URL Smoke Gate
+
+After hosting is connected, run `SAVEN_PRODUCTION_URL=https://your-saven-domain.example npm run prod-smoke:saven` to verify live SAVEN routes over HTTPS.
+
+
+## BioMath Admin Deploy Checklist
+
+Run `npm run admin-deploy:saven` before production promotion. It verifies that SAVEN Ops is present inside BioMath Core Admin with launch control, evidence, monitoring, alerts, workers, incidents, audit, overrides, and persistence status.
+
+
+## Production Go / No-Go Package
+
+Run `npm run go-no-go:saven` before production promotion. The gate separates `GO`, `HOLD`, and `RC ONLY` states and keeps safety holds visible.
+
+
+## Production Launch Record
+
+Run `npm run launch-record:saven` and fill `docs/SAVEN_PRODUCTION_LAUNCH_RECORD.md` before production promotion. Default decision remains `RC ONLY` until production URL, backend, reviewers, rollback owner, and first-hour watch owner are recorded.

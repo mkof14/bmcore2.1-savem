@@ -194,6 +194,57 @@ npm run github-release:saven
 
 Use `docs/SAVEN_GITHUB_RELEASE_NOTES.md` and `docs/SAVEN_GITHUB_RELEASE_CHECKLIST.md` when preparing the candidate tag or GitHub release.
 
+## Production Launch Record
+
+Run:
+
+```zsh
+npm run launch-record:saven
+```
+
+Use `docs/SAVEN_PRODUCTION_LAUNCH_RECORD.md` to record release tag, production URL, backend mode, Supabase project, reviewer names, rollback owner, first-hour watch owner, and current `GO`, `HOLD`, or `RC ONLY` decision.
+
+## Production Go / No-Go Package
+
+Run:
+
+```zsh
+npm run go-no-go:saven
+```
+
+Use `docs/SAVEN_PRODUCTION_GO_NO_GO.md` as the final operator decision layer before production promotion. It separates `GO`, `HOLD`, and `RC ONLY` states.
+
+## BioMath Admin Deploy Checklist
+
+Run:
+
+```zsh
+npm run admin-deploy:saven
+```
+
+Use `docs/SAVEN_BIOMATH_ADMIN_DEPLOY_CHECKLIST.md` before promotion to verify that SAVEN launch control, monitoring, alerts, evidence, workers, incidents, audit, overrides, and persistence are visible inside BioMath Core Admin.
+
+## Production URL Smoke Gate
+
+Run:
+
+```zsh
+npm run prod-smoke:saven
+SAVEN_PRODUCTION_URL=https://your-saven-domain.example npm run prod-smoke:saven
+```
+
+Use `docs/SAVEN_PRODUCTION_URL_SMOKE_GATE.md` after Vercel or production hosting is connected. Without `SAVEN_PRODUCTION_URL`, it validates the package in review mode. With the URL, it checks live SAVEN routes over HTTPS.
+
+## Final Release Tag Gate
+
+Run:
+
+```zsh
+npm run tag:saven
+```
+
+Use `docs/SAVEN_FINAL_RELEASE_TAG_GATE.md` before creating or pushing a release tag. The gate proves release notes, final manifest, hosting, production env, rollback, post-launch ops, Admin Ops, and command surface are present.
+
 ## GitHub And Hosting Steps
 
 1. Push the current branch to `savem-origin/main`.
@@ -271,6 +322,16 @@ npm run launch:saven
 
 Launch Control summarizes SAVEN release gates into a `go` or `hold` decision before production handoff.
 
+## Hosting Deployment Package
+
+Run:
+
+```zsh
+npm run hosting:saven
+```
+
+Use `docs/SAVEN_HOSTING_DEPLOYMENT_PACKAGE.md` for Vercel setup, environment variables, promotion gate, rollback, and production holds.
+
 ## Post-Launch Ops Package
 
 Run:
@@ -280,6 +341,26 @@ npm run postlaunch:saven
 ```
 
 Use `docs/SAVEN_POST_LAUNCH_OPS.md` for first 15 minutes, first hour, day 1, rollback triggers, and operator review after deployment.
+
+## Production Environment Gate
+
+Run:
+
+```zsh
+npm run prod-env:saven
+```
+
+For strict production verification, run with `SAVEN_DEPLOY_TARGET=production` and the real Vercel/Supabase public variables. Use `docs/SAVEN_PRODUCTION_ENV_GATE.md` to confirm Edge or HTTP mode before promotion.
+
+## Rollback Drill Package
+
+Run:
+
+```zsh
+npm run rollback:saven
+```
+
+Use `docs/SAVEN_ROLLBACK_DRILL.md` before production promotion and after any hold event. The rollback path is human-approved and keeps robot, emergency, privacy, and migration risk gated.
 
 ## Release Blockers
 
