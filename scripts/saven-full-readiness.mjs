@@ -30,6 +30,7 @@ const steps = [
   { label: 'Production release orchestrator', command: 'npm', args: ['run', 'production-release:saven'] },
   { label: 'Production evidence index', command: 'npm', args: ['run', 'evidence-index:saven'] },
   { label: 'Release operator brief', command: 'npm', args: ['run', 'operator-brief:saven'] },
+  { label: 'RC tag command package', command: 'npm', args: ['run', 'rc-tag:saven'] },
   { label: 'Admin launch control', command: 'npm', args: ['run', 'admin-launch:saven'] },
   { label: 'Admin evidence pack', command: 'npm', args: ['run', 'admin-evidence:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },

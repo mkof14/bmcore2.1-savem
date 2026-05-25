@@ -194,6 +194,17 @@ npm run github-release:saven
 
 Use `docs/SAVEN_GITHUB_RELEASE_NOTES.md` and `docs/SAVEN_GITHUB_RELEASE_CHECKLIST.md` when preparing the candidate tag or GitHub release.
 
+## RC Tag Command Package
+
+Run:
+
+```zsh
+npm run rc-tag:saven
+SAVEN_STRICT_TAG=1 npm run rc-tag:saven
+```
+
+Use `docs/SAVEN_RC_TAG_COMMANDS.md` before creating or pushing a release candidate tag.
+
 ## Release Operator Brief
 
 Run:

@@ -108,3 +108,8 @@ Run `npm run evidence-index:saven` and review `docs/SAVEN_PRODUCTION_EVIDENCE_IN
 ## Release Operator Brief
 
 Run `npm run operator-brief:saven` and review `docs/SAVEN_RELEASE_OPERATOR_BRIEF.md` before production promotion. The brief summarizes current decision, ready evidence, production holds, and next human actions.
+
+
+## RC Tag Command Package
+
+Run `npm run rc-tag:saven` before creating the release candidate tag. For the final pre-tag check, use `SAVEN_STRICT_TAG=1 npm run rc-tag:saven` after the working tree is clean.

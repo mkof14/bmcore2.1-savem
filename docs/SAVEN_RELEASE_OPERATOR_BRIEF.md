@@ -72,3 +72,8 @@ SAVEN_PRODUCTION_URL=https://your-saven-domain.example npm run prod-smoke:saven
 ## Short Handoff
 
 SAVEN is ready as a release candidate package. It is not ready for live production until the launch record is filled with real production URL, backend, Supabase, reviewer, rollback, and first-hour watch ownership.
+
+
+## RC Tag Command Package
+
+Run `npm run rc-tag:saven` before creating a release candidate tag. Use `SAVEN_STRICT_TAG=1 npm run rc-tag:saven` only after the working tree is clean.

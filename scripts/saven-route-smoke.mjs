@@ -93,6 +93,7 @@ const sourceExpectations = [
   ['Production Release Orchestrator', ['SAVEN Production Release Orchestrator', 'production-release:saven', 'Release Sequence', 'Final Human Decision']],
   ['Production Evidence Index', ['SAVEN Production Evidence Index', 'evidence-index:saven', 'Evidence Map', 'Production Holds']],
   ['Release Operator Brief', ['SAVEN Release Operator Brief', 'operator-brief:saven', 'Current Decision', 'Short Handoff']],
+  ['RC Tag Command Package', ['SAVEN RC Tag Command Package', 'rc-tag:saven', 'Suggested RC Tag', 'Tag Holds']],
   ['Final Readiness Report', ['SAVEN Final Readiness Report']],
 ];
 
