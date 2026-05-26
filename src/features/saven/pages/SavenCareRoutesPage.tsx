@@ -18,7 +18,7 @@ function StatusPill({ label, tone }: { label: string; tone: Tone }) {
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
     </section>
@@ -29,7 +29,7 @@ function LayeredPanel({ title, text, items }: { title: string; text: string; ite
   return (
     <article className="rounded-3xl border border-white/70 bg-white/78 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-slate-950/58">
       <h4 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h4>
-      <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{text}</p>
+      <p className="mt-2 text-base leading-6 text-slate-600 dark:text-slate-300">{text}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {items.map((item) => (
           <span key={item} className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-500/10 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/20">{item}</span>
@@ -141,12 +141,12 @@ export function SavenCareRoutes() {
 
       <section className="grid gap-4 rounded-[2rem] border border-cyan-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-executor-command="care">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100/70">Executor command rail</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-cyan-100/70">Executor command rail</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Route a human, not a page.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">Care routes start as a command and stop at the right human gate.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Care routes start as a command and stop at the right human gate.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, request nurse follow-up and send the recovery context.</p>
           <p className="mt-2 text-sm text-cyan-100">Target: Nurse Olivia Grant</p>
         </div>
@@ -162,7 +162,7 @@ export function SavenCareRoutes() {
         <div className="relative grid gap-3 lg:grid-cols-4">
           {['Need signal', 'Route packet', 'Human gate', 'Audit trail'].map((label, index) => (
             <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.09] px-4 py-3 text-sm font-semibold text-white shadow-sm">
-              <span className="mb-2 inline-flex rounded-full bg-white/12 px-2.5 py-1 text-[11px] text-white ring-1 ring-white/10">0{index + 1}</span>
+              <span className="mb-2 inline-flex rounded-full bg-white/12 px-2.5 py-1 text-xs text-white ring-1 ring-white/10">0{index + 1}</span>
               <p>{label}</p>
             </div>
           ))}
@@ -172,9 +172,9 @@ export function SavenCareRoutes() {
       <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_16%_16%,rgba(0,180,255,0.18),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,178,54,0.18),transparent_28%),radial-gradient(circle_at_72%_88%,rgba(16,185,129,0.15),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.95),rgba(240,249,255,0.8),rgba(255,247,237,0.76))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_16%_16%,rgba(0,180,255,0.24),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,178,54,0.15),transparent_28%),radial-gradient(circle_at_72%_88%,rgba(16,185,129,0.12),transparent_30%),linear-gradient(135deg,rgba(3,7,18,0.98),rgba(7,20,39,0.9),rgba(35,19,7,0.68))] dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Escalation map</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Escalation map</p>
             <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">One map for caregiver, family, clinical, and urgent paths.</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Every route carries reason, context, proof state, and the human gate.</p>
+            <p className="mt-2 max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300">Every route carries reason, context, proof state, and the human gate.</p>
           </div>
           <StatusPill tone="gold" label="Local only" />
         </div>
@@ -229,9 +229,9 @@ export function SavenCareRoutes() {
           <div className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Route packet</p>
+                <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Route packet</p>
                 <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">{selectedContact.name}</h3>
-                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">{selectedContact.route}</p>
+                <p className="mt-2 max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300">{selectedContact.route}</p>
               </div>
               <StatusPill tone={selectedContact.role === 'emergency' ? 'gold' : 'green'} label={selectedContact.role === 'emergency' ? 'Needs confirmation' : 'Ready to prepare'} />
             </div>
@@ -244,14 +244,14 @@ export function SavenCareRoutes() {
             <div className="mt-5 grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
               <div className="rounded-3xl bg-slate-950 p-4 text-white shadow-inner ring-1 ring-white/10">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100">Dispatch command</p>
+                  <p className="text-sm font-semibold tracking-[0.06em] text-blue-100">Dispatch command</p>
                   <span className="rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-100 ring-1 ring-blue-300/20">Ready packet</span>
                 </div>
                 <p className="mt-3 text-sm leading-7 text-slate-200">{selectedRouteCommand}</p>
               </div>
 
               <div className="rounded-3xl border border-white/70 bg-[#f7f5f1] p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/70">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Confirmation mode</p>
+                <p className="text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-400">Confirmation mode</p>
                 <div className="mt-3 grid grid-cols-2 gap-2">
                   {(['prepare', 'confirm'] as const).map((mode) => (
                     <button
@@ -265,13 +265,13 @@ export function SavenCareRoutes() {
                     </button>
                   ))}
                 </div>
-                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{selectedContact.role === 'emergency' ? 'Emergency remains human-confirmed only.' : 'Prepare saves the route; confirm simulates human approval in local mode.'}</p>
+                <p className="mt-2 text-base leading-6 text-slate-600 dark:text-slate-300">{selectedContact.role === 'emergency' ? 'Emergency remains human-confirmed only.' : 'Prepare saves the route; confirm simulates human approval in local mode.'}</p>
               </div>
             </div>
 
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               <label className="block rounded-3xl border border-white/70 bg-white/78 p-4 shadow-sm dark:border-white/10 dark:bg-slate-900/70">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Need signal</span>
+                <span className="text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-400">Need signal</span>
                 <textarea
                   value={routeReason}
                   onChange={(event) => setRouteReason(event.target.value)}
@@ -279,7 +279,7 @@ export function SavenCareRoutes() {
                 />
               </label>
               <label className="block rounded-3xl border border-white/70 bg-white/78 p-4 shadow-sm dark:border-white/10 dark:bg-slate-900/70">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Context attached</span>
+                <span className="text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-400">Context attached</span>
                 <textarea
                   value={routeSummary}
                   onChange={(event) => setRouteSummary(event.target.value)}
@@ -290,14 +290,14 @@ export function SavenCareRoutes() {
 
             {structuredRequest && (
               <div className="mt-4 rounded-3xl bg-slate-950 p-4 text-white shadow-inner ring-1 ring-white/10">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-100">Gateway packet</p>
+                <p className="text-sm font-semibold tracking-[0.06em] text-emerald-100">Gateway packet</p>
                 <pre className="mt-3 overflow-x-auto text-xs leading-6 text-slate-200">{JSON.stringify(structuredRequest, null, 2)}</pre>
               </div>
             )}
           </div>
 
           <aside className="rounded-[2rem] border border-white/70 bg-[#f7f5f1] p-6 shadow-sm dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Confirmation gate</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Confirmation gate</p>
             <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">No route jumps the human gate.</h3>
             <div className="mt-5 space-y-3">
               {routeSteps.map((step, index) => (
@@ -305,7 +305,7 @@ export function SavenCareRoutes() {
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-blue-600 text-sm font-semibold text-white shadow-lg shadow-blue-950/20">{index + 1}</span>
                   <div>
                     <p className="text-sm font-semibold text-slate-950 dark:text-white">{step.label}</p>
-                    <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{step.detail}</p>
+                    <p className="mt-1 text-base leading-6 text-slate-600 dark:text-slate-300">{step.detail}</p>
                   </div>
                 </div>
               ))}

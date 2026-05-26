@@ -16,7 +16,7 @@ function StatusPill({ label, tone }: { label: string; tone: Tone }) {
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
     </section>
@@ -27,7 +27,7 @@ function LayeredPanel({ title, text, items }: { title: string; text: string; ite
   return (
     <article className="rounded-3xl border border-white/70 bg-white/78 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-slate-950/58">
       <h4 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h4>
-      <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{text}</p>
+      <p className="mt-2 text-base leading-6 text-slate-600 dark:text-slate-300">{text}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {items.map((item) => (
           <span key={item} className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-500/10 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/20">{item}</span>
@@ -58,12 +58,12 @@ export function EnvironmentSystem() {
 
       <section className="grid gap-4 rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[300px_minmax(0,1fr)_300px]" data-saven-gate-center="environment">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/70">Permission gate</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Permission gate</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Room rules before action.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">SAVEN checks room, helper, device, and robot permission before support moves.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">SAVEN checks room, helper, device, and robot permission before support moves.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, check hallway permission before assisted walking support.</p>
           <p className="mt-2 text-sm text-blue-100">Target: Hallway, Maya present, robot movement locked.</p>
         </div>
@@ -83,7 +83,7 @@ export function EnvironmentSystem() {
       <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_15%_18%,rgba(59,130,246,0.2),transparent_28%),radial-gradient(circle_at_82%_22%,rgba(16,185,129,0.16),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.92),rgba(239,246,255,0.78),rgba(255,247,237,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_15%_18%,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_82%_22%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(33,22,10,0.7))] dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Environment permissions</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Environment permissions</p>
             <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Rules change by room, risk, and available helper.</h3>
           </div>
           <StatusPill tone="blue" label="Home Recovery" />
@@ -103,10 +103,10 @@ export function EnvironmentSystem() {
                   <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70"><Icon className="h-5 w-5" /></span>
                   <h4 className="text-xl font-semibold">{rule.zone}</h4>
                 </div>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Allowed</p>
-                <p className="mt-2 text-sm leading-6 opacity-85">{rule.allowed}</p>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Restricted</p>
-                <p className="mt-2 text-sm leading-6 opacity-85">{rule.restricted}</p>
+                <p className="mt-4 text-sm font-semibold tracking-[0.06em] opacity-65">Allowed</p>
+                <p className="mt-2 text-base leading-6 opacity-85">{rule.allowed}</p>
+                <p className="mt-4 text-sm font-semibold tracking-[0.06em] opacity-65">Restricted</p>
+                <p className="mt-2 text-base leading-6 opacity-85">{rule.restricted}</p>
               </article>
             );
           })}
@@ -116,7 +116,7 @@ export function EnvironmentSystem() {
       <section className="rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Environment flow</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-blue-100">Environment flow</p>
             <h3 className="mt-2 text-3xl font-semibold tracking-tight">The home becomes a controlled support surface.</h3>
           </div>
           <StatusPill tone="green" label="Rules active" />
@@ -125,9 +125,9 @@ export function EnvironmentSystem() {
           {environmentFlow.map((item, index) => (
             <div key={item.label} className="rounded-3xl border border-white/10 bg-white/6 p-4 transition-all hover:-translate-y-0.5 hover:bg-white/9">
               <span className="grid h-9 w-9 place-items-center rounded-full bg-blue-500 text-sm font-semibold text-white">{index + 1}</span>
-              <p className="mt-4 text-sm font-semibold uppercase tracking-[0.16em] text-blue-100">{item.label}</p>
+              <p className="mt-4 text-sm font-semibold tracking-[0.08em] text-blue-100">{item.label}</p>
               <p className="mt-2 text-xl font-semibold">{item.value}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-300">{item.detail}</p>
+              <p className="mt-2 text-base leading-6 text-slate-300">{item.detail}</p>
             </div>
           ))}
         </div>

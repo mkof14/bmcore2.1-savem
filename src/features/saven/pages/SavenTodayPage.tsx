@@ -48,7 +48,7 @@ function InfoNote({ tone, title, text, className = '' }: { tone: 'blue' | 'gold'
   return (
     <div className={'rounded-3xl border p-4 shadow-sm ' + color + ' ' + className}>
       <p className="font-semibold">{title}</p>
-      <p className="mt-2 text-sm leading-6 opacity-85">{text}</p>
+      <p className="mt-2 text-base leading-6 opacity-85">{text}</p>
     </div>
   );
 }
@@ -76,7 +76,7 @@ function SummaryLine({ label, value }: { label: string; value?: string }) {
 function InfoTile({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-3xl border border-white/10 bg-white/[0.08] p-4 text-white shadow-sm ring-1 ring-white/10">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100/70">{label}</p>
+      <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">{label}</p>
       <p className="mt-2 font-semibold text-white">{value}</p>
     </div>
   );
@@ -279,9 +279,9 @@ function SavenLiveShiftBelt({ openPage }: { openPage: (pageId: 'app-support' | '
     <section className="overflow-hidden rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10">
       <div className="grid gap-5 xl:grid-cols-[310px_minmax(0,1fr)] xl:items-stretch">
         <div className="rounded-[1.6rem] border border-white/10 bg-black/22 p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/70">Live shift belt</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Live shift belt</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Anna is covered right now.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">One line for the current support truth: action, owner, proof, and next window.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">One line for the current support truth: action, owner, proof, and next window.</p>
           <button onClick={() => openPage('app-command')} className="mt-5 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
             Send voice command
           </button>
@@ -295,9 +295,9 @@ function SavenLiveShiftBelt({ openPage }: { openPage: (pageId: 'app-support' | '
               className="group min-h-[154px] rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4 text-left shadow-sm ring-1 ring-white/5 transition-all hover:-translate-y-0.5 hover:border-blue-300/35 hover:bg-white/[0.1] hover:shadow-xl hover:shadow-blue-950/20"
             >
               <span className={'block h-1.5 w-16 rounded-full bg-gradient-to-r ' + cell.tone} />
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{cell.label}</p>
+              <p className="mt-4 text-sm font-semibold tracking-[0.06em] text-slate-300">{cell.label}</p>
               <h4 className="mt-2 line-clamp-2 text-lg font-semibold leading-6 text-white">{cell.title}</h4>
-              <p className="mt-2 line-clamp-2 text-sm leading-5 text-slate-300">{cell.detail}</p>
+              <p className="mt-2 line-clamp-2 text-base leading-6 text-slate-300">{cell.detail}</p>
               <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue-100">
                 {cell.action}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -340,7 +340,7 @@ export function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeS
         <section className="space-y-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Today’s support shift</p>
+              <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Today’s support shift</p>
               <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Live handoffs</h2>
             </div>
             <button onClick={() => openPage('app-support')} className="group inline-flex items-center gap-2 rounded-full border border-white/70 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:text-blue-700 hover:shadow-md dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:text-slate-200 dark:hover:border-blue-300/30 dark:hover:text-blue-100">
@@ -455,9 +455,9 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
     <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.22),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(249,115,22,0.14),transparent_28%),radial-gradient(circle_at_78%_88%,rgba(16,185,129,0.16),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(255,247,237,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.28),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(249,115,22,0.12),transparent_28%),radial-gradient(circle_at_78%_88%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(33,22,10,0.66))] dark:ring-1 dark:ring-white/10">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">End-to-end scenario</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">End-to-end scenario</p>
           <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">One support event from need to continuity.</h3>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">This is the product spine for SAVEN: every page supports one shared operational story instead of disconnected demo panels.</p>
+          <p className="mt-2 max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300">This is the product spine for SAVEN: every page supports one shared operational story instead of disconnected demo panels.</p>
         </div>
         <StatusPill tone="green" label={'Step ' + (activeStep + 1) + ' of ' + scenarioSteps.length} />
       </div>
@@ -488,9 +488,9 @@ function SavenEndToEndScenario({ openPage }: { openPage: (pageId: 'app-support' 
         </div>
 
         <aside className={'rounded-[2rem] border p-5 shadow-sm transition-all ' + toneClass}>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] opacity-65">{active.label}</p>
+          <p className="text-sm font-semibold tracking-[0.06em] opacity-65">{active.label}</p>
           <h4 className="mt-2 text-2xl font-semibold tracking-tight">{active.title}</h4>
-          <p className="mt-3 text-sm leading-6 opacity-85">{active.detail}</p>
+          <p className="mt-2 text-base leading-6 opacity-85">{active.detail}</p>
           <div className="mt-5 rounded-2xl bg-slate-950 p-4 text-sm font-semibold leading-6 text-white shadow-inner ring-1 ring-white/10">{active.command}</div>
           <p className="mt-4 rounded-2xl bg-white/78 p-3 text-sm font-semibold leading-6 shadow-sm dark:bg-slate-950/70">{active.result}</p>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -549,9 +549,9 @@ function TodayOperationalClarity() {
     <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_84%_18%,rgba(249,115,22,0.14),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(255,247,237,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.23),transparent_30%),radial-gradient(circle_at_84%_18%,rgba(249,115,22,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(33,22,10,0.66))] dark:ring-1 dark:ring-white/10">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Today operational clarity</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Today operational clarity</p>
           <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">What needs attention right now?</h3>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Today should show the operating truth: owner, proof, continuity impact, and next action.</p>
+          <p className="mt-2 max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300">Today should show the operating truth: owner, proof, continuity impact, and next action.</p>
         </div>
         <StatusPill tone="gold" label="1 open proof" />
       </div>
@@ -571,7 +571,7 @@ function TodayOperationalClarity() {
                 <span className="rounded-full bg-white/82 px-3 py-1 text-xs font-semibold shadow-sm dark:bg-slate-950/70">{row.label}</span>
               </div>
               <h4 className="mt-4 text-xl font-semibold">{row.value}</h4>
-              <div className="mt-4 space-y-2 text-sm leading-6 opacity-85">
+              <div className="mt-4 space-y-2 text-base leading-6 opacity-85">
                 <p><span className="font-semibold">Owner:</span> {row.owner}</p>
                 <p><span className="font-semibold">Proof:</span> {row.proof}</p>
                 <p><span className="font-semibold">Impact:</span> {row.impact}</p>
@@ -597,7 +597,7 @@ function TimelineOperationalClarity() {
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Timeline clarity</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Timeline clarity</p>
           <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Each event should explain proof and continuity.</h3>
         </div>
         <StatusPill tone="green" label="Explainable timeline" />
@@ -632,7 +632,7 @@ function HumanSupportHeader({ setup }: { setup: LifeSetupState }) {
     <section className="rounded-[2rem] border border-blue-300/18 bg-[radial-gradient(circle_at_12%_16%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_86%_18%,rgba(249,115,22,0.13),transparent_28%),linear-gradient(135deg,#07111f,#0b1728_58%,#20160b)] p-7 text-white shadow-xl shadow-slate-950/18 backdrop-blur-xl ring-1 ring-white/10">
       <div className="grid gap-7 xl:grid-cols-[1fr_420px] xl:items-end">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-100/70">Person status</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-blue-100/70">Person status</p>
           <h2 className="mt-3 text-5xl font-semibold tracking-tight text-white">{setup.preferredName || setup.firstName} Roberts</h2>
           <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-200">
             {setup.supportMode}, {setup.mobility.toLowerCase()}, {setup.rhythm.toLowerCase()}.
@@ -681,7 +681,7 @@ function NeedsAttentionPanel() {
           <AlertCircle className="h-5 w-5" />
         </span>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-200">Needs Attention</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-amber-700 dark:text-amber-200">Needs Attention</p>
           <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">3 open items</h3>
         </div>
       </div>
@@ -699,7 +699,7 @@ function NeedsAttentionPanel() {
 function VerifiedTimelineCompact() {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl transition-all hover:border-blue-200 dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Verified Human Support Timeline</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Verified Human Support Timeline</p>
       <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">What already happened</h2>
       <div className="mt-6 space-y-3">
         {verifiedActions.slice(0, 4).map((event) => (
@@ -731,9 +731,9 @@ function NextSupportWindow() {
       <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-blue-400/20 blur-3xl" />
       <div className="absolute -bottom-12 left-8 h-28 w-40 rounded-full bg-amber-300/16 blur-3xl" />
       <div className="relative">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Next support window</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-blue-100">Next support window</p>
       <h3 className="mt-4 text-3xl font-semibold tracking-tight">Rest period check</h3>
-      <p className="mt-3 text-sm leading-6 text-slate-300">15:00, Daniel Roberts, family confirmed.</p>
+      <p className="mt-2 text-base leading-6 text-slate-300">15:00, Daniel Roberts, family confirmed.</p>
       <div className="mt-6 h-2 overflow-hidden rounded-full bg-white/10">
         <div className="h-full w-2/3 rounded-full bg-gradient-to-r from-blue-300 to-amber-300" />
       </div>
@@ -794,9 +794,9 @@ function CareContactNetwork({ compact = false }: { compact?: boolean }) {
     <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_15%_20%,rgba(59,130,246,0.22),transparent_28%),radial-gradient(circle_at_82%_16%,rgba(16,185,129,0.16),transparent_28%),radial-gradient(circle_at_74%_86%,rgba(249,115,22,0.16),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(255,247,237,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_15%_20%,rgba(59,130,246,0.28),transparent_28%),radial-gradient(circle_at_82%_16%,rgba(16,185,129,0.13),transparent_28%),radial-gradient(circle_at_74%_86%,rgba(249,115,22,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(33,22,10,0.68))] dark:ring-1 dark:ring-white/10">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Care connection network</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Care connection network</p>
           <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Care circle online.</h3>
-          {!compact && <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">Choose the right person fast. SAVEN keeps the path visible.</p>}
+          {!compact && <p className="mt-2 max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300">Choose the right person fast. SAVEN keeps the path visible.</p>}
         </div>
         <StatusPill tone="green" label="Care contacts ready" />
       </div>
@@ -816,7 +816,7 @@ function CareContactNetwork({ compact = false }: { compact?: boolean }) {
               <article key={contact.role} className={'group min-w-0 rounded-3xl border p-4 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ' + tone}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.12em] opacity-65">{contact.role}</p>
+                    <p className="text-sm font-semibold tracking-[0.06em] opacity-65">{contact.role}</p>
                     <h4 className="mt-2 break-words text-lg font-semibold leading-6">{contact.name}</h4>
                   </div>
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-white/70 transition-transform group-hover:scale-105 dark:bg-slate-950/70 dark:ring-white/10">
@@ -824,7 +824,7 @@ function CareContactNetwork({ compact = false }: { compact?: boolean }) {
                   </span>
                 </div>
                 <p className="mt-3 inline-flex max-w-full rounded-2xl bg-white/82 px-3 py-1.5 text-xs font-semibold leading-5 shadow-sm dark:bg-slate-950/70">{contact.availability}</p>
-                {!compact && <p className="mt-4 text-sm leading-6 opacity-85">{contact.trigger}</p>}
+                {!compact && <p className="mt-3 text-base leading-6 opacity-85">{contact.trigger}</p>}
                 <button className="mt-4 min-h-11 w-full rounded-2xl bg-slate-950 px-4 py-2 text-sm font-semibold leading-5 text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-slate-950 dark:hover:bg-blue-100">
                   {contact.action}
                 </button>
@@ -835,7 +835,7 @@ function CareContactNetwork({ compact = false }: { compact?: boolean }) {
 
         {!compact && (
           <aside className="rounded-[2rem] border border-white/10 bg-slate-950 p-5 text-white shadow-xl shadow-slate-950/20">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Escalation ladder</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-blue-100">Escalation ladder</p>
             <div className="mt-5 space-y-3">
               {escalationSteps.map((step, index) => (
                 <div key={step.label} className="grid grid-cols-[38px_minmax(0,1fr)] gap-3 rounded-3xl border border-white/10 bg-white/[0.06] p-3">
@@ -843,7 +843,7 @@ function CareContactNetwork({ compact = false }: { compact?: boolean }) {
                   <div>
                     <p className="font-semibold text-white">{step.label}</p>
                     <p className="mt-1 text-sm text-slate-300">{step.target}</p>
-                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{step.time}</p>
+                    <p className="mt-1 text-sm font-semibold tracking-[0.06em] text-slate-500">{step.time}</p>
                   </div>
                 </div>
               ))}

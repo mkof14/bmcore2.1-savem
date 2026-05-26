@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
     </section>
@@ -106,9 +106,9 @@ export function SavenFAQ() {
 
       <section className="grid gap-4 rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[300px_minmax(0,1fr)]" data-saven-practice-layer="faq">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/70">Ask SAVEN, then check proof</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Ask SAVEN, then check proof</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">FAQ becomes a practice desk.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">Use these as first commands when training a caregiver, nurse, or family member.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Use these as first commands when training a caregiver, nurse, or family member.</p>
         </div>
         <div className="grid gap-3 lg:grid-cols-3">
           {[
@@ -117,7 +117,7 @@ export function SavenFAQ() {
             ['Physical gate', 'Hey SAVEN, can the robot help here?', 'Checks room, approval, telemetry'],
           ].map(([label, command, result]) => (
             <div key={label} className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{label}</p>
+              <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">{label}</p>
               <p className="mt-2 text-sm font-semibold leading-6 text-white">{command}</p>
               <p className="mt-2 text-xs leading-5 text-blue-100">{result}</p>
             </div>
@@ -132,12 +132,12 @@ export function SavenFAQ() {
               <img src="/saven-mark.png" alt="" className="h-full w-full object-cover" />
             </span>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">SAVEN knowledge base</p>
+              <p className="text-sm font-semibold tracking-[0.06em] text-blue-100">SAVEN knowledge base</p>
               <h3 className="mt-1 text-2xl font-semibold">Operator answers</h3>
             </div>
           </div>
           <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Selected topic</p>
+            <p className="text-sm font-semibold tracking-[0.06em] text-slate-400">Selected topic</p>
             <h4 className="mt-3 text-3xl font-semibold tracking-tight">{activeFaq.question}</h4>
             <p className="mt-4 text-sm leading-7 text-slate-300">{activeFaq.answer}</p>
             <div className="mt-5 h-2 overflow-hidden rounded-full bg-slate-900">
@@ -154,7 +154,7 @@ export function SavenFAQ() {
               <article key={faq.question} className={(isOpen ? tone + ' shadow-lg' : 'border-white/70 bg-white/82 dark:border-white/10 dark:bg-slate-950/65') + ' rounded-3xl border p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl'}>
                 <button onClick={() => setOpenFaq(isOpen ? -1 : index)} className="flex w-full items-center justify-between gap-4 text-left">
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">{faq.group}</p>
+                    <p className="text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-400">{faq.group}</p>
                     <h3 className="mt-2 text-xl font-semibold text-slate-950 dark:text-white">{faq.question}</h3>
                   </div>
                   <span className={(isOpen ? 'rotate-90 bg-slate-950 text-white dark:bg-white dark:text-slate-950' : 'bg-slate-100 text-slate-500 dark:bg-slate-900 dark:text-slate-300') + ' grid h-9 w-9 shrink-0 place-items-center rounded-full transition-all'}>

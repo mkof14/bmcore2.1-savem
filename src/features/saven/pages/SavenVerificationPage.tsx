@@ -17,7 +17,7 @@ function StatusPill({ label, tone }: { label: string; tone: Tone }) {
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
     </section>
@@ -87,12 +87,12 @@ export function VerificationCenter() {
 
       <section className="grid gap-4 rounded-[2rem] border border-emerald-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[300px_minmax(0,1fr)_300px]" data-saven-gate-center="verification">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100/70">Proof gate</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-emerald-100/70">Proof gate</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Continuity waits for proof.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">A task closes only when the right person or signal confirms reality.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">A task closes only when the right person or signal confirms reality.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, verify the walking session with Maya and wearable motion trend.</p>
           <p className="mt-2 text-sm text-emerald-100">Target: Assisted walking session, continuity +2 after proof.</p>
         </div>
@@ -107,7 +107,7 @@ export function VerificationCenter() {
         <div className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(16,185,129,0.15),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(240,253,244,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_14%_18%,rgba(59,130,246,0.23),transparent_30%),radial-gradient(circle_at_88%_18%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(6,34,24,0.62))] dark:ring-1 dark:ring-white/10">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Open verifications</p>
+              <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Open verifications</p>
               <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">What is waiting for confirmation?</h3>
             </div>
             <StatusPill tone="gold" label="2 open" />
@@ -130,7 +130,7 @@ export function VerificationCenter() {
                 >
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-65">{item.status}</p>
+                      <p className="text-sm font-semibold tracking-[0.06em] opacity-65">{item.status}</p>
                       <h4 className="mt-2 text-xl font-semibold">{item.task}</h4>
                       <p className="mt-2 text-sm leading-6 opacity-80">{item.proof}</p>
                     </div>
@@ -148,7 +148,7 @@ export function VerificationCenter() {
               <FileCheck2 className="h-6 w-6" />
             </span>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100">Selected proof</p>
+              <p className="text-sm font-semibold tracking-[0.06em] text-emerald-100">Selected proof</p>
               <h3 className="mt-1 text-2xl font-semibold">{selectedProof.task}</h3>
             </div>
           </div>
@@ -158,7 +158,7 @@ export function VerificationCenter() {
             <SummaryLine label="Continuity impact" value={selectedProof.impact} />
             <SummaryLine label="Next action" value={selectedProof.next} />
           </div>
-          <div className="mt-6 rounded-3xl bg-white/7 p-4 text-sm leading-6 text-slate-300 ring-1 ring-white/10">
+          <div className="mt-6 rounded-3xl bg-white/7 p-4 text-base leading-6 text-slate-300 ring-1 ring-white/10">
             Backend event shape: taskId, proofType, verifierId, evidenceSource, status, continuityImpact, nextAction.
           </div>
         </aside>
@@ -178,7 +178,7 @@ export function VerificationCenter() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="text-2xl font-semibold">{policy.label}</h3>
-                  <p className="mt-3 text-sm leading-6 opacity-85">{policy.proof}</p>
+                  <p className="mt-2 text-base leading-6 opacity-85">{policy.proof}</p>
                 </div>
                 <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70"><Icon className="h-5 w-5" /></span>
               </div>

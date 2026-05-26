@@ -23,7 +23,7 @@ function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; t
     <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-7 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <div className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full bg-blue-200/20 blur-3xl dark:bg-slate-950/70 dark:ring-1 dark:ring-blue-300/15" />
       <div className="relative">
-      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
       </div>
@@ -53,7 +53,7 @@ function TimelineOperationalClarity() {
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Timeline clarity</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Timeline clarity</p>
           <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Each event should explain proof and continuity.</h3>
         </div>
         <StatusPill tone="green" label="Explainable timeline" />
@@ -144,9 +144,9 @@ function EmergencyEscalationCenter({ compact = false }: { compact?: boolean }) {
     <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.2),transparent_28%),radial-gradient(circle_at_84%_22%,rgba(239,68,68,0.16),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.76),rgba(255,241,242,0.7))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_18%_18%,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_84%_22%,rgba(239,68,68,0.14),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(45,16,16,0.58))] dark:ring-1 dark:ring-white/10">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Escalation center</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Escalation center</p>
           <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">SAVEN separates normal support from urgent escalation.</h3>
-          {!compact && <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">The goal is to reduce panic: clear levels, clear route, clear next action. Real emergency calling is intentionally not connected in this development version.</p>}
+          {!compact && <p className="mt-2 max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300">The goal is to reduce panic: clear levels, clear route, clear next action. Real emergency calling is intentionally not connected in this development version.</p>}
         </div>
         <StatusPill tone="gold" label="Escalation rules" />
       </div>
@@ -166,8 +166,8 @@ function EmergencyEscalationCenter({ compact = false }: { compact?: boolean }) {
                 {row.tone === 'red' && <span className="h-3 w-3 animate-pulse rounded-full bg-red-500 shadow-[0_0_14px_rgba(239,68,68,0.8)]" />}
               </div>
               <h4 className="mt-4 text-xl font-semibold">{row.level}</h4>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] opacity-65">{row.route}</p>
-              {!compact && <p className="mt-4 text-sm leading-6 opacity-85">{row.trigger}</p>}
+              <p className="mt-1 text-sm font-semibold tracking-[0.06em] opacity-65">{row.route}</p>
+              {!compact && <p className="mt-3 text-base leading-6 opacity-85">{row.trigger}</p>}
               <p className="mt-4 rounded-2xl bg-white/72 p-3 text-sm font-semibold leading-6 shadow-sm dark:bg-slate-950/70">{row.response}</p>
             </article>
           );
@@ -184,12 +184,12 @@ export function HumanSupportTimeline() {
 
       <section className="grid gap-4 rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-human-rail="timeline">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/70">Timeline rail</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Timeline rail</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">History stays human-readable.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">Every event says what happened, who confirmed it, and what changed next.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Every event says what happened, who confirmed it, and what changed next.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, explain today&apos;s verified support history.</p>
           <p className="mt-2 text-sm text-blue-100">Target: proof trail, not raw logs.</p>
         </div>
@@ -239,12 +239,12 @@ export function SupportCircle() {
 
       <section className="grid gap-4 rounded-[2rem] border border-emerald-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-human-rail="circle">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100/70">Circle rail</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-emerald-100/70">Circle rail</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Responsibility has shape.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">SAVEN shows who acts first, who is fallback, and who verifies reality.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">SAVEN shows who acts first, who is fallback, and who verifies reality.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, show who should handle the next recovery task.</p>
           <p className="mt-2 text-sm text-emerald-100">Target: Maya first, Daniel fallback, nurse if unresolved.</p>
         </div>
@@ -305,7 +305,7 @@ export function SupportCircle() {
                   </span>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-slate-950 dark:text-slate-100">{node.label}</p>
-                    <p className="mt-1 truncate text-xs uppercase tracking-[0.16em] opacity-70">{node.type}</p>
+                    <p className="mt-1 truncate text-xs tracking-[0.08em] opacity-70">{node.type}</p>
                   </div>
                 </div>
               </div>
@@ -325,7 +325,7 @@ export function SupportCircle() {
                 <p className="text-sm font-semibold">{step.label}</p>
                 <span className="grid h-7 w-7 place-items-center rounded-full bg-white/70 text-xs font-semibold dark:bg-slate-950/70">{index + 1}</span>
               </div>
-              <p className="mt-3 text-sm leading-6 opacity-80">{step.text}</p>
+              <p className="mt-2 text-base leading-6 opacity-80">{step.text}</p>
             </div>
           );
         })}
@@ -346,7 +346,7 @@ function CirclePermissionsMatrix() {
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Circle permissions</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Circle permissions</p>
           <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Who can do what?</h3>
         </div>
         <StatusPill tone="blue" label="Permission matrix" />
@@ -355,8 +355,8 @@ function CirclePermissionsMatrix() {
         {rows.map(([role, action, limit]) => (
           <article key={role} className="rounded-3xl border border-blue-200 bg-blue-50 p-4 text-blue-900 shadow-sm dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100">
             <p className="text-xl font-semibold">{role}</p>
-            <p className="mt-3 text-sm leading-6 opacity-85">{action}</p>
-            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] opacity-60">{limit}</p>
+            <p className="mt-2 text-base leading-6 opacity-85">{action}</p>
+            <p className="mt-2 text-sm font-semibold tracking-[0.06em] opacity-60">{limit}</p>
           </article>
         ))}
       </div>
@@ -371,12 +371,12 @@ export function RecoveryMode() {
 
       <section className="grid gap-4 rounded-[2rem] border border-amber-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-human-rail="recovery">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-100/70">Recovery rail</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-amber-100/70">Recovery rail</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">One next action at a time.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">Recovery mode lowers noise and keeps the next verified step visible.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Recovery mode lowers noise and keeps the next verified step visible.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, what is Anna&apos;s next recovery action?</p>
           <p className="mt-2 text-sm text-amber-100">Target: assisted walking, Maya owner, proof required.</p>
         </div>
@@ -390,7 +390,7 @@ export function RecoveryMode() {
       <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
         <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Current recovery action</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Current recovery action</p>
             <h3 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white">Assisted walking session</h3>
             <p className="mt-4 text-lg leading-8 text-slate-600 dark:text-slate-300">Maya Carter is responsible. Confirmation is required before continuity updates.</p>
           </div>

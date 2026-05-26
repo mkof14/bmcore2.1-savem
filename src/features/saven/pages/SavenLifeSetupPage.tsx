@@ -26,7 +26,7 @@ function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; t
     <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-7 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <div className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full bg-blue-200/20 blur-3xl dark:bg-slate-950/70 dark:ring-1 dark:ring-blue-300/15" />
       <div className="relative">
-      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
       </div>
@@ -38,7 +38,7 @@ function LayeredPanel({ title, text, items }: { title: string; text: string; ite
   return (
     <article className="group rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
       <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{text}</p>
+      <p className="mt-2 text-base leading-6 text-slate-600 dark:text-slate-300">{text}</p>
       <div className="mt-5 flex flex-wrap gap-2">
         {items.map((item) => (
           <span key={item} className="rounded-full bg-[#f7f5f1] px-3 py-1.5 text-xs font-semibold text-slate-600 dark:bg-slate-950/65 dark:text-slate-200 dark:ring-1 dark:ring-white/10">{item}</span>
@@ -117,7 +117,7 @@ export function LifeSetup({
           <div className="absolute -right-8 top-0 hidden h-52 w-52 rounded-full bg-blue-200/30 blur-3xl dark:bg-blue-400/12 md:block" />
           <div className="absolute bottom-0 left-10 hidden h-28 w-72 rounded-full bg-amber-200/24 blur-3xl dark:bg-amber-300/10 md:block" />
           <div className="relative">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Life Setup</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Life Setup</p>
             <h2 className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 dark:text-white">
               Build a real-life support profile in a few clear steps.
             </h2>
@@ -127,7 +127,7 @@ export function LifeSetup({
             <div className="mt-7 grid gap-3 md:grid-cols-4">
               {['Person', 'Life context', 'Support circle', 'Daily plan'].map((item, index) => (
                 <div key={item} className="group rounded-3xl border border-white/70 bg-white/72 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-white/90 hover:shadow-md dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:bg-slate-900/80">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">Part {index + 1}</p>
+                  <p className="text-sm font-semibold tracking-[0.06em] text-slate-400 dark:text-slate-500">Part {index + 1}</p>
                   <p className="mt-2 text-sm font-semibold text-slate-900 dark:text-white">{item}</p>
                   <div className="mt-3 h-1 rounded-full bg-gradient-to-r from-blue-300 via-amber-300 to-emerald-300 opacity-60 transition-opacity group-hover:opacity-100" />
                 </div>
@@ -143,9 +143,9 @@ export function LifeSetup({
 
         <section className="grid gap-4 rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[300px_minmax(0,1fr)_270px]" data-saven-life-setup-rail="true">
           <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-200">Setup command rail</p>
+            <p className="text-sm font-semibold tracking-[0.06em] text-blue-200">Setup command rail</p>
             <h3 className="mt-2 text-xl font-semibold">Create support by voice or touch.</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-300">SAVEN turns setup answers into daily support, people, devices, and proof.</p>
+            <p className="mt-2 text-base leading-6 text-slate-300">SAVEN turns setup answers into daily support, people, devices, and proof.</p>
           </div>
 
           <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/70 p-4">
@@ -298,7 +298,7 @@ function SupportProfileSummary({ setup }: { setup: LifeSetupState }) {
   return (
     <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/88 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#0b1726]/86">
       <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-blue-200/20 blur-3xl dark:bg-slate-950/70 dark:ring-1 dark:ring-blue-300/15" />
-      <p className="relative text-xs font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Live Review</p>
+      <p className="relative text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-400">Live Review</p>
       <h3 className="mt-3 text-2xl font-semibold text-slate-950 dark:text-white">{setup.preferredName || setup.firstName} Support Profile</h3>
       <div className="mt-5 rounded-3xl border border-slate-100 bg-[#f7f5f1] p-4 dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
         <div className="flex items-center gap-3">
@@ -377,7 +377,7 @@ function LifeSetupSection({
             <div className={`grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-sm font-semibold text-white shadow-lg ${dotClass}`}>{step}</div>
             <div className="min-w-0">
               <h3 className="text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h3>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">{subtitle}</p>
+              <p className="mt-2 max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300">{subtitle}</p>
             </div>
           </div>
           <div className="hidden h-12 min-w-28 rounded-full border border-white/70 bg-white/70 shadow-inner dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 lg:block" />
@@ -408,7 +408,7 @@ function OptionGroup({
           <span className="inline-flex w-fit items-center justify-center rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800 dark:bg-slate-950/70 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25">Single</span>
           <div>
             <h4 className="text-lg font-semibold leading-6 text-slate-950 dark:text-white">{title}</h4>
-            <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">{description}</p>
+            <p className="mt-1 max-w-3xl text-base leading-6 text-slate-600 dark:text-slate-300">{description}</p>
           </div>
         </div>
       </div>
@@ -441,7 +441,7 @@ function MultiOptionGroup({
           <span className="inline-flex w-fit items-center justify-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800 dark:bg-slate-950/70 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/25">{selected.length} selected</span>
           <div>
             <h4 className="text-lg font-semibold leading-6 text-slate-950 dark:text-white">{title}</h4>
-            <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">{description}</p>
+            <p className="mt-1 max-w-3xl text-base leading-6 text-slate-600 dark:text-slate-300">{description}</p>
           </div>
         </div>
       </div>

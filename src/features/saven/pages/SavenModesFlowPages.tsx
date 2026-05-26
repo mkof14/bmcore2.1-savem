@@ -59,7 +59,7 @@ function SavenLifecycleCommandStrip() {
     <section className="overflow-hidden rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10" data-saven-lifecycle-command="true">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">Lifecycle command strip</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Lifecycle command strip</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Every support task has the same spine.</h3>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-200">Need, owner, permission, proof, and continuity are always visible.</p>
         </div>
@@ -70,7 +70,7 @@ function SavenLifecycleCommandStrip() {
           <div key={label} className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4 ring-1 ring-white/5">
             <div className="flex items-center gap-3">
               <span className="grid h-8 w-8 place-items-center rounded-full bg-blue-600 text-xs font-semibold text-white">{index + 1}</span>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{label}</p>
+              <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">{label}</p>
             </div>
             <p className="mt-3 text-sm font-semibold leading-6 text-white">{command}</p>
             <p className="mt-2 text-xs leading-5 text-blue-100">{result}</p>
@@ -86,7 +86,7 @@ function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; t
     <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-7 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <div className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-full bg-blue-200/20 blur-3xl dark:bg-slate-950/70 dark:ring-1 dark:ring-blue-300/15" />
       <div className="relative">
-      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
       </div>
@@ -98,7 +98,7 @@ function LayeredPanel({ title, text, items }: { title: string; text: string; ite
   return (
     <article className="group rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30 dark:hover:bg-slate-900/80">
       <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">{title}</h3>
-      <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{text}</p>
+      <p className="mt-2 text-base leading-6 text-slate-600 dark:text-slate-300">{text}</p>
       <div className="mt-5 flex flex-wrap gap-2">
         {items.map((item) => (
           <span key={item} className="rounded-full bg-[#f7f5f1] px-3 py-1.5 text-xs font-semibold text-slate-600 dark:bg-slate-950/65 dark:text-slate-200 dark:ring-1 dark:ring-white/10">{item}</span>
@@ -142,9 +142,9 @@ export function DualModeArchitecture() {
             <div className="absolute -bottom-12 left-8 h-32 w-32 rounded-full bg-amber-300/18 blur-3xl" />
             <div className="relative flex h-full flex-col justify-between gap-6">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100">Shared Core</p>
+                <p className="text-sm font-semibold tracking-[0.06em] text-blue-100">Shared Core</p>
                 <h3 className="mt-3 text-3xl font-semibold tracking-tight">Execution core</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">The same core assigns, verifies, and keeps continuity.</p>
+                <p className="mt-2 text-base leading-6 text-slate-300">The same core assigns, verifies, and keeps continuity.</p>
               </div>
               <div className="space-y-2">
                 {['Execution engine', 'Verification engine', 'Timeline', 'Access system', 'Device layer', 'Robot layer'].map((item) => (
@@ -170,7 +170,7 @@ export function DualModeArchitecture() {
         <div className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Human to Reality Flow</p>
+              <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Human to Reality Flow</p>
               <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Need becomes verified support.</h3>
             </div>
             <StatusPill tone="green" label="Operational continuity" />
@@ -198,7 +198,7 @@ export function DualModeArchitecture() {
       <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Built-in Support Templates</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Built-in Support Templates</p>
             <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Autonomous support profiles are ready without BioMath Core.</h3>
           </div>
           <StatusPill tone="gold" label="Autonomous engine" />
@@ -207,7 +207,7 @@ export function DualModeArchitecture() {
           {autonomousSupportTemplates.map((template) => (
             <article key={template.name} className="rounded-3xl border border-slate-100 bg-[#f7f5f1] p-5 transition-all hover:-translate-y-0.5 hover:border-amber-200 hover:bg-white hover:shadow-lg dark:border-white/10 dark:bg-slate-950/50 dark:hover:border-amber-300/25 dark:hover:bg-slate-900/80">
               <h4 className="text-xl font-semibold text-slate-950 dark:text-white">{template.name}</h4>
-              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{template.workflow}</p>
+              <p className="mt-2 text-base leading-6 text-slate-600 dark:text-slate-300">{template.workflow}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {template.tasks.slice(0, 3).map((task) => (
                   <span key={task} className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-600 dark:bg-slate-950/65 dark:text-slate-200 dark:ring-1 dark:ring-white/10">{task}</span>
@@ -251,7 +251,7 @@ function ModePanel({
 
   return (
     <article className={`relative overflow-hidden rounded-[2rem] border border-white/70 bg-gradient-to-br ${toneClass} p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10`}><span className={(tone === 'gold' ? 'from-amber-400 to-orange-400' : 'from-blue-500 to-cyan-400') + ' absolute left-0 top-0 h-1 w-full bg-gradient-to-r'} />
-      <p className="text-xs font-semibold uppercase tracking-[0.22em] opacity-75">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.06em] opacity-75">{eyebrow}</p>
       <h3 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h3>
       <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">{text}</p>
       <div className="mt-5 rounded-3xl bg-white/68 p-4 text-sm font-semibold text-slate-800 shadow-sm dark:bg-slate-950/70 dark:text-slate-100 dark:ring-1 dark:ring-white/10">{status}</div>
@@ -269,7 +269,7 @@ function ModePanel({
 function ContinuityEnginePanel() {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Continuity Engine</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Continuity Engine</p>
       <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Stability for the support day.</h3>
       <div className="mt-5 space-y-3">
         {continuityFactors.map((factor) => (
@@ -286,15 +286,15 @@ function ContinuityEnginePanel() {
 function ArchitectureSeparationPanel() {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Intelligence Separation</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Intelligence Separation</p>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         <div className="rounded-3xl bg-blue-50 p-5 dark:bg-slate-950/70 dark:ring-1 dark:ring-blue-300/15">
           <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">BioMath Core</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Biological understanding, predictive modeling, physiological analysis, dynamic interpretation.</p>
+          <p className="mt-2 text-base leading-6 text-slate-600 dark:text-slate-300">Biological understanding, predictive modeling, physiological analysis, dynamic interpretation.</p>
         </div>
         <div className="rounded-3xl bg-amber-50 p-5 dark:bg-slate-950/70 dark:ring-1 dark:ring-amber-300/15">
           <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">SAVEN</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">Operational coordination, task execution, verification, environments, access, devices, robotics orchestration.</p>
+          <p className="mt-2 text-base leading-6 text-slate-600 dark:text-slate-300">Operational coordination, task execution, verification, environments, access, devices, robotics orchestration.</p>
         </div>
       </div>
     </section>
@@ -304,7 +304,7 @@ function ArchitectureSeparationPanel() {
 function AutonomousSupportEnginePanel() {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Autonomous Support Engine</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Autonomous Support Engine</p>
       <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Task generation from real-life context.</h3>
       <div className="mt-5 grid gap-2 sm:grid-cols-2">
         {['Age group', 'Support mode', 'Mobility level', 'Environment', 'Recovery type', 'Support goals', 'Daily rhythm', 'Caregiver availability', 'Device availability', 'Robot availability'].map((item) => (

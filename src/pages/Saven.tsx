@@ -914,7 +914,7 @@ function PublicSavenSidebar({
       </div>
 
       <nav className="p-4 lg:flex-1">
-        <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-[0.22em] text-gray-500 dark:text-gray-500">Public Site</p>
+        <p className="mb-3 px-3 text-sm font-semibold tracking-[0.06em] text-gray-500 dark:text-gray-500">Public Site</p>
         <div className="grid gap-1">
           {publicMenuItems.map((item) => {
             const isActive = activePage === item.id;
@@ -940,7 +940,7 @@ function PublicSavenSidebar({
 
       <div className="m-4 border border-blue-200 bg-blue-50 p-4 shadow-sm dark:border-blue-400/20 dark:bg-blue-950/35">
         <p className="text-sm font-semibold text-gray-900 dark:text-white">Clear separation</p>
-        <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
+        <p className="mt-2 text-base leading-6 text-gray-600 dark:text-gray-300">
           This side is the public SAVEN website. The real support system begins through Enter SAVEN System.
         </p>
       </div>
@@ -957,7 +957,7 @@ function SavenHome({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" />
         <div className="relative px-6 pb-20 pt-20 sm:px-8 lg:px-12 lg:pb-24 lg:pt-28">
           <div className="max-w-4xl">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.32em] text-orange-100">Public SAVEN Website</p>
+            <p className="mb-5 text-sm font-semibold tracking-[0.06em] text-orange-100">Public SAVEN Website</p>
             <h1 className="max-w-4xl text-5xl font-semibold tracking-tight md:text-7xl">Execution, verification, and human support infrastructure</h1>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-200 md:text-xl">
               SAVEN connects BioMath Core's digital understanding of a person with verified real-world support actions performed by people, caregivers, devices, sensors, smart environments, and future robotic systems.
@@ -983,7 +983,7 @@ function SavenHome({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
       <section className="px-6 py-12 sm:px-8 lg:px-12">
         <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-orange-600 dark:text-orange-300">Public Website vs Real System</p>
+            <p className="mb-3 text-sm font-semibold tracking-[0.08em] text-orange-600 dark:text-orange-300">Public Website vs Real System</p>
             <h2 className="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white md:text-4xl">
               SAVEN now has a visible entry into the real support operating system.
             </h2>
@@ -992,9 +992,9 @@ function SavenHome({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
             </p>
           </div>
           <div className="border border-emerald-200 bg-emerald-50 p-6 shadow-sm dark:border-emerald-400/20 dark:bg-emerald-950/30">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-300">Real system entry</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-emerald-700 dark:text-emerald-300">Real system entry</p>
             <h3 className="mt-3 text-2xl font-semibold text-gray-950 dark:text-white">Start SAVEN</h3>
-            <p className="mt-3 text-sm leading-6 text-gray-700 dark:text-gray-300">
+            <p className="mt-2 text-base leading-6 text-gray-700 dark:text-gray-300">
               Create a profile, connect people, and start verified daily help.
             </p>
             <button
@@ -1022,9 +1022,9 @@ function SavenHome({ openPage }: { openPage: (pageId: SavenPageId) => void }) {
                   <ArrowRight className="h-4 w-4" />
                 </span>
               </div>
-              <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-orange-600 dark:text-orange-300">{page.eyebrow}</p>
+              <p className="mt-5 text-sm font-semibold tracking-[0.06em] text-orange-600 dark:text-orange-300">{page.eyebrow}</p>
               <h3 className="mt-2 text-xl font-semibold text-gray-950 dark:text-white">{page.label}</h3>
-              <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">{page.summary}</p>
+              <p className="mt-2 text-base leading-6 text-gray-600 dark:text-gray-300">{page.summary}</p>
               <div className="mt-5 h-px bg-gradient-to-r from-blue-400/0 via-blue-400/45 to-orange-300/0 opacity-70" />
             </button>
           ))}
@@ -1047,7 +1047,7 @@ function SavenSubPage({ page, openPage }: { page: SectionPage; openPage: (pageId
               <ArrowLeft className="h-4 w-4" />
               Back to SAVEN public site
             </button>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-orange-600 dark:text-orange-300">{page.eyebrow}</p>
+            <p className="mb-4 text-sm font-semibold tracking-[0.06em] text-orange-600 dark:text-orange-300">{page.eyebrow}</p>
             <h1 className="max-w-5xl text-4xl font-semibold tracking-tight text-gray-900 dark:text-white md:text-6xl">{page.title}</h1>
             <p className="mt-6 max-w-4xl text-lg leading-8 text-gray-600 dark:text-gray-300">{page.summary}</p>
           </div>
@@ -1058,7 +1058,7 @@ function SavenSubPage({ page, openPage }: { page: SectionPage; openPage: (pageId
               <img src="/saven-mark.png" alt="SAVEN logo" className="h-full w-full object-cover" />
             </div>
             <div className="absolute bottom-8 left-8 right-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-orange-100">SAVEN</p>
+              <p className="text-sm font-semibold tracking-[0.06em] text-orange-100">SAVEN</p>
               <p className="mt-4 text-3xl font-semibold tracking-tight text-white">{page.accent}</p>
             </div>
           </div>
@@ -1071,7 +1071,7 @@ function SavenSubPage({ page, openPage }: { page: SectionPage; openPage: (pageId
             <div className="bg-slate-950">
               <img src={page.visual} alt={page.visualAlt || page.label} className="mx-auto max-h-[420px] w-full object-contain" />
             </div>
-            {page.visualNote && <p className="px-2 pt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">{page.visualNote}</p>}
+            {page.visualNote && <p className="px-2 pt-3 text-base leading-6 text-gray-600 dark:text-gray-300">{page.visualNote}</p>}
           </div>
         )}
 
@@ -1107,7 +1107,7 @@ function SavenAppShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#f7f5f1] text-slate-950 dark:bg-[#07111f] dark:text-white">
+    <div className="saven-calm-density relative min-h-screen overflow-hidden bg-[#f7f5f1] text-slate-950 dark:bg-[#07111f] dark:text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(91,143,201,0.24),transparent_30%),radial-gradient(circle_at_90%_0%,rgba(198,155,72,0.2),transparent_26%),radial-gradient(circle_at_70%_95%,rgba(4,120,87,0.13),transparent_30%),linear-gradient(180deg,#fbfaf7,#f2efe8)] dark:bg-[radial-gradient(circle_at_12%_8%,rgba(91,143,201,0.25),transparent_32%),radial-gradient(circle_at_88%_4%,rgba(198,155,72,0.16),transparent_28%),radial-gradient(circle_at_70%_92%,rgba(16,185,129,0.1),transparent_30%),linear-gradient(180deg,#07111f,#0f172a_48%,#111827)]" />
       <div className="relative grid min-h-screen lg:grid-cols-[258px_1fr]">
         <aside className="hidden border-r border-white/60 bg-white/72 px-3 py-4 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#081422]/80 lg:block">
@@ -1123,13 +1123,13 @@ function SavenAppShell({
           </button>
           <div className="mt-4 overflow-hidden rounded-2xl border border-blue-200/60 bg-[linear-gradient(135deg,#ffffff,#eff6ff_52%,#fff7ed)] p-3 shadow-sm shadow-blue-950/5 dark:border-blue-300/15 dark:bg-[linear-gradient(135deg,#06101f,#0b1728_58%,#21170b)] dark:ring-1 dark:ring-blue-300/10">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-700 dark:text-blue-100">Support active</p>
+              <p className="text-sm font-semibold tracking-[0.06em] text-blue-700 dark:text-blue-100">Support active</p>
               <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.85)]" />
             </div>
             <p className="mt-2 text-base font-semibold tracking-tight text-slate-950 dark:text-white">Anna Roberts</p>
             <div className="mt-2 flex flex-wrap gap-1.5">
-              <span className="rounded-full bg-blue-500/12 px-2.5 py-1 text-[11px] font-semibold text-blue-800 dark:bg-blue-400/15 dark:text-blue-100">Home Recovery</span>
-              <span className="rounded-full bg-orange-500/12 px-2.5 py-1 text-[11px] font-semibold text-orange-800 dark:bg-orange-400/15 dark:text-orange-100">Live circle</span>
+              <span className="rounded-full bg-blue-500/12 px-2.5 py-1 text-xs font-semibold text-blue-800 dark:bg-blue-400/15 dark:text-blue-100">Home Recovery</span>
+              <span className="rounded-full bg-orange-500/12 px-2.5 py-1 text-xs font-semibold text-orange-800 dark:bg-orange-400/15 dark:text-orange-100">Live circle</span>
             </div>
           </div>
           <nav className="mt-4 space-y-0.5">
@@ -1180,7 +1180,7 @@ function SavenAppShell({
           <header className="relative z-10 border-b border-white/70 bg-[#f7f5f1]/88 px-5 py-4 backdrop-blur-xl dark:border-white/10 dark:bg-[#07111f]/88 sm:px-8 lg:px-10">
             <div className="mx-auto flex max-w-[1480px] flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">BioMath Core SAVEN</p>
+                <p className="text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-400">BioMath Core SAVEN</p>
                 <h1 className="mt-1 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">SAVEN support console</h1>
               </div>
               <div className="flex flex-wrap items-center gap-2 text-sm">
@@ -1206,7 +1206,7 @@ function SavenAppShell({
               <button
                 key={item.id}
                 onClick={() => openPage(item.id)}
-                className={`flex flex-col items-center justify-center rounded-2xl px-2 py-2 text-[11px] font-semibold ${
+                className={`flex flex-col items-center justify-center rounded-2xl px-2 py-2 text-xs font-semibold ${
                   isActive ? 'bg-slate-950 text-white dark:bg-slate-900 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25' : 'text-slate-500 dark:text-slate-400'
                 }`}
               >
@@ -1295,7 +1295,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
       <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_10%_12%,rgba(59,130,246,0.22),transparent_28%),radial-gradient(circle_at_92%_18%,rgba(249,115,22,0.15),transparent_26%),linear-gradient(135deg,rgba(3,9,20,0.98),rgba(8,20,38,0.94),rgba(30,19,12,0.72))] p-6 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10">
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_390px] xl:items-stretch">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">SAVEN Dispatch</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-blue-100">SAVEN Dispatch</p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">Voice becomes assigned support.</h2>
             <p className="mt-3 max-w-2xl text-base leading-7 text-slate-200">Speak once. SAVEN turns it into owner, route, proof, and next move.</p>
             <div className="mt-5 flex flex-wrap gap-2">
@@ -1313,7 +1313,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
                 <MessageSquareText className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-100/75">Command pad</p>
+                <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/75">Command pad</p>
                 <h3 className="mt-1 text-xl font-semibold text-white">{active.label}</h3>
               </div>
             </div>
@@ -1352,7 +1352,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
       <section className="overflow-hidden rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10" data-saven-operating-chain="true">
         <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">SAVEN operating chain</p>
+            <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">SAVEN operating chain</p>
             <h3 className="mt-2 text-2xl font-semibold tracking-tight">One command travels through the whole support system.</h3>
           </div>
           <button onClick={() => openPage('app-today')} className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
@@ -1369,10 +1369,10 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
               <span className={'block h-1.5 w-16 rounded-full bg-gradient-to-r ' + step.tone} />
               <div className="mt-4 flex items-center gap-2">
                 <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 text-xs font-semibold text-white ring-1 ring-white/10">{index + 1}</span>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-300">{step.label}</p>
+                <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">{step.label}</p>
               </div>
               <h4 className="mt-3 text-lg font-semibold leading-6 text-white">{step.title}</h4>
-              <p className="mt-2 line-clamp-3 text-sm leading-5 text-slate-300">{step.detail}</p>
+              <p className="mt-2 line-clamp-2 text-base leading-6 text-slate-300">{step.detail}</p>
             </button>
           ))}
         </div>
@@ -1392,7 +1392,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
                 <span className={'absolute left-0 top-0 h-1 w-full bg-gradient-to-r ' + accentMap[item.color]} />
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.15em] opacity-65">{item.group}</p>
+                    <p className="text-sm font-semibold tracking-[0.06em] opacity-65">{item.group}</p>
                     <h3 className="mt-2 text-xl font-semibold">{item.label}</h3>
                     <p className="mt-1 truncate text-sm font-semibold opacity-75">{item.target}</p>
                   </div>
@@ -1400,14 +1400,14 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
                     <Icon className="h-5 w-5" />
                   </span>
                 </div>
-                <p className="mt-3 line-clamp-2 text-sm leading-5 opacity-82">{item.command}</p>
+                <p className="mt-3 line-clamp-2 text-base leading-6 opacity-82">{item.command}</p>
               </button>
             );
           })}
         </div>
 
         <aside className="rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-100/70">Execution route</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Execution route</p>
           <h3 className="mt-2 text-2xl font-semibold text-white">{active.target}</h3>
           <p className="mt-2 text-sm font-semibold text-blue-100">{active.proof}</p>
           <div className="mt-5 grid gap-2">
@@ -1421,11 +1421,11 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
             ))}
           </div>
           <div className="mt-5 rounded-3xl bg-black/35 p-4 text-white shadow-inner ring-1 ring-white/10">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] opacity-65">Prepared command</p>
+            <p className="text-sm font-semibold tracking-[0.06em] opacity-65">Prepared command</p>
             <p className="mt-2 line-clamp-3 text-sm font-semibold leading-6">{draftCommand}</p>
           </div>
           <div className="mt-4 rounded-3xl border border-white/10 bg-white/[0.06] p-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-100/70">Intent route</p>
+            <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Intent route</p>
             <div className="mt-3 grid gap-2">
               {commandPlan.route.map((step) => (
                 <span key={step} className="rounded-2xl bg-slate-950/75 px-3 py-2 text-xs font-semibold text-slate-200 ring-1 ring-white/10">{step}</span>
@@ -1433,7 +1433,7 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
             </div>
           </div>
           <div className="mt-4 rounded-3xl border border-emerald-300/15 bg-emerald-500/[0.07] p-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-100/70">Permission review</p>
+            <p className="text-sm font-semibold tracking-[0.06em] text-emerald-100/70">Permission review</p>
             <p className="mt-2 text-sm font-semibold text-white">{permissionReview.decision.replace(/_/g, ' ')}</p>
             <p className="mt-2 text-xs leading-5 text-slate-300">{permissionReview.reason}</p>
           </div>
@@ -1529,9 +1529,9 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
             <span className={(micActive ? 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.85)]' : 'bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.85)]') + ' absolute bottom-0.5 right-0.5 h-1.5 w-1.5 rounded-full'} />
           </span>
           <div className="min-w-0">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.15em] text-blue-700 dark:text-blue-200">Voice rail</p>
+            <p className="text-sm font-semibold tracking-[0.06em] text-blue-700 dark:text-blue-200">Voice rail</p>
             <p className="truncate text-xs font-semibold text-slate-950 dark:text-white">Ask SAVEN</p>
-            <p className="truncate text-[10px] text-slate-500 dark:text-slate-400">{pageLabel}</p>
+            <p className="truncate text-xs text-slate-500 dark:text-slate-400">{pageLabel}</p>
           </div>
         </div>
 
@@ -1541,7 +1541,7 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
               <button
                 key={item.id}
                 onClick={() => setActiveCommand(item.id)}
-                className={(item.id === activeCommand ? 'bg-blue-600 text-white shadow-sm shadow-blue-950/15 ring-blue-300/30' : 'bg-white/76 text-slate-700 ring-slate-200 hover:bg-white dark:bg-slate-950/62 dark:text-slate-200 dark:ring-white/10') + ' rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 transition-all hover:-translate-y-0.5'}
+                className={(item.id === activeCommand ? 'bg-blue-600 text-white shadow-sm shadow-blue-950/15 ring-blue-300/30' : 'bg-white/76 text-slate-700 ring-slate-200 hover:bg-white dark:bg-slate-950/62 dark:text-slate-200 dark:ring-white/10') + ' rounded-full px-2.5 py-1 text-xs font-semibold ring-1 transition-all hover:-translate-y-0.5'}
               >
                 {item.label}
               </button>
@@ -1549,7 +1549,7 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
           </div>
           <div className="mt-1.5 min-w-0 rounded-2xl bg-white/64 px-3 py-1.5 text-slate-950 shadow-inner ring-1 ring-white/60 dark:bg-slate-950/48 dark:text-white dark:ring-white/10">
             <p className="truncate text-xs font-semibold">Hey SAVEN, {selected.command}</p>
-            <p className="truncate text-[10px] text-slate-500 dark:text-slate-400">Target: {selected.target}</p>
+            <p className="truncate text-xs text-slate-500 dark:text-slate-400">Target: {selected.target}</p>
           </div>
         </div>
 
@@ -1567,7 +1567,7 @@ function SavenCommandStrip({ activePage, openPage }: { activePage: SavenPageId; 
                 />
               ))}
             </div>
-            <p className={(micError ? 'text-red-300' : 'text-slate-400') + ' mt-0.5 truncate text-[9px] font-semibold uppercase tracking-[0.14em]'}>
+            <p className={(micError ? 'text-red-300' : 'text-slate-400') + ' mt-0.5 truncate text-sm font-semibold tracking-[0.06em]'}>
               {micError || (micActive ? 'Live level' : 'Mic level')}
             </p>
           </div>
@@ -1602,7 +1602,7 @@ function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: Sav
       <section className="overflow-hidden rounded-[2rem] border border-blue-200/60 bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.16),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.96),rgba(239,246,255,0.82),rgba(255,247,237,0.62))] p-8 shadow-sm backdrop-blur-xl dark:border-blue-300/18 dark:bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(6,16,31,0.96),rgba(15,23,42,0.86),rgba(35,23,10,0.38))] dark:ring-1 dark:ring-blue-300/10">
         <div className="grid gap-8 xl:grid-cols-[1fr_420px] xl:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">Real SAVEN begins here</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Real SAVEN begins here</p>
             <h2 className="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-6xl">Start SAVEN</h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
               Create a support profile, connect the circle, and begin verified daily help.
@@ -1620,7 +1620,7 @@ function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: Sav
           <div className="relative overflow-hidden rounded-[2rem] bg-slate-950 p-4 text-white shadow-2xl ring-1 ring-white/10">
             <img src="/saven-mark.png" alt="SAVEN system identity" className="h-72 w-full rounded-[1.5rem] object-cover" />
             <div className="absolute bottom-7 left-7 right-7 rounded-2xl border border-white/10 bg-slate-950/72 px-4 py-3 backdrop-blur-md">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">SAVEN command layer</p>
+              <p className="text-sm font-semibold tracking-[0.06em] text-blue-100">SAVEN command layer</p>
               <p className="mt-1 text-sm text-slate-200">Voice and text commands are available across the operating system.</p>
             </div>
           </div>
@@ -1686,7 +1686,7 @@ function SavenOperatorShortcuts({ openPage }: { openPage: (pageId: SavenPageId) 
     <section className="overflow-hidden rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10" data-saven-start-shortcuts="true">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">Operator shortcuts</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Operator shortcuts</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Start with the action, not the menu.</h3>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-200">These are the four entry points a caregiver or family member can actually use.</p>
         </div>
@@ -1702,10 +1702,10 @@ function SavenOperatorShortcuts({ openPage }: { openPage: (pageId: SavenPageId) 
             className="group min-h-[176px] rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4 text-left shadow-sm ring-1 ring-white/5 transition-all hover:-translate-y-0.5 hover:border-blue-300/35 hover:bg-white/[0.1] hover:shadow-xl hover:shadow-blue-950/20"
           >
             <span className={'block h-1.5 w-16 rounded-full bg-gradient-to-r ' + item.tone} />
-            <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">{item.label}</p>
+            <p className="mt-4 text-sm font-semibold tracking-[0.06em] text-slate-300">{item.label}</p>
             <h4 className="mt-2 text-xl font-semibold leading-6 text-white">{item.title}</h4>
             <p className="mt-3 rounded-2xl bg-black/25 px-3 py-2 text-sm font-semibold leading-5 text-slate-100 ring-1 ring-white/10">Hey SAVEN, {item.command}</p>
-            <p className="mt-3 line-clamp-2 text-sm leading-5 text-slate-300">{item.result}</p>
+            <p className="mt-3 line-clamp-2 text-base leading-6 text-slate-300">{item.result}</p>
           </button>
         ))}
       </div>
@@ -1774,10 +1774,10 @@ function SavenStartPath({ openPage }: { openPage: (pageId: SavenPageId) => void 
               </span>
               <div className="mt-5 flex items-center gap-3">
                 <span className="rounded-full bg-white/12 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/15">{item.step}</span>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-200">{item.title}</p>
+                <p className="text-sm font-semibold tracking-[0.06em] text-slate-200">{item.title}</p>
               </div>
               <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">{item.action}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-100/90">{item.detail}</p>
+              <p className="mt-2 text-base leading-6 text-slate-100/90">{item.detail}</p>
               <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-cyan-100">
                 Enter path
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -1826,7 +1826,7 @@ function SavenLaunchAssurance({ openPage }: { openPage: (pageId: SavenPageId) =>
     <section className="rounded-[2rem] border border-white/10 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-launch-assurance="true">
       <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/70">Launch assurance</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Launch assurance</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">SAVEN starts only when action, owner, and proof are visible.</h3>
         </div>
         <button onClick={() => openPage('app-today')} className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
@@ -1840,9 +1840,9 @@ function SavenLaunchAssurance({ openPage }: { openPage: (pageId: SavenPageId) =>
             onClick={() => openPage(lane.page)}
             className={'min-h-[154px] rounded-[1.5rem] border p-4 text-left shadow-sm ring-1 ring-white/5 transition-all hover:-translate-y-0.5 hover:bg-white/[0.08] hover:shadow-xl hover:shadow-blue-950/20 ' + lane.tone}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] opacity-80">{lane.label}</p>
+            <p className="text-sm font-semibold tracking-[0.06em] opacity-80">{lane.label}</p>
             <h4 className="mt-3 text-xl font-semibold leading-6 text-white">{lane.title}</h4>
-            <p className="mt-3 text-sm leading-6 text-slate-200">{lane.detail}</p>
+            <p className="mt-2 text-base leading-6 text-slate-200">{lane.detail}</p>
           </button>
         ))}
       </div>

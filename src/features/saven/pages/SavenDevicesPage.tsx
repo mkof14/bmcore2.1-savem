@@ -16,7 +16,7 @@ function StatusPill({ label, tone }: { label: string; tone: Tone }) {
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
     </section>
@@ -72,7 +72,7 @@ function ReadinessCard({ title, subtitle, status, lines, items }: { title: strin
     <article className="rounded-[2rem] border border-white/70 bg-white/82 p-5 shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{subtitle}</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-400">{subtitle}</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h3>
         </div>
         <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-900 dark:bg-emerald-500/10 dark:text-emerald-100 dark:ring-1 dark:ring-emerald-300/20">{status}</span>
@@ -110,12 +110,12 @@ export function DeviceReadiness() {
 
       <section className="grid gap-4 rounded-[2rem] border border-emerald-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-executor-command="device">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100/70">Executor command rail</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-emerald-100/70">Executor command rail</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Signals become proof.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">Devices support the human story; they do not decide alone.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Devices support the human story; they do not decide alone.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, check device telemetry for walking-session verification.</p>
           <p className="mt-2 text-sm text-emerald-100">Target: Wearable recovery tracker</p>
         </div>
@@ -131,7 +131,7 @@ export function DeviceReadiness() {
         <div className="relative grid gap-3 lg:grid-cols-4">
           {['Signal seen', 'Scope checked', 'Human proof', 'Continuity update'].map((label, index) => (
             <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.09] px-4 py-3 text-sm font-semibold text-white shadow-sm">
-              <span className="mb-2 inline-flex rounded-full bg-white/12 px-2.5 py-1 text-[11px] text-white ring-1 ring-white/10">D{index + 1}</span>
+              <span className="mb-2 inline-flex rounded-full bg-white/12 px-2.5 py-1 text-xs text-white ring-1 ring-white/10">D{index + 1}</span>
               <p>{label}</p>
             </div>
           ))}
@@ -150,7 +150,7 @@ export function DeviceReadiness() {
               <Wifi className="h-6 w-6" />
             </span>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">Device Gateway</p>
+              <p className="text-sm font-semibold tracking-[0.06em] text-blue-100">Device Gateway</p>
               <h3 className="mt-1 text-2xl font-semibold">Signals close the support loop.</h3>
             </div>
           </div>
@@ -166,7 +166,7 @@ export function DeviceReadiness() {
       <section className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(16,185,129,0.15),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(240,253,244,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_14%_16%,rgba(59,130,246,0.23),transparent_30%),radial-gradient(circle_at_86%_16%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(6,34,24,0.62))] dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Proof signal routing</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Proof signal routing</p>
             <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Which signal closes the support loop?</h3>
           </div>
           <StatusPill tone="green" label="Proof active" />
@@ -206,7 +206,7 @@ export function DeviceReadiness() {
             <article key={rule.label} className={'rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
               <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/82 shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70"><Icon className="h-5 w-5" /></span>
               <h3 className="mt-4 text-xl font-semibold">{rule.label}</h3>
-              <p className="mt-3 text-sm leading-6 opacity-85">{rule.detail}</p>
+              <p className="mt-2 text-base leading-6 opacity-85">{rule.detail}</p>
             </article>
           );
         })}

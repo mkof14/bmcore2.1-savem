@@ -16,7 +16,7 @@ function StatusPill({ label, tone }: { label: string; tone: Tone }) {
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
     </section>
@@ -117,12 +117,12 @@ export function RobotReadiness() {
 
       <section className="grid gap-4 rounded-[2rem] border border-amber-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-executor-command="robot">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-100/70">Executor command rail</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-amber-100/70">Executor command rail</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Robots stay permissioned.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">SAVEN can ask for readiness, but physical action waits for approval.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">SAVEN can ask for readiness, but physical action waits for approval.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, check robot readiness and keep physical action locked.</p>
           <p className="mt-2 text-sm text-amber-100">Target: SAVEN Assist R1</p>
         </div>
@@ -137,7 +137,7 @@ export function RobotReadiness() {
         <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(59,130,246,0.16)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.14)_1px,transparent_1px)] [background-size:38px_38px] dark:opacity-35" />
         <div className="relative grid gap-7 xl:grid-cols-[minmax(0,1.02fr)_minmax(460px,0.98fr)] xl:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 dark:text-blue-200">Robot / Device Service Matrix</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-blue-700 dark:text-blue-200">Robot / Device Service Matrix</p>
             <h2 className="mt-4 max-w-4xl text-5xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-6xl">Robots act only inside the SAVEN permission loop.</h2>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">SAVEN turns a support task into scoped robot readiness, room awareness, device proof, and human approval. Robots can help, but they never decide care alone.</p>
             <div className="mt-7 grid gap-3 sm:grid-cols-3">
@@ -147,7 +147,7 @@ export function RobotReadiness() {
                 ['Reality', 'Signal plus human proof'],
               ].map(([label, value]) => (
                 <div key={label} className="rounded-3xl border border-white/70 bg-white/76 p-4 shadow-sm dark:border-white/10 dark:bg-slate-950/60 dark:ring-1 dark:ring-white/10">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{label}</p>
+                  <p className="text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-400">{label}</p>
                   <p className="mt-2 text-sm font-semibold text-slate-950 dark:text-white">{value}</p>
                 </div>
               ))}
@@ -192,7 +192,7 @@ export function RobotReadiness() {
         <div className="relative grid gap-3 lg:grid-cols-5">
           {['Task source', 'Policy check', 'Human gate', 'Robot ready', 'Proof return'].map((label, index) => (
             <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.09] px-4 py-3 text-sm font-semibold text-white shadow-sm">
-              <span className="mb-2 inline-flex rounded-full bg-white/12 px-2.5 py-1 text-[11px] text-white ring-1 ring-white/10">R{index + 1}</span>
+              <span className="mb-2 inline-flex rounded-full bg-white/12 px-2.5 py-1 text-xs text-white ring-1 ring-white/10">R{index + 1}</span>
               <p>{label}</p>
             </div>
           ))}
@@ -219,7 +219,7 @@ export function RobotReadiness() {
                 <span className="rounded-full bg-white/82 px-3 py-1 text-xs font-semibold shadow-sm ring-1 ring-current/10 dark:bg-slate-950/70">{item.state}</span>
               </div>
               <h3 className="mt-4 text-xl font-semibold">{item.label}</h3>
-              <p className="mt-3 text-sm leading-6 opacity-85">{item.detail}</p>
+              <p className="mt-2 text-base leading-6 opacity-85">{item.detail}</p>
             </article>
           );
         })}
@@ -228,13 +228,13 @@ export function RobotReadiness() {
       <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Permission matrix</p>
+            <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Permission matrix</p>
             <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">The permission loop before movement.</h3>
           </div>
           <StatusPill tone="blue" label="Loop active" />
         </div>
         <div className="mt-5 overflow-hidden rounded-3xl border border-slate-100 bg-[#f7f5f1] dark:border-white/10 dark:bg-slate-900/70">
-          <div className="hidden grid-cols-[1.1fr_1fr_1fr_1fr_1fr_110px] gap-0 border-b border-slate-200/70 bg-white/70 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-400 xl:grid">
+          <div className="hidden grid-cols-[1.1fr_1fr_1fr_1fr_1fr_110px] gap-0 border-b border-slate-200/70 bg-white/70 px-4 py-3 text-sm font-semibold tracking-[0.06em] text-slate-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-slate-400 xl:grid">
             <span>Service</span>
             <span>SAVEN</span>
             <span>Robot</span>
@@ -267,19 +267,19 @@ export function RobotReadiness() {
 
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
         <div className="rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_12%_16%,rgba(59,130,246,0.16),transparent_30%),radial-gradient(circle_at_88%_16%,rgba(16,185,129,0.14),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(239,246,255,0.78),rgba(240,253,244,0.72))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_12%_16%,rgba(59,130,246,0.22),transparent_30%),radial-gradient(circle_at_88%_16%,rgba(16,185,129,0.12),transparent_28%),linear-gradient(135deg,rgba(4,10,20,0.98),rgba(10,22,40,0.9),rgba(6,34,24,0.62))] dark:ring-1 dark:ring-white/10">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Physical endpoints</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Physical endpoints</p>
           <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">Executors, sensors, and rooms share one control loop.</h3>
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
             {robots.map((robot) => (
               <article key={robot.name} className="group rounded-3xl border border-white/70 bg-white/78 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-xl dark:border-white/10 dark:bg-slate-950/60">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">{robot.model}</p>
+                    <p className="text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-400">{robot.model}</p>
                     <h4 className="mt-2 text-xl font-semibold text-slate-950 dark:text-white">{robot.name}</h4>
                   </div>
                   <RobotBadge status={robot.readiness} />
                 </div>
-                <p className="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-300">{robot.capability}</p>
+                <p className="mt-3 text-base leading-6 text-slate-600 dark:text-slate-300">{robot.capability}</p>
                 <div className="mt-4 rounded-2xl bg-[#f7f5f1] p-3 text-sm dark:bg-slate-900/70">
                   <SummaryLine label="Assignment" value={robot.assignment} />
                 </div>
@@ -299,7 +299,7 @@ export function RobotReadiness() {
               <Workflow className="h-6 w-6" />
             </span>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">Action gate</p>
+              <p className="text-sm font-semibold tracking-[0.06em] text-blue-100">Action gate</p>
               <h3 className="mt-1 text-2xl font-semibold">Permission before motion</h3>
             </div>
           </div>
@@ -310,7 +310,7 @@ export function RobotReadiness() {
             <SummaryLine label="Continuity" value="Proof before continuity" />
             <SummaryLine label="Emergency" value="Stop and prepare context only" />
           </div>
-          <div className="mt-6 rounded-3xl bg-white/7 p-4 text-sm leading-6 text-slate-300 ring-1 ring-white/10">
+          <div className="mt-6 rounded-3xl bg-white/7 p-4 text-base leading-6 text-slate-300 ring-1 ring-white/10">
             Backend rule: every robot service should be an adapter behind the SAVEN gateway, never a page-specific direct integration.
           </div>
         </div>

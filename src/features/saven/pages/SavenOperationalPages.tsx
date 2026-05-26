@@ -1,7 +1,7 @@
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
     </section>
@@ -24,9 +24,9 @@ export function SavenCommandCenter() {
           const tone = item.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : item.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
           return (
             <article key={item.label} className={'rounded-[2rem] border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] opacity-65">{item.label}</p>
+              <p className="text-sm font-semibold tracking-[0.08em] opacity-65">{item.label}</p>
               <div className="mt-4 rounded-2xl bg-slate-950 p-4 text-sm font-semibold leading-6 text-white shadow-inner">{item.command}</div>
-              <p className="mt-4 text-sm leading-6 opacity-85">{item.result}</p>
+              <p className="mt-3 text-base leading-6 opacity-85">{item.result}</p>
             </article>
           );
         })}
@@ -51,12 +51,12 @@ export function TaskLifecycleService() {
 
       <section className="grid gap-4 rounded-[2rem] border border-blue-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-operations-rail="lifecycle">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100/70">Lifecycle rail</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Lifecycle rail</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">No hidden task state.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">Every support need must show owner, permission, action, proof, and continuity.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Every support need must show owner, permission, action, proof, and continuity.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, show where the walking task is in the lifecycle.</p>
           <p className="mt-2 text-sm text-blue-100">Target: assisted walking session</p>
         </div>
@@ -73,7 +73,7 @@ export function TaskLifecycleService() {
             {index < lifecycle.length - 1 && <span className="pointer-events-none absolute -right-3 top-1/2 hidden h-1 w-6 rounded-full bg-gradient-to-r from-blue-400 to-orange-400 xl:block" />}
             <span className="grid h-10 w-10 place-items-center rounded-2xl bg-white/82 text-sm font-semibold shadow-sm dark:bg-slate-950/70">{String(index + 1).padStart(2, '0')}</span>
             <h3 className="mt-4 text-xl font-semibold">{title}</h3>
-            <p className="mt-4 text-sm leading-6 opacity-85">{state}</p>
+            <p className="mt-3 text-base leading-6 opacity-85">{state}</p>
           </article>
         ))}
       </section>
@@ -95,12 +95,12 @@ export function DailySupportPlanBuilder() {
 
       <section className="grid gap-4 rounded-[2rem] border border-amber-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-operations-rail="daily-plan">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-100/70">Daily plan rail</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-amber-100/70">Daily plan rail</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">The day is a support script.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">Each window has an owner, proof rule, fallback, and continuity impact.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Each window has an owner, proof rule, fallback, and continuity impact.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, build today around hydration, walking, rest, and family summary.</p>
           <p className="mt-2 text-sm text-amber-100">Target: Anna Roberts, Home Recovery</p>
         </div>
@@ -146,7 +146,7 @@ export function VerificationPolicyBuilder() {
           return (
             <article key={label} className={'rounded-[2rem] border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + color}>
               <h3 className="text-2xl font-semibold">{label}</h3>
-              <p className="mt-3 text-sm leading-6 opacity-85">{proof}</p>
+              <p className="mt-2 text-base leading-6 opacity-85">{proof}</p>
             </article>
           );
         })}
@@ -169,12 +169,12 @@ export function ContinuityOperations() {
 
       <section className="grid gap-4 rounded-[2rem] border border-emerald-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-operations-rail="continuity">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100/70">Continuity rail</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-emerald-100/70">Continuity rail</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Support stability is earned.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">Continuity rises only when support is done, confirmed, and ready for the next window.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Continuity rises only when support is done, confirmed, and ready for the next window.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Say this</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, explain what is keeping continuity at 86.</p>
           <p className="mt-2 text-sm text-emerald-100">Target: today support continuity</p>
         </div>
@@ -187,7 +187,7 @@ export function ContinuityOperations() {
 
       <section className="grid gap-5 xl:grid-cols-[420px_minmax(0,1fr)]">
         <div className="rounded-[2rem] border border-white/70 bg-slate-950 p-6 text-white shadow-xl shadow-slate-950/20 dark:border-white/10 dark:ring-1 dark:ring-blue-300/20">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Continuity score</p>
+          <p className="text-sm font-semibold tracking-[0.08em] text-blue-100">Continuity score</p>
           <div className="mt-5 flex items-end gap-4">
             <p className="text-7xl font-semibold tracking-tight">86</p>
             <p className="pb-3 text-sm font-semibold text-emerald-200">Stable</p>
@@ -195,7 +195,7 @@ export function ContinuityOperations() {
           <div className="mt-6 h-3 overflow-hidden rounded-full bg-slate-900">
             <div className="h-full w-[86%] rounded-full bg-gradient-to-r from-blue-500 via-emerald-400 to-amber-300" />
           </div>
-          <p className="mt-5 text-sm leading-6 text-slate-300">Operational confidence, not a medical score.</p>
+          <p className="mt-5 text-base leading-6 text-slate-300">Operational confidence, not a medical score.</p>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           {rows.map((row) => {
@@ -204,7 +204,7 @@ export function ContinuityOperations() {
               <article key={row.label} className={'rounded-[2rem] border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
                 <p className="text-sm font-semibold opacity-75">{row.label}</p>
                 <h3 className="mt-3 text-3xl font-semibold">{row.value}</h3>
-                <p className="mt-3 text-sm leading-6 opacity-85">{row.detail}</p>
+                <p className="mt-2 text-base leading-6 opacity-85">{row.detail}</p>
               </article>
             );
           })}

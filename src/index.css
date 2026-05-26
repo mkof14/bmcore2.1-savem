@@ -92,3 +92,55 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* SAVEN calm density layer: keeps the app operational without tiny, noisy copy. */
+.saven-calm-density {
+  font-size: 16px;
+}
+
+.saven-calm-density p,
+.saven-calm-density span,
+.saven-calm-density button {
+  text-wrap: pretty;
+}
+
+.saven-calm-density [class*="text-[9px]"],
+.saven-calm-density [class*="text-[10px]"],
+.saven-calm-density [class*="text-[11px]"] {
+  font-size: 0.75rem;
+  line-height: 1.1rem;
+}
+
+.saven-calm-density [class*="text-xs"] {
+  font-size: 0.8125rem;
+  line-height: 1.2rem;
+}
+
+.saven-calm-density p[class*="text-sm"] {
+  font-size: 0.95rem;
+  line-height: 1.55rem;
+}
+
+.saven-calm-density p[class*="leading-6"],
+.saven-calm-density p[class*="leading-7"],
+.saven-calm-density p[class*="leading-8"] {
+  max-width: 68ch;
+}
+
+.saven-calm-density [class*="uppercase"][class*="tracking-"] {
+  text-transform: none;
+  letter-spacing: 0.08em;
+}
+
+.saven-calm-density h1 + p,
+.saven-calm-density h2 + p,
+.saven-calm-density h3 + p {
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 1024px) {
+  .saven-calm-density main {
+    font-size: 1.01rem;
+  }
+}
+

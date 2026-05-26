@@ -1,7 +1,7 @@
 function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
-      <p className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
+      <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
       <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
     </section>
@@ -12,7 +12,7 @@ function LayeredPanel({ title, text, items }: { title: string; text: string; ite
   return (
     <article className="rounded-3xl border border-white/70 bg-white/78 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl dark:border-white/10 dark:bg-slate-950/58">
       <h4 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">{title}</h4>
-      <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{text}</p>
+      <p className="mt-2 text-base leading-6 text-slate-600 dark:text-slate-300">{text}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {items.map((item) => (
           <span key={item} className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-500/10 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/20">{item}</span>
@@ -80,12 +80,12 @@ export function SavenLearningCenter() {
 
       <section className="grid gap-4 rounded-[2rem] border border-emerald-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[300px_minmax(0,1fr)_270px]" data-saven-practice-layer="learning">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-100/70">SAVEN practice path</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-emerald-100/70">SAVEN practice path</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Train by running one real loop.</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-200">Each lesson should end with a visible owner, permission, proof, or continuity update.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Each lesson should end with a visible owner, permission, proof, or continuity update.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">Practice command</p>
+          <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Practice command</p>
           <p className="mt-2 text-lg font-semibold leading-7">Hey SAVEN, walk me through assisted walking support from need to proof.</p>
           <p className="mt-2 text-sm text-emerald-100">Then open Today, Circle, Environment, and Verification in order.</p>
         </div>
@@ -104,7 +104,7 @@ export function SavenLearningCenter() {
                 <img src="/saven-mark.png" alt="" className="h-full w-full object-cover" />
               </span>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-100">Training path</p>
+                <p className="text-sm font-semibold tracking-[0.06em] text-blue-100">Training path</p>
                 <h3 className="mt-1 text-2xl font-semibold">6 core lessons</h3>
               </div>
             </div>
