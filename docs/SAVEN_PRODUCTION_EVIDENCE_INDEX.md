@@ -150,3 +150,11 @@ These artifacts separate clean RC readiness from the human production GO decisio
 - `docs/SAVEN_STRICT_GO.md`
 
 These artifacts prevent accidental GO language while production values are still placeholders.
+
+## Final Handoff
+
+- `docs/SAVEN_RC_PROOF.md`
+- `docs/SAVEN_FINAL_HANDOFF.md`
+- `docs/SAVEN_NEXT_PHASE_MAP.md`
+
+These artifacts summarize the current RC-ready state and the remaining live-GO work.

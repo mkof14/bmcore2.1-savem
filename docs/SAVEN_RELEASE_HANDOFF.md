@@ -525,3 +525,13 @@ The final production language guard is:
 - `npm run strict-go:saven`
 
 Use `SAVEN_STRICT_GO=1 npm run strict-go:saven` only after real production values and owners are recorded.
+
+## Final Handoff
+
+Use:
+
+- `npm run rc-proof:saven`
+- `npm run handoff-final:saven`
+- `npm run next-phase:saven`
+
+This is the concise handoff: SAVEN is RC-ready, strict-GO protected, and waiting for real production values and owners before live GO.

@@ -45,6 +45,9 @@ const requiredScripts = [
   'values-ready:saven',
   'release-lock:saven',
   'strict-go:saven',
+  'rc-proof:saven',
+  'handoff-final:saven',
+  'next-phase:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -330,6 +333,30 @@ const checks = [
       'SAVEN Strict GO',
       'Strict Mode',
       'Strict GO Boundary',
+    ],
+  },
+  {
+    label: 'RC proof',
+    file: 'docs/SAVEN_RC_PROOF.md',
+    markers: [
+      'SAVEN RC Proof',
+      'RC-Safe Result',
+    ],
+  },
+  {
+    label: 'Final handoff',
+    file: 'docs/SAVEN_FINAL_HANDOFF.md',
+    markers: [
+      'SAVEN Final Handoff',
+      'Remaining Before Live GO',
+    ],
+  },
+  {
+    label: 'Next phase map',
+    file: 'docs/SAVEN_NEXT_PHASE_MAP.md',
+    markers: [
+      'SAVEN Next Phase Map',
+      'Phase D: Human GO Decision',
     ],
   },
   {

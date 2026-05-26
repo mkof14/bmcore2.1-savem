@@ -93,7 +93,10 @@
     "production-go:saven": "node scripts/saven-production-go-decision-audit.mjs",
     "values-ready:saven": "node scripts/saven-production-values-ready-audit.mjs",
     "release-lock:saven": "node scripts/saven-release-lock-audit.mjs",
-    "strict-go:saven": "node scripts/saven-strict-go-audit.mjs"
+    "strict-go:saven": "node scripts/saven-strict-go-audit.mjs",
+    "rc-proof:saven": "node scripts/saven-rc-proof-audit.mjs",
+    "handoff-final:saven": "node scripts/saven-final-handoff-audit.mjs",
+    "next-phase:saven": "node scripts/saven-next-phase-map-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

@@ -186,6 +186,30 @@ const checks = [
     ],
   },
   {
+    label: 'RC proof',
+    file: 'docs/SAVEN_RC_PROOF.md',
+    markers: [
+      'SAVEN RC Proof',
+      'RC-Safe Result',
+    ],
+  },
+  {
+    label: 'Final handoff',
+    file: 'docs/SAVEN_FINAL_HANDOFF.md',
+    markers: [
+      'SAVEN Final Handoff',
+      'Remaining Before Live GO',
+    ],
+  },
+  {
+    label: 'Next phase map',
+    file: 'docs/SAVEN_NEXT_PHASE_MAP.md',
+    markers: [
+      'SAVEN Next Phase Map',
+      'Phase D: Human GO Decision',
+    ],
+  },
+  {
     label: 'Release env example',
     file: '.env.saven.example',
     markers: [
@@ -517,6 +541,21 @@ if (packageJson.scripts?.['strict-go:saven'] !== 'node scripts/saven-strict-go-a
   throw new Error('package.json is missing strict-go:saven script.');
 }
 console.log('[release] ok package strict-go:saven script');
+
+if (packageJson.scripts?.['rc-proof:saven'] !== 'node scripts/saven-rc-proof-audit.mjs') {
+  throw new Error('package.json is missing rc-proof:saven script.');
+}
+console.log('[release] ok package rc-proof:saven script');
+
+if (packageJson.scripts?.['handoff-final:saven'] !== 'node scripts/saven-final-handoff-audit.mjs') {
+  throw new Error('package.json is missing handoff-final:saven script.');
+}
+console.log('[release] ok package handoff-final:saven script');
+
+if (packageJson.scripts?.['next-phase:saven'] !== 'node scripts/saven-next-phase-map-audit.mjs') {
+  throw new Error('package.json is missing next-phase:saven script.');
+}
+console.log('[release] ok package next-phase:saven script');
 
 if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');
