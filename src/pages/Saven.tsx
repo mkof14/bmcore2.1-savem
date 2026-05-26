@@ -1320,7 +1320,10 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
             <textarea
               value={draftCommand}
               onChange={(event) => setDraftCommand(event.target.value)}
-              className="mt-4 min-h-[84px] w-full resize-none rounded-3xl border border-white/10 bg-slate-950/82 px-4 py-3 text-sm font-semibold leading-6 text-white shadow-inner outline-none transition placeholder:text-slate-500 focus:border-blue-300 focus:ring-4 focus:ring-blue-500/15"
+              data-saven-command-pad-input="true"
+              spellCheck={false}
+              style={{ backgroundColor: '#07111f', color: '#f8fafc', caretColor: '#60a5fa', WebkitTextFillColor: '#f8fafc' }}
+              className="mt-4 min-h-[84px] w-full resize-none rounded-3xl border border-blue-200/20 px-4 py-3 text-sm font-semibold leading-6 shadow-inner outline-none transition placeholder:text-slate-400 focus:border-blue-300 focus:ring-4 focus:ring-blue-500/20"
             />
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               <button onClick={() => openPage(active.page)} className="rounded-full bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-500">
