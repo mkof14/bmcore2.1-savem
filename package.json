@@ -98,7 +98,8 @@
     "handoff-final:saven": "node scripts/saven-final-handoff-audit.mjs",
     "next-phase:saven": "node scripts/saven-next-phase-map-audit.mjs",
     "values-worksheet:saven": "node scripts/saven-production-values-worksheet-audit.mjs",
-    "values-gap:saven": "node scripts/saven-production-values-gap-report.mjs"
+    "values-gap:saven": "node scripts/saven-production-values-gap-report.mjs",
+    "values-local:saven": "node scripts/saven-create-production-values-local.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
