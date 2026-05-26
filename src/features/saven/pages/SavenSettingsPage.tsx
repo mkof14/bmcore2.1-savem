@@ -502,7 +502,7 @@ export function SavenSettings() {
 
   return (
     <div className="space-y-6">
-      <PageIntro eyebrow="Settings" title="Adapt SAVEN to the person." text="Control how SAVEN behaves around one person: reminders, cognitive load, escalation, devices, robots, privacy, recovery emphasis, and verified execution rules." />
+      <PageIntro eyebrow="Settings" title="Tune SAVEN calmly." text="Set reminders, voice, privacy, devices, robots, and approval rules." />
 
       <section className="grid gap-5 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
         <div className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
@@ -510,7 +510,7 @@ export function SavenSettings() {
             <div>
               <p className="text-sm font-semibold tracking-[0.08em] text-slate-300">Person Operating Profile</p>
               <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Daily support behavior</h3>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-200">These settings define how SAVEN should act before it creates tasks, assigns responsibility, or asks people to confirm reality.</p>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-200">Set the default support behavior.</p>
             </div>
             <StatusPill tone="green" label="System ready" />
           </div>
@@ -531,14 +531,14 @@ export function SavenSettings() {
             {systemRules.map((rule) => (
               <div key={rule.label} className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-sm dark:border-white/10 dark:bg-slate-900">
                 <span className="text-slate-300">{rule.label}</span>
-                <span className="text-right font-semibold text-slate-900 dark:text-white">{rule.value}</span>
+                <span className="text-right font-semibold text-white">{rule.value}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-white/70 bg-white/82 p-5 shadow-sm backdrop-blur-xl transition-all hover:border-blue-200 hover:shadow-xl hover:shadow-blue-950/10 dark:border-white/10 dark:bg-slate-950 dark:ring-1 dark:ring-white/10 dark:hover:border-blue-300/30">
+      <section className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="min-w-0">
             <p className="text-sm font-semibold tracking-[0.08em] text-slate-300">Voice Control</p>
@@ -639,38 +639,8 @@ export function SavenSettings() {
       <section className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-semibold tracking-[0.08em] text-slate-300">Voice coverage</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Commands across SAVEN</h3>
-          </div>
-          <StatusPill tone="blue" label="Voice layer" />
-        </div>
-        <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          {voiceCommands.map((item) => (
-            <button key={item.id} onClick={() => setActiveVoiceCommand(item.id)} className="rounded-3xl border border-white/10 bg-white/8 p-4 text-left transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md dark:border-white/10 dark:bg-slate-900 dark:hover:border-blue-300/30">
-              <span className="mb-4 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-slate-950 dark:text-blue-100 dark:ring-1 dark:ring-blue-300/25">{item.service}</span>
-              <p className="font-semibold text-white">{item.label}</p>
-              <p className="mt-2 text-base leading-6 text-slate-300">{item.command}</p>
-            </button>
-          ))}
-        </div>
-        <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-          {voiceServices.map((service) => (
-            <div key={service.label} className="min-w-0 rounded-2xl border border-white/10 bg-slate-950/70 p-4 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-sm dark:border-white/10 dark:bg-slate-900 dark:hover:border-blue-300/30">
-              <div className="mb-3 flex items-center justify-between gap-3">
-                <p className="min-w-0 truncate font-semibold text-white">{service.label}</p>
-                <span className={(service.active ? 'bg-emerald-500' : 'bg-slate-500') + ' h-2.5 w-2.5 shrink-0 rounded-full'} />
-              </div>
-              <p className="line-clamp-2 break-words text-base leading-6 text-slate-300">{service.value}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="rounded-[2rem] border border-blue-300/16 bg-[#07111f] p-6 text-white shadow-xl shadow-slate-950/16 backdrop-blur-xl ring-1 ring-white/10">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
             <p className="text-sm font-semibold tracking-[0.08em] text-slate-300">Regulators</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Tune the support engine</h3>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Support engine</h3>
           </div>
           <StatusPill tone="blue" label="Live configuration" />
         </div>
@@ -685,7 +655,7 @@ export function SavenSettings() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-semibold tracking-[0.08em] text-slate-300">Permissions and switches</p>
-            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Control what SAVEN is allowed to do</h3>
+            <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white">Allowed actions</h3>
           </div>
           <StatusPill tone="gold" label="Human approval layer" />
         </div>

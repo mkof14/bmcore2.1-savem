@@ -19,8 +19,8 @@ function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; t
   return (
     <section className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
       <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">{eyebrow}</p>
-      <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 dark:text-white md:text-5xl">{title}</h2>
-      <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-600 dark:text-slate-300">{text}</p>
+      <h2 className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-5xl">{title}</h2>
+      <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-300">{text}</p>
     </section>
   );
 }
@@ -137,13 +137,13 @@ export function SavenCareRoutes() {
 
   return (
     <div className="space-y-6">
-      <PageIntro eyebrow="Care Routes" title="Escalation map: route the right human with context." text="Caregiver, family, nurse, doctor, and urgent paths all start from the same support packet. Local version only: no real messages or calls are sent." />
+      <PageIntro eyebrow="Care Routes" title="Route the right human." text="SAVEN prepares the packet, then waits at the human gate." />
 
       <section className="grid gap-4 rounded-[2rem] border border-cyan-300/18 bg-[#07111f] p-5 text-white shadow-xl shadow-slate-950/18 ring-1 ring-white/10 xl:grid-cols-[290px_minmax(0,1fr)_260px]" data-saven-executor-command="care">
         <div>
           <p className="text-sm font-semibold tracking-[0.06em] text-cyan-100/70">Executor command rail</p>
-          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Route a human, not a page.</h3>
-          <p className="mt-2 text-base leading-6 text-slate-200">Care routes start as a command and stop at the right human gate.</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight">Human route ready.</h3>
+          <p className="mt-2 text-base leading-6 text-slate-200">Prepare context. Wait for approval.</p>
         </div>
         <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4">
           <p className="text-sm font-semibold tracking-[0.06em] text-slate-300">Say this</p>
@@ -157,24 +157,12 @@ export function SavenCareRoutes() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#020817] p-4 text-white shadow-xl shadow-slate-950/20 ring-1 ring-white/10" data-saven-relay="care">
-        <div className="pointer-events-none absolute inset-x-6 top-1/2 hidden h-px bg-gradient-to-r from-blue-400/40 via-emerald-300/45 to-amber-300/45 lg:block" />
-        <div className="relative grid gap-3 lg:grid-cols-4">
-          {['Need signal', 'Route packet', 'Human gate', 'Audit trail'].map((label, index) => (
-            <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.09] px-4 py-3 text-sm font-semibold text-white shadow-sm">
-              <span className="mb-2 inline-flex rounded-full bg-white/12 px-2.5 py-1 text-xs text-white ring-1 ring-white/10">0{index + 1}</span>
-              <p>{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-[radial-gradient(circle_at_16%_16%,rgba(0,180,255,0.18),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,178,54,0.18),transparent_28%),radial-gradient(circle_at_72%_88%,rgba(16,185,129,0.15),transparent_30%),linear-gradient(135deg,rgba(255,255,255,0.95),rgba(240,249,255,0.8),rgba(255,247,237,0.76))] p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[radial-gradient(circle_at_16%_16%,rgba(0,180,255,0.24),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,178,54,0.15),transparent_28%),radial-gradient(circle_at_72%_88%,rgba(16,185,129,0.12),transparent_30%),linear-gradient(135deg,rgba(3,7,18,0.98),rgba(7,20,39,0.9),rgba(35,19,7,0.68))] dark:ring-1 dark:ring-white/10">
+      <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_16%_16%,rgba(0,180,255,0.22),transparent_30%),radial-gradient(circle_at_86%_14%,rgba(255,178,54,0.14),transparent_28%),linear-gradient(135deg,rgba(3,7,18,0.98),rgba(7,20,39,0.9),rgba(35,19,7,0.68))] p-6 text-white shadow-xl shadow-slate-950/18 backdrop-blur-xl ring-1 ring-white/10">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
           <div>
             <p className="text-sm font-semibold tracking-[0.08em] text-slate-500 dark:text-slate-400">Escalation map</p>
             <h3 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950 dark:text-white">One map for caregiver, family, clinical, and urgent paths.</h3>
-            <p className="mt-2 max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300">Every route carries reason, context, proof state, and the human gate.</p>
+            <p className="mt-2 max-w-2xl text-base leading-6 text-slate-600 dark:text-slate-300">Reason, context, proof, human gate.</p>
           </div>
           <StatusPill tone="gold" label="Local only" />
         </div>

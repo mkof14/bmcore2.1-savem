@@ -13,19 +13,18 @@ export function SavenCommandCenter() {
     { label: 'Voice', command: 'Hey SAVEN, show today support status.', result: 'Highlights open verification and next action.', tone: 'blue' },
     { label: 'Text', command: 'Assign walking support to Maya.', result: 'Routes support task with verification required.', tone: 'green' },
     { label: 'Robot-safe', command: 'Can R1 help with mobility?', result: 'Checks readiness; physical action stays approval-gated.', tone: 'gold' },
-    { label: 'Family', command: 'Prepare Daniel evening summary.', result: 'Creates family-safe digest without hidden medical detail.', tone: 'blue' },
   ];
 
   return (
     <div className="space-y-6">
-      <PageIntro eyebrow="SAVEN Command Center" title="One command layer across every support service." text="Voice and text commands control daily support, caregiver handoff, device checks, robot readiness, verification, and continuity." />
-      <section className="grid gap-4 md:grid-cols-2">
+      <PageIntro eyebrow="SAVEN Command Center" title="Command, assign, verify." text="Voice or text becomes a clear support route with a human gate." />
+      <section className="grid gap-4 lg:grid-cols-3">
         {commands.map((item) => {
-          const tone = item.tone === 'green' ? 'border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-300/20 dark:bg-emerald-500/10 dark:text-emerald-100' : item.tone === 'gold' ? 'border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-300/20 dark:bg-amber-500/10 dark:text-amber-100' : 'border-blue-200 bg-blue-50 text-blue-900 dark:border-blue-300/20 dark:bg-blue-500/10 dark:text-blue-100';
+          const tone = item.tone === 'green' ? 'border-emerald-300/20 bg-emerald-500/10 text-emerald-100' : item.tone === 'gold' ? 'border-amber-300/20 bg-amber-500/10 text-amber-100' : 'border-blue-300/20 bg-blue-500/10 text-blue-100';
           return (
-            <article key={item.label} className={'rounded-[2rem] border p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-xl ' + tone}>
+            <article key={item.label} className={'rounded-[2rem] border bg-[#07111f] p-5 shadow-xl shadow-slate-950/16 ring-1 ring-white/10 transition-all hover:-translate-y-0.5 ' + tone}>
               <p className="text-sm font-semibold tracking-[0.08em] opacity-65">{item.label}</p>
-              <div className="mt-4 rounded-2xl bg-slate-950 p-4 text-sm font-semibold leading-6 text-white shadow-inner">{item.command}</div>
+              <div className="mt-4 rounded-2xl bg-slate-950/90 p-4 text-sm font-semibold leading-6 text-white shadow-inner ring-1 ring-white/10">{item.command}</div>
               <p className="mt-3 text-base leading-6 opacity-85">{item.result}</p>
             </article>
           );
