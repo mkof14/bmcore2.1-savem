@@ -505,3 +505,13 @@ The final release discipline layer is:
 - `npm run final-seal:saven`
 
 It confirms live watch, operator sign-off, rollback proof, and release evidence before anyone describes SAVEN as live GO.
+
+## Production GO Handoff
+
+The final handoff layer is:
+
+- `npm run clean-release:saven`
+- `npm run go-handoff:saven`
+- `npm run production-go:saven`
+
+This keeps the release honest: RC-ready is not the same as live GO unless production values, owners, safety gates, rollback, and watch are complete.

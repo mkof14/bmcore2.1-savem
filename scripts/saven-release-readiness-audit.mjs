@@ -132,6 +132,33 @@ const checks = [
     ],
   },
   {
+    label: 'Clean release pass',
+    file: 'docs/SAVEN_CLEAN_RELEASE_PASS.md',
+    markers: [
+      'SAVEN Clean Release Pass',
+      'Clean Pass Model',
+      'Clean Pass Holds',
+    ],
+  },
+  {
+    label: 'Production GO handoff',
+    file: 'docs/SAVEN_PRODUCTION_GO_HANDOFF.md',
+    markers: [
+      'SAVEN Production GO Handoff',
+      'GO Handoff Inputs',
+      'GO Handoff Rule',
+    ],
+  },
+  {
+    label: 'Production GO decision',
+    file: 'docs/SAVEN_PRODUCTION_GO_DECISION.md',
+    markers: [
+      'SAVEN Production GO Decision',
+      'Decision States',
+      'Safety Language',
+    ],
+  },
+  {
     label: 'Release env example',
     file: '.env.saven.example',
     markers: [
@@ -433,6 +460,21 @@ if (packageJson.scripts?.['final-seal:saven'] !== 'node scripts/saven-final-seal
   throw new Error('package.json is missing final-seal:saven script.');
 }
 console.log('[release] ok package final-seal:saven script');
+
+if (packageJson.scripts?.['clean-release:saven'] !== 'node scripts/saven-clean-release-pass-audit.mjs') {
+  throw new Error('package.json is missing clean-release:saven script.');
+}
+console.log('[release] ok package clean-release:saven script');
+
+if (packageJson.scripts?.['go-handoff:saven'] !== 'node scripts/saven-production-go-handoff-audit.mjs') {
+  throw new Error('package.json is missing go-handoff:saven script.');
+}
+console.log('[release] ok package go-handoff:saven script');
+
+if (packageJson.scripts?.['production-go:saven'] !== 'node scripts/saven-production-go-decision-audit.mjs') {
+  throw new Error('package.json is missing production-go:saven script.');
+}
+console.log('[release] ok package production-go:saven script');
 
 if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');

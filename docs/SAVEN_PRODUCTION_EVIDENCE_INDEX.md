@@ -134,3 +134,11 @@ These artifacts close the post-launch evidence loop: incident drill, rollback pr
 - `docs/SAVEN_FINAL_SEAL.md`
 
 These artifacts close the release loop after operator evidence: live watch, sign-off, and final seal.
+
+## Production GO Handoff
+
+- `docs/SAVEN_CLEAN_RELEASE_PASS.md`
+- `docs/SAVEN_PRODUCTION_GO_HANDOFF.md`
+- `docs/SAVEN_PRODUCTION_GO_DECISION.md`
+
+These artifacts separate clean RC readiness from the human production GO decision.

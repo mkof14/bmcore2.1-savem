@@ -87,7 +87,10 @@
     "operator-evidence:saven": "node scripts/saven-operator-evidence-audit.mjs",
     "live-watch:saven": "node scripts/saven-live-watch-checklist-audit.mjs",
     "signoff:saven": "node scripts/saven-operator-signoff-audit.mjs",
-    "final-seal:saven": "node scripts/saven-final-seal-audit.mjs"
+    "final-seal:saven": "node scripts/saven-final-seal-audit.mjs",
+    "clean-release:saven": "node scripts/saven-clean-release-pass-audit.mjs",
+    "go-handoff:saven": "node scripts/saven-production-go-handoff-audit.mjs",
+    "production-go:saven": "node scripts/saven-production-go-decision-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

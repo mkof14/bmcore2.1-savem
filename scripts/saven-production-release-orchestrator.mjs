@@ -39,6 +39,9 @@ const requiredScripts = [
   'live-watch:saven',
   'signoff:saven',
   'final-seal:saven',
+  'clean-release:saven',
+  'go-handoff:saven',
+  'production-go:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -270,6 +273,33 @@ const checks = [
       'SAVEN Final Seal',
       'Final Seal Model',
       'Final Seal Holds',
+    ],
+  },
+  {
+    label: 'Clean release pass',
+    file: 'docs/SAVEN_CLEAN_RELEASE_PASS.md',
+    markers: [
+      'SAVEN Clean Release Pass',
+      'Clean Pass Model',
+      'Clean Pass Holds',
+    ],
+  },
+  {
+    label: 'Production GO handoff',
+    file: 'docs/SAVEN_PRODUCTION_GO_HANDOFF.md',
+    markers: [
+      'SAVEN Production GO Handoff',
+      'GO Handoff Inputs',
+      'GO Handoff Rule',
+    ],
+  },
+  {
+    label: 'Production GO decision',
+    file: 'docs/SAVEN_PRODUCTION_GO_DECISION.md',
+    markers: [
+      'SAVEN Production GO Decision',
+      'Decision States',
+      'Safety Language',
     ],
   },
   {
