@@ -1264,10 +1264,10 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
   const permissionReview = createSavenCommandPermissionReview(savenMockState, commandPlan.input);
 
   const colorMap: Record<string, string> = {
-    blue: 'border-blue-300/25 bg-[#07111f] text-white ring-1 ring-blue-300/12',
-    green: 'border-emerald-300/25 bg-[#061a17] text-white ring-1 ring-emerald-300/12',
-    gold: 'border-amber-300/25 bg-[#1f1608] text-white ring-1 ring-amber-300/12',
-    red: 'border-red-300/25 bg-[#210d12] text-white ring-1 ring-red-300/12',
+    blue: 'border-blue-200 bg-blue-50 text-slate-950 ring-1 ring-blue-200/70 dark:border-blue-300/25 dark:bg-[#07111f] dark:text-white dark:ring-blue-300/12',
+    green: 'border-emerald-200 bg-emerald-50 text-slate-950 ring-1 ring-emerald-200/70 dark:border-emerald-300/25 dark:bg-[#061a17] dark:text-white dark:ring-emerald-300/12',
+    gold: 'border-amber-200 bg-amber-50 text-slate-950 ring-1 ring-amber-200/70 dark:border-amber-300/25 dark:bg-[#1f1608] dark:text-white dark:ring-amber-300/12',
+    red: 'border-red-200 bg-red-50 text-slate-950 ring-1 ring-red-200/70 dark:border-red-300/25 dark:bg-[#210d12] dark:text-white dark:ring-red-300/12',
   };
   const accentMap: Record<string, string> = {
     blue: 'from-blue-500 to-cyan-400',
@@ -1392,15 +1392,15 @@ function SavenCommandsPage({ openPage }: { openPage: (pageId: SavenPageId) => vo
                 <span className={'absolute left-0 top-0 h-1 w-full bg-gradient-to-r ' + accentMap[item.color]} />
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold tracking-[0.06em] opacity-65">{item.group}</p>
+                    <p className="text-sm font-semibold tracking-[0.06em] text-slate-500 dark:text-slate-300/70">{item.group}</p>
                     <h3 className="mt-2 text-xl font-semibold">{item.label}</h3>
-                    <p className="mt-1 truncate text-sm font-semibold opacity-75">{item.target}</p>
+                    <p className="mt-1 truncate text-sm font-semibold text-slate-600 dark:text-slate-300">{item.target}</p>
                   </div>
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white/72 shadow-inner ring-1 ring-white/80 dark:bg-slate-950/58 dark:ring-white/10">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-slate-700 shadow-inner ring-1 ring-slate-200 dark:bg-slate-950/58 dark:text-white dark:ring-white/10">
                     <Icon className="h-5 w-5" />
                   </span>
                 </div>
-                <p className="mt-3 line-clamp-2 text-base leading-6 opacity-82">{item.command}</p>
+                <p className="mt-3 line-clamp-2 text-base font-semibold leading-6 text-slate-700 dark:text-slate-200">{item.command}</p>
               </button>
             );
           })}
