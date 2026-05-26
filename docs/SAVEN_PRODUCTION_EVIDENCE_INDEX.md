@@ -158,3 +158,9 @@ These artifacts prevent accidental GO language while production values are still
 - `docs/SAVEN_NEXT_PHASE_MAP.md`
 
 These artifacts summarize the current RC-ready state and the remaining live-GO work.
+
+## Production Values Worksheet
+
+- `docs/SAVEN_PRODUCTION_VALUES_WORKSHEET.md`
+
+This worksheet is the bridge between RC-ready evidence and real production GO values.

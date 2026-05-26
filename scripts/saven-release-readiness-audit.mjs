@@ -210,6 +210,15 @@ const checks = [
     ],
   },
   {
+    label: 'Production values worksheet',
+    file: 'docs/SAVEN_PRODUCTION_VALUES_WORKSHEET.md',
+    markers: [
+      'SAVEN Production Values Worksheet',
+      'Public Values To Record In Launch Record',
+      'Secrets Not To Commit',
+    ],
+  },
+  {
     label: 'Release env example',
     file: '.env.saven.example',
     markers: [
@@ -556,6 +565,11 @@ if (packageJson.scripts?.['next-phase:saven'] !== 'node scripts/saven-next-phase
   throw new Error('package.json is missing next-phase:saven script.');
 }
 console.log('[release] ok package next-phase:saven script');
+
+if (packageJson.scripts?.['values-worksheet:saven'] !== 'node scripts/saven-production-values-worksheet-audit.mjs') {
+  throw new Error('package.json is missing values-worksheet:saven script.');
+}
+console.log('[release] ok package values-worksheet:saven script');
 
 if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');

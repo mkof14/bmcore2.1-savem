@@ -48,6 +48,7 @@ const requiredScripts = [
   'rc-proof:saven',
   'handoff-final:saven',
   'next-phase:saven',
+  'values-worksheet:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -357,6 +358,15 @@ const checks = [
     markers: [
       'SAVEN Next Phase Map',
       'Phase D: Human GO Decision',
+    ],
+  },
+  {
+    label: 'Production values worksheet',
+    file: 'docs/SAVEN_PRODUCTION_VALUES_WORKSHEET.md',
+    markers: [
+      'SAVEN Production Values Worksheet',
+      'Public Values To Record In Launch Record',
+      'Secrets Not To Commit',
     ],
   },
   {

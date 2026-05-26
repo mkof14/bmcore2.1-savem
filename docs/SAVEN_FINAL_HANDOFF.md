@@ -45,3 +45,13 @@ SAVEN is RC-ready and protected by strict GO lock.
 ```zsh
 npm run handoff-final:saven
 ```
+
+## Production Values Worksheet
+
+Before editing the launch record, use:
+
+```zsh
+npm run values-worksheet:saven
+```
+
+Then fill `docs/SAVEN_PRODUCTION_LAUNCH_RECORD.md` with real public production values and owners. Do not commit private secrets.

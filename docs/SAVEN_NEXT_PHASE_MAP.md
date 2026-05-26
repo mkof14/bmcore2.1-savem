@@ -40,3 +40,7 @@ This map is for the next large block of work after RC packaging.
 ```zsh
 npm run next-phase:saven
 ```
+
+## Production Values Worksheet
+
+The next phase starts with `docs/SAVEN_PRODUCTION_VALUES_WORKSHEET.md`. Fill that first, then update the launch record, then run strict checks.
