@@ -49,6 +49,7 @@ const requiredScripts = [
   'handoff-final:saven',
   'next-phase:saven',
   'values-worksheet:saven',
+  'values-gap:saven',
 ];
 
 for (const script of requiredScripts) {

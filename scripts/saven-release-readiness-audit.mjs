@@ -571,6 +571,11 @@ if (packageJson.scripts?.['values-worksheet:saven'] !== 'node scripts/saven-prod
 }
 console.log('[release] ok package values-worksheet:saven script');
 
+if (packageJson.scripts?.['values-gap:saven'] !== 'node scripts/saven-production-values-gap-report.mjs') {
+  throw new Error('package.json is missing values-gap:saven script.');
+}
+console.log('[release] ok package values-gap:saven script');
+
 if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');
 }

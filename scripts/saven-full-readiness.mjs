@@ -60,6 +60,7 @@ const steps = [
   { label: 'Final handoff package', command: 'npm', args: ['run', 'handoff-final:saven'] },
   { label: 'Next phase map', command: 'npm', args: ['run', 'next-phase:saven'] },
   { label: 'Production values worksheet', command: 'npm', args: ['run', 'values-worksheet:saven'] },
+  { label: 'Production values gap report', command: 'npm', args: ['run', 'values-gap:saven'] },
   { label: 'Admin launch control', command: 'npm', args: ['run', 'admin-launch:saven'] },
   { label: 'Admin evidence pack', command: 'npm', args: ['run', 'admin-evidence:saven'] },
   { label: 'Deploy readiness', command: 'npm', args: ['run', 'deploy:saven'] },
