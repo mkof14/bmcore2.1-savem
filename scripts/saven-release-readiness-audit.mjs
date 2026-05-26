@@ -105,6 +105,33 @@ const checks = [
     ],
   },
   {
+    label: 'Live watch checklist',
+    file: 'docs/SAVEN_LIVE_WATCH_CHECKLIST.md',
+    markers: [
+      'SAVEN Live Watch Checklist',
+      'Live Watch Signals',
+      'Hold Signals',
+    ],
+  },
+  {
+    label: 'Operator sign-off',
+    file: 'docs/SAVEN_OPERATOR_SIGNOFF.md',
+    markers: [
+      'SAVEN Operator Sign-Off',
+      'Sign-Off Owners',
+      'Sign-Off Rule',
+    ],
+  },
+  {
+    label: 'Final seal',
+    file: 'docs/SAVEN_FINAL_SEAL.md',
+    markers: [
+      'SAVEN Final Seal',
+      'Final Seal Model',
+      'Final Seal Holds',
+    ],
+  },
+  {
     label: 'Release env example',
     file: '.env.saven.example',
     markers: [
@@ -391,6 +418,21 @@ if (packageJson.scripts?.['operator-evidence:saven'] !== 'node scripts/saven-ope
   throw new Error('package.json is missing operator-evidence:saven script.');
 }
 console.log('[release] ok package operator-evidence:saven script');
+
+if (packageJson.scripts?.['live-watch:saven'] !== 'node scripts/saven-live-watch-checklist-audit.mjs') {
+  throw new Error('package.json is missing live-watch:saven script.');
+}
+console.log('[release] ok package live-watch:saven script');
+
+if (packageJson.scripts?.['signoff:saven'] !== 'node scripts/saven-operator-signoff-audit.mjs') {
+  throw new Error('package.json is missing signoff:saven script.');
+}
+console.log('[release] ok package signoff:saven script');
+
+if (packageJson.scripts?.['final-seal:saven'] !== 'node scripts/saven-final-seal-audit.mjs') {
+  throw new Error('package.json is missing final-seal:saven script.');
+}
+console.log('[release] ok package final-seal:saven script');
 
 if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');

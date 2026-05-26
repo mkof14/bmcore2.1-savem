@@ -84,7 +84,10 @@
     "launch-room:saven": "node scripts/saven-launch-room-runbook-audit.mjs",
     "incident-drill:saven": "node scripts/saven-postlaunch-incident-drill-audit.mjs",
     "rollback-proof:saven": "node scripts/saven-rollback-proof-audit.mjs",
-    "operator-evidence:saven": "node scripts/saven-operator-evidence-audit.mjs"
+    "operator-evidence:saven": "node scripts/saven-operator-evidence-audit.mjs",
+    "live-watch:saven": "node scripts/saven-live-watch-checklist-audit.mjs",
+    "signoff:saven": "node scripts/saven-operator-signoff-audit.mjs",
+    "final-seal:saven": "node scripts/saven-final-seal-audit.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

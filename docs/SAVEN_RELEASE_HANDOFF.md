@@ -495,3 +495,13 @@ The release handoff now includes:
 - `npm run operator-evidence:saven`
 
 These commands prove SAVEN can be watched, contained, rolled back, and explained by a human operator after promotion.
+
+## Final Seal
+
+The final release discipline layer is:
+
+- `npm run live-watch:saven`
+- `npm run signoff:saven`
+- `npm run final-seal:saven`
+
+It confirms live watch, operator sign-off, rollback proof, and release evidence before anyone describes SAVEN as live GO.

@@ -126,3 +126,11 @@ This is the live-day operating script for SAVEN launch room roles, timing, watch
 - `docs/SAVEN_OPERATOR_EVIDENCE.md`
 
 These artifacts close the post-launch evidence loop: incident drill, rollback proof, and final operator evidence.
+
+## Final Seal
+
+- `docs/SAVEN_LIVE_WATCH_CHECKLIST.md`
+- `docs/SAVEN_OPERATOR_SIGNOFF.md`
+- `docs/SAVEN_FINAL_SEAL.md`
+
+These artifacts close the release loop after operator evidence: live watch, sign-off, and final seal.

@@ -36,6 +36,9 @@ const requiredScripts = [
   'incident-drill:saven',
   'rollback-proof:saven',
   'operator-evidence:saven',
+  'live-watch:saven',
+  'signoff:saven',
+  'final-seal:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -240,6 +243,33 @@ const checks = [
       'SAVEN Operator Evidence Package',
       'Evidence Model',
       'Decision Language',
+    ],
+  },
+  {
+    label: 'Live watch checklist',
+    file: 'docs/SAVEN_LIVE_WATCH_CHECKLIST.md',
+    markers: [
+      'SAVEN Live Watch Checklist',
+      'Live Watch Signals',
+      'Hold Signals',
+    ],
+  },
+  {
+    label: 'Operator sign-off',
+    file: 'docs/SAVEN_OPERATOR_SIGNOFF.md',
+    markers: [
+      'SAVEN Operator Sign-Off',
+      'Sign-Off Owners',
+      'Sign-Off Rule',
+    ],
+  },
+  {
+    label: 'Final seal',
+    file: 'docs/SAVEN_FINAL_SEAL.md',
+    markers: [
+      'SAVEN Final Seal',
+      'Final Seal Model',
+      'Final Seal Holds',
     ],
   },
   {
