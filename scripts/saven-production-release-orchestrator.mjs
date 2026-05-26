@@ -42,6 +42,9 @@ const requiredScripts = [
   'clean-release:saven',
   'go-handoff:saven',
   'production-go:saven',
+  'values-ready:saven',
+  'release-lock:saven',
+  'strict-go:saven',
 ];
 
 for (const script of requiredScripts) {
@@ -300,6 +303,33 @@ const checks = [
       'SAVEN Production GO Decision',
       'Decision States',
       'Safety Language',
+    ],
+  },
+  {
+    label: 'Production values ready',
+    file: 'docs/SAVEN_PRODUCTION_VALUES_READY.md',
+    markers: [
+      'SAVEN Production Values Ready',
+      'Required Production Values',
+      'Hold Rule',
+    ],
+  },
+  {
+    label: 'Release lock',
+    file: 'docs/SAVEN_RELEASE_LOCK.md',
+    markers: [
+      'SAVEN Release Lock',
+      'Release Lock States',
+      'Locked Safety Gates',
+    ],
+  },
+  {
+    label: 'Strict GO',
+    file: 'docs/SAVEN_STRICT_GO.md',
+    markers: [
+      'SAVEN Strict GO',
+      'Strict Mode',
+      'Strict GO Boundary',
     ],
   },
   {

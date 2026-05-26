@@ -515,3 +515,13 @@ The final handoff layer is:
 - `npm run production-go:saven`
 
 This keeps the release honest: RC-ready is not the same as live GO unless production values, owners, safety gates, rollback, and watch are complete.
+
+## Strict GO Lock
+
+The final production language guard is:
+
+- `npm run values-ready:saven`
+- `npm run release-lock:saven`
+- `npm run strict-go:saven`
+
+Use `SAVEN_STRICT_GO=1 npm run strict-go:saven` only after real production values and owners are recorded.

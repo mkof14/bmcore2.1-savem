@@ -159,6 +159,33 @@ const checks = [
     ],
   },
   {
+    label: 'Production values ready',
+    file: 'docs/SAVEN_PRODUCTION_VALUES_READY.md',
+    markers: [
+      'SAVEN Production Values Ready',
+      'Required Production Values',
+      'Hold Rule',
+    ],
+  },
+  {
+    label: 'Release lock',
+    file: 'docs/SAVEN_RELEASE_LOCK.md',
+    markers: [
+      'SAVEN Release Lock',
+      'Release Lock States',
+      'Locked Safety Gates',
+    ],
+  },
+  {
+    label: 'Strict GO',
+    file: 'docs/SAVEN_STRICT_GO.md',
+    markers: [
+      'SAVEN Strict GO',
+      'Strict Mode',
+      'Strict GO Boundary',
+    ],
+  },
+  {
     label: 'Release env example',
     file: '.env.saven.example',
     markers: [
@@ -475,6 +502,21 @@ if (packageJson.scripts?.['production-go:saven'] !== 'node scripts/saven-product
   throw new Error('package.json is missing production-go:saven script.');
 }
 console.log('[release] ok package production-go:saven script');
+
+if (packageJson.scripts?.['values-ready:saven'] !== 'node scripts/saven-production-values-ready-audit.mjs') {
+  throw new Error('package.json is missing values-ready:saven script.');
+}
+console.log('[release] ok package values-ready:saven script');
+
+if (packageJson.scripts?.['release-lock:saven'] !== 'node scripts/saven-release-lock-audit.mjs') {
+  throw new Error('package.json is missing release-lock:saven script.');
+}
+console.log('[release] ok package release-lock:saven script');
+
+if (packageJson.scripts?.['strict-go:saven'] !== 'node scripts/saven-strict-go-audit.mjs') {
+  throw new Error('package.json is missing strict-go:saven script.');
+}
+console.log('[release] ok package strict-go:saven script');
 
 if (packageJson.scripts?.['release:saven'] !== 'node scripts/saven-release-readiness-audit.mjs') {
   throw new Error('package.json is missing release:saven script.');

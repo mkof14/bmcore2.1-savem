@@ -142,3 +142,11 @@ These artifacts close the release loop after operator evidence: live watch, sign
 - `docs/SAVEN_PRODUCTION_GO_DECISION.md`
 
 These artifacts separate clean RC readiness from the human production GO decision.
+
+## Strict GO Lock
+
+- `docs/SAVEN_PRODUCTION_VALUES_READY.md`
+- `docs/SAVEN_RELEASE_LOCK.md`
+- `docs/SAVEN_STRICT_GO.md`
+
+These artifacts prevent accidental GO language while production values are still placeholders.
