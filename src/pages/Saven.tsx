@@ -1621,7 +1621,7 @@ function SavenSystemStart({ openPage, profileCreated }: { openPage: (pageId: Sav
             <img src="/saven-mark.png" alt="SAVEN system identity" className="h-72 w-full rounded-[1.5rem] object-cover" />
             <div className="absolute bottom-7 left-7 right-7 rounded-2xl border border-white/10 bg-slate-950/72 px-4 py-3 backdrop-blur-md">
               <p className="text-sm font-semibold tracking-[0.06em] text-blue-100">SAVEN command layer</p>
-              <p className="mt-1 text-sm text-slate-200">Voice and text commands are available across the operating system.</p>
+              <p className="mt-1 text-sm text-slate-200">Speak, assign, verify.</p>
             </div>
           </div>
         </div>
@@ -1688,7 +1688,7 @@ function SavenOperatorShortcuts({ openPage }: { openPage: (pageId: SavenPageId) 
         <div>
           <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Operator shortcuts</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Start with the action, not the menu.</h3>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-200">These are the four entry points a caregiver or family member can actually use.</p>
+          <p className="mt-2 max-w-2xl text-base leading-6 text-slate-200">Four clear ways to begin.</p>
         </div>
         <button onClick={() => openPage('app-commands')} className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
           Open commands

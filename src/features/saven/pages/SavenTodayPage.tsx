@@ -281,7 +281,7 @@ function SavenLiveShiftBelt({ openPage }: { openPage: (pageId: 'app-support' | '
         <div className="rounded-[1.6rem] border border-white/10 bg-black/22 p-4">
           <p className="text-sm font-semibold tracking-[0.06em] text-blue-100/70">Live shift belt</p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight">Anna is covered right now.</h3>
-          <p className="mt-2 text-base leading-6 text-slate-200">One line for the current support truth: action, owner, proof, and next window.</p>
+          <p className="mt-2 text-base leading-6 text-slate-200">Action, owner, proof, next window.</p>
           <button onClick={() => openPage('app-command')} className="mt-5 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-blue-50">
             Send voice command
           </button>
@@ -327,10 +327,6 @@ export function TodaySupport({ setup, openPage, profileCreated }: { setup: LifeS
       {!profileCreated && <InfoNote tone="amber" title="Demo profile is active" text="Complete Life Setup to personalize SAVEN and generate a support plan for this person." />}
       <HumanSupportHeader setup={setup} />
       <SavenLiveShiftBelt openPage={openPage} />
-      <CareContactNetwork compact />
-      <SavenEndToEndScenario openPage={openPage} />
-      <TodayOperationalClarity />
-      <SavenDeveloperReadinessStack />
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {stats.map((stat) => (
           <MetricCard key={stat.label} label={stat.label} value={stat.value} tone={stat.tone} />

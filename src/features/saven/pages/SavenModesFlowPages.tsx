@@ -124,7 +124,7 @@ export function DualModeArchitecture() {
       <PageIntro
         eyebrow="SAVEN Operating Modes"
         title="One support system, two ways to run."
-        text="Connected mode reads BioMath context. Autonomous mode runs from profile, rules, people, devices, robots, and verification."
+        text="Connected or standalone. The same SAVEN core assigns, verifies, and keeps continuity."
       />
 
       <section className="overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#0b1726]/88">
@@ -166,7 +166,7 @@ export function DualModeArchitecture() {
         </div>
       </section>
 
-      <section className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
+      <section className="saven-secondary-detail grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="rounded-[2rem] border border-white/70 bg-white/82 p-6 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/65 dark:ring-1 dark:ring-white/10">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
@@ -190,7 +190,7 @@ export function DualModeArchitecture() {
         <ContinuityEnginePanel />
       </section>
 
-      <section className="grid gap-5 lg:grid-cols-2">
+      <section className="saven-secondary-detail grid gap-5 lg:grid-cols-2">
         <ArchitectureSeparationPanel />
         <AutonomousSupportEnginePanel />
       </section>

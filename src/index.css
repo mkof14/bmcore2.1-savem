@@ -144,3 +144,22 @@
   }
 }
 
+/* SAVEN primary page focus pass: keep first screens calmer and less instructional. */
+.saven-calm-density .saven-secondary-detail {
+  opacity: 0.92;
+}
+
+.saven-calm-density .saven-secondary-detail p {
+  line-height: 1.5rem;
+}
+
+.saven-calm-density .saven-secondary-detail article,
+.saven-calm-density .saven-secondary-detail > div {
+  border-radius: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .saven-calm-density .saven-secondary-detail {
+    margin-top: -0.25rem;
+  }
+}

@@ -121,8 +121,8 @@ export function LifeSetup({
             <h2 className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-slate-950 dark:text-white">
               Build a real-life support profile in a few clear steps.
             </h2>
-            <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-              This is not a medical form. SAVEN learns the person's life situation, support circle, rhythm, comfort, and goals so daily support can start calmly.
+            <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
+              A calm setup for the person, their circle, and the first support day.
             </p>
             <div className="mt-7 grid gap-3 md:grid-cols-4">
               {['Person', 'Life context', 'Support circle', 'Daily plan'].map((item, index) => (
